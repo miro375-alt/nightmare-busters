@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#000000">
+</head>
+<body>
+<title>0시 33분 — 진행자 전광판</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#000;overflow:hidden;
+    font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif}
+  /* in-flow full-viewport box (gives the iframe real height) */
+  .screen{position:relative;display:block;width:100vw;height:100vh;height:100dvh;min-height:100vh;min-height:100dvh;
+    background:#040507;overflow:hidden}
+  /* landscape is canonical: in portrait, rotate the inner panel 90° so the sign
+     always reads as a wide subway display (outer .screen stays in flow — keeps iframe height) */
+  .rot{position:absolute;inset:0}
+  @media (orientation:portrait){
+    .rot{inset:auto;top:0;left:100%;width:100vh;width:100dvh;height:100vw;
+      transform:rotate(90deg);transform-origin:0 0}
+  }
+  .screen canvas{display:block;width:100%;height:100%;background:#040507}
+  #vig{position:absolute;inset:0;pointer-events:none;z-index:2;
+    background:
+      radial-gradient(135% 115% at 50% 50%, transparent 66%, rgba(0,0,0,.4) 100%),
+      linear-gradient(103deg, rgba(255,255,255,.03) 0%, transparent 16%, transparent 84%, rgba(255,255,255,.02) 100%);
+    mix-blend-mode:screen}
+  .sound{
+    position:absolute;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));z-index:5;
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(10,12,16,.55);border:1px solid rgba(255,255,255,.09);color:rgba(200,204,210,.55);
+    font-size:11px;letter-spacing:.04em;padding:7px 11px;border-radius:999px;cursor:pointer;
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:.4;transition:opacity .3s,color .2s}
+  .sound:hover,.sound:focus-visible{opacity:1;color:#fff}
+  .sound[data-on="1"]{color:#FFB227;opacity:.85;border-color:#4a3d1e}
+  .sound:focus-visible{outline:2px solid #FFB227;outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){.sound{transition:none}}
+</style>
+
+<div class="screen">
+  <div class="rot" id="rot">
+    <canvas id="led" aria-label="심야 지하철 전광판 — 백룸 현상"></canvas>
+    <div id="vig"></div>
+    <button class="sound" id="snd" data-on="0" aria-label="소리 켜기">◍ 소리</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const rotEl = document.getElementById('rot');
+  const cv = document.getElementById('led');
+  const ctx = cv.getContext('2d', { alpha:false });
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const COL = { amber:'#FFB227', green:'#57E389', red:'#FF362B' };
+  const G=COL.green, A=COL.amber, X=COL.red;
+
+  let COLS, ROWS, PITCH, R, buf, bcol, DPR;
+  const off = document.createElement('canvas');
+  const octx = off.getContext('2d', { willReadFrequently:true });
+  const unlit = document.createElement('canvas');         // pre-rendered off-dot grid
+
+  function resize(){
+    // measure the rotation wrapper: its layout size is already landscape-shaped
+    const W = Math.max(1, rotEl.clientWidth  || window.innerWidth);
+    const H = Math.max(1, rotEl.clientHeight || window.innerHeight);
+    DPR = Math.min(window.devicePixelRatio||1, 2);
+    cv.width  = Math.round(W*DPR);
+    cv.height = Math.round(H*DPR);
+    const pitchCss = 5.5;                                 // ~CSS px per dot (fine pitch)
+    COLS = Math.max(48, Math.min(260, Math.round(W/pitchCss)));
+    PITCH = cv.width/COLS;
+    ROWS = Math.max(24, Math.round(cv.height/PITCH));
+    R = PITCH*0.40;
+    buf  = new Float32Array(COLS*ROWS);
+    bcol = new Array(COLS*ROWS).fill('#000');
+    // bake the unlit dot texture once
+    unlit.width = cv.width; unlit.height = cv.height;
+    const u = unlit.getContext('2d', { alpha:false });
+    u.fillStyle = '#040507'; u.fillRect(0,0,unlit.width,unlit.height);
+    u.fillStyle = '#101319';
+    for(let y=0;y<ROWS;y++){ const cy=y*PITCH+PITCH/2;
+      for(let x=0;x<COLS;x++){ const cx=x*PITCH+PITCH/2;
+        u.beginPath(); u.arc(cx,cy,R*0.82,0,6.2832); u.fill(); } }
+  }
+  resize();
+  let rt; addEventListener('resize', ()=>{ clearTimeout(rt); rt=setTimeout(resize,120); });
+  addEventListener('orientationchange', ()=>setTimeout(resize,220));
+
+  function L(){
+    return {
+      hy:  Math.round(ROWS*0.05), hh: Math.max(4, Math.round(ROWS*0.10)),
+      hlx: Math.round(COLS*0.04), hlw: Math.round(COLS*0.40),
+      hrx: Math.round(COLS*0.56), hrw: Math.round(COLS*0.40),
+      l1x: Math.round(COLS*0.05), l1y: Math.round(ROWS*0.28), l1w: Math.round(COLS*0.90), l1h: Math.max(6, Math.round(ROWS*0.26)),
+      l2x: Math.round(COLS*0.05), l2y: Math.round(ROWS*0.58), l2w: Math.round(COLS*0.90), l2h: Math.max(5, Math.round(ROWS*0.21)),
+    };
+  }
+  function clearBuf(){ buf.fill(0); }
+
+  function region(text, color, rx, ry, rw, rh, align='center'){
+    if(!text || rw<=0 || rh<=0) return;
+    off.width = rw; off.height = rh;
+    octx.clearRect(0,0,rw,rh);
+    let size = rh;
+    octx.font = `800 ${size}px 'Apple SD Gothic Neo','Malgun Gothic',sans-serif`;
+    let w = octx.measureText(text).width;
+    if(w > rw){ size = Math.max(5, Math.floor(size*rw/w*0.98)); }
+    octx.font = `800 ${size}px 'Apple SD Gothic Neo','Malgun Gothic',sans-serif`;
+    octx.textBaseline='middle'; octx.textAlign=align; octx.fillStyle='#fff';
+    const tx = align==='left'?0:align==='right'?rw:rw/2;
+    octx.fillText(text, tx, rh/2);
+    const d = octx.getImageData(0,0,rw,rh).data;
+    for(let y=0;y<rh;y++){ const gy=ry+y; if(gy<0||gy>=ROWS) continue;
+      for(let x=0;x<rw;x++){ const gx=rx+x; if(gx<0||gx>=COLS) continue;
+        const a=d[(y*rw+x)*4+3]/255;
+        if(a>0.30){ const i=gy*COLS+gx, v=Math.min(1,a*1.15);
+          if(v>buf[i]){ buf[i]=v; bcol[i]=color; } } } }
+  }
+
+  const phases = [
+    { t:1.5, mood:0, boot:true },
+    { t:3.0, mood:0.00, hl:'운행중', hr:'00:31', l1:['이번역  서울역',G], l2:['내리실문  오른쪽',A] },
+    { t:3.0, mood:0.05, hl:'운행중', hr:'00:32', l1:['다음역  시청',G],   l2:['안전선 밖으로',A] },
+    { t:3.0, mood:0.30, hl:'지 연',  hr:'00:3?', l1:['다음역  ??????',G], l2:['안전선 밖은 없습니다',A] },
+    { t:3.0, mood:0.55, hl:'경 고',  hr:'0:33',  l1:['이번역  0시 33분',A], l2:['내리실문  왼쪽??',X] },
+    { t:3.6, mood:0.86, hl:'정 지',  hr:'00:33', l1:['다음역  :  없음',X], l2:['뒤돌아보지 마시오',X] },
+    { t:2.6, mood:1.00, hl:'',      hr:'00:33', l1:['당신은 이미',X],     l2:['승차했습니다',X] },
+    { t:1.1, mood:1.00, blackout:true },
+    { t:2.4, mood:0.15, hl:'첫차대기', hr:'05:33', l1:['05:33 첫차까지',A], l2:['버티십시오',G] },
+  ];
+  let pi=0, pe=0, mood=0, last=performance.now();
+
+  function frame(now){
+    let dt=(now-last)/1000; if(dt>0.1) dt=0.1; last=now;
+    pe += dt;
+    if(pe >= phases[pi].t){ pe=0; pi++; if(pi>=phases.length) pi=1; }
+    const cur = phases[pi];
+    mood += (cur.mood-mood)*Math.min(1, dt*3.2);
+
+    clearBuf();
+    const lay = L();
+    if(cur.boot){
+      const fill = Math.min(1, pe/cur.t);
+      const n = COLS*ROWS*fill*0.5;
+      for(let k=0;k<n;k++){ const i=(Math.random()*COLS*ROWS)|0; buf[i]=Math.random()*0.5; bcol[i]=A; }
+      region('서울교통공사', A, lay.l1x, lay.l1y, lay.l1w, lay.l1h, 'center');
+    } else if(cur.blackout){
+      if(Math.random()<0.3) region('▮', X, (COLS>>1)-1, (ROWS>>1)-2, 3, 5);
+    } else {
+      region(cur.hl||'', (cur.hl&&cur.mood>0.5)?X:G, lay.hlx, lay.hy, lay.hlw, lay.hh, 'left');
+      region(cur.hr||'', A, lay.hrx, lay.hy, lay.hrw, lay.hh, 'right');
+      if(cur.l1) region(cur.l1[0], cur.l1[1], lay.l1x, lay.l1y, lay.l1w, lay.l1h, 'center');
+      if(cur.l2) region(cur.l2[0], cur.l2[1], lay.l2x, lay.l2y, lay.l2w, lay.l2h, 'center');
+    }
+
+    ctx.drawImage(unlit, 0, 0);
+    const m = reduce ? mood*0.4 : mood;
+    const gFlick = 1 - (reduce?0:Math.random()*0.05) - m*Math.random()*0.14;
+
+    const rowShift = new Int8Array(ROWS);
+    if(m>0.25 && !reduce){ const n=(m*6)|0;
+      for(let k=0;k<n;k++){ const r=(Math.random()*ROWS)|0; rowShift[r]=((Math.random()-0.5)*(2+m*10))|0; } }
+    const deadCol = new Uint8Array(COLS);
+    if(m>0.6 && !reduce){ const n=(m*7)|0; for(let k=0;k<n;k++) deadCol[(Math.random()*COLS)|0]=1; }
+
+    for(let y=0;y<ROWS;y++){
+      const sx=rowShift[y], cy=y*PITCH+PITCH/2;
+      for(let x=0;x<COLS;x++){
+        const bx=x*PITCH+PITCH/2;
+        const i=y*COLS+x; const v=buf[i]; if(v<=0) continue;
+        if(deadCol[x] && Math.random()<0.8) continue;
+        let drawY=cy;
+        if(m>0.82 && !reduce && Math.random()<0.05*m) drawY += PITCH*(1+Math.random()*2);
+        let col=bcol[i];
+        if(m>0.5 && !reduce && Math.random()<0.06*m) col=X;
+        const inten=Math.max(0, v*gFlick*(1-Math.random()*0.10*m));
+        if(inten<=0.04) continue;
+        const px=bx+sx*PITCH*0.5;
+        ctx.beginPath(); ctx.arc(px,drawY,R,0,6.2832);
+        ctx.fillStyle=col; ctx.globalAlpha=Math.min(1,0.35+inten*0.65);
+        ctx.shadowColor=col; ctx.shadowBlur=6+inten*10; ctx.fill();
+      }
+    }
+    ctx.globalAlpha=1; ctx.shadowBlur=0;
+
+    if(m>0.7 && !reduce){
+      for(let k=0;k<(m*10)|0;k++){ const x=(Math.random()*COLS)|0,y=(Math.random()*ROWS)|0;
+        ctx.beginPath(); ctx.arc(x*PITCH+PITCH/2,y*PITCH+PITCH/2,R*0.9,0,6.2832);
+        ctx.fillStyle=X; ctx.globalAlpha=Math.random()*0.6; ctx.shadowColor=X; ctx.shadowBlur=8; ctx.fill(); }
+      ctx.globalAlpha=1; ctx.shadowBlur=0;
+    }
+    if(!reduce){
+      const sweep=((now/22)%(cv.height+120))-60;
+      const g=ctx.createLinearGradient(0,sweep-40,0,sweep+40);
+      g.addColorStop(0,'rgba(255,255,255,0)'); g.addColorStop(.5,`rgba(180,200,255,${0.02+m*0.05})`); g.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.fillStyle=g; ctx.fillRect(0,sweep-40,cv.width,80);
+    }
+
+    if(audio.on) audio.tick(m);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  const audio = {
+    on:false, ac:null, hum:null, humG:null, noiseG:null, lp:null,
+    start(){
+      const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+      const ac=this.ac=new AC();
+      this.humG=ac.createGain(); this.humG.gain.value=0.05; this.humG.connect(ac.destination);
+      this.hum=ac.createOscillator(); this.hum.type='sine'; this.hum.frequency.value=52; this.hum.connect(this.humG);
+      const o2=ac.createOscillator(); o2.type='sine'; o2.frequency.value=78.3;
+      const g2=ac.createGain(); g2.gain.value=0.02; o2.connect(g2); g2.connect(ac.destination);
+      const nb=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate); const d=nb.getChannelData(0);
+      for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+      const src=ac.createBufferSource(); src.buffer=nb; src.loop=true;
+      this.lp=ac.createBiquadFilter(); this.lp.type='lowpass'; this.lp.frequency.value=380;
+      this.noiseG=ac.createGain(); this.noiseG.gain.value=0.015;
+      src.connect(this.lp); this.lp.connect(this.noiseG); this.noiseG.connect(ac.destination);
+      this.hum.start(); o2.start(); src.start(); this.on=true;
+    },
+    tick(m){ if(!this.ac) return; const t=this.ac.currentTime;
+      this.humG.gain.setTargetAtTime(0.045+m*0.07,t,0.2);
+      this.hum.frequency.setTargetAtTime(52-m*8+Math.sin(t*3)*m*4,t,0.2);
+      this.noiseG.gain.setTargetAtTime(0.012+m*0.05,t,0.2);
+      this.lp.frequency.setTargetAtTime(380+m*1400,t,0.2); },
+    stop(){ if(this.ac){ this.ac.close(); this.ac=null; } this.on=false; }
+  };
+  const btn=document.getElementById('snd');
+  btn.addEventListener('click', ()=>{
+    if(audio.on){ audio.stop(); btn.dataset.on='0'; btn.textContent='◍ 소리'; }
+    else { audio.start(); btn.dataset.on='1'; btn.textContent='◉ 소리'; }
+  });
+})();
+</script>
+
+</body>
+</html>
