@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제009호 제1터널 — 한국이상관리공단</title>
+<meta name="description" content="1974년에 중단된 터널이, 아직 파이고 있다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* 문서 본문 */
+.dochead{padding:44px 0 0;position:relative}
+.dochead .kicker{font-size:11.5px;letter-spacing:.2em;color:var(--ink3)}
+.dochead h1{font-size:clamp(26px,5vw,38px);font-weight:800;letter-spacing:-.02em;margin:12px 0 6px}
+.dochead .one{color:var(--ink2);font-size:15px;margin-bottom:22px;max-width:58ch}
+.spec{
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+  gap:0;margin-bottom:38px;
+}
+.spec div{padding:11px 12px 11px 0}
+.spec dt{font-size:10.5px;letter-spacing:.14em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:14px;font-weight:600}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+article h2.sec{
+  font-size:19px;font-weight:800;letter-spacing:-.01em;
+  margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--rule);
+}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px}
+.tw th{
+  text-align:left;font-size:11.5px;letter-spacing:.06em;color:var(--ink3);font-weight:700;
+  padding:9px 11px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.tw td{padding:10px 11px;border-bottom:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="dochead">
+  <div class="kicker">특수관리물 관리카드</div>
+  <h1>제009호 · 제1터널</h1>
+  <p class="one">1974년에 중단된 터널이, 아직 파이고 있다.</p>
+</div>
+<dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제009호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-ga'>가급</span></dd></div><div><dt>관할</dt><dd>강원지역본부</dd></div><div><dt>소재</dt><dd>토목시설</dd></div><div><dt>지정</dt><dd>1976. 8.</dd></div></dl>
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제009호(이하 "당해 관리물")는 <span class="redact">██</span>도 <span class="redact">██</span>군 소재 <strong>미완공 터널</strong> 1개소 및 그 내부 공간을 말함.</p>
+<p><strong>2.</strong> 갱구(坑口)는 두께 2.4m의 철근콘크리트로 폐쇄하고, 상부에 사면 녹화를 시행하여 외부에서 식별되지 아니하도록 함. 현재 상태 양호함.</p>
+<p><strong>3.</strong> <strong>진입 조사는 10년 주기로 시행함.</strong> 조사 인원은 3인 이하로 하며, 왕복 소요 시간을 사전에 산정하고 <strong>산정 시간의 2배를 초과하여 체류하지 아니할 것.</strong></p>
+<p><strong>4.</strong> 조사 시 <strong>굴진장(掘進長)을 실측하여 기록</strong>할 것. 실측치가 직전 조사 대비 증가한 경우, 증가율을 산출하여 본부에 보고함.</p>
+<p><strong>5.</strong> 조사반은 갱내에서 <strong>작업음(착암·발파·운반음 등)이 청취되는 경우 즉시 철수</strong>할 것. 음원의 위치를 확인하려 하지 아니할 것.</p>
+<p><strong>6.</strong> 갱내에서 발견되는 자재·공구·작업 흔적은 <strong>회수하지 아니함.</strong> 촬영 후 원위치에 둘 것.</p>
+<p><strong>7.</strong> 10년 주기 조사에 소요되는 예산은 「시설물 안전점검」 항목으로 편성하되, <strong>점검 결과보고서는 작성하지 아니함.</strong> 본 문서철에 복명서 원본을 편철하는 것으로 갈음함. 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 당해 관리물은 1972년 착공되어 1974년 중단된 도로터널임. 당시 국토개발 계획에 따라 <span class="redact">██</span>군과 <span class="redact">██</span>군을 연결할 목적으로 계획되었으나, 노선 변경 및 사고 발생으로 사업이 취소되었음.</p>
+<p><strong>2-2.</strong> 준공되지 아니한 터널이므로 도로대장·시설물통합정보관리시스템 등 어느 공부에도 등재되어 있지 아니함. 지형도상 해당 위치는 <strong>자연 사면</strong>으로 표기됨.</p>
+<p><strong>2-3.</strong> 설계상 계획 연장은 <strong>1,860m</strong>이며, 1974년 중단 시점의 굴진장은 <strong>340m</strong>로 기록되어 있음.</p>
+<p><strong>2-4.</strong> 그러나 진입 조사 시 실측되는 굴진장은 다음과 같이 <strong>증가하고 있음.</strong></p>
+<div class='tw'><table><thead><tr><th>조사 시기</th><th>실측 굴진장</th><th>직전 대비</th></tr></thead><tbody><tr><td>1974. 6. (중단 시)</td><td>340m</td><td>—</td></tr><tr><td>1978. 5.</td><td>612m</td><td>+272m</td></tr><tr><td>1988. 9.</td><td>908m</td><td>+296m</td></tr><tr><td><strong>1998. 2.</strong></td><td><strong>1,204m</strong></td><td>+296m</td></tr><tr><td>2008. 11.</td><td>1,499m</td><td>+295m</td></tr><tr><td>2016. 4.</td><td>1,721m</td><td>+222m</td></tr><tr><td><strong>2024. 10.</strong></td><td><strong>1,858m</strong></td><td><strong>+137m</strong></td></tr></tbody></table></div>
+<p>연평균 굴진율은 약 <strong>29.5m/년</strong>이며, 이는 1970년대 재래식 발파 굴착 공법의 평균 굴진율과 근사함.</p>
+<p><strong>2-5.</strong> 갱내에는 굴착 작업의 흔적이 지속적으로 관측됨. 확인된 사항은 다음과 같음.</p>
+<ul><li>막장면(掘進 최전방)의 <strong>신선한 발파흔</strong> 및 천공 자국</li><li>갱내에 정렬된 <strong>자재</strong> — 침목, 궤도(광차용), 목재 지보공. 전부 1970년대 규격이며 부식이 진행되지 아니함</li><li><strong>작업복 및 안전모</strong> — 갱구 인근에 걸려 있음. 수량은 조사 시마다 다름</li><li>배수로 및 환기 시설이 <strong>유지 관리되고 있음.</strong> 갱내 공기질은 통상적인 시공 중 터널 수준임</li></ul>
+<p><strong>2-6.</strong> 작업 인원은 <strong>관측된 바 없음.</strong> 작업음은 8회 조사 중 6회에서 청취되었으며, 관리 지침 제5항에 따라 전 사례 즉시 철수하였음.</p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1972. 4.</td><td>착공. 시공사 <span class="redact">██</span>건설. 1일 2교대</td></tr><tr><td>1973. 11.</td><td>낙반 사고 발생. <strong>매몰자 발생</strong></td></tr><tr><td>1974. 6.</td><td>2차 사고. 공사 중단</td></tr><tr><td>1974. 9.</td><td>노선 변경 결정. 사업 취소</td></tr><tr><td>1976. 8.</td><td>인근 주민 신고(야간 발파음)로 조사. <strong>가급 지정</strong> 및 갱구 폐쇄</td></tr><tr><td>1978. 5.</td><td>제1차 진입 조사</td></tr><tr><td>1998. 2.</td><td>제3차 진입 조사. 같은 해 <strong>지정해제 검토 대상</strong>에 포함되었으나 제외됨</td></tr><tr><td>2024. 10.</td><td>제6차 진입 조사</td></tr></tbody></table></div>
+<blockquote><p><strong>1973년 사고 매몰자 수에 관하여:</strong> 시공사 사고보고서 <strong>7명</strong>, 관할 경찰 기록 <strong>9명</strong>, 노동청 산업재해 처리 <strong>4명</strong>, 지역 신문 보도 <strong>11명</strong>으로 각각 상이함. 유족 보상이 확인된 것은 <strong>4명</strong>임. 나머지의 신원·존부는 확인되지 아니함. 당시 이 현장에는 <strong>명부에 오르지 아니한 일용 인력</strong>이 다수 있었던 것으로 사료됨.</p></blockquote>
+<h2 class='sec'>붙임 1. 제1차 진입 조사 복명서 (1978. 5.)</h2>
+<p><em>원본 필사. 세로쓰기, 국한문 혼용. 표기는 원문대로 옮김.</em></p>
+<blockquote><p><strong>復命書</strong></p>
+<p>1978年 5月 <span class="redact">██</span>日, 特殊管理本部 <span class="redact">██</span>班 3名이 第009號 坑內에 進入하였음.</p>
+<p>一. 坑口 開放 後 進入. 內部는 乾燥하고 空氣 良好함. 燈火 없이도 어느 程度 視界가 確保됨. 光源은 確認하지 못하였음.</p>
+<p>一. 掘進長 實測 612m. 中斷 當時 記錄(340m)과 相違함. 測量 誤差로 보기 어려움.</p>
+<p>一. 坑內 中間部에 光車 軌道가 敷設되어 있음. 中斷 當時 軌道는 撤去한 것으로 記錄되어 있으나, 現存함. <strong>軌道 上面의 마모 狀態로 보아 使用 中인 것으로 判斷됨.</strong></p>
+<p>一. 掘鑿 最前方에서 發破音 聽取. 距離 約 200m 內外로 推定. 三人 中 一人이 前進을 主張하였으나 班長이 制止하고 撤收함.</p>
+<p>一. 撤收 中, 坑口 側 壁面에 白墨으로 쓴 文句를 發見함. 進入 時에는 없었음. 內容은 다음과 같음.</p>
+<pre class='doc-pre'>오늘 몇 미터 나갔나</pre>
+<p>一. 所見: 本 坑道는 中斷된 바 없는 것으로 思料됨. <strong>工事는 繼續되고 있음.</strong> 다만 施工 主體를 特定할 수 없음. 끝.</p></blockquote>
+<h2 class='sec'>붙임 2. 제3차 진입 조사 복명서 (1998. 2.)</h2>
+<p><em>지정해제 검토를 위한 조사. 당시 본 공단은 구조조정 중이었음.</em></p>
+<blockquote><p><strong>복명서</strong></p>
+<ol><li>출장 목적: 제009호 지정해제 여부 판단을 위한 현황 확인</li><li>출장 인원: 2명 (당초 3명 편성이었으나 1명 결원. 충원 불가)</li><li>조사 결과</li></ol>
+<p>가. 굴진장 실측 <strong>1,204m.</strong> 1988년 대비 296m 증가함.</p>
+<p>나. 갱내 자재 및 시설 상태 양호. <strong>환기 시설이 증설되어 있음.</strong> 1988년 조사 시에는 확인되지 아니한 설비이며, 규격은 1970년대 것과 동일함.</p>
+<p>다. 막장 방향에서 작업음 청취. 지침에 따라 철수함.</p>
+<p>라. 철수 중 갱구로부터 약 80m 지점에서 <strong>함바(현장 식당)로 보이는 가설물</strong>을 확인함. 1988년 조사에는 없었음. 내부에 식기 12벌이 배열되어 있었으며, <strong>온기가 있었음.</strong> 밥솥 내부에 밥이 있었음. 상태는 방금 지은 것과 같았음.</p>
+<ol><li>판단 의견</li></ol>
+<p>본 관리물은 지정해제에 적합하지 아니함. 관리 소요 예산은 10년 주기 조사비 뿐이므로 절감액이 크지 아니하며, <strong>해제 시 갱구 폐쇄 상태의 유지 주체가 소멸</strong>함.</p>
+<ol><li>비고</li></ol>
+<p>상기 3-라 항의 식기 수량은 <strong>12벌</strong>임. 1973년 사고 당시 매몰자 수에 관하여 기록이 상이하다는 점을 부기함. 12는 어느 기록과도 일치하지 아니함.</p>
+<p><em>(복명서 여백, 조사자 자필)</em></p>
+<p><em>밥솥을 열어본 사람은 나다. 열지 말았어야 했는데 열었다. 열고 나서 뚜껑을 도로 닫았다. 그때 든 생각을 보고서에는 못 쓰겠어서 여기 쓴다.</em></p>
+<p><em>— 아직 안 왔구나. 몇 명이 더 와야 하나.</em></p>
+<p><em>우리 둘이 들어갔는데 식기가 열둘이었다. 나는 이걸 한 번도 다른 사람에게 말한 적이 없다.</em></p></blockquote>
+<h2 class='sec'>붙임 3. 제6차 진입 조사 복명서 (2024. 10.)</h2>
+<blockquote><p><strong>출장 복명서</strong></p>
+<ol><li>출장 개요: 제009호 정기 진입 조사(10년 주기). 3명 편성, 위탁업체 계측 인력 1명 동행(계약직)</li><li>조사 결과</li></ol>
+<p>가. <strong>굴진장 실측 1,858m.</strong> 직전(2016년) 대비 137m 증가. <strong>증가폭이 종전 대비 현저히 감소</strong>하였음.</p>
+<p>나. 계획 연장은 <strong>1,860m</strong>임. 즉 현재 굴진장은 계획 연장에 <strong>2m 미달</strong>한 상태임.</p>
+<p>다. 막장면 관측 결과, 종전과 달리 <strong>발파 준비가 완료된 상태</strong>로 확인됨(천공 완료, 장약 삽입 완료, 뇌관 결선 완료). 발파는 시행되지 아니한 상태였음.</p>
+<p>라. 작업음은 청취되지 아니하였음. <strong>6차 조사 중 최초임.</strong></p>
+<p>마. 갱내 전 구간에 걸쳐 <strong>정리 정돈이 이루어져 있었음.</strong> 자재는 종류별로 적치되고, 궤도는 청소되어 있으며, 함바의 식기는 세척 후 엎어 놓여 있었음. 작업복과 안전모는 갱구에 <strong>정렬</strong>되어 있었음. 수량 <strong>12벌</strong>임.</p>
+<ol><li>판단 의견</li></ol>
+<p>당해 관리물은 <strong>50년간의 굴착을 완료하는 단계에 있는 것으로 사료됨.</strong> 마지막 발파 1회분을 남겨두고 있으며, 시행 시기는 확인할 수 없음.</p>
+<ol><li>특기 사항 — <strong>굴진 방향에 관하여</strong></li></ol>
+<p>본 조사에서 최초로 갱내 측량을 실시한 결과, 당해 터널의 굴진 방향은 1972년 설계 노선과 <strong>일치하지 아니함.</strong> 굴진 방위각은 설계 대비 <strong>약 31도 편위</strong>되어 있음.</p>
+<p>현 굴진 방향의 연장선상 지표면에는 다음이 위치함.</p>
+<div class='tw'><table><thead><tr><th>이격 거리</th><th>지표 시설</th></tr></thead><tbody><tr><td>약 0.4km</td><td><span class="redact">██</span>리 마을 (인구 9명)</td></tr><tr><td>약 2.1km</td><td><span class="redact">██</span>고속도로 <span class="redact">██</span>터널 <strong>(2027년 개통 예정, 현재 굴착 중)</strong></td></tr><tr><td>약 6.8km</td><td><span class="redact">██</span>군청 소재지</td></tr></tbody></table></div>
+<p><span class="redact">██</span>터널은 현재 반대편 갱구로부터 굴착이 진행 중이며, 본 조사 시점 기준 굴진장은 <strong>약 1.9km</strong>임. 양자의 잔여 이격 거리는 <strong>약 200m</strong>임.</p>
+<ol><li>건의</li></ol>
+<p>가. 관리 지침 제3항의 조사 주기를 <strong>10년에서 1년으로 단축</strong>할 것을 건의함. 나. <span class="redact">██</span>고속도로 시공사에 대한 <strong>굴진 중단 협조 요청</strong>을 검토할 것을 건의함. 다만 요청 사유를 문서로 작성할 수 없으므로, 실현 가능성은 낮은 것으로 판단됨.</p>
+<p>끝.</p></blockquote>
+<h2 class='sec'>붙임 4. 건의 처리 결과 (2025. 1.)</h2>
+<blockquote><p><strong>회신 (본부 → 강원지역본부)</strong></p>
+<ol><li>귀 본부의 2024. 10. 건의에 대하여 다음과 같이 회신함.</li></ol>
+<ol><li>조사 주기 단축(건의 가): <strong>수용 곤란.</strong> 2025년도 예산에 반영되지 아니하였으며, 추경 편성 계획 없음. 다만 <strong>중장기 개선 과제로 관리</strong>하겠음.</li></ol>
+<ol><li>시공사 협조 요청(건의 나): <strong>수용 곤란.</strong> 요청의 법적 근거가 없으며, 국가재정사업의 공정에 영향을 미칠 경우 그 손실에 대한 배상 책임이 본 공단에 귀속될 수 있음.</li></ol>
+<ol><li>참고로 <span class="redact">██</span>고속도로 <span class="redact">██</span>터널은 2026. 8. <strong>관통(貫通) 예정</strong>이며, 관통식이 계획되어 있음. 관통식에는 관계 기관 인사가 참석함.</li></ol>
+<ol><li>귀 본부는 현행 관리 지침에 따라 관리하기 바람. 끝.</li></ol></blockquote>
+<blockquote><p><em>(강원지역본부 접수 메모, 자필)</em></p>
+<p><em>중장기 개선 과제로 관리하겠다는 회신을 받았다. 우리 기관에서 그 문장의 뜻은 하나다. 아무것도 하지 않겠다는 뜻이다.</em></p>
+<p><em>저쪽은 200m 남았고 1년에 300m씩 판다. 이쪽은 2m 남았고 장약을 다 넣어놨다.</em></p>
+<p><em>2026년 8월에 관통식을 한다고 한다. 테이프를 자르고 사진을 찍을 것이다. 그 자리에 사람이 많이 올 것이다.</em></p>
+<p><em>나는 다음 정기인사에 신청을 넣었다. 승인될지는 모르겠다.</em></p></blockquote>
+</article>
+<div class="docfoot">
+  <div>한국이상관리공단 · 대외비 3급 · 보존기간 준영구</div>
+  <div>본 문서의 무단 복제·유출을 금함</div>
+</div>
+<div class='nav'><a href='index.html'>문서 대장</a><a href='doc-016.html'>제016호 계단 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>
