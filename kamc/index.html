@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>한국이상관리공단 문서보관소</title>
+<meta name="description" content="한국형 이상현상 관리 기관의 문서 아카이브">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+
+/* 문서 본문 */
+.dochead{padding:44px 0 0;position:relative}
+.dochead .kicker{font-size:11.5px;letter-spacing:.2em;color:var(--ink3)}
+.dochead h1{font-size:clamp(26px,5vw,38px);font-weight:800;letter-spacing:-.02em;margin:12px 0 6px}
+.dochead .one{color:var(--ink2);font-size:15px;margin-bottom:22px;max-width:58ch}
+.spec{
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+  gap:0;margin-bottom:38px;
+}
+.spec div{padding:11px 12px 11px 0}
+.spec dt{font-size:10.5px;letter-spacing:.14em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:14px;font-weight:600}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+article h2.sec{
+  font-size:19px;font-weight:800;letter-spacing:-.01em;
+  margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--rule);
+}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px}
+.tw th{
+  text-align:left;font-size:11.5px;letter-spacing:.06em;color:var(--ink3);font-weight:700;
+  padding:9px 11px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.tw td{padding:10px 11px;border-bottom:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="masthead">
+  <div class="eyebrow">행정안전부 산하 기타공공기관</div>
+  <h1>한국이상관리공단 문서보관소</h1>
+  <p class="sub">「특수관리물의 관리에 관한 법률」에 따라 지정·관리 중인 특수관리물의
+  관리카드를 열람합니다. 본 자료는 대외비이며, 열람 사실은 기록됩니다.</p>
+  <div class="stamp">대외비</div>
+</div>
+
+<table class="ledger">
+<thead><tr><th>관리번호</th><th>명칭</th><th>등급</th><th>관할</th><th>지정</th></tr></thead>
+<tbody><tr>
+  <td class="no">제037호</td>
+  <td class="ti">
+    <a href="doc-037.html">106동</a>
+    <div class="ln">105동까지 있는 단지에, 106동이 있다.</div>
+  </td>
+  <td><span class="gr g-na">나급</span></td>
+  <td class="meta">수도권지역본부</td>
+  <td class="meta">1998. 11.</td>
+</tr><tr>
+  <td class="no">제052호</td>
+  <td class="ti">
+    <a href="doc-052.html">응시생</a>
+    <div class="ln">매년 수험생이 한 명 더 온다. 매년 같은 사람이다.</div>
+  </td>
+  <td><span class="gr g-na">나급</span></td>
+  <td class="meta">중부지역본부</td>
+  <td class="meta">1990. 2.</td>
+</tr><tr>
+  <td class="no">제088호</td>
+  <td class="ti">
+    <a href="doc-088.html">마을회관</a>
+    <div class="ln">1998년 이후 이 마을에서는 아무도 죽지 않았다.</div>
+  </td>
+  <td><span class="gr g-na">나급</span></td>
+  <td class="meta">영남지역본부</td>
+  <td class="meta">1999. 12.</td>
+</tr><tr>
+  <td class="no">제104호</td>
+  <td class="ti">
+    <a href="doc-104.html">5절</a>
+    <div class="ln">애국가는 4절까지다. 그러나 4절 다음이 있다.</div>
+  </td>
+  <td><span class="gr g-ga">가급</span></td>
+  <td class="meta">본부 직할</td>
+  <td class="meta">1989. 3.</td>
+</tr><tr>
+  <td class="no">제121호</td>
+  <td class="ti">
+    <a href="doc-121.html">수몰지구</a>
+    <div class="ln">물이 빠질 때마다, 마을은 그 사이 지난 세월만큼 발전해 있다.</div>
+  </td>
+  <td><span class="gr g-na">나급</span></td>
+  <td class="meta">중부내륙지역본부</td>
+  <td class="meta">1978. 9.</td>
+</tr><tr>
+  <td class="no">제140호</td>
+  <td class="ti">
+    <a href="doc-140.html">미귀가</a>
+    <div class="ln">전역 기록은 있으나, 귀가 기록은 없다.</div>
+  </td>
+  <td><span class="gr g-na">나급</span></td>
+  <td class="meta">중부지역본부</td>
+  <td class="meta">1983. 4.</td>
+</tr><tr>
+  <td class="no">제158호</td>
+  <td class="ti">
+    <a href="doc-158.html">거주불명</a>
+    <div class="ln">주소가 주민센터인 사람들은, 밤에 주민센터에 있다.</div>
+  </td>
+  <td><span class="gr g-na">나급</span></td>
+  <td class="meta">전 지역본부 공통</td>
+  <td class="meta">2009. 12.</td>
+</tr><tr>
+  <td class="no">제173호</td>
+  <td class="ti">
+    <a href="doc-173.html">글자</a>
+    <div class="ln">읽을 수는 있다. 쓰면 안 된다.</div>
+  </td>
+  <td><span class="gr g-ga">가급</span></td>
+  <td class="meta">본부 직할</td>
+  <td class="meta">1974. 10.</td>
+</tr><tr>
+  <td class="no">제190호</td>
+  <td class="ti">
+    <a href="doc-190.html">회식</a>
+    <div class="ln">1997년 12월에 시작된 회식이 아직 끝나지 않았다.</div>
+  </td>
+  <td><span class="gr g-na">나급</span></td>
+  <td class="meta">영남지역본부</td>
+  <td class="meta">1999. 2.</td>
+</tr><tr>
+  <td class="no">제221호</td>
+  <td class="ti">
+    <a href="doc-221.html">모교</a>
+    <div class="ln">전국의 학교 괴담은 서로 다른 학교의 이야기가 아니다.</div>
+  </td>
+  <td><span class="gr g-boryu">지정보류</span></td>
+  <td class="meta">본부 직할(관리기획처)</td>
+  <td class="meta">1981. 3.</td>
+</tr><tr>
+  <td class="no">제245호</td>
+  <td class="ti">
+    <a href="doc-245.html">귀성</a>
+    <div class="ln">명절 연휴 새벽, 고속도로에 없는 나들목이 생긴다.</div>
+  </td>
+  <td><span class="gr g-da">다급</span></td>
+  <td class="meta">중부지역본부</td>
+  <td class="meta">1983. 9.</td>
+</tr></tbody>
+</table>
+
+<div class="sitefoot">
+현재 등재 <strong>11건</strong> · 가급 2건 · 나급 7건 · 다급 1건 · 지정보류 1건<br>
+본 보관소는 창작물입니다. 등장하는 지명·기관·인물·사건은 모두 가상이며 실재하는 것과 관련이 없습니다.
+</div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>

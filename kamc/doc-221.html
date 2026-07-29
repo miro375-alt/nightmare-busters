@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제221호 모교 — 한국이상관리공단</title>
+<meta name="description" content="전국의 학교 괴담은 서로 다른 학교의 이야기가 아니다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+
+/* 문서 본문 */
+.dochead{padding:44px 0 0;position:relative}
+.dochead .kicker{font-size:11.5px;letter-spacing:.2em;color:var(--ink3)}
+.dochead h1{font-size:clamp(26px,5vw,38px);font-weight:800;letter-spacing:-.02em;margin:12px 0 6px}
+.dochead .one{color:var(--ink2);font-size:15px;margin-bottom:22px;max-width:58ch}
+.spec{
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+  gap:0;margin-bottom:38px;
+}
+.spec div{padding:11px 12px 11px 0}
+.spec dt{font-size:10.5px;letter-spacing:.14em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:14px;font-weight:600}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+article h2.sec{
+  font-size:19px;font-weight:800;letter-spacing:-.01em;
+  margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--rule);
+}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px}
+.tw th{
+  text-align:left;font-size:11.5px;letter-spacing:.06em;color:var(--ink3);font-weight:700;
+  padding:9px 11px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.tw td{padding:10px 11px;border-bottom:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="dochead">
+  <div class="kicker">특수관리물 관리카드</div>
+  <h1>제221호 · 모교</h1>
+  <p class="one">전국의 학교 괴담은 서로 다른 학교의 이야기가 아니다.</p>
+</div>
+<dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제221호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-boryu'>지정보류</span></dd></div><div><dt>관할</dt><dd>본부 직할(관리기획처)</dd></div><div><dt>소재</dt><dd>구전 서사</dd></div><div><dt>지정</dt><dd>1981. 3.</dd></div></dl>
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제221호(이하 "당해 관리물")는 <strong>물리적 실체를 갖지 아니함.</strong> 당해 관리물은 전국 초·중·고등학교에서 구전되는 특정 서사군(群)이며, 격리·봉인·이전이 불가능함. 본 지침은 「관리」가 아닌 <strong>「확산 억제」</strong>에 한하여 적용함.</p>
+<p><strong>2.</strong> 당해 관리물의 원점(原點)으로 추정되는 <span class="redact">██</span>국민학교(1979. 2. 폐교)에 관한 기록은 다음 각 호에 따라 정비함.</p>
+<ul><li>가. 교육행정 전산자료 중 폐교 대장·학교 연혁·학구(學區) 자료 — 「기록물 정비」 명목으로 삭제</li><li>나. 지방자치단체 시사(市史)·군지(郡誌)·향토사 발간물 — 발간 전 검토 후 「사실관계 오류 정정 요청」(표준 서식 제3호) 발송</li><li>다. 지역 구전 채록 사업 결과물 — 관계 부서와 협의하여 미수록 처리</li></ul>
+<p><strong>3.</strong> 채록 자료의 수집은 계속함. 다만 <strong>채록 행위 자체가 확산 요인일 가능성이 배제되지 아니하므로</strong>, 담당자는 채록 내용을 구두로 전파하지 아니할 것. 부서 회의 시 요지 낭독을 금함.</p>
+<p><strong>4.</strong> 당해 부지에 설치된 상부 시설물(붙임 4)에 대하여는 다음 사항을 관계 기관에 「설계 권고」 형식으로 통보함. 통보 사유는 기재하지 아니함.</p>
+<ul><li>가. 화장실 대변기 칸 수를 <strong>4칸으로 하지 아니할 것</strong></li><li>나. 계단은 층별·방향별 단수를 <strong>동일하게 유지할 것</strong></li><li>다. 교정에 인물 조형물 설치 시 <strong>명판을 반드시 부착할 것</strong></li><li>라. 음악 교과 특별실은 <strong>창이 없는 실(室)에 배치하지 아니할 것</strong></li></ul>
+<p><strong>5.</strong> 당해 관리물은 소재지 특정 불가로 「특수관리물의 관리에 관한 법률」 제11조의 지정 요건을 충족하지 못함. 1981년 이래 <strong>지정보류</strong> 상태이며, 별도 예산은 배정되지 아니함. 소요 비용은 「기타 사업비」에서 집행함.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 본 공단은 1981년부터 2026년 현재까지 전국 초·중·고등학교 구전 서사 <strong>3,417건</strong>을 채록·분석하였음. 채록 지역은 17개 시·도 전역이며, 화자(話者)는 대부분 재학생임.</p>
+<p><strong>2-2.</strong> 3,417건 중 <strong>2,890건(84.6%)</strong>이 다음 4개 유형에 집중됨.</p>
+<div class='tw'><table><thead><tr><th>유형</th><th>통칭</th><th>건수</th></tr></thead><tbody><tr><td>A</td><td>화장실 넷째 칸</td><td>1,102</td></tr><tr><td>B</td><td>교정 동상의 야간 이동</td><td>744</td></tr><tr><td>C</td><td>음악실 초상화의 시선 추적</td><td>618</td></tr><tr><td>D</td><td>계단 단수 불일치</td><td>426</td></tr></tbody></table></div>
+<p><strong>2-3.</strong> 위 서사는 통상 "전국에 퍼진 흔한 괴담"으로 인식되어 왔으나, 본 공단의 세부 묘사 대조 결과 <strong>전 유형이 단일 시설 1개소의 실제 도면 및 시설 현황과 일치</strong>함이 확인되었음(붙임 2). 해당 시설은 ○○도 <span class="redact">██</span>군 소재 <strong><span class="redact">██</span>국민학교</strong>이며, 1979. 2. 폐교되었음.</p>
+<p><strong>2-4.</strong> 폐교 사유는 교육행정 자료상 <strong>「학생 수 감소」</strong>로 기재되어 있음. 그러나 확보된 학적 통계상 재학생 수는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>연도</th><th>재학생 수</th></tr></thead><tbody><tr><td>1975</td><td>362</td></tr><tr><td>1976</td><td>388</td></tr><tr><td>1977</td><td>451</td></tr><tr><td>1978</td><td><strong>511</strong></td></tr></tbody></table></div>
+<p>폐교 직전 3년간 재학생 수는 <strong>증가 추세</strong>였음. 학구 내 인구 이동 자료상 유입 요인은 확인되지 아니함.</p>
+<p><strong>2-5.</strong> 당해 관리물의 가장 중대한 특성은 <strong>서사가 사건에 선행</strong>한다는 점임. 특정 학교에서 A~D 유형 서사가 채록된 이후, 해당 학교에서 <strong>서사 내용과 일치하는 사건이 발생</strong>하는 사례가 반복 확인되었음. 본 공단은 이를 <strong>「선행 서사」</strong>로 표기함.</p>
+<ul><li>서사 채록 → 사건 발생까지의 평균 간격: <strong>11개월</strong></li><li>선행 관계가 확인된 사건: 총 <strong>207건</strong></li><li>사건이 발생하지 아니한 채록 건에서는, 이후 해당 서사가 <strong>인접 학교로 이동</strong>하여 재채록됨</li></ul>
+<p><strong>2-6.</strong> 요컨대 당해 관리물은 <strong>이야기의 형태로 자기 자신을 복제</strong>하며, 복제가 완료된 장소에서 원본 시설의 사건을 재현하는 것으로 사료됨. 폐교된 학교가 서사를 매개로 학교를 계속 생산하고 있다고 볼 수 있음.</p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1946. 9.</td><td><span class="redact">██</span>국민학교 개교</td></tr><tr><td>1975. 8.</td><td>본관 증축. 중앙계단 단수 불일치 발생(붙임 2)</td></tr><tr><td>1977. 4.</td><td>교정에 이순신 장군 동상 설치. 예산 부족으로 <strong>기단 명판 미부착</strong></td></tr><tr><td>1979. 2.</td><td>폐교. 사유 「학생 수 감소」. 재학생 511명 전원 전학 처리</td></tr><tr><td>1981. 3.</td><td>인접 3개 학교에서 <strong>동일 문장의 구전 서사</strong> 접수. 조사 착수 및 지정보류</td></tr><tr><td>1988. 5.</td><td>향토사 발간물 삭제 요청 개시</td></tr><tr><td>1994. 10.</td><td>부지 정리 및 <strong>콘크리트 타설</strong>(한국식 격리 제1공법)</td></tr><tr><td>2003. 3.</td><td>부지 상부 시설물 준공(붙임 4)</td></tr><tr><td>2011. 6.</td><td>누적 채록 1,000건 돌파</td></tr><tr><td>2024. 11.</td><td><strong>본 공단을 소재로 한 서사 최초 채록</strong>(붙임 5)</td></tr><tr><td>2026. 4.</td><td>실지조사 시행(붙임 5)</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 채록 자료 대조표 (A유형 발췌)</h2>
+<p>아래 3건은 채록 지역·시점·화자가 상호 무관하며, 자료 간 전파 경로가 확인되지 아니함.</p>
+<div class='tw'><table><thead><tr><th>구분</th><th>① 1993. 6. ○○시</th><th>② 2007. 10. <span class="redact">██</span>도 <span class="redact">██</span>군</th><th>③ 2021. 5. ○○광역시</th></tr></thead><tbody><tr><td>화자</td><td>초6 여</td><td>중2 남</td><td>초5 여</td></tr><tr><td>본문</td><td>"넷째 칸은 두드리면 안 된다. 세 번 두드리면 안에서 같이 두드린다. 네 번 두드리면 문이 열린다."</td><td>"네 번째 칸은 노크하면 안 됨. 세 번 하면 따라 함. 네 번 하면 열림."</td><td>"마지막 칸이 넷째 칸인데 3번 노크하면 따라 노크하고 4번 하면 열려."</td></tr><tr><td>공통 후단</td><td>"열리면 아무도 없고 물이 내려가 있다."</td><td>"열려도 아무도 없고 물만 내려가 있음."</td><td>"안에 아무도 없어. 물은 내려가 있어."</td></tr><tr><td>부가 묘사</td><td>"그 칸만 문고리가 <strong>바깥에</strong> 달려 있다."</td><td>"넷째 칸 손잡이는 <strong>밖에</strong> 있음."</td><td>"넷째 칸은 손잡이가 <strong>밖에</strong> 있어서 안에서 못 연대."</td></tr></tbody></table></div>
+<p>세 학교의 화장실 칸 수는 각각 <strong>6칸, 5칸, 8칸</strong>이며, 어느 곳에도 문고리가 외부에 설치된 칸은 없음. 끝.</p>
+<h2 class='sec'>붙임 2. <span class="redact">██</span>국민학교 도면 대조 결과 (2019. 8.)</h2>
+<p><span class="redact">██</span>군청 건축과 문서고에서 1975년 증축 준공도면 사본을 확보하여 대조하였음.</p>
+<div class='tw'><table><thead><tr><th>유형</th><th>서사 내 묘사</th><th>도면·현황</th></tr></thead><tbody><tr><td>A</td><td>화장실 넷째 칸. 문고리가 바깥에 있음</td><td>본관 2층 남자화장실 <strong>총 4칸.</strong> 1976년 시설 보수대장상 <strong>4번 칸 문 파손으로 문짝 반전 설치</strong>, 잠금장치 외부 부착</td></tr><tr><td>B</td><td>동상이 밤에 움직임. 이름이 적혀 있지 않음</td><td>1977년 설치. <strong>명판 미부착.</strong> 기단 볼트 구멍 4개만 존재</td></tr><tr><td>C</td><td>음악실 초상화의 눈이 따라옴. 음악실은 어두움</td><td>음악실은 본관 3층 서편 끝. <strong>창 없음.</strong> 원 용도는 교구 창고, 1974년 용도 변경</td></tr><tr><td>D</td><td>올라갈 때와 내려갈 때 계단 수가 다름</td><td>본관 중앙계단. 증축 시 좌측 <strong>13단</strong>, 우측 <strong>14단</strong>으로 시공됨. 준공검사 지적사항 있으나 「예산상 재시공 곤란」으로 종결</td></tr></tbody></table></div>
+<p>전국 학교 화장실 칸 수의 최빈값은 6칸이며, 4칸 구조는 조사 대상 1,208개교 중 <strong>11개교</strong>에 불과함. 그럼에도 A유형 서사 1,102건 중 <strong>1,102건 전부</strong>가 "넷째 칸"으로 서술됨. 끝.</p>
+<h2 class='sec'>붙임 3. 1979년 학적부 대조 결과 (2020. 2.)</h2>
+<p>폐교 시 생산된 학적 서류 일체는 인계 기록만 있고 실물은 확인되지 아니하였으나, 2019년 <span class="redact">██</span>군 교육지원청 창고 정리 과정에서 <strong>제33회 졸업생 명부</strong> 및 <strong>전학 처리 대장</strong>이 발견되었음.</p>
+<p><strong>가. 졸업생 명부</strong></p>
+<ul><li>1979. 2. 졸업 대상 6학년 재학생: <strong>87명</strong></li><li>졸업 처리 인원: <strong>84명</strong></li><li>전학 처리 인원: <strong>0명</strong></li><li><strong>차이: 3명</strong></li></ul>
+<p>해당 3명은 졸업·전학·퇴학·사망 어느 항목에도 기재되지 아니하였음. 명부상 성명란은 기재되어 있으나 <strong>판독 불가</strong>함. 잉크 번짐이 아니라 <strong>글자가 없는 상태로 필압만 남아</strong> 있음.</p>
+<p><strong>나. 전학 처리 대장</strong></p>
+<p>폐교와 함께 전학 처리된 재학생 508명(잔여 3명 제외)의 전학 학교는 총 <strong>41개교</strong>임. 해당 41개교를 현재 채록 자료의 <strong>최초 발생 학교 목록</strong>과 대조한 결과는 다음과 같음.</p>
+<ul><li>41개교 중 A~D 유형 서사가 채록된 학교: <strong>41개교</strong></li><li>최초 채록 시점 평균: 전학 처리 후 <strong>2년 4개월</strong></li></ul>
+<p>전학생 508명의 이후 학적은 추적하지 아니하였음. 추적 시행 여부에 대한 품의는 2020. 3. 상신되어 <strong>2020. 4. 반려</strong>되었음. 반려 사유란: <strong>"현재 60세 이상으로 추정되며, 확인의 실익이 없음."</strong> 끝.</p>
+<h2 class='sec'>붙임 4. 부지 현황 및 상부 시설물</h2>
+<p><strong>가.</strong> 1994. 10. 당해 부지 전면에 대하여 콘크리트 타설을 시행하였음(면적 8,█00㎡, 두께 1.2m). 시행 명목은 「폐교 재산 정비」이며, 공단 관여 사실은 문서에 기재하지 아니하였음.</p>
+<p><strong>나.</strong> 상부 시설물의 용도는 지정 당시 「근린공원」으로 계획되었으나, 2001년 <span class="redact">██</span>군 지구단위계획 변경에 따라 <strong>교육시설</strong>로 변경되었음. 변경 사유는 다음과 같이 기재되어 있음.</p>
+<blockquote><p>"관내 학령인구 증가에 따른 신설 학교 부지 확보 필요. <strong>군유지로서 기 정지(整地)가 완료되어 별도 부지 매입비가 소요되지 아니하므로</strong> 본 부지를 활용함이 타당함."</p></blockquote>
+<p><strong>다.</strong> 2003. 3. 해당 부지에 <strong>○○초등학교</strong>가 개교하였음. 현재 재학생 6█8명.</p>
+<p><strong>라.</strong> 본 공단은 2001. 12. 및 2002. 6. 두 차례에 걸쳐 계획 변경 재검토를 요청하였으나, 요청 공문에 사유를 기재할 수 없었으므로 <strong>「기타 사유」</strong>로 발송되었음. 회신은 다음과 같음.</p>
+<blockquote><p>"귀 기관의 의견은 구체적 근거가 제시되지 아니하여 반영이 곤란함을 알려드립니다."</p></blockquote>
+<p><strong>마.</strong> 2003년 개교 이후 ○○초등학교에서 채록된 서사는 총 <strong>19건</strong>임. 이 중 A유형 7건은 "넷째 칸"으로 서술되고 있음. 해당 학교 화장실은 층별 <strong>3칸</strong>임. 끝.</p>
+<blockquote><p><em>(2003. 4. 담당 과장 자필, 검토란 여백): "우리는 학교를 콘크리트로 덮고 그 위에 학교를 지었다. 예산 때문이다. 이건 은폐가 아니라 증축이다."</em></p></blockquote>
+<h2 class='sec'>붙임 5. 삭제 조치 실적 및 이례 채록 건</h2>
+<p><strong>가. 삭제 조치와 신규 채록의 상관</strong></p>
+<p>본 공단의 기록 정비·삭제 요청 실적과 당해 연도 신규 채록 건수는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>연도</th><th>삭제·정정 요청(건)</th><th>신규 채록(건)</th></tr></thead><tbody><tr><td>1988</td><td>12</td><td>31</td></tr><tr><td>1995</td><td>29</td><td>66</td></tr><tr><td>2003</td><td>55</td><td>118</td></tr><tr><td>2012</td><td>94</td><td>204</td></tr><tr><td>2020</td><td>152</td><td>331</td></tr><tr><td>2025</td><td>208</td><td>452</td></tr></tbody></table></div>
+<p>두 계열의 상관계수는 <strong>r = 0.98</strong>임. 삭제 조치를 확대할수록 신규 채록이 증가하는 관계가 관측되며, <strong>인과의 방향은 확정되지 아니함.</strong> 2021년 삭제 조치 축소 검토가 있었으나, 「현행 관리 방식 외 대안 부재」로 종결되었음.</p>
+<p><strong>나. 이례 채록 건 (2024. 11. ○○시 <span class="redact">██</span>초등학교, 초5 남)</strong></p>
+<blockquote><p>"우리 학교에 없는 교실이 하나 있는데, 작년에 검은 옷 입은 아저씨들이 와서 그 교실을 조사하고 갔대. 명찰을 달고 있었는데 <strong>이름이 안 적혀 있었대.</strong> 아저씨들은 세 명이 들어가서 세 명이 나왔는데, 원래 네 명이었대."</p></blockquote>
+<p><strong>다.</strong> 위 채록 이후 동일 유형(이하 「E유형」) 서사가 2026. 7. 현재 <strong>61건</strong> 채록되었음. 공통 요소는 「검은 옷」, 「이름 없는 명찰」, 「없는 교실」, 「인원 불일치」임.</p>
+<p><strong>라.</strong> 본 공단은 2026. 4. 3. <span class="redact">██</span>초등학교에 실지조사를 시행하였음. 조사반 3명, 출장 목적 「구전 서사 현장 확인」. 복명서상 특이사항 없음. 조사 대상으로 기재된 실(室)은 <strong>"본관 3층 3-4 교실"</strong>이며, 해당 학교 본관은 <strong>2층까지</strong>임.</p>
+<p><strong>마.</strong> 즉 위 서사는 본 공단의 조사가 시행되기 <strong>17개월 전</strong>에 채록되었음. 이는 2-5항의 「선행 서사」 정의에 부합함.</p>
+<p><strong>바.</strong> 본 공단은 당해 관리물의 확산 억제를 위하여 45년간 기록 삭제를 시행하여 왔음. 현재 E유형 서사의 핵심 소재는 <strong>기록을 삭제하러 오는 조직</strong>임. 본 공단의 관리 행위가 서사의 구성 요소로 편입된 것으로 사료됨.</p>
+<p><strong>사.</strong> 등급 조정 절차의 개시를 검토하였으나, 당해 관리물은 지정보류 상태이므로 절차 개시 요건을 충족하지 못함. 요건 충족을 위하여는 <strong>소재지의 특정</strong>이 필요함. 현재 관리카드의 소재지란에는 다음과 같이 기재되어 있음.</p>
+<pre class='doc-pre'>소 재 지 : 전국</pre>
+<p>끝.</p>
+<blockquote><p><em>(2026. 7. 담당 부장 자필, 결재 여백): "45년 동안 우리는 그 학교를 지웠다. 지우는 방법을 아는 건 우리뿐이었다. 이제 아이들이 그 방법을 이야기로 만들어서 옮기고 있다. 다음에 채록될 문장이 무엇일지는 대충 짐작이 간다. 그 학교는 학생을 잃은 적이 없다."</em></p></blockquote>
+</article>
+<div class="docfoot">
+  <div>한국이상관리공단 · 대외비 3급 · 보존기간 준영구</div>
+  <div>본 문서의 무단 복제·유출을 금함</div>
+</div>
+<div class='nav'><a href='doc-190.html'>← 제190호 회식</a><a href='index.html'>문서 대장</a><a href='doc-245.html'>제245호 귀성 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>
