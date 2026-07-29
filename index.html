@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ko">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity Web Player | project_mgd_vampire</title>
+    <title>NIGHTMARE BUSTERS · 베베가 지켜줄게</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <style>
@@ -17,7 +17,7 @@
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
+        <div style="color:#EAE4FF;font-family:sans-serif;font-size:15px;text-align:center;line-height:1.6">베베가 준비하고 있어요…<br><span style="opacity:.55;font-size:12px">처음엔 잠시 걸려요 · 약 38MB</span></div>
         <div id="unity-progress-bar-empty">
           <div id="unity-progress-bar-full"></div>
         </div>
@@ -26,7 +26,7 @@
       <div id="unity-footer">
         <div id="unity-logo-title-footer"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">project_mgd_vampire</div>
+        <div id="unity-build-title">NIGHTMARE BUSTERS</div>
       </div>
     </div>
     <script>
@@ -58,16 +58,16 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/eaf42b39ea6924c4b1650c1135ca1dd7.loader.js";
+      var loaderUrl = buildUrl + "/11c635d295cf895152e1d7a3af837296.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/b368ca75014d57c5cc25ba32292942ae.data.unityweb",
+        dataUrl: buildUrl + "/7e3ee8486f9aed67f837e42091f852e9.data.unityweb",
         frameworkUrl: buildUrl + "/e8b99be2800924ede8052b67ff25e1aa.framework.js.unityweb",
-        codeUrl: buildUrl + "/16c4f8f1ce2d59be7df049d552e519da.wasm.unityweb",
+        codeUrl: buildUrl + "/25f704f30264f4a407c229e68c3eac3f.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "project_mgd_vampire",
-        productVersion: "0.1",
+        companyName: "aguard",
+        productName: "NIGHTMARE BUSTERS",
+        productVersion: "1.0",
         showBanner: unityShowBanner,
         // errorHandler: function(err, url, line) {
         //    alert("error " + err + " occurred at line " + line);
@@ -127,7 +127,7 @@
                 };
 
               }).catch((message) => {
-                alert(message);
+                var lb=document.getElementById('unity-loading-bar'); if(lb) lb.style.display='none';var eo=document.createElement('div');eo.setAttribute('style','position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0e0e12;color:#EAE4FF;font-family:sans-serif;text-align:center;padding:24px;z-index:9999');eo.innerHTML='<div style="font-size:44px">🐻</div><div style="font-size:20px;font-weight:700;margin:12px 0 6px">게임을 불러오지 못했어요</div><div style="opacity:.8;line-height:1.6">잠시 후 새로고침하거나<br>크롬 브라우저로 열어주세요.</div>';document.body.appendChild(eo);
               });
             };
 
