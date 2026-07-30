@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제005호 위탁 협력사 명부 — 한국이상관리공단</title>
+<meta name="description" content="현장 관리의 68%를 이 열한 곳이 수행한다. 그중 네 곳은 사업자등록이 조회되지 않는다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+/* 증거 도판 */
+.fig{margin:26px auto 30px;max-width:400px}
+.figbox{border:1px solid var(--ink);background:#0b0c0d;line-height:0}
+.figsvg{display:block;width:100%;height:auto}
+.fig figcaption{
+  border:1px solid var(--rule);border-top:none;background:var(--paper2);
+  padding:7px 10px;font-size:11.5px;color:var(--ink2);text-align:center;line-height:1.6;
+  font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+@media (max-width:520px){.fig{max-width:100%}}
+
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제005호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">위탁 협력사 명부</div>
+      <div class="t2">제 005 호</div>
+    </div>
+    <p class="one">현장 관리의 68%를 이 열한 곳이 수행한다. 그중 네 곳은 사업자등록이 조회되지 않는다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>본부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='nm'>성○○</td><td class='nm'>방○○</td><td class='nm'>한○○</td><td class='nm'>양○○</td><td class='nm'>차○○</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제005호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-teuk' title='甲 · 결재선 이사장 — 관리 수단이 없음. 관측만 하거나 국가가 편입함'>갑급</span><div class='gdesc'>甲 · 결재선 이사장 — 관리 수단이 없음. 관측만 하거나 국가가 편입함</div></dd></div><div><dt>관할</dt><dd>본부 직할 (계약심사부)</dd></div><div><dt>소재</dt><dd>내부지침</dd></div><div><dt>발생원인</dt><dd>해당 없음</dd></div><div><dt>지정</dt><dd>1998. 9.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 성○○, (025) ███-████)</div>
+  <div class="tbar">
+    <b>제005호 &nbsp;위탁 협력사 명부</b>
+    <span>특수관리물 관리카드 · 2026년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 본 문서는 특수관리물이 아니며, <strong>본 공단이 관리 업무를 위탁하고 있는 협력사의 명부</strong>임.</p>
+<p><strong>2.</strong> 협력사에 대하여는 <strong>관리물의 성격을 고지하지 아니함.</strong> 위탁계약서의 업무 범위에는 시설 점검·계측·정비·운반 등 통상적 항목만 기재함(제003호 열람 구분 4급 참조).</p>
+<p><strong>3.</strong> 협력사 선정은 <strong>수의계약</strong>을 원칙으로 함. 경쟁입찰을 시행하지 아니하는 사유는 다음과 같음.</p>
+<ul><li><strong>○</strong> 경쟁입찰 시 신규 업체가 낙찰될 수 있으며, 신규 업체는 <strong>관행을 알지 못함</strong></li><li><strong>○</strong> 종전 업체는 업무의 성격을 고지받은 바 없으나, <strong>오랜 수행으로 하지 말아야 할 것을 알고 있음</strong></li><li><strong>○</strong> 이 「알고 있음」은 문서화되어 있지 아니하므로 인수인계가 불가함</li></ul>
+<p><strong>4.</strong> 협력사의 계약 해지 통보가 접수된 경우 <strong>최우선 순위로 재협상</strong>함. 재협상 실패 시의 대책은 정해진 바 없음.</p>
+<p><strong>5.</strong> 붙임 2의 「대표자 확인 불가」 4개사에 대하여는 <strong>사업자등록 조회를 재시도하지 아니함.</strong> 계좌이체는 정상 처리되고 있으며, 조회 실패를 문서로 확인하는 경우 계약의 적법성이 문제됨. 끝.</p>
+<h2 class='sec'>현황</h2>
+<p><strong>2-1.</strong> 2026. 7. 현재 위탁 협력사는 <strong>11개사</strong>이며, 본 공단 현장 관리 업무의 <strong>68%</strong>를 수행함. 위탁비 총액은 연 <strong>약 91억 원</strong>으로 본 공단 예산의 43%에 해당함.</p>
+<p><strong>2-2.</strong> 협력사 소속 인원은 <strong>4종</strong>(위탁·용역업체 소속)이며, 일부 업체가 사용하는 일용 인원은 <strong>5종</strong>으로 명부 기재 의무가 없음.</p>
+<p><strong>2-3.</strong> 협력사 11개사 중 <strong>7개사</strong>는 사업자등록·법인등기·재무제표가 정상 확인됨. 나머지 <strong>4개사</strong>는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>구분</th><th>확인 사항</th></tr></thead><tbody><tr><td>사업자등록번호</td><td>조회되지 아니함 (「폐업」이 아니라 <strong>「등록 없음」</strong>)</td></tr><tr><td>법인등기</td><td>없음</td></tr><tr><td>대표자</td><td>성명은 계약서에 기재되어 있으나, 주민등록 조회 불가</td></tr><tr><td>계좌이체</td><td><strong>정상 처리됨</strong></td></tr><tr><td>세금계산서</td><td>발행됨. 국세청 전자세금계산서 시스템에 <strong>정상 등재</strong></td></tr><tr><td>업무 수행</td><td><strong>정상.</strong> 결과보고서 제출, 기성 청구, 준공 검사 전부 이상 없음</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 협력사 명부 (정상 확인 7개사)</h2>
+<div class='tw'><table><thead><tr><th>업체명</th><th>위탁 업무</th><th>관련 관리물</th><th>계약 방식</th><th>연 계약액</th></tr></thead><tbody><tr><td><strong><span class="redact">██</span>이엔지</strong></td><td>시설 안전진단</td><td>제021호 (2021년 컨소시엄 주관)</td><td>수의</td><td>1,840,000천원</td></tr><tr><td><strong><span class="redact">██</span>종합관리</strong></td><td>공동주택 위탁관리</td><td>제037호 · 제255호</td><td>수의</td><td>620,000천원</td></tr><tr><td><strong><span class="redact">██</span>환경</strong></td><td>폐기물 수집·운반 및 선별</td><td>제329호</td><td>수의</td><td>1,120,000천원</td></tr><tr><td><strong><span class="redact">██</span>계측</strong></td><td>계측 장비 운용·기록</td><td>제470호 · 제484호</td><td>수의</td><td>187,000천원</td></tr><tr><td><strong><span class="redact">██</span>테크</strong></td><td>반주기 결번 처리 (월 1회)</td><td>제477호</td><td>수의</td><td>96,000천원</td></tr><tr><td><strong><span class="redact">██</span>산업방제</strong></td><td>유해곤충 방제</td><td>제391호</td><td>지자체 대행</td><td>2,410,000천원</td></tr><tr><td><strong><span class="redact">██</span>인력</strong></td><td>일용 인력 공급</td><td>전 관리물 공통</td><td>단가계약</td><td>(실적 정산)</td></tr></tbody></table></div>
+<p><strong>주 1.</strong> <span class="redact">██</span>이엔지는 2021년 사고 이후 <strong>안전진단 업무를 수행하지 아니하고 있음.</strong> 계약은 유지되고 있으며, 계약 내용은 「자료 정리 및 보관」으로 변경되었음. 사고 당시 진입 인력 9명 중 미귀환 6명이 당해 업체 소속이었으며, 유족 소송에서 본 공단과 공동 피고였음.</p>
+<p><strong>주 2.</strong> <span class="redact">██</span>인력의 공급 인원은 5종이므로, <strong>누가 어느 현장에 갔는지 확인할 수 없음.</strong> 단가계약이므로 정산은 인원 수와 일수로만 이루어짐. 2026년 상반기 정산 인원은 <strong>1,942인·일</strong>임.</p>
+<p><strong>주 3.</strong> <span class="redact">██</span>테크의 업무는 「특정 곡 번호를 매월 결번 처리하는 것」이며, 그 곡 번호가 매년 바뀌는 이유는 고지되지 아니하였음. 업체 담당자 진술: <em>"저희는 번호만 받습니다. 왜 그 번호인지는 안 물어봅니다. 십 년 됐습니다."</em></p>
+<h2 class='sec'>붙임 2. 확인 불가 4개사</h2>
+<div class='tw'><table><thead><tr><th>업체명</th><th>위탁 업무</th><th>관련 관리물</th><th>특이사항</th></tr></thead><tbody><tr><td><strong><span class="redact">██</span>상사</strong></td><td>인쇄물 납품 (연 1회, 4월 2일)</td><td>제417호 계열</td><td>대표 <strong>박○○</strong>. 2001년 당해 노선 막차 승무 기관사. <strong>2026. 1. 사망.</strong> 이후 납품 미이행</td></tr><tr><td><strong><span class="redact">██</span>흥업</strong></td><td>청사 시설 관리 (야간)</td><td>본부 청사</td><td>계약 개시 <strong>1979년.</strong> 47년간 대표자 변경 없음</td></tr><tr><td><strong><span class="redact">██</span>토건</strong></td><td>매몰지 사후관리</td><td>제339호</td><td>소재지가 <strong>제073호 소재 건물</strong> 지하 1층으로 기재되어 있음</td></tr><tr><td><strong><span class="redact">██</span>사(社)</strong></td><td>(업무 기재 없음)</td><td>(기재 없음)</td><td>계약서에 <strong>업무 범위란이 공란.</strong> 연 3,300,000원 지급. 1978년부터</td></tr></tbody></table></div>
+<p><strong>가.</strong> 4개사 중 3개사(<span class="redact">██</span>상사·<span class="redact">██</span>흥업·<span class="redact">██</span>사)의 계약서 서명 필적을 대조한 결과, <strong>동일 필적으로 감정</strong>되었음. 감정 결과는 문서로 남기지 아니하였으며, 본 붙임의 기재로 갈음함.</p>
+<p><strong>나.</strong> <strong><span class="redact">██</span>사(社)</strong>에 관하여. 상호가 「<span class="redact">██</span>사」로만 기재되어 있고 업무 범위란이 공란인 계약이 1978년부터 매년 갱신되고 있음. 지급액은 48년간 <strong>연 3,300,000원으로 동일</strong>함(물가 반영 없음). 결과보고서는 매년 1장이 제출되며, 문구는 전 연도 동일함.</p>
+<figure class="fig"><div class="figbox"><svg viewBox="0 0 480 230" class="figsvg" role="img"><defs><style>.sm{font:11px ui-monospace,monospace;fill:#3a3630}.hd{font:700 15px serif;fill:#241f19}.og{font:10px sans-serif;fill:#5a544a;letter-spacing:2px}.stm{font:700 12px sans-serif;fill:#9d2a24;letter-spacing:3px}</style></defs><rect width="480" height="230" fill="#e7e2d5"/><filter id="n1"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n1)" opacity=".22"/><g transform="rotate(0.9 240 115)"><rect x="16" y="14" width="448" height="200" fill="#f3efe4" stroke="#c8c1af"/><text x="48" y="44" class="og">██사</text><text x="48" y="70" class="hd">용역 결과보고서</text><line x1="48" y1="80" x2="432" y2="80" stroke="#8b8477"/><text x="48" y="100" class="sm">용역명</text><text x="104" y="100" class="sm">(기재 없음)</text><text x="290" y="100" class="sm"></text><text x="48" y="121" class="sm">수행기간</text><text x="104" y="121" class="sm">2025. 1. 1. ~ 12. 31.</text><text x="290" y="121" class="sm"></text><text x="48" y="142" class="sm">계약금액</text><text x="104" y="142" class="sm">3,300,000원</text><text x="290" y="142" class="sm"></text><text x="48" y="163" class="sm">수행결과</text><text x="104" y="163" class="sm">이상 없음. 내년에 계속.</text><text x="290" y="163" class="sm"></text><text x="48" y="196" class="sm">담당자 확인란 (공란)</text></g><circle cx="30" cy="64" r="5" fill="#dcd6c7" stroke="#c1baa7"/><circle cx="30" cy="152" r="5" fill="#dcd6c7" stroke="#c1baa7"/></svg></div><figcaption><span class="redact">██</span>사 2025년도 용역 결과보고서. 제출 서류 전량(1매). 1978년분부터 문구가 동일함.</figcaption></figure>
+<p><strong>다.</strong> 계약심사부는 2019년 <span class="redact">██</span>사의 계약 중단을 검토하였음. 검토 의견은 다음과 같음.</p>
+<blockquote><p>48년간 업무 범위가 확인되지 아니한 계약임. 중단이 타당함.</p>
+<p>다만 <strong>중단 시 어떤 업무가 중단되는지 확인할 수 없으므로</strong>, 중단에 따른 영향을 평가할 수 없음. 영향 평가 없이 중단하는 것은 곤란함.</p>
+<p><strong>현행 유지.</strong> 끝.</p></blockquote>
+<h2 class='sec'>붙임 3. 협력사 해지 통보 이력</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>업체</th><th>사유</th><th>결과</th></tr></thead><tbody><tr><td>2016. 4.</td><td>(안전진단 3사 중 2사)</td><td><strong>업무 성격을 고지받은 후</strong> 즉시 해지</td><td>시범 고지 중단 (제003호 붙임 1 참조)</td></tr><tr><td>2025. 12.</td><td>(택배사 1사)</td><td>보관료 단가가 물가 상승분 미반영</td><td><strong>재협상 중.</strong> 미타결 시 3,900건 폐기 예정 (제206호)</td></tr><tr><td>2026. 1.</td><td><span class="redact">██</span>상사</td><td>대표 사망</td><td><strong>후속 납품자 미확보.</strong> 제417호 계열 관리 중단</td></tr><tr><td>2026. 3.</td><td><span class="redact">██</span>산업방제 (기간제 근로자 2인)</td><td>계약 만료</td><td>대체 인력 미채용 (제391호 계수 인력 3인 → 2인)</td></tr></tbody></table></div>
+<p><strong>분석 의견.</strong> 협력사 이탈의 주된 사유는 위험 인지가 아니라 <strong>단가</strong>임. 2016년 사례를 제외하면 전건이 계약 조건 문제이며, 이는 다음을 뜻함.</p>
+<blockquote><p><strong>본 공단의 관리 체계는 협력사가 그 업무의 성격을 모르는 상태에서, 낮은 단가로 계속 수행해 준다는 전제 위에 서 있음.</strong></p></blockquote>
+<p>두 조건 중 하나만 무너져도 관리가 중단됨. 2026년 현재 <strong>단가 조건이 무너지고 있음.</strong></p>
+<blockquote><p><em>(계약심사부장 검토 의견, 2026. 7.)</em></p>
+<p>협력사 열한 곳이 우리 현장의 68%를 한다. 그 사람들은 자기가 무엇을 점검하는지 모른다. 우리가 안 알려줬고, 알려주면 안 온다는 것도 2016년에 확인했다.</p>
+<p>단가는 20년째 거의 그대로다. 물가는 올랐다. 그래서 하나씩 나가고 있다. <span class="redact">██</span>상사는 대표가 죽어서 나갔고, 택배사는 보관료 때문에 나가려 하고, 방제 인력은 계약이 끝나서 나갔다.</p>
+<p>우리가 할 수 있는 일은 단가를 올리는 것이다. 단가를 올리려면 예산을 받아야 하고, 예산을 받으려면 <strong>왜 그 업무가 그만큼 위험한지를 문서로 써야 한다.</strong> 쓰면 협력사가 그 문서를 보게 된다.</p>
+<p>그래서 매년 같은 결론이 나온다. <strong>현행 유지.</strong></p>
+<p>붙임 2의 네 곳은 단가를 올려 달라고 한 적이 없다. 47년째, 48년째다. 나는 그 네 곳이 없어지지 않기를 바라고 있고, 그것을 바란다는 사실이 내 직무의 어느 항목에 해당하는지 모르겠다. 끝.</p></blockquote>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">성○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">방○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">한○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;기획조정실-2026-0005 (2026. 7. 30.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;본부 직할 (계약심사부)<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (025) ███-████<span class="sep">/</span>전송 (025) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-003.html'>← 제003호 인원 분류 및 직제</a><a href='index.html'>문서 대장</a><a href='doc-009.html'>제009호 제1터널 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>
