@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제233호 어린이보호구역 — 한국이상관리공단</title>
+<meta name="description" content="아이가 없는 동네의 스쿨존에서, 보행자 감지가 계속된다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+/* 증거 도판 */
+.fig{margin:26px auto 30px;max-width:400px}
+.figbox{border:1px solid var(--ink);background:#0b0c0d;line-height:0}
+.figsvg{display:block;width:100%;height:auto}
+.fig figcaption{
+  border:1px solid var(--rule);border-top:none;background:var(--paper2);
+  padding:7px 10px;font-size:11.5px;color:var(--ink2);text-align:center;line-height:1.6;
+  font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+@media (max-width:520px){.fig{max-width:100%}}
+
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제233호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">어린이보호구역</div>
+      <div class="t2">제 233 호</div>
+    </div>
+    <p class="one">아이가 없는 동네의 스쿨존에서, 보행자 감지가 계속된다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>지부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='jg'>전결<br><span class='jgn'>강○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제233호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-da' title='丁 · 결재선 담당 전결 — 절차만 이행하면 유지됨 (위해도와 무관)'>정급</span><div class='gdesc'>丁 · 결재선 담당 전결 — 절차만 이행하면 유지됨 (위해도와 무관)</div></dd></div><div><dt>관할</dt><dd>서부관리소</dd></div><div><dt>소재</dt><dd>도로시설</dd></div><div><dt>발생원인</dt><dd>제1기 (전란기)</dd></div><div><dt>지정</dt><dd>1999. 9.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 강○○, (079) ███-████)</div>
+  <div class="tbar">
+    <b>제233호 &nbsp;어린이보호구역</b>
+    <span>특수관리물 관리카드 · 2001년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제233호(이하 "당해 관리물")는 묵산시 <span class="redact">██</span>구 <span class="redact">██</span>로 일원 <strong>어린이보호구역 지정 구간(연장 312m)</strong> 및 해당 구간에서 관측되는 보행자 감지 현상을 말함.</p>
+<p><strong>2.</strong> 당해 구간의 <strong>어린이보호구역 지정을 해제하지 아니함.</strong> 「어린이보호구역의 지정 및 관리에 관한 규칙」상 지정 요건(인근 초등학교·유치원 등의 존재)이 이미 소멸하였으므로, 본 공단은 관할 지자체에 <strong>「보육시설 신설 예정」을 사유로 한 지정 유지</strong>를 매년 요청하고 있음. 신설 계획은 존재하지 아니함.</p>
+<p><strong>3.</strong> 노면 표시(지그재그선, 「어린이보호구역」 문안, 적색 미끄럼방지 포장)를 <strong>덧칠하거나 제거하지 아니할 것.</strong> 마모 시 재도색하되, 최초 시공 시의 규격·색상·위치를 변경하지 아니할 것.</p>
+<p><strong>4.</strong> 당해 구간의 <strong>무인 교통단속 장비 및 보행자 감지 시스템의 전원을 차단하지 아니함.</strong> 감지 로그는 자동 삭제 주기(30일)를 적용하지 아니하고, 본 공단이 전량 이관받아 보존함.</p>
+<p><strong>5.</strong> 감지 로그의 <strong>추정 신장 데이터</strong>를 매 분기 분석하고, 평균 신장이 <strong>160cm를 초과하는 시점</strong>을 지부에 즉시 보고할 것. <em>— 2000. 8. 신설.</em></p>
+<p><strong>6.</strong> 당해 구간에서 발생하는 교통사고는 통상의 절차에 따라 처리하되, 운전자 진술 중 <strong>보행자 관련 부분</strong>은 본 공단이 별도 수집함. 진술의 정정을 요구하지 아니할 것. 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 당해 구간은 1978년 개교한 <span class="redact">██</span>국민학교(후 <span class="redact">██</span>초등학교) 정문 앞 도로이며, 1995년 시가 어린이보호구역으로 고시하였음. 해당 학교는 <strong>1996. 2. 폐교</strong>되었고, 부지는 1997년 공동주택으로 재건축되었음.</p>
+<p><strong>2-2.</strong> 폐교 이후에도 당해 구간의 <strong>보행자 감지 시스템이 지속적으로 작동</strong>하고 있음. 감지 시 촬영된 영상에는 <strong>보행자가 촬영되지 아니함.</strong> 장비 점검 결과 센서·광학계 모두 정상이며, 3회에 걸친 장비 교체(제조사 상이) 후에도 현상은 동일함.</p>
+<p><strong>2-3.</strong> 감지 발생 시각은 다음 시간대에 집중됨.</p>
+<div class='tw'><table><thead><tr><th>시간대</th><th>일평균 감지(2000년 기준)</th><th>비고</th></tr></thead><tbody><tr><td>08:05 ~ 08:35</td><td>41회</td><td>등교 시간대</td></tr><tr><td>12:40 ~ 13:10</td><td>12회</td><td>저학년 하교</td></tr><tr><td>13:40 ~ 14:20</td><td>29회</td><td>하교 시간대</td></tr><tr><td>15:10 ~ 15:40</td><td>18회</td><td>하교 시간대</td></tr><tr><td>그 외</td><td>3회</td><td>—</td></tr></tbody></table></div>
+<p>주말·공휴일 감지는 발생하지 아니함. <strong>방학 기간(구 <span class="redact">██</span>초등학교 학사일정 기준)에는 감지가 중단됨.</strong> 해당 학사일정은 1996년 폐교 시점의 것이며, 이후 개정된 바 없음.</p>
+<p><strong>2-4.</strong> 감지 로그에는 대상의 <strong>추정 신장(cm)</strong>이 기록됨. 이는 통상적인 보행자 감지 장비의 표준 기능임. 1999년 최초 이관분의 신장 분포는 <strong>112cm ~ 148cm</strong>로, <strong>초등학교 재학 연령대의 신장 분포와 통계적으로 일치</strong>하였음.</p>
+<p><strong>2-5.</strong> 당해 구간에서는 연평균 <strong>7.2건</strong>의 교통사고(대부분 급제동에 따른 추돌 및 단독사고)가 발생하고 있음. 인적 피해는 경상에 그침. 운전자 진술은 다음과 같이 일관됨.</p>
+<blockquote><p>"아이가 뛰어들었습니다. 확실히 봤습니다. 그래서 밟았습니다."</p></blockquote>
+<p>블랙박스 영상에 보행자는 <strong>촬영되지 아니함.</strong> 다만 다수 영상에서 <strong>제동 직전 차량 전조등이 노면에 만드는 그림자의 형태</strong>가 통상과 다르다는 분석 결과가 있음(판독 소견: "판단 보류").</p>
+<p><strong>2-6.</strong> 당해 구간의 사고는 <strong>전부 물적·경상 피해에 그치고 있음.</strong> 지정 이후 2년간 사망·중상 사고는 <strong>0건</strong>임. 관측 기간이 짧아 유사 규모 도로와의 통계적 비교는 성립하지 아니하나, 본 공단은 당해 관리물을 <strong>위해 요소로 분류하지 아니함.</strong></p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1978. 3.</td><td><span class="redact">██</span>국민학교 개교. 최성기(1985년) 재학생 <strong>1,940명</strong> (대상의 연원)</td></tr><tr><td>1995. 8.</td><td>어린이보호구역 고시(시)</td></tr><tr><td>1996. 2.</td><td>폐교. 폐교 당시 재학생 <strong>31명</strong></td></tr><tr><td>1996. 3. ~ 1998. 8.</td><td>시청 민원대장에 "없는 아이가 감지된다" 취지의 민원 4건 접수. 처리 결과란 전건 <strong>「현장 확인 후 종결」.</strong> 같은 기간 지자체 도로관리 대장에 감지기 오작동 수리 이력 7건. <strong>별도 조사는 시행된 바 없음</strong></td></tr><tr><td>1997. 6.</td><td>지자체, 보호구역 해제 및 노면 표시 제거 시행 → <strong>붙임 2</strong></td></tr><tr><td>1997. 11.</td><td>학교 부지 공동주택 준공 (총 640세대)</td></tr><tr><td><strong>1998. 9. 30.</strong></td><td><strong>격리 발생</strong></td></tr><tr><td>1999. 9.</td><td>전담반 초동 확인. 관리번호 부여 및 <strong>정급 지정.</strong> 로그 이관 개시</td></tr><tr><td>2000. 8.</td><td>신장 데이터 이상 확인 (붙임 3). 관리 지침 제5항 신설</td></tr><tr><td>2001. 5.</td><td>관내 폐교 인접 구간 전수 조사 (붙임 4)</td></tr><tr><td>2001. 7.</td><td><strong>감지 시간대 이동 개시</strong> (붙임 5)</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 인구 통계 대조</h2>
+<p>당해 구간이 속한 <span class="redact">██</span>동의 만 12세 이하 인구는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>연도</th><th>만 12세 이하(명)</th><th>감지(회)</th></tr></thead><tbody><tr><td>1990</td><td>2,4<span class="redact">██</span></td><td>(기록 없음)</td></tr><tr><td>1995</td><td>1,4<span class="redact">██</span></td><td>(기록 없음)</td></tr><tr><td>1998</td><td>9<span class="redact">██</span></td><td>(기록 없음)</td></tr><tr><td>1999 (10 ~ 12월)</td><td>5<span class="redact">██</span></td><td>6,6<span class="redact">██</span></td></tr><tr><td>2000</td><td>3<span class="redact">██</span></td><td>26,411</td></tr><tr><td>2001 (1 ~ 8월)</td><td><strong>2<span class="redact">██</span></strong></td><td><strong>17,6<span class="redact">██</span></strong></td></tr></tbody></table></div>
+<p><strong>감지 횟수는 실거주 아동 수와 무관하게 일정함.</strong> 로그 이관 이후 수업일 1일당 감지는 <strong>120회 내외</strong>이며, 월별 편차는 0.4% 미만임. 다만 <strong>이관 기간이 1년 11개월에 불과하여 장기 추세는 판단하지 아니함.</strong> 1999. 10. 이전의 감지 로그는 자동 삭제 주기(30일)에 따라 폐기되어 존재하지 아니함.</p>
+<p>연간 환산치는 <strong>1985년 <span class="redact">██</span>국민학교 최성기 재학생 1,940명의 1일 왕복 통행량 추정치</strong>와 근사함. <em>(1,940명 × 2회 × 수업일수 약 220일 ÷ 32 — 감지 구간 통과 비율 보정)</em></p>
+<h2 class='sec'>붙임 2. 보호구역 해제 시행 결과 (1997. 6. ~ 9.)</h2>
+<p>폐교에 따라 지자체는 당해 구간의 어린이보호구역 지정을 해제하고, 노면 표시를 제거하였음. <strong>당시 본 공단은 존재하지 아니하였음.</strong> 본 항의 경과는 지자체 도로관리 대장, 시공업체 회신 공문 및 시의회 회의록에서 사후에 확인한 것이며, 이상 현상으로 취급한 문서는 없음.</p>
+<div class='tw'><table><thead><tr><th>경과</th><th>내용</th></tr></thead><tbody><tr><td>6. 14.</td><td>지정 해제 고시. 노면 표시 제거 및 재포장 완료</td></tr><tr><td>6. 15.</td><td><strong>재포장면에 지그재그선 재출현.</strong> 도료 성분 분석 결과 제거된 기존 도료와 동일 배합. 시공업체는 재시공한 바 없다고 회신</td></tr><tr><td>6. 17.</td><td>재차 제거. 6. 18. 재출현. 이후 4회 반복 후 지자체 포기</td></tr><tr><td>7. ~ 8.</td><td>당해 구간 감지 <strong>중단.</strong> 로그 0건</td></tr><tr><td><strong>8. 21.</strong></td><td><strong>인접 <span class="redact">██</span>로(보호구역 아님)에서 어린이 교통사고 발생.</strong> 인적 피해 발생</td></tr><tr><td>9. 2.</td><td>같은 도로에서 2차 사고 발생</td></tr><tr><td>9. 9.</td><td>지자체, 당해 구간 보호구역 <strong>재지정.</strong> 감지 재개(당일 41회)</td></tr><tr><td>9. 10. ~</td><td><span class="redact">██</span>로 사고 발생 없음 (현재까지)</td></tr></tbody></table></div>
+<p><strong>분석:</strong> 당해 관리물은 지정 구간 내에 한정되어 발현하며, <strong>지정이 해제될 경우 구간 밖에서 실질적 피해가 발생</strong>하는 것으로 사료됨. 인과관계는 입증되지 아니하였으나, 관리 지침 제2항·제3항은 본 사례에 따라 수립되었음.</p>
+<blockquote><p><em>(지정 조서 여백, 담당자 자필): 보호구역이 저것들을 가둬두는 게 아니다. <strong>저것들이 보호구역 안에 있어 주는 것이다.</strong> 우리가 선을 지워버리면, 저것들은 갈 데가 없어진다. 그러면 아무 데서나 뛰어든다.</em></p></blockquote>
+<h2 class='sec'>붙임 3. 추정 신장 데이터 분석 (2000. 8. 최초 / 이후 분기별 갱신)</h2>
+<ol><li>8. 정기 분석에서, 감지 대상의 추정 신장이 <strong>회차별로 증가</strong>하고 있음이 확인되었음.</li></ol>
+<div class='tw'><table><thead><tr><th>분석 시점</th><th>최소</th><th>최대</th><th><strong>평균</strong></th></tr></thead><tbody><tr><td>1999. 10.</td><td>112</td><td>148</td><td>128.4</td></tr><tr><td>2000. 4.</td><td>114</td><td>150</td><td>130.1</td></tr><tr><td>2000. 8.</td><td>116</td><td>151</td><td>131.6</td></tr><tr><td>2001. 2.</td><td>117</td><td>153</td><td>133.0</td></tr><tr><td>2001. 5.</td><td>119</td><td>154</td><td>134.2</td></tr><tr><td><strong>2001. 8.</strong></td><td><strong>120</strong></td><td><strong>156</strong></td><td><strong>135.4</strong></td></tr></tbody></table></div>
+<p>증가폭을 연 단위로 환산하면 <strong>3.7cm</strong>이며, 이는 대한민국 소아·청소년 표준 성장 도표상 <strong>동일 집단의 연령별 평균 신장 증가와 일치</strong>함. 다만 <strong>관측 6회로는 증가가 계속될 것인지 판단할 자료가 부족함.</strong></p>
+<figure class="fig"><div class="figbox"><svg viewBox="0 0 480 258" class="figsvg" role="img"><defs><style>.ax{font:10px ui-monospace,monospace;fill:#56504a}.yl{font:10px sans-serif;fill:#56504a}</style></defs><rect width="480" height="258" fill="#f0ece0"/><filter id="n12"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n12)" opacity=".14"/><line x1="56" y1="28" x2="462" y2="28" stroke="#bcb5a3" stroke-dasharray="2 3"/><line x1="56" y1="76" x2="462" y2="76" stroke="#bcb5a3" stroke-dasharray="2 3"/><line x1="56" y1="123" x2="462" y2="123" stroke="#bcb5a3" stroke-dasharray="2 3"/><line x1="56" y1="170" x2="462" y2="170" stroke="#bcb5a3" stroke-dasharray="2 3"/><line x1="56" y1="218" x2="462" y2="218" stroke="#bcb5a3" stroke-dasharray="2 3"/><polyline points="56.0,218.0 137.2,171.9 218.4,131.1 299.6,93.1 380.8,60.6 462.0,28.0" fill="none" stroke="#2f4858" stroke-width="1.8"/><circle cx="56.0" cy="218.0" r="2.4" fill="#9d2a24"/><circle cx="137.2" cy="171.9" r="2.4" fill="#9d2a24"/><circle cx="218.4" cy="131.1" r="2.4" fill="#9d2a24"/><circle cx="299.6" cy="93.1" r="2.4" fill="#9d2a24"/><circle cx="380.8" cy="60.6" r="2.4" fill="#9d2a24"/><circle cx="462.0" cy="28.0" r="2.4" fill="#9d2a24"/><line x1="56" y1="28" x2="56" y2="218" stroke="#56504a"/><line x1="56" y1="218" x2="462" y2="218" stroke="#56504a"/><text x="56" y="18" class="yl">추정 신장 평균 (cm)</text><text x="48" y="33" class="ax" text-anchor="end">135.4</text><text x="48" y="218" class="ax" text-anchor="end">128.4</text><text x="56" y="236" class="ax" text-anchor="middle">1999.10</text><text x="137" y="236" class="ax" text-anchor="middle">2000.4</text><text x="218" y="236" class="ax" text-anchor="middle">2000.8</text><text x="300" y="236" class="ax" text-anchor="middle">2001.2</text><text x="381" y="236" class="ax" text-anchor="middle">2001.5</text><text x="462" y="236" class="ax" text-anchor="middle">2001.8</text></svg></div><figcaption>감지 대상 추정 신장 평균(cm). 1999. 10. 최초 이관분부터 2001. 8.까지 6회 관측분. 관측 기간 1년 11개월.</figcaption></figure>
+<p><strong>즉 감지 대상은 성장하고 있음.</strong> 1999년 최초 관측 시 초등학교 저학년 신장 분포였던 집단이, 현재 고학년 분포에 해당함. 이 추세가 유지되는 경우 관리 지침 제5항의 보고 기준(평균 160cm)에 도달하는 시점은 <strong>2000년대 중반</strong>으로 추계되나, 추계의 근거는 6회 관측분뿐임.</p>
+<p>감지 횟수·시간대·주말 미발생 등 그 밖의 패턴은 <strong>1년 11개월간 변동 없이 유지</strong>되고 있었음. 붙임 5 이전까지는.</p>
+<h2 class='sec'>붙임 4. 동종 사례 확인 (2001. 5.)</h2>
+<p>관내 폐교 인접 어린이보호구역 중 <strong>지정이 유지되고 있는 구간 9개소</strong>에 대한 전수 조사 결과, <strong>2개소</strong>에서 동종 현상이 확인되었음.</p>
+<p>공통 조건은 다음과 같음.</p>
+<ul><li>폐교 후 <strong>보호구역 지정이 해제되지 아니하였을 것</strong> (행정 소홀 또는 예산 부족에 따른 방치가 대부분임)</li><li>노면 표시가 <strong>제거되지 아니하였을 것</strong></li><li>감지 장비가 <strong>철거되지 아니하였을 것</strong></li></ul>
+<p>즉 당해 현상은 <strong>행정이 잊고 지워지지 않은 선(線)이 남아 있는 곳에서만</strong> 발현함. 본 공단은 이를 「잔존 지정」으로 분류하고, 2개소 전부에 대하여 지정 유지를 요청하였음.</p>
+<p>요청 공문의 사유란은 전부 <strong>「보육시설 신설 예정」</strong>으로 기재하였음. 소관 부서는 <strong>회신을 요구하지 아니하였음.</strong> 요청 공문 3건 중 회신은 1건이며, 내용은 「검토함」임.</p>
+<h2 class='sec'>붙임 5. 감지 시간대 이동 (2001. 7. ~ 현재)</h2>
+<ol><li>7.부터 당해 구간의 감지 시간대에 변화가 확인되고 있음.</li></ol>
+<div class='tw'><table><thead><tr><th>시간대</th><th>2000년 일평균</th><th><strong>2001. 8. 일평균</strong></th></tr></thead><tbody><tr><td>08:05 ~ 08:35</td><td>41</td><td>12</td></tr><tr><td>13:40 ~ 14:20</td><td>29</td><td>6</td></tr><tr><td>15:10 ~ 15:40</td><td>18</td><td>4</td></tr><tr><td><strong>07:20 ~ 07:50</strong></td><td>0</td><td><strong>33</strong></td></tr><tr><td><strong>18:40 ~ 19:30</strong></td><td>0</td><td><strong>41</strong></td></tr><tr><td><strong>22:00 ~ 23:10</strong></td><td>0</td><td><strong>15</strong></td></tr></tbody></table></div>
+<p>총 감지 횟수는 <strong>수업일 1일당 120회 내외로 변동 없음.</strong> 시간대만 이동하였음.</p>
+<p>이동 후의 시간대는 당해 지역 <strong>출퇴근 통행량 조사(2000년)의 첨두시간과 일치</strong>함. 22시대 감지는 야간 근로 및 여가 통행 시간대에 해당함.</p>
+<p>또한 2001. 7. 이후 <strong>주말 감지가 최초로 발생</strong>하기 시작하였음(토요일 일평균 9회). 방학 기간에 해당하는 8월에도 감지가 중단되지 아니하였음. <strong>감지 로그가 존재하는 1999. 10. 이후 처음임.</strong></p>
+<p>당해 구간의 교통사고는 2001. 7. 이후 <strong>0건</strong>임. 뛰어드는 것이 없기 때문임.</p>
+<blockquote><p><strong>지부 검토 의견 (2001. 9.)</strong></p>
+<p>우리는 2년간 이 구간의 선을 지우지 못하게 막아 왔다. 근거는 붙임 2였다. 선이 없으면 저것들이 밖으로 나간다고 판단했기 때문이다.</p>
+<p>그런데 이제 저것들은 <strong>어린이의 시간표로 움직이지 않는다.</strong> 통행 시간은 출퇴근이고, 주말에도 나온다. 어린이보호구역은 만 13세 미만을 보호하기 위한 제도다. 신장은 아직 그 범위 안에 있으나, <strong>시간표는 이미 아니다.</strong></p>
+<p>제도가 대상을 놓쳤을 때 그것이 어디로 가는지에 대하여는 확인된 바 없다.</p>
+<p>다만 확인된 것은 다음과 같다. 저것들은 2년 동안 <strong>한 번도 그 312m를 벗어난 적이 없다.</strong> 자랐고, 시간표를 바꿨고, 여전히 그 안에 있다. 우리가 그어 놓은 선 안에서 학교에 다녔고, 이제 그 선 안에서 어른들의 시간에 맞추어 걷는다.</p>
+<p>관리 지침 제5항의 보고 기준(평균 160cm 초과)은 아직 충족되지 아니하였다. 지금 속도라면 몇 해 뒤에 충족된다. 그때 보고를 받아도 우리가 할 수 있는 일은 없을 것이다. 저 구간을 관측한 것은 2년이고, 저것들이 저기 있었던 것은 그보다 오래다. 민원대장에 네 건이 남아 있는데 전부 「현장 확인 후 종결」이다.</p>
+<p>등급 조정 없이 현행 관리를 유지함. 끝.</p></blockquote>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">강○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">서○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">배○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;기획조정실-2001-0233 (2001. 9. 28.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;서부관리소<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (079) ███-████<span class="sep">/</span>전송 (079) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-221.html'>← 제221호 모교</a><a href='index.html'>문서 대장</a><a href='doc-245.html'>제245호 귀성 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>

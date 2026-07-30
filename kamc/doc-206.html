@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제206호 미배달 — 한국이상관리공단</title>
+<meta name="description" content="배송 중인 화물이 있다. 5년째 배송 중이다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+/* 증거 도판 */
+.fig{margin:26px auto 30px;max-width:400px}
+.figbox{border:1px solid var(--ink);background:#0b0c0d;line-height:0}
+.figsvg{display:block;width:100%;height:auto}
+.fig figcaption{
+  border:1px solid var(--rule);border-top:none;background:var(--paper2);
+  padding:7px 10px;font-size:11.5px;color:var(--ink2);text-align:center;line-height:1.6;
+  font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+@media (max-width:520px){.fig{max-width:100%}}
+
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제206호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">미배달</div>
+      <div class="t2">제 206 호</div>
+    </div>
+    <p class="one">배송 중인 화물이 있다. 5년째 배송 중이다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>지부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='jg'>전결<br><span class='jgn'>권○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제206호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-da' title='丁 · 결재선 담당 전결 — 절차만 이행하면 유지됨 (위해도와 무관)'>정급</span><div class='gdesc'>丁 · 결재선 담당 전결 — 절차만 이행하면 유지됨 (위해도와 무관)</div></dd></div><div><dt>관할</dt><dd>동부관리소</dd></div><div><dt>소재</dt><dd>물류시설</dd></div><div><dt>발생원인</dt><dd>제2기 (구조조정기)</dd></div><div><dt>지정</dt><dd>2000. 6.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 권○○, (088) ███-████)</div>
+  <div class="tbar">
+    <b>제206호 &nbsp;미배달</b>
+    <span>특수관리물 관리카드 · 2001년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제206호(이하 "당해 관리물")는 시 전역 택배 물류센터에 적치된 <strong>배달 및 반송이 모두 이루어지지 아니하는 화물</strong> 일체를 말함. 특정 화물이 아니라 <strong>화물이 그 상태에 놓이는 현상</strong>을 지정 대상으로 함.</p>
+<p><strong>2.</strong> 본 공단은 주요 택배사 3사와 「장기 미배달 화물 보관 협약」을 체결하고, <strong>보관료를 전액 지원</strong>함. 협약서에는 본 공단의 명의를 사용하지 아니하며, 「한국물류표준협회」 명의로 갈음함.</p>
+<p><strong>3.</strong> 협약 사업자는 다음 사항을 준수하여야 함.</p>
+<ul><li>가. 당해 화물을 <strong>폐기·개봉·반송하지 아니할 것</strong></li><li>나. 당해 화물을 <strong>하나의 구역에 집적 보관</strong>할 것 (분산 보관 금지)</li><li>다. 화물의 수량 변동을 <strong>매월 보고</strong>할 것. <strong>감소분은 사유를 기재하지 아니하여도 무방함</strong></li><li>라. 작업자에게 당해 화물의 성격을 고지하지 아니할 것</li></ul>
+<p><strong>4.</strong> 송장 조회 시스템상 당해 화물의 배송 상태는 <strong>「배송 중」으로 유지</strong>함. 상태를 「미배달」·「반송」·「분실」 등으로 변경하지 아니할 것. 상태 변경 시행 결과는 붙임 3과 같음.</p>
+<p><strong>5.</strong> 배송 상태가 <strong>「배송 완료」로 자동 전환된 화물</strong>이 확인된 경우, 담당자는 즉시 지부에 보고하고 해당 수취인 주소지를 관리 대상에 편입할 것. 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 당해 관리물에 해당하는 화물은 다음 조건을 <strong>동시에</strong> 충족함.</p>
+<ul><li>송장 번호가 정상 발급되어 있으며, 조회 시스템에서 <strong>정상 조회됨</strong></li><li>배송 상태가 <strong>「배송 중」</strong>에서 변경되지 아니함 (최장 확인 사례 <strong>5년 1개월</strong> — 송장 발급 1996. 8.)</li><li>수취인 주소로 배송을 시도하면 <strong>주소가 확인되지 아니함</strong> (없는 지번, 철거된 건물, 통폐합된 행정구역)</li><li>발송인 정보로 반송을 시도하면 <strong>반송이 완료되지 아니함</strong> (차량 적재 후 물류센터 복귀 시 해당 화물만 적재되어 있음)</li></ul>
+<p><strong>2-2.</strong> 2001. 9. 현재 관내 집적 수량은 <strong>4,1<span class="redact">██</span>건</strong>임. 지정 이래 월평균 약 45건씩 증가하고 있음. 관측 기간이 1년 3개월에 불과하여 증가율의 추세는 판단하지 아니함.</p>
+<p><strong>2-3.</strong> <strong>수취인 조회 결과:</strong> 신원이 확인된 2,874건 중,</p>
+<div class='tw'><table><thead><tr><th>구분</th><th>건수</th><th>비율</th></tr></thead><tbody><tr><td>사망자</td><td>1,262</td><td>43.9%</td></tr><tr><td>실종 신고자</td><td>690</td><td>24.0%</td></tr><tr><td>주민등록 거주불명 등록자</td><td>741</td><td>25.8%</td></tr><tr><td>생존·정상 등록 확인</td><td><strong>181</strong></td><td>6.3%</td></tr></tbody></table></div>
+<p><em>거주불명 등록자 관련 사항은 특수관리물 제158호를 참조할 것.</em></p>
+<p><strong>2-4.</strong> <strong>발송인 정보:</strong> 전 화물의 발송인란 기재 내용이 <strong>동일</strong>함.</p>
+<pre class='doc-pre'>보내는 분 : (공란)
+연 락 처 : 000-0000-0000
+주    소 : ○○시 ██구 ██동 ██-██</pre>
+<p>기재된 주소는 <strong>1998. 11. 폐업한 물류센터 부지</strong>이며, 현재는 나대지임. 해당 물류센터는 폐업 당시 <strong>미배달 화물 약 2,6<span class="redact">██</span>건을 처리하지 못한 채 청산</strong>되었음(붙임 4).</p>
+<p><strong>2-5.</strong> 화물의 물성은 정상임. 종이·비닐·테이프로 포장된 통상적 소포이며, 중량은 0.3~14kg 범위임. X선 판독 결과 내용물은 <strong>일상적 생활용품</strong>으로 확인됨(의류, 식품, 서적, 의약품, 소형 가전 등). 위험물은 확인되지 아니함.</p>
+<p><strong>2-6.</strong> 화물은 <strong>정기적으로 감소함.</strong> 월평균 <strong>9건</strong>이 집적 구역에서 소실되며, 반출 기록·CCTV상 이상은 확인되지 아니함. 소실된 화물의 송장을 조회하면 배송 상태가 <strong>「배송 완료」</strong>로 전환되어 있음. <strong>수령인 서명란에는 서명이 있음.</strong></p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1994 ~ 1998</td><td>관내 택배 취급점·물류센터에서 "반송도 배달도 안 되는 화물" 관련 내부 보고 산발적 발생. 전건 전산 오류로 처리됨. 같은 기간 시청 민원대장에 관련 민원 5건 접수. 처리 결과란 전건 <strong>「현장 확인 후 종결」</strong></td></tr><tr><td><strong>1998. 9. 30.</strong></td><td><strong>격리 발생</strong></td></tr><tr><td>1998. 11.</td><td><span class="redact">██</span>물류 폐업. 미배달 화물 약 2,6<span class="redact">██</span>건 미처리 청산</td></tr><tr><td>1999. 7.</td><td><span class="redact">██</span>택배 <span class="redact">██</span>허브 화재 조사 중, 소실되지 아니한 화물 구역 발견. <strong>화재 구역 한복판에 있었으나 그을음조차 없었음</strong></td></tr><tr><td>2000. 6.</td><td>전담반 초동 확인. 관리번호 부여 및 <strong>정급 지정.</strong> 협약 체결 및 보관료 지원 개시</td></tr><tr><td>2001. 2.</td><td>배송 상태 변경 시행 (붙임 3)</td></tr><tr><td>2001. 6.</td><td>「배송 완료」 전환 최초 확인 (붙임 5)</td></tr><tr><td>2001. 8.</td><td>협약 사업자 1사가 협약 해지 통보. 본 공단 보관료 단가가 물가 상승분을 반영하지 못한 데 따름. 현재 재협상 중</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 집적 구역 실태</h2>
+<p>관내 3개 물류센터에 집적 보관 중이며, 협약상 명칭은 「장기 보관 구역」임. 현장 작업자들 사이에서는 <strong>「그 라인」</strong>으로 불리고 있음.</p>
+<p>작업 환경 조사 결과 다음 사항이 확인되었음.</p>
+<ul><li>해당 구역의 조도(照度)는 센터 평균의 61% 수준임. 등기구는 정상 작동함</li><li>야간 작업자들은 해당 구역에 <strong>혼자 들어가지 아니하는 관행</strong>이 있음. 사규에 없는 자발적 관행임</li><li>해당 구역 인접 라인의 작업자 이직률은 센터 평균의 <strong>2.8배</strong>임</li><li>작업자 면담 시 다수가 "가끔 송장 뜯는 소리가 난다"고 진술함. 화물은 개봉되어 있지 아니함</li></ul>
+<blockquote><p><strong>작업자 면담 (2001. 3. / 야간 분류조, 근속 8년):</strong></p>
+<p>"무섭고 그런 건 아니에요. 그냥 안 가요. 갈 일도 없고요. 근데 물량 밀리는 날에는 거기 통로로 지나가거든요. 지름길이라서. 그럴 때 보면 <strong>송장 방향이 다 저를 보고 있어요.</strong> 아시죠, 송장이 위로 붙어 있잖아요. 근데 다 세로로 서 있어요. 그거 누가 세워놨겠어요. 그냥 그렇게 돼 있는 거지. 저는 그거 안 고쳐요. 고쳐놓으면 다음 날 또 그러니까."</p></blockquote>
+<h2 class='sec'>붙임 2. 시험 개봉 결과 (2000. 11. / 총 8건)</h2>
+<p>지부 승인 하에 화물 8건을 개봉하였음. 개봉은 수취인이 사망자로 확인된 건에 한하여 시행하였음.</p>
+<div class='tw'><table><thead><tr><th>연번</th><th>수취인 상태</th><th>내용물</th><th>비고</th></tr></thead><tbody><tr><td>1</td><td>1996년 사망</td><td>겨울 내의 2벌 (미개봉, 상표 부착)</td><td>제조일자 <strong>1995년 9월</strong></td></tr><tr><td>2</td><td>1999년 사망</td><td>고혈압 처방약 30일분</td><td>조제일 <strong>1999년 3월</strong>. 성분 정상, 변질 없음</td></tr><tr><td>3</td><td>1997년 실종</td><td>초등학생용 학습지 3권</td><td>3권 모두 <strong>1997년 4월호</strong></td></tr><tr><td>4</td><td>1998년 사망</td><td>생일 케이크용 초, 성냥</td><td>—</td></tr><tr><td>5~8</td><td>(생략)</td><td>(생략)</td><td>전건 유사</td></tr></tbody></table></div>
+<p><strong>공통 사항:</strong> 전 화물의 내용물이 <strong>발송 추정 시점 기준으로 신품 상태</strong>이며, 경과 연수에 따른 변질·산화·부패가 확인되지 아니함. 연번 4의 케이크용 초는 <strong>미사용 상태</strong>였음.</p>
+<p><strong>결론:</strong> 당해 화물은 <strong>보내진 시점에 머물러 있는 것</strong>으로 사료됨. 이후 개봉을 중단함. 개봉한 8건은 재포장하여 원위치에 적치하였으며, <strong>8건 중 5건이 2001. 6.까지 소실되었음.</strong> 끝.</p>
+<blockquote><p><em>(개봉 담당 조사관 복명서 여백 자필): 연번 3을 열었을 때 안에 편지가 있었다. 보고서에는 안 썼다. 학습지 사이에 끼워져 있었고 "이번 달도 열심히 해라"라고만 적혀 있었다. 별 내용이 아니라서 안 썼다. 근데 그 애는 그걸 못 받았다. 그게 계속 생각난다.</em></p></blockquote>
+<h2 class='sec'>붙임 3. 배송 상태 변경 시행 결과 (2001. 2.)</h2>
+<p>지부는 시스템 부하 및 고객 문의 대응을 이유로, 당해 화물의 배송 상태를 <strong>「배송 중」에서 「미배달(주소 불명)」로 일괄 변경</strong>하는 시행을 승인하였음. 대상 1,024건.</p>
+<div class='tw'><table><thead><tr><th>경과</th><th>내용</th></tr></thead><tbody><tr><td>D+0</td><td>상태 일괄 변경 완료</td></tr><tr><td>D+1</td><td>변경된 1,024건 중 <strong>996건의 상태가 「배송 중」으로 자동 복구</strong>됨. 시스템 로그에 변경 이력 없음</td></tr><tr><td>D+2</td><td>복구되지 아니한 28건이 집적 구역에서 <strong>소실</strong>됨</td></tr><tr><td>D+4</td><td>소실 28건 중 <strong>11건의 수취인 유족·최종 거주지</strong>에서 배달 사고 신고 접수</td></tr><tr><td>D+9</td><td>신고 내용 확인 결과, 전건이 <strong>"주문한 적 없는 택배가 문 앞에 놓여 있었다"</strong>는 내용이었음</td></tr></tbody></table></div>
+<p>신고자 진술 (D+4 접수분, 발췌):</p>
+<blockquote><p>"돌아가신 어머니 앞으로 온 택배가 문 앞에 있었습니다. 어머니는 8년 전에 돌아가셨고 이 집은 제가 3년 전에 이사 온 집입니다. 어머니는 이 주소를 모르십니다. <strong>저도 이사 온 걸 아무한테도 말 안 했습니다.</strong>"</p></blockquote>
+<p><strong>결론:</strong> 배송 상태는 <strong>당해 화물을 물류망 내부에 머무르게 하는 유일한 조건</strong>으로 사료됨. 「배송 중」인 한 화물은 도착하지 아니함. 상태가 종결되면 화물은 <strong>도착해야 할 곳을 스스로 찾음.</strong> 관리 지침 제4항은 본 건에 따라 신설되었음. 끝.</p>
+<h2 class='sec'>붙임 4. 1998년 <span class="redact">██</span>물류 청산 자료</h2>
+<p>폐업 당시 미처리 화물 약 2,6<span class="redact">██</span>건의 행방은 확인되지 아니함. 청산 서류상 처리 방법란은 다음과 같이 기재되어 있음.</p>
+<pre class='doc-pre'>[미배달 화물 처리 계획]
+
+ 처리 방법 : 보관
+ 보관 장소 : (기재 없음)
+ 보관 기간 : 배달 완료 시까지
+ 담 당 자 : (기재 없음)
+
+  ※ 위 화물은 폐기하지 아니함.
+    받을 사람이 있는 물건임.</pre>
+<p>마지막 두 행은 <strong>인쇄가 아니라 자필</strong>이며, 필적 대조 대상자를 특정하지 못하였음. 당시 임직원 명부상 <strong>필적이 일치하는 자는 없음.</strong></p>
+<p>폐업 시점의 미처리 2,6<span class="redact">██</span>건과 현재 집적 수량 4,1<span class="redact">██</span>건 사이의 증가분에 대하여는 확인된 바 없음.</p>
+<h2 class='sec'>붙임 5. 「배송 완료」 전환 사례 (2001. 6. ~ 현재)</h2>
+<ol><li>6. 이후, 소실 화물의 배송 상태가 <strong>「배송 완료」</strong>로 전환되는 사례가 확인되고 있음. 종전에는 소실 후 조회 자체가 되지 아니하였음.</li></ol>
+<p>전환된 건의 배송 완료 정보는 다음과 같이 기재됨.</p>
+<div class='tw'><table><thead><tr><th>항목</th><th>기재 내용</th></tr></thead><tbody><tr><td>배송 완료 일시</td><td>정상 기재 (전건 <strong>04:00~05:00 사이</strong>)</td></tr><tr><td>배송 담당자</td><td>(공란)</td></tr><tr><td>인수 방법</td><td><strong>직접 수령</strong></td></tr><tr><td>수령인</td><td><strong>본인</strong></td></tr><tr><td>수령인 서명</td><td>서명 있음</td></tr></tbody></table></div>
+<p>수령인 서명은 <strong>수취인 본인의 필적과 일치</strong>함. 사망자 1,262건 중 서명이 확인된 건은 현재까지 <strong>94건</strong>이며, 그중 2건은 유족이 보관 중인 생전 필적과 정밀 대조를 거쳐 <strong>동일인 필적으로 감정</strong>되었음.</p>
+<p>배송 완료 처리된 화물의 배송 주소는 전부 <strong>「배송 중」 상태일 때의 주소와 다름.</strong> 새 주소는 실재하는 주소이며, 현재 다른 사람이 거주 중임.</p>
+<p>본 공단은 관리 지침 제5항에 따라 해당 주소지 <strong>94개소</strong>를 관리 대상에 편입하였음. 편입 후 조치 방법은 정해진 바 없으며, 거주자에게 통보하지 아니함. 통보할 근거 법령이 없고, 통보할 내용을 문장으로 만들 수 없기 때문임.</p>
+<blockquote><p><em>(지부 검토 의견)</em> 우리는 1년 3개월 동안 이 화물들이 도착하지 못하게 막아 왔다. 그 사이에 그것들이 <strong>주소를 갱신하기 시작했다.</strong> 받는 사람이 이사를 가도 따라간다는 뜻이고, 받는 사람이 죽어도 서명을 한다는 뜻이다.</p>
+<p>협약 사업자 1사가 이미 해지를 통보했다. 보관료 단가를 못 맞춰서다. 연 8천만 원이면 되는 일인데 우리는 그 예산을 확보하지 못했다.</p>
+<p>해지되면 그 센터의 9<span class="redact">██</span>건은 폐기된다. 폐기되면 어디로 가는지 우리는 이미 알고 있다.</p>
+<p>예산 재요구를 상신함. 반영 가능성은 낮은 것으로 판단됨. 끝.</p></blockquote>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">권○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">허○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">민○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;기획조정실-2001-0206 (2001. 9. 28.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;동부관리소<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (088) ███-████<span class="sep">/</span>전송 (088) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-190.html'>← 제190호 회식</a><a href='index.html'>문서 대장</a><a href='doc-209.html'>제209호 야간 복도 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>

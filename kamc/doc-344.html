@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제344호 37번 화면 — 한국이상관리공단</title>
+<meta name="description" content="그 골목은 시내 어디에도 없다. 그런데 사람이 지나간다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+/* 증거 도판 */
+.fig{margin:26px auto 30px;max-width:400px}
+.figbox{border:1px solid var(--ink);background:#0b0c0d;line-height:0}
+.figsvg{display:block;width:100%;height:auto}
+.fig figcaption{
+  border:1px solid var(--rule);border-top:none;background:var(--paper2);
+  padding:7px 10px;font-size:11.5px;color:var(--ink2);text-align:center;line-height:1.6;
+  font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+@media (max-width:520px){.fig{max-width:100%}}
+
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제344호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">37번 화면</div>
+      <div class="t2">제 344 호</div>
+    </div>
+    <p class="one">그 골목은 시내 어디에도 없다. 그런데 사람이 지나간다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>지부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='nm'>오○○</td><td class='jg'>전결<br><span class='jgn'>손○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제344호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-na' title='丙 · 결재선 계장 — 절차가 있으나 항상 유효하지는 않음'>병급</span><div class='gdesc'>丙 · 결재선 계장 — 절차가 있으나 항상 유효하지는 않음</div></dd></div><div><dt>관할</dt><dd>서부관리소</dd></div><div><dt>소재</dt><dd>감시행정</dd></div><div><dt>발생원인</dt><dd>제2기 (구조조정기)</dd></div><div><dt>지정</dt><dd>1999. 7.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 오○○, (052) ███-████)</div>
+  <div class="tbar">
+    <b>제344호 &nbsp;37번 화면</b>
+    <span>특수관리물 관리카드 · 2001년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제344호(이하 "당해 관리물")는 묵산시 <strong>CCTV 통합관제센터</strong>의 비디오월에 표시되는 채널 1개(이하 "37번 화면") 및 해당 화면에 송출되는 영상을 말함. 송출원(送出源)은 확인되지 아니함.</p>
+<p><strong>2.</strong> 묵산시 통합관제센터를 <strong>폐쇄·이전·통폐합하지 아니함.</strong> 시가 청사 이전 또는 통합을 추진할 경우, 본 공단은 시 및 관할 경찰서와 협의하여 <strong>사업 순위를 후순위로 조정</strong>하되, 조정 사유는 문서에 기재하지 아니함(붙임 4 참조).</p>
+<p><strong>3.</strong> 관제센터 운영 소프트웨어의 채널 구성을 <strong>변경하지 아니할 것.</strong> 비디오월 분할 설정, 채널 순번, 카메라 관리번호 체계를 임의로 정비하지 아니함.</p>
+<p><strong>4.</strong> 37번 화면의 영상은 <strong>열람·제공·복제 대상으로 취급하지 아니함.</strong> 「공공기관의 개인정보보호에 관한 법률」상 영상정보 열람 요청이 접수되더라도 당해 채널은 검색 대상에서 제외됨(시스템상 검색되지 아니함). 별도 보존을 시도하지 아니함(붙임 3).</p>
+<p><strong>5.</strong> 관제요원의 <strong>계약 형태 및 계약 기간에 관한 사항</strong>은 본 공단이 위탁 용역업체를 통하여 관리함. 관제요원 채용 공고의 계약 기간은 <strong>11개월을 초과하지 아니하도록</strong> 하며, 갱신은 1회로 제한함. 총 근속 기간이 <strong>22개월을 초과하는 자가 발생하지 아니하도록</strong> 할 것.</p>
+<p><strong>6.</strong> 제5항의 조치 사유를 묻는 시·업체의 문의에는 「상시 인력 전환 관련 인건비 예산 사정」으로 회신함. <strong>추가 설명을 요하는 사례는 지금까지 없었음.</strong></p>
+<p><strong>7.</strong> 근속 22개월을 초과한 관제요원이 확인된 경우, 담당자는 즉시 지부에 보고하고 해당 요원에 대한 <strong>면담 및 소재 확인 주기를 월 1회로 단축</strong>할 것. 소재 확인이 2회 연속 불가한 경우의 처리 절차는 정해진 바 없음. 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<figure class="fig"><div class="figbox"><svg viewBox="0 0 480 300" class="figsvg" role="img"><defs><style>.osd{font:11px ui-monospace,monospace;fill:#d6d6ce}.osd2{font:10px ui-monospace,monospace;fill:#a6a69e}</style><linearGradient id="g15" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#13161a"/><stop offset=".55" stop-color="#1c2025"/><stop offset="1" stop-color="#0c0e10"/></linearGradient></defs><rect width="480" height="300" fill="url(#g15)"/><g opacity=".45"><rect x="52" y="158" width="376" height="142" fill="#22272c"/><path d="M52 158 L196 100 L300 100 L428 158 Z" fill="#191d21"/><rect x="192" y="108" width="24" height="50" fill="#2a2f35"/><rect x="268" y="108" width="24" height="50" fill="#2a2f35"/><rect x="126" y="196" width="18" height="34" fill="#20252a"/></g><filter id="n15"><feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="4"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n15)" opacity=".30"/><g opacity=".22"><rect y="0" width="480" height="1.6" fill="#000"/><rect y="4" width="480" height="1.6" fill="#000"/><rect y="8" width="480" height="1.6" fill="#000"/><rect y="12" width="480" height="1.6" fill="#000"/><rect y="16" width="480" height="1.6" fill="#000"/><rect y="20" width="480" height="1.6" fill="#000"/><rect y="24" width="480" height="1.6" fill="#000"/><rect y="28" width="480" height="1.6" fill="#000"/><rect y="32" width="480" height="1.6" fill="#000"/><rect y="36" width="480" height="1.6" fill="#000"/><rect y="40" width="480" height="1.6" fill="#000"/><rect y="44" width="480" height="1.6" fill="#000"/><rect y="48" width="480" height="1.6" fill="#000"/><rect y="52" width="480" height="1.6" fill="#000"/><rect y="56" width="480" height="1.6" fill="#000"/><rect y="60" width="480" height="1.6" fill="#000"/><rect y="64" width="480" height="1.6" fill="#000"/><rect y="68" width="480" height="1.6" fill="#000"/><rect y="72" width="480" height="1.6" fill="#000"/><rect y="76" width="480" height="1.6" fill="#000"/><rect y="80" width="480" height="1.6" fill="#000"/><rect y="84" width="480" height="1.6" fill="#000"/><rect y="88" width="480" height="1.6" fill="#000"/><rect y="92" width="480" height="1.6" fill="#000"/><rect y="96" width="480" height="1.6" fill="#000"/><rect y="100" width="480" height="1.6" fill="#000"/><rect y="104" width="480" height="1.6" fill="#000"/><rect y="108" width="480" height="1.6" fill="#000"/><rect y="112" width="480" height="1.6" fill="#000"/><rect y="116" width="480" height="1.6" fill="#000"/><rect y="120" width="480" height="1.6" fill="#000"/><rect y="124" width="480" height="1.6" fill="#000"/><rect y="128" width="480" height="1.6" fill="#000"/><rect y="132" width="480" height="1.6" fill="#000"/><rect y="136" width="480" height="1.6" fill="#000"/><rect y="140" width="480" height="1.6" fill="#000"/><rect y="144" width="480" height="1.6" fill="#000"/><rect y="148" width="480" height="1.6" fill="#000"/><rect y="152" width="480" height="1.6" fill="#000"/><rect y="156" width="480" height="1.6" fill="#000"/><rect y="160" width="480" height="1.6" fill="#000"/><rect y="164" width="480" height="1.6" fill="#000"/><rect y="168" width="480" height="1.6" fill="#000"/><rect y="172" width="480" height="1.6" fill="#000"/><rect y="176" width="480" height="1.6" fill="#000"/><rect y="180" width="480" height="1.6" fill="#000"/><rect y="184" width="480" height="1.6" fill="#000"/><rect y="188" width="480" height="1.6" fill="#000"/><rect y="192" width="480" height="1.6" fill="#000"/><rect y="196" width="480" height="1.6" fill="#000"/><rect y="200" width="480" height="1.6" fill="#000"/><rect y="204" width="480" height="1.6" fill="#000"/><rect y="208" width="480" height="1.6" fill="#000"/><rect y="212" width="480" height="1.6" fill="#000"/><rect y="216" width="480" height="1.6" fill="#000"/><rect y="220" width="480" height="1.6" fill="#000"/><rect y="224" width="480" height="1.6" fill="#000"/><rect y="228" width="480" height="1.6" fill="#000"/><rect y="232" width="480" height="1.6" fill="#000"/><rect y="236" width="480" height="1.6" fill="#000"/><rect y="240" width="480" height="1.6" fill="#000"/><rect y="244" width="480" height="1.6" fill="#000"/><rect y="248" width="480" height="1.6" fill="#000"/><rect y="252" width="480" height="1.6" fill="#000"/><rect y="256" width="480" height="1.6" fill="#000"/><rect y="260" width="480" height="1.6" fill="#000"/><rect y="264" width="480" height="1.6" fill="#000"/><rect y="268" width="480" height="1.6" fill="#000"/><rect y="272" width="480" height="1.6" fill="#000"/><rect y="276" width="480" height="1.6" fill="#000"/><rect y="280" width="480" height="1.6" fill="#000"/><rect y="284" width="480" height="1.6" fill="#000"/><rect y="288" width="480" height="1.6" fill="#000"/><rect y="292" width="480" height="1.6" fill="#000"/><rect y="296" width="480" height="1.6" fill="#000"/></g><text x="14" y="24" class="osd">CH 37  (대장 미등재)</text><text x="466" y="24" class="osd" text-anchor="end">2001-09-25 03:33:24</text><text x="14" y="288" class="osd2">REC ●</text><text x="466" y="288" class="osd2" text-anchor="end">간판 없음 / 계절 불일치</text></svg></div><figcaption>37번 화면. 시각 표시가 관제센터 표준시보다 정확히 60분 느렸음. 2001. 9. 현재 31분 차.</figcaption></figure>
+<p><strong>2-1.</strong> 묵산시 통합관제센터는 1993년 국비 지원 사업으로 구축된 관제시설임. 관제 대상 카메라 <strong>1,240대</strong>(방범 806 / 어린이보호구역 122 / 주정차 단속 246 / 재난·하천 66)를 운용하며, 관제요원 <strong>24명</strong>(기간제근로자, 3조 2교대) 및 관할 경찰서 파견 경찰관 2명이 상주함. 이는 통상의 통합관제센터와 동일한 표준 구성임.</p>
+<p><strong>2-2.</strong> 관제실 정면 비디오월은 <strong>40인치 프로젝션 모니터 9대(3×3)</strong>로 구성되며, 각 모니터는 4분할로 설정되어 총 36채널을 표시함. 그러나 좌측 하단 모니터 1대는 <strong>5분할로 표시</strong>되며, 다섯 번째 칸에 37번 화면이 나타남. 운영 소프트웨어의 저장된 분할 설정값은 <strong>"4분할"</strong>임.</p>
+<p><strong>2-3.</strong> 37번 화면은 다음과 같이 <strong>시스템상 존재하지 아니함.</strong></p>
+<div class='tw'><table><thead><tr><th>확인 항목</th><th>결과</th></tr></thead><tbody><tr><td>카메라 관리번호 (시 CCTV 관리 대장)</td><td>부여된 바 없음</td></tr><tr><td>관제 채널 목록 (운영 소프트웨어 DB)</td><td>36번까지만 등재</td></tr><tr><td>유지보수 용역 계약서 (연 2회 정기점검 대상)</td><td>1,240대분만 계상</td></tr><tr><td>통신 회선 사용료 청구 내역</td><td>해당 회선 없음</td></tr><tr><td>녹화 서버 저장 용량 사용량</td><td>36채널분과 일치</td></tr><tr><td>영상정보 열람대장</td><td>37번 관련 기록 <strong>0건</strong> (로그 대상이 아님)</td></tr></tbody></table></div>
+<p><strong>2-4.</strong> 화면에 표시되는 장소는 폭 약 2.4m의 <strong>골목</strong>임. 양측에 2~3층 조적조 건물이 인접하며, <strong>간판·상호·번지 표기가 일절 없음.</strong> 노면은 아스팔트가 아닌 시멘트 미장이며, 우측에 전신주 1기와 배수구가 있음. 관내 및 인접 지역의 항공사진·지적도 대조 결과, <strong>일치하는 지점은 확인되지 아니함.</strong></p>
+<p><strong>2-5.</strong> 화면 내 계절은 외부와 무관하게 <strong>고정</strong>되어 있음. 통행인의 복장은 전 기간에 걸쳐 늦가을~초겨울에 해당하며, 강수·적설은 관측된 바 없음. 조도는 주간 수준으로 일정하고, 그림자의 방향 변화가 없음.</p>
+<p><strong>2-6.</strong> 화면 우측 상단의 시각 표시(OSD)는 관제센터 표준시 대비 <strong>정확히 60분 느렸음.</strong> 지정 초기에는 서머타임 설정 오류로 판단하였으나, 국내에서는 1988년 이후 시행하지 아니함. 해당 채널은 시각 동기화 대상 장비 목록에 없으므로 <strong>동기화가 불가함.</strong></p>
+<p><strong>2-7.</strong> 통행 인원은 <strong>1일 평균 4~11명</strong>임. 전원 정상적으로 보행하며, 뛰거나 멈추거나 뒤를 돌아보는 사례는 관측되지 아니함. <strong>카메라를 응시하지 아니함.</strong> 통행 방향은 화면 좌측→우측이 약 8:2로 우세하며, 동일 인물이 되돌아오는 사례는 <strong>지정 이후 확인된 바 없음.</strong></p>
+<p><strong>2-8.</strong> 관제요원은 37번 화면에 대하여 <strong>어떠한 조치도 취하지 아니함.</strong> 신고·출동·기록 대상이 아니며, 업무 매뉴얼에도 없음. 다만 <strong>근속 기간이 긴 요원일수록 화면 속 인물 중 아는 얼굴이 있다고 진술</strong>하는 경향이 확인됨.</p>
+<div class='tw'><table><thead><tr><th>근속 구간</th><th>대상 인원</th><th>"아는 얼굴" 진술자</th></tr></thead><tbody><tr><td>6개월 미만</td><td>22명</td><td>0명</td></tr><tr><td>6~12개월</td><td>18명</td><td>1명</td></tr><tr><td>12~22개월</td><td>9명</td><td>5명</td></tr><tr><td>22개월 초과</td><td>4명</td><td><strong>4명</strong></td></tr></tbody></table></div>
+<p><strong>2-9.</strong> <strong>37번 화면에 자신의 얼굴이 나타났다고 진술한 요원은 예외 없이 퇴직함.</strong> 진술 시점부터 퇴직까지의 기간은 평균 <strong>19일</strong>이며, 사유는 자진 퇴사 또는 계약 만료임. 지정 이후 해당 사례는 <strong>5명</strong>이며, 전원 퇴직 후 소재가 확인되지 아니함. 다만 <strong>실종 신고가 접수된 사례는 0건</strong>임.</p>
+<p><strong>2-10.</strong> 제2-9항의 실종 신고 미접수 사유는 제288호 관련 조사에서 분류한 「사회적 연결 희박군」의 요건과 동일한 구조로 사료됨. 5명 중 3명은 이후 주민등록상 <strong>거주불명 등록</strong>되어 제158호 관리 대상에 편입되었으나, 해당 청사에서 <strong>야간 흔적은 관측되지 아니함.</strong></p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1992</td><td>정부 「CCTV 통합관제센터 구축 사업」 착수. 시(市)가 구축 대상에 포함됨</td></tr><tr><td>1993. 9.</td><td>묵산시 통합관제센터 개소. 관제 카메라 1,102대로 운영 개시</td></tr><tr><td>1994. 2.</td><td>관제요원, 채널 목록에 없는 화면이 표시된다는 사실을 유지보수 업체에 신고. 업체 회신: "분할 설정 오류. 재부팅 요망"</td></tr><tr><td>1995 ~ 1997</td><td>관제센터 운영 일지 특이사항란에 동일 취지 기재 반복. 재부팅 47회 시행 기록 확인. 이후 기재 중단</td></tr><tr><td>1997. 11.</td><td>관제센터 신청사 이전 및 구청사 폐쇄 (붙임 4)</td></tr><tr><td><strong>1998. 9. 30.</strong></td><td>격리 발생</td></tr><tr><td>1999. 7.</td><td>전담반 초동 확인. <strong>병급 지정.</strong> 지정 심의 의견란: "인명·재산 피해 없음. 별도 시설 불요"</td></tr><tr><td>1999. 9.</td><td>등록 대장 및 계약 대조 (붙임 1)</td></tr><tr><td>2000. 2.</td><td>영상 별도 보존 시행 (붙임 3)</td></tr><tr><td>2000. 5.</td><td>관리 지침 제2항·제5항 신설 (붙임 4)</td></tr><tr><td>2000. 8.</td><td>을급 상향 상신. <strong>반려.</strong> 반려 사유란: "인명 피해 미확인(실종 신고 접수 사실 없음). 현행 등급 유지"</td></tr><tr><td>2000. 12.</td><td>시각 차이 감소 최초 확인 (붙임 5)</td></tr><tr><td>2001. 9.</td><td>을급 상향 재상신 (붙임 5)</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 등록 대장 및 계약 대조 결과 (1999. 9. ~ 12.)</h2>
+<p>본 공단은 37번 화면의 송출원을 확인하기 위하여 다음을 시행하였음.</p>
+<ul><li><strong>광케이블 물리 추적:</strong> 관제센터 인입 광케이블 전 회선을 단선 시험하였음. 회선을 전부 차단한 상태에서 36개 채널은 전부 소등되었으나, <strong>37번 화면은 정상 송출됨.</strong> 이때 화면 내 통행인 3명이 관측되었음.</li><li><strong>녹화 서버 분해 점검:</strong> 저장장치 및 인코더 전량 교체. 결과 변동 없음.</li><li><strong>비디오월 모니터 교체:</strong> 좌측 하단 모니터 1대를 신품으로 교체. 신품에서도 5분할 표시 및 37번 화면 유지됨.</li><li><strong>비디오월 전원 차단:</strong> 해당 모니터 전원 차단 시 화면 소등됨. <strong>다만 인접한 우측 모니터가 5분할로 전환되고 다섯 번째 칸에 37번 화면이 표시됨.</strong> 전원 재인가 후 원복됨.</li></ul>
+<p><strong>결론:</strong> 당해 관리물은 특정 장비에 귀속되지 아니하며, <strong>관제실이라는 공간과 그 안에서 화면을 보는 인원에 귀속</strong>되는 것으로 사료됨. 이후 물리적 확인을 시도하지 아니함. 끝.</p>
+<h2 class='sec'>붙임 2. 관제요원 면담 기록 (발췌)</h2>
+<p><em>2000. 6. 면담. 대상: 박○○(당시 근속 9개월, 기간제근로자). 면담자는 본 공단 직원임을 밝히지 아니하고 「관제 환경 실태조사」 명목으로 진행하였음.</em></p>
+<blockquote><p><strong>문:</strong> 37번 화면에 대해 알고 계십니까.</p>
+<p><strong>답:</strong> 압니다. 다들 압니다. 근데 저는 그 화면 안 봅니다.</p>
+<p><strong>문:</strong> 보지 않는다는 것이 무슨 의미입니까.</p>
+<p><strong>답:</strong> 말 그대로 안 봅니다. 시선을 그쪽에 안 둡니다. 저 들어왔을 때 선임이 그러더라고요. <strong>37번은 보는 게 아니라 찍히는 거라고.</strong> 오래 보면 어느 날 저기 지나간대요. 그래서 저는 안 봅니다.</p>
+<p><strong>문:</strong> 실제로 그런 사례를 보셨습니까.</p>
+<p><strong>답:</strong> 저 오기 전에 계시던 분이요. 그분이 어느 날 와서 저기 자기가 있다고, 그래서 다 같이 봤는데 진짜 비슷했어요. 근데 뭐 화질이 그래서 확실하진 않고. 그분 다음 달에 계약 끝났어요.</p>
+<p><strong>문:</strong> 그 후 연락한 적 있습니까.</p>
+<p><strong>답:</strong> 없어요. 여기 사람들 다 그래요. 11개월 하고 나가고 새로 오고. 이름도 잘 몰라요. 저도 12월에 끝납니다.</p></blockquote>
+<p><em>면담 종료 후 기재. 박○○은 2000. 12. 계약 만료로 퇴직하였으며, 만료 3주 전 「37번 화면에 본인이 나온다」고 동료에게 진술한 사실이 확인됨. 본 공단은 해당 진술을 사후에 인지하였음. 현재 소재 불명. 실종 신고 접수 사실 없음.</em></p>
+<h2 class='sec'>붙임 3. 영상 별도 보존 시행 결과 (2000. 2.)</h2>
+<p>관제 영상은 관계 법령 및 표준 운영·관리 방침에 따라 <strong>30일 경과 후 자동 삭제</strong>됨. 본 공단은 37번 화면의 증거 확보를 위하여 다음을 시행하였음.</p>
+<div class='tw'><table><thead><tr><th>방법</th><th>결과</th></tr></thead><tbody><tr><td>녹화 서버 → 외장 저장장치 복사</td><td>복사는 정상 완료됨(용량·재생시간 일치). <strong>재생 시 12번 채널(주정차 단속) 영상이 표시됨</strong></td></tr><tr><td>동일 시도 5회 반복</td><td>재생된 영상은 매번 다른 채널의 것이었으며, 어느 것도 37번이 아니었음</td></tr><tr><td>비디오월 직접 촬영 (사진)</td><td>인화·출력물에서 해당 칸이 <strong>균일한 흑색</strong>으로 표시됨. 인접 칸은 정상</td></tr><tr><td>비디오월 직접 촬영 (동영상)</td><td>해당 칸 전 구간 노이즈. 다만 <strong>음성 트랙에 보행음이 녹음됨</strong></td></tr><tr><td>요원 육안 관찰 후 스케치</td><td><strong>유일하게 남는 기록임.</strong> 두 해 동안 9점 확보. 이 중 7점의 골목 구조·전신주 위치·배수구 위치가 상호 일치함</td></tr></tbody></table></div>
+<p><strong>결론:</strong> 당해 관리물은 <strong>기록으로 이전되지 아니하며</strong>, 사람의 기억을 경유한 형태로만 외부에 남음. 본 공단이 보유한 증거는 스케치 9점 및 요원 진술이 전부임. 2000년 을급 상향 상신이 반려된 근거 중 하나는 「객관적 자료 부족」이었음. 끝.</p>
+<h2 class='sec'>붙임 4. 신청사 이전 경과 (1997. 11. ~ 1998. 2.) 및 후속 조치</h2>
+<ol><li>묵산시는 청사 노후를 사유로 통합관제센터를 신청사로 이전하였음. 당시 본 공단은 존재하지 아니하였으므로 개입한 사실이 없으며, 아래 경과는 <strong>관제센터 운영 일지·시설 관리 대장 및 재직 요원 진술을 1999년에 사후 재구성</strong>한 것임. 당시 이를 관리 대상으로 취급한 기관은 없음.</li></ol>
+<div class='tw'><table><thead><tr><th>경과</th><th>내용</th></tr></thead><tbody><tr><td>11. 14.</td><td>구청사 관제 장비 전량 철거. 구청사 전원 차단</td></tr><tr><td>11. 15.</td><td>신청사 개소. 비디오월 4×4 구성(16대, 각 4분할, 64채널)</td></tr><tr><td>11. 16.</td><td>신청사 비디오월 좌측 하단 모니터가 <strong>5분할로 표시됨.</strong> 다섯 번째 칸에 동일 골목</td></tr><tr><td>11. 22.</td><td>인접 <span class="redact">██</span>면 통합관제센터에서 <strong>동일 현상 발생 기재.</strong> 해당 센터는 종전까지 이상 없었음</td></tr><tr><td>12. 8.</td><td>두 센터의 화면 대조 기록 확인. <strong>동일 골목이나 촬영 각도가 상이함.</strong> 즉 2개 지점에서 관측되고 있었던 것으로 판단됨</td></tr><tr><td>1998. 1.</td><td><span class="redact">██</span>면 센터 관제요원 전원(9명)이 계약 만료 처리되고 신규 인원으로 교체됨. 시행 주체는 위탁업체이며, 시행 사유는 문서에 기재되어 있지 아니함</td></tr><tr><td>1998. 2.</td><td><span class="redact">██</span>면 센터 화면 소멸. 묵산시 센터로 단일화</td></tr></tbody></table></div>
+<p><strong>결론:</strong> 당해 관리물은 <strong>폐쇄에 의하여 소멸하지 아니하며, 인접 관제시설로 확산</strong>함. 확산 시 관리 대상 시설이 증가하여 소요 예산이 배가되므로, <strong>1개소에 고정하여 유지하는 것이 관리상 유리</strong>함.</p>
+<p>또한 <span class="redact">██</span>면 센터의 소멸 경위에 비추어, <strong>관제요원의 근속 기간이 짧을수록 발현 강도가 낮은 것</strong>으로 사료됨. 이에 2000. 5. 관리 지침 제2항(폐쇄 금지) 및 제5항(계약 기간 11개월 제한)을 신설함. 해당 조치는 위탁업체가 통상 시행하는 <strong>상시 인력 전환 회피 관행과 형태가 동일</strong>하므로, 별도의 은폐 조치를 요하지 아니함. 끝.</p>
+<blockquote><p><em>(관리 지침 제5항 신설 검토 의견, 여백 자필 / 2000. 5.): 우리가 하는 일은 저 화면을 끄는 게 아니라, 저 화면을 오래 본 사람이 생기지 않게 하는 것이다. 그래서 사람을 11개월씩 쓴다. 11개월씩 쓰면 아무도 아는 얼굴이 안 생긴다. 11개월씩 쓰면 <strong>아무도 그 사람을 찾지 않는다.</strong> 두 번째 것은 조치 사항이 아니라 결과인데, 결과가 조치보다 더 확실하게 작동하고 있다.</em></p></blockquote>
+<h2 class='sec'>붙임 5. 시각 차이 추이 및 최근 관측 사항 (2000. 12. ~ 현재)</h2>
+<ol><li>12. 정기 점검 중, 37번 화면의 시각 표시 차이가 <strong>60분에서 이탈</strong>하였음이 확인됨. 이후 측정치는 다음과 같음.</li></ol>
+<div class='tw'><table><thead><tr><th>측정 시점</th><th>시각 차이</th><th>비고</th></tr></thead><tbody><tr><td>1999. 7. ~ 2000. 11.</td><td>60분 00초</td><td>지정 이후 오차 없음</td></tr><tr><td>2000. 12.</td><td>59분</td><td></td></tr><tr><td>2001. 2.</td><td>55분</td><td></td></tr><tr><td>2001. 4.</td><td>48분</td><td></td></tr><tr><td>2001. 6.</td><td>40분</td><td></td></tr><tr><td>2001. 9.</td><td><strong>31분</strong></td><td>감소 폭 확대 중</td></tr></tbody></table></div>
+<p>단순 회귀 추정 시 <strong>0분 도달 예상 시점은 2002. 2.</strong>임. 0분 도달 시의 상태는 예측할 수 없음.</p>
+<p>같은 기간 화면 내에서 다음 사항이 추가로 확인되었음.</p>
+<ul><li><strong>2001. 3.</strong> 골목 우측 끝 건물 외벽에 <strong>회색 함체(函體)가 설치</strong>됨. 종전 영상에는 없었음.</li><li><strong>2001. 5.</strong> 함체 하단에 <strong>카메라 1대가 부착</strong>됨. 형식은 관제용 표준 PTZ 카메라와 동일함.</li><li><strong>2001. 7.</strong> 해당 카메라의 <strong>방향이 골목이 아니라 화면 정면</strong>, 즉 관측자 측을 향하도록 조정됨. 이후 방향 변동 없음.</li><li><strong>2001. 8.</strong> 카메라 하우징 측면의 표기를 확대 판독하였음. 서체 및 표기 형식이 묵산시 통합관제센터의 <strong>카메라 관리번호 표기 규격과 동일</strong>함. 판독 가능한 부분은 뒷 두 자리이며, <strong>「37」</strong>임.</li></ul>
+<p>본 공단은 상기 사항에 대하여 다음과 같이 정리함.</p>
+<p><strong>37번 화면은 본 관제센터에 등록되지 아니한 채널이나, 저쪽 체계에서는 37번으로 등록되어 있는 것으로 사료됨.</strong> 즉 양측은 서로를 자기 대장에 없는 한 개의 여분 채널로 표시하고 있으며, 각자 상대측 관제실을 관측하고 있는 것으로 판단됨. 근속이 긴 요원이 화면 속에서 아는 얼굴을 보는 현상, 및 자기 얼굴을 본 요원이 퇴직 후 소재 불명이 되는 현상은 <strong>이 구조로 설명 가능함.</strong></p>
+<p>시각 차이가 0분에 도달할 경우, 두 화면은 동시각(同時刻)이 되며, <strong>어느 쪽이 채널이고 어느 쪽이 관제실인지 구분할 근거가 소멸함.</strong> 본 공단은 해당 시점 이후의 관리 지침을 마련하지 못하였음.</p>
+<ol><li>9. 을급 상향을 재상신하였음. 처리 기한은 2001. 12. 31.임. 소요 예산은 연 약 2억 원으로 추계되며, 확보 가능성은 낮음.</li></ol>
+<blockquote><p><em>(재상신 문서 결재란 여백, 지부장 자필): 저쪽에도 관제요원이 있을 것이다. 기간제일 것이고, 교대근무일 것이고, 아무도 그 사람들을 찾지 않을 것이다. 우리가 여기서 하는 일을 저쪽도 하고 있다면, 계약 기간을 줄이는 쪽이 이긴다. 이건 관리가 아니라 <strong>누가 사람을 더 빨리 갈아치우느냐의 문제</strong>다. 그리고 우리는 그 방면으로는 준비가 되어 있다.</em></p></blockquote>
+<p>끝.</p>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">오○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">손○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">주○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;기획조정실-2001-0344 (2001. 9. 28.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;서부관리소<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (052) ███-████<span class="sep">/</span>전송 (052) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-339.html'>← 제339호 매몰지</a><a href='index.html'>문서 대장</a><a href='doc-356.html'>제356호 씨간장 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>
