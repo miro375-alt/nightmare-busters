@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제088호 마을회관 — 한국이상관리공단</title>
+<meta name="description" content="1998년 이후 이 마을에서는 아무도 죽지 않았다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+/* 증거 도판 */
+.fig{margin:26px auto 30px;max-width:400px}
+.figbox{border:1px solid var(--ink);background:#0b0c0d;line-height:0}
+.figsvg{display:block;width:100%;height:auto}
+.fig figcaption{
+  border:1px solid var(--rule);border-top:none;background:var(--paper2);
+  padding:7px 10px;font-size:11.5px;color:var(--ink2);text-align:center;line-height:1.6;
+  font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+@media (max-width:520px){.fig{max-width:100%}}
+
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제088호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">마을회관</div>
+      <div class="t2">제 088 호</div>
+    </div>
+    <p class="one">1998년 이후 이 마을에서는 아무도 죽지 않았다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>지부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='jg'>전결<br><span class='jgn'>정○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제088호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-da' title='丁 · 결재선 담당 전결 — 절차만 이행하면 유지됨 (위해도와 무관)'>정급</span><div class='gdesc'>丁 · 결재선 담당 전결 — 절차만 이행하면 유지됨 (위해도와 무관)</div></dd></div><div><dt>관할</dt><dd>서부관리소</dd></div><div><dt>소재</dt><dd>취락·복지시설</dd></div><div><dt>발생원인</dt><dd>제1기 (전란기)</dd></div><div><dt>지정</dt><dd>1999. 12.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 정○○, (094) ███-████)</div>
+  <div class="tbar">
+    <b>제088호 &nbsp;마을회관</b>
+    <span>특수관리물 관리카드 · 2026년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제088호(이하 "당해 관리물")는 ○○군 <span class="redact">██</span>면 <span class="redact">██</span>리 소재 마을회관(경로당) 및 당해 리(里) <strong>행정구역 전체</strong>를 말함. 현상의 경계는 리 경계와 일치하는 것으로 관측됨.</p>
+<p><strong>2.</strong> 당해 리 주민 11명에 대하여는 지정 사실을 통보하지 아니함. 분기 점검은 마을회관 외부에서 <strong>육안 관측</strong>으로 실시하며, 주민과의 대화 및 신체 접촉을 시도하지 아니함.</p>
+<p><strong>3.</strong> 당해 리에서 접수되는 119 신고는 관할 소방서와의 협의에 따라 본 공단으로 이첩함. 응급환자 발생 시에도 <strong>의료 후송을 시도하지 아니함.</strong> 관할 보건지소의 방문 진료로 대체하되, 진료 기록상 이송 소견은 기재하지 아니함(1999. 11. 시행 결과, 붙임 2 참조).</p>
+<p><strong>4.</strong> 당해 리가 행정구역 통폐합·리(里) 통합·지번 정리 대상에 포함되지 아니하도록 관계 부서와 협의함. <strong>제외 사유는 문서에 기재하지 아니함.</strong> 통합 시의 결과는 확인된 바 없으며, 확인을 시도하지 아니함.</p>
+<p><strong>5.</strong> 이장 명의로 매년 <span class="redact">██</span>면사무소에 제출되는 「마을 현황 보고서」는 반려하지 아니하고 정상 접수·처리할 것.</p>
+<p><strong>6.</strong> 지방소멸대응기금 배분 시 당해 리를 대상에 포함할 것. 배분액은 집행하지 아니하며, 매년 불용 처리함. 행정 단위는 예산이 배정되는 동안 유지됨.</p>
+<p><strong>7.</strong> 당해 리에 전입신고 또는 출생신고가 접수될 경우 즉시 지부에 보고할 것. <strong>사망신고는 접수되지 아니함.</strong></p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> <span class="redact">██</span>리는 1998년 이후 <strong>사망신고가 1건도 접수되지 아니한</strong> 마을임. 같은 기간 출생신고 역시 없음. 주민등록상 인구는 <strong>11명</strong>, 평균 연령 <strong>94세</strong>, 최고령자는 김○○(1919년생, <strong>107세</strong>)임.</p>
+<p><strong>2-2.</strong> 주민 11명은 노화가 진행되지 아니함. 2003년 최초 관측 시의 사진과 최근 분기 점검 사진을 대조한 결과, 체형·모발·피부 상태에 <strong>유의한 변화가 관측되지 아니하였음.</strong> 착의(着衣) 또한 동일함.</p>
+<p><strong>2-3.</strong> 다만 당해 현상은 리 경계 내에서만 유지됨. 주민이 경계를 벗어날 경우 <strong>경과하지 아니한 시간이 일시에 적용되는 것</strong>으로 관측되었음(붙임 2).</p>
+<p><strong>2-4.</strong> 주민 11명은 매일 오전 10시경 마을회관에 집결하여 화투(고스톱)를 실시함. 참여자 3명, 관전자 8명이며 좌석 배치가 고정되어 있음. 패의 구성, 진행 순서, 승자, 종료 시각이 <strong>매일 동일함</strong>(붙임 3).</p>
+<p><strong>2-5.</strong> 당해 리의 주택은 총 58동이며, 이 중 <strong>47동이 빈집</strong>임. 47동 중 <span class="redact">██</span>동에서 매월 기본요금을 초과하는 전기 사용량이 계측되고 있음. 한국전력 측 회신은 "계량기 노후에 따른 오차"임.</p>
+<p><strong>2-6.</strong> 이장은 매년 「마을 현황 보고서」를 <span class="redact">██</span>면사무소에 제출하고 있으며, 기재 내용에 이상이 없음. 인구·가구수·농지면적·공동시설 현황이 모두 정확함. 다만 <strong>1986년 이후 40년간 보고서의 필체가 동일함.</strong> 같은 기간 이장은 최○○(1986~2000), 박○○(2000~2011), 이○○(2011~현재)으로 <strong>3차례 교체</strong>되었음. 3인의 다른 문서상 필적은 각각 상이하며, 보고서 필적과는 어느 것도 일치하지 아니함.</p>
+<p><strong>2-7.</strong> 당해 리는 2019년 인구감소지역으로 지정되었고, 2022년 <span class="redact">██</span>면 행정구역 통폐합 계획의 대상에 포함되었음. 본 공단은 협의를 통해 당해 리를 계획에서 제외시켰음.</p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1986. 3.</td><td>이장 최○○ 취임. 이후 마을 현황 보고서 필체가 현재까지 동일함</td></tr><tr><td>1991. 7.</td><td><span class="redact">██</span>리 마지막 출생신고 접수. 이후 0건</td></tr><tr><td>1998. 4.</td><td><span class="redact">██</span>리 마지막 사망신고 접수(이○○, 향년 91세). 이후 0건</td></tr><tr><td>1999. 11.</td><td>주민 정○○ 응급 후송 중 사망. 관할 보건소가 <span class="redact">██</span>면청에 이례 보고</td></tr><tr><td>1999. 12.</td><td>본 공단 조사 착수. <strong>정급 지정.</strong> 지정 사유란: "인명 피해 없음. 주민 고령으로 자연 소멸 예상"</td></tr><tr><td>2003. 5.</td><td>최초 정기 관측 조사 시행(붙임 3)</td></tr><tr><td>2019. 3.</td><td>인구감소지역 지정. 지방소멸대응기금 배분 대상 포함</td></tr><tr><td>2022. 8.</td><td><span class="redact">██</span>면 행정구역 통폐합 계획 수립. 본 공단 협의로 <span class="redact">██</span>리 제외</td></tr><tr><td>2026. 6.</td><td><strong>전입신고 1건 접수</strong>(붙임 5)</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 주민등록 및 가족관계등록 대조 결과 (2000. 2.)</h2>
+<p>당해 리 주민 11명의 주민등록표와 가족관계등록부를 대조한 결과는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>항목</th><th>내용</th></tr></thead><tbody><tr><td>주민등록상 인구</td><td>11명 (남 4, 여 7)</td></tr><tr><td>최고령 / 최연소</td><td>김○○ 1919년생 / 이○○ 1937년생</td></tr><tr><td>1998년 이후 사망·전출신고</td><td>각 0건</td></tr><tr><td>1991년 이후 출생신고</td><td>0건</td></tr></tbody></table></div>
+<p>11명의 직계비속은 전원 리 외부에 거주하며, 이 중 4명은 이미 사망하였음. 즉 당해 리에는 <strong>자녀가 부모보다 먼저 사망한 사례</strong>가 4건 있음.</p>
+<p>11명 중 9명은 국민연금 또는 기초연금 수급자임. 수급은 정상적으로 이루어지고 있으며, 매월 <span class="redact">██</span>농협 <span class="redact">██</span>면지점에서 <strong>본인이 직접 수령</strong>하고 있음. 지점 직원 면담 결과 "신분증 확인 절차상 문제가 없었다"는 진술을 얻었음. 제시된 신분증은 <strong>1975년 발급된 도민증</strong>이었음. 끝.</p>
+<h2 class='sec'>붙임 2. 의료 후송 시행 결과 (1999. 11.)</h2>
+<ol><li>11. 주민 정○○(당시 88세)이 마을회관에서 의식을 잃어, 자녀의 요청에 따라 묵산시 소재 병원으로 후송되었음. 본 건은 본 공단 지정 이전에 발생하였으며, 지정의 직접적 계기가 되었음.</li></ol>
+<ul><li><strong>11. 3. 10:52</strong> 119 신고 접수. 구급차 출동</li><li><strong>11. 3. 11:07</strong> 구급차가 <span class="redact">██</span>리 경계(<span class="redact">██</span>교)를 통과</li><li><strong>11. 3. 11:09</strong> 구급대원, 환자의 심정지 확인. 심폐소생술 실시</li><li><strong>11. 3. 11:41</strong> 묵산시 <span class="redact">██</span>병원 도착. 사망 판정</li></ul>
+<p>사망진단서상 <strong>직접사인은 "노환"</strong>으로 기재되었으며, <strong>사망 추정 시각은 11시 07분</strong>임. 이는 구급차가 리 경계를 통과한 시각과 일치함.</p>
+<p>담당 의사는 후속 조사에서 다음과 같이 진술하였음.</p>
+<blockquote><p>"도착했을 때 이미 사후경직이 상당히 진행돼 있었습니다. 그건 몇 시간 걸리는 겁니다. 30분 만에 그렇게 되지 않습니다. 저는 사망 시각을 새벽으로 적으려 했는데, 구급대원이 방금 전까지 맥이 있었다고 해서 11시 7분으로 적었습니다. 둘 중 하나는 틀린 겁니다. 어느 쪽인지는 제가 판단할 수 없었습니다."</p></blockquote>
+<p>유족은 부검을 요구하지 아니하였음.</p>
+<p><strong>본 건 이후, 당해 리 주민에 대한 의료 후송은 시행되지 아니함.</strong> 관리 지침 제3항은 1999. 12. 지정과 동시에 수립되었으며, 현재까지 개정된 바 없음.</p>
+<blockquote><p><em>(2016년 감사 지적사항) "특수관리물 제088호 관리 지침 제3항은 「응급의료에 관한 법률」 제6조(응급의료의 거부금지)에 저촉될 소지가 있음. 검토 요망."</em></p>
+<p><em>(조치결과) "당해 리 주민의 응급 상황은 1999년 이후 발생한 사실이 없어 실익이 없음. 현행 유지."</em></p></blockquote>
+<h2 class='sec'>붙임 3. 정기 관측 기록 요약 (2003. 5. ~ 현재)</h2>
+<p>당해 관리물의 핵심 관측 대상은 마을회관 내 화투판임. 2003년 이후 91회의 분기 점검에서 확인된 사항은 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>항목</th><th>관측 결과</th></tr></thead><tbody><tr><td>개시 / 종료</td><td>10:00 / 16:00 전후 (오차 ±4분)</td></tr><tr><td>참여자 / 관전자</td><td>3인 / 8인 고정. 좌석 배치 동일</td></tr><tr><td>초기 패 구성</td><td>91회 전회 동일</td></tr><tr><td>승자</td><td>91회 전회 동일 (박○○)</td></tr><tr><td>1판 소요 시간</td><td>91회 전회 동일 (오차 ±3초)</td></tr></tbody></table></div>
+<p>판돈으로 사용되는 100원 주화는 <strong>33개</strong>로 고정되어 있으며(1인당 3개), <strong>전량 1994년 발행분</strong>임. 28년간 마모도가 진행되지 아니하였음.</p>
+<p>2009년 시행한 개입 시험 결과는 다음과 같음.</p>
+<ul><li><strong>주화 추가:</strong> 조사원이 100원 주화 1개를 판에 추가함. 익일 관측 시 주화는 33개였음. 추가분은 조사원의 상의 주머니에서 발견되었음.</li><li><strong>화투 반출:</strong> 조사원이 마을회관 미비치 시간대에 화투 1매(비 광)를 반출함. 익일 관측 시 화투는 48매 전량 존재하였음. 반출한 1매는 증거봉투 내에 그대로 있었음.</li><li><strong>말 걸기:</strong> 조사원이 관전자 1인에게 인사함. 응답 없음. 3회 반복. 응답 없음. 다만 그날 화투판은 <strong>평소보다 4분 늦게 시작</strong>되었음.</li></ul>
+<blockquote><p><em>(관측 담당자 자필, 2009년 복명서 여백): "말을 안 듣는 게 아니라 안 들리는 것 같다. 우리 쪽이 소리가 안 나는 위치에 있는 느낌이다."</em></p></blockquote>
+<h2 class='sec'>붙임 4. 면담 기록 (2024. 9.)</h2>
+<p>리 외부 거주 직계비속 중 유일하게 면담에 응한 김○○(당시 74세, 묵산시 거주. 부(父) 김○○, 107세, <span class="redact">██</span>리 거주)의 진술 요지임.</p>
+<blockquote><p><strong>문:</strong> 최근 마을에 다녀오신 적이 있습니까.</p>
+<p><strong>답:</strong> 십몇 년 됐습니다. 그때도 아버지는 그대로였습니다. 놀랍지도 않았습니다. 어릴 때부터 그랬으니까요.</p>
+<p><strong>문:</strong> 왜 가지 않으십니까.</p>
+<p><strong>답:</strong> 무릎이 안 좋습니다. 마을 입구에서 회관까지 삼백 미터가 오르막입니다. 버스는 하루 두 번 들어갑니다.</p>
+<p><strong>문:</strong> 아버님을 모셔 나올 생각은 없으십니까.</p>
+<p><strong>답:</strong> 동네 사람들이 나오면 안 된다고 합니다. 저도 압니다. 정○○ 어르신 일은 다 압니다.</p>
+<p><strong>문:</strong> 아버님의 생존 여부는 어떻게 확인하십니까.</p>
+<p><strong>답:</strong> 면사무소에 전화하면 알려줍니다. 아버지 살아계신 거 압니다. 근데 제가 늙어서 이제 그 마을에 못 갑니다. <strong>제가 먼저 갈 것 같습니다.</strong></p>
+<p><strong>문:</strong> 자녀분께는 이 사실을 말씀하셨습니까.</p>
+<p><strong>답:</strong> 제 아들은 그 마을을 모릅니다. 알려주지 않을 겁니다.</p></blockquote>
+<p><em>(2026. 6. 추가 기재) 면담인 김○○는 <strong>2026. 5. 27. 묵산시 자택에서 사망</strong>하였음. 사인은 급성 심근경색이며, 사망신고는 2026. 5. 29. 묵산시청에 접수되어 정상 처리되었음. 화장은 2026. 5. 31. 완료되었으며, 유해는 묵산시 봉안당에 안치되어 있음.</em></p>
+<h2 class='sec'>붙임 5. 전입신고 처리 건 (2026. 6.)</h2>
+<ol><li>6. 11. <span class="redact">██</span>면사무소에 당해 리에 대한 전입신고 1건이 접수되었음. 1998년 이후 최초임.</li></ol>
+<pre class='doc-pre'>전  입  자 : 김 ○ ○ (1952년생)
+전입 일자 : 2026. 6. 11.
+전  입  지 : ○○군 ██면 ██리 ██번지
+세  대  주 : 김 ○ ○ (1919년생) — 관계: 부(父)
+신  고  인 : 본인
+전입 사유 : 가족과 함께 거주</pre>
+<p>전입자는 <strong>붙임 4의 면담인과 동일인</strong>임.</p>
+<p>주민등록 전산에서 묵산시의 사망 처리와 <span class="redact">██</span>면의 전입 처리가 충돌하여 신고서가 1차 반려되었으나, <strong>2026. 6. 18. 사망 처리가 취소</strong>되고 전입이 확정되었음. 취소 사유란 기재는 <strong>"착오 정정"</strong>이며, 처리자 계정은 확인되지 아니함. 묵산시청은 해당 취소 처리를 시행한 사실이 없다고 회신하였음.</p>
+<p>봉안당 안치 상태는 변동이 없음. <strong>확인을 시도하지 아니함.</strong></p>
+<p>필적 감정 결과는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>대상</th><th>결과</th></tr></thead><tbody><tr><td>신고인 서명란</td><td>김○○ 본인 필적과 <strong>일치</strong></td></tr><tr><td>신고서 본문 기재</td><td>1986년 이후 「마을 현황 보고서」 필체와 <strong>일치</strong></td></tr></tbody></table></div>
+<ol><li>7. 분기 점검 결과, 마을회관 내 관전자 좌석이 8석에서 <strong>9석</strong>으로 증가하였음. 참여자는 3인으로 변동 없음. 판돈으로 사용되는 100원 주화는 <strong>36개</strong>로 증가하였으며, 추가된 3개의 발행연도는 <strong>2026년</strong>임. 당해 리에서 1994년 이후 발행된 물품이 확인된 것은 이번이 처음임.</li></ol>
+<p>주민등록상 인구는 <strong>12명</strong>, 평균 연령은 <strong>92.4세</strong>로 변경되었음.</p>
+<p>본 건으로 당해 관리물의 관리등급을 정급에서 <strong>병급으로 상향</strong> 조정함.</p>
+<p><strong>상향 사유란: "인구가 증가함."</strong> 끝.</p>
+<blockquote><p><em>(서부관리소장 검토 의견, 여백 자필): "1999년에 한 명이 나가서 죽었고 열한 명이 남았다. 이번에 한 명이 들어와서 다시 열두 명이 되었다. 나는 이 마을이 소멸을 견디는 줄 알았다. 아니었다. <strong>명부를 맞추고 있었다.</strong> 우리가 40년간 통폐합을 막아준 것은 관리가 아니라 협조였다."</em></p></blockquote>
+<blockquote><p><em>(담당자 처리 메모): 이번 달 <span class="redact">██</span>면사무소는 「마을 현황 보고서」를 정상 접수하였음. 인구란의 11이 12로 정정되어 있었음. 정정한 필체는 처음 기재한 필체와 동일함.</em></p></blockquote>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">정○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">송○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">심○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;기획조정실-2026-0088 (2026. 7. 30.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;서부관리소<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (094) ███-████<span class="sep">/</span>전송 (094) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-073.html'>← 제073호 B2-137</a><a href='index.html'>문서 대장</a><a href='doc-095.html'>제095호 하행 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>

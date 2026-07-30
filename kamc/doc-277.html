@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제277호 지하보도 — 한국이상관리공단</title>
+<meta name="description" content="길이는 18미터다. 건너면 3.4킬로미터를 간다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+/* 증거 도판 */
+.fig{margin:26px auto 30px;max-width:400px}
+.figbox{border:1px solid var(--ink);background:#0b0c0d;line-height:0}
+.figsvg{display:block;width:100%;height:auto}
+.fig figcaption{
+  border:1px solid var(--rule);border-top:none;background:var(--paper2);
+  padding:7px 10px;font-size:11.5px;color:var(--ink2);text-align:center;line-height:1.6;
+  font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+@media (max-width:520px){.fig{max-width:100%}}
+
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제277호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">지하보도</div>
+      <div class="t2">제 277 호</div>
+    </div>
+    <p class="one">길이는 18미터다. 건너면 3.4킬로미터를 간다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>지부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='nm'>이○○</td><td class='jg'>전결<br><span class='jgn'>권○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제277호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-na' title='丙 · 결재선 계장 — 절차가 있으나 항상 유효하지는 않음'>병급</span><div class='gdesc'>丙 · 결재선 계장 — 절차가 있으나 항상 유효하지는 않음</div></dd></div><div><dt>이상도</dt><dd><span class='tier t-2'>기괴</span></dd></div><div><dt>관할</dt><dd>외곽관리소 (도로시설관리부)</dd></div><div><dt>소재</dt><dd>공간 · 도로시설</dd></div><div><dt>발생원인</dt><dd>제2기 (구조조정기)</dd></div><div><dt>지정</dt><dd>1991. 4.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 이○○, (031) ███-████)</div>
+  <div class="tbar">
+    <b>제277호 &nbsp;지하보도</b>
+    <span>특수관리물 관리카드 · 2026년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제277호(이하 "당해 관리물")는 ○○시 <span class="redact">██</span>구 소재 <strong><span class="redact">██</span>지하보도</strong>(통칭 "<span class="redact">██</span>굴다리", <span class="redact">██</span>선 철도 <span class="redact">██</span>.█km 지점 하부 횡단통로)와, 그 양단 계단실 사이에서 관측되는 거리 불일치 현상을 말함. 「도로법」 제2조제2호에 따른 도로의 부속물이며, 「시설물의 안전 및 유지관리에 관한 특별법」상 <strong>제3종시설물</strong>로 지정되어 있음.</p>
+<p><strong>2.</strong> 당해 관리물에 대하여 <strong>폐쇄·매몰·셔터 설치·구조 변경을 하지 아니함.</strong> ○○시가 「노후 지하보도 정비사업」 또는 「보행환경 개선사업」 대상으로 검토하는 경우 대상에서 제외하도록 요청함. 요청 시 본 공단 명의를 사용하지 아니하고 <strong>「철도 하부 구조물 관리주체 협의 미완료」</strong>를 사유로 갈음함. — <em>2003년 폐쇄 시행 결과에 따름(붙임 3-나).</em></p>
+<p><strong>3.</strong> 당해 관리물의 <strong>일평균 보행 통행량을 2,000명 이하로 유지</strong>함을 관리 목표로 함. 목표 달성을 위한 조치는 다음 각 목에 따르며, 전부 ○○시 소관 사무의 형식으로 시행함.</p>
+<ul><li>가. 통로 및 계단실 평균 조도를 <strong>관계 기준 하한에 근접하게 유지</strong>할 것. 조도 민원은 「전력 수요관리 협조」로 회신함</li><li>나. 계단 논슬립·핸드레일·방수 하자의 <strong>보수 시기를 정기점검 지적 후 최장 기간까지 지연</strong>시킬 것. 안전상 즉시 조치 사유가 발생한 경우에는 시행함</li><li>다. 계단실 상단에 <strong>「범죄예방 안내문」 및 「야간 통행 자제 안내」</strong>를 게시할 것</li><li>라. 「교통약자의 이동편의 증진법」에 따른 <strong>승강설비 설치 대상에서 제외</strong>할 것. 제외 사유란에는 "구조 안전성 검토 필요"로 기재함</li></ul>
+<p><strong>4.</strong> 계단 A·B 주변 노숙인에 대하여는 통상의 거리상담 및 응급잠자리 안내를 시행하되, <strong>시설 입소 권유를 반복하지 아니함.</strong> 동절기 한파 특보 발효 시에는 예외로 함. — <em>본 항의 실질적 취지는 붙임 1-나 및 붙임 4 말미 참조.</em></p>
+<p><strong>5.</strong> 당해 관리물 내 전기(계약전력 <span class="redact">██</span>kW, 공공용) 및 상수도 요금은 <strong>정상 납부 상태를 유지</strong>함. 검침 불가 구간은 추정 부과로 갈음하고, 사용량 과다 소명 요구는 「지하 구조물 누전 추정」으로 회신함.</p>
+<p><strong>6.</strong> CCTV 4대의 영상은 「개인정보 보호법」 제25조에 따라 30일간 보관함. 다만 <strong>진입 기록이 있고 진출 기록이 없는 건</strong>은 원본을 지부로 이송하고 보관 기간을 적용하지 아니함.</p>
+<p><strong>7.</strong> 담당자는 <strong>연 2회 통로 실측</strong>을 시행함. A→B 1회, B→A 1회로 하여 두 수치와 각 소요 시간을 별도로 기재하고, 일치시키려 하지 아니할 것. — <em>2026. 6. 개정: 주기를 <strong>분기 1회</strong>로 변경함. 사유는 붙임 5 참조.</em> 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 당해 관리물은 1979년 준공된 철도 하부 횡단 지하보도이며, 구조는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>구간</th><th>내용</th></tr></thead><tbody><tr><td>계단 A</td><td>○○시 <span class="redact">██</span>구 <strong><span class="redact">██</span>1동</strong> <span class="redact">██</span>로 <span class="redact">██</span> 소재. 지상 출입구 정상 확인됨. 22단</td></tr><tr><td>지하 통로</td><td>폭 3.2m, 유효높이 2.4m, <strong>실측 연장 18.0m</strong></td></tr><tr><td>계단 B</td><td>지상 출입구가 ○○시 <span class="redact">██</span>구 <strong><span class="redact">██</span>3동</strong> <span class="redact">██</span>로 <span class="redact">██</span>█ 소재. 24단</td></tr></tbody></table></div>
+<p><strong>2-2.</strong> 두 출입구의 <strong>지상 직선거리는 3.4km</strong>이며, 서로 다른 행정동에 소재함. 계단 B 출입구는 계단 A 기준 남동 방향이고, <span class="redact">██</span>선 선로와는 무관한 위치임.</p>
+<p><strong>2-3.</strong> 계단 A로부터 선로 반대측 20m 지점(설계도상 계단 B가 있어야 할 위치)에는 <strong>구조물이 존재하지 아니함.</strong> 해당 지점은 철도 옹벽 및 사면이며, 굴착 조사 결과 지하 구조물도 확인되지 아니하였음(1993년, 2011년 각 1회).</p>
+<p><strong>2-4.</strong> 그럼에도 통로 실측 연장은 <strong>18.0m</strong>이고, 준공도면·정기안전점검 보고서·현황측량 결과가 모두 일치함.</p>
+<div class='tw'><table><thead><tr><th>방향</th><th>실측 연장</th><th>통과 소요 시간(중위값)</th><th>편차</th></tr></thead><tbody><tr><td><strong>A → B</strong></td><td>18.0m</td><td><strong>19.6초</strong></td><td>±1.8초</td></tr><tr><td><strong>B → A</strong></td><td>18.0m</td><td><strong>6분 41초</strong></td><td>4분 12초 ~ 11분 38초</td></tr></tbody></table></div>
+<p><strong>2-5.</strong> 즉 A→B 방향 통과 시 보행자는 <strong>약 20초에 3.4km를 이동</strong>함. B→A 소요 시간은 매회 상이하며 규칙성은 확인되지 아니함. 통로 내 보행 속도·체감 시간·촬영 영상의 프레임 수는 양 방향 모두 18m에 부합함.</p>
+<p><strong>2-6.</strong> 왕복 이용자의 <strong>시각 인식은 실제 시각보다 앞서게 되며</strong>, 그 차이는 왕복 횟수에 비례하여 누적됨. 왕복 1회당 편차 중위값은 <strong>+2.4분</strong>임. 자동동기화 기기는 재동기화 시 보정되나, 본인의 인식과 기계식 시계는 보정되지 아니함. 신체적 이상 소견은 확인된 바 없음(붙임 2).</p>
+<p><strong>2-7.</strong> 통로 내 상주자(노숙인 등)에게는 편차가 누적되지 아니함. <strong>통과하는 자에게만 발생함.</strong></p>
+<p><strong>2-8.</strong> 지역 주민 사이에서 당해 관리물은 「빠른 길」 또는 「굴다리」로 통칭되며, 이상 현상으로 인식되고 있지 아니함. 계단 A 인근 부동산 광고 중 <span class="redact">██</span>건이 <strong>"굴다리 도보 3분, <span class="redact">██</span>3동 직통"</strong>을 입지 조건으로 표기하고 있음. 조치를 취하지 아니하였음.</p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1979. 5.</td><td><span class="redact">██</span>선 복선화에 따라 준공. 준공검사 이상 없음</td></tr><tr><td>1984. 11.</td><td><span class="redact">██</span>구청 최초 민원("굴다리 건너면 다른 동으로 나온다"). 「측량 오류」로 자체 처리</td></tr><tr><td>1988. 3.</td><td>검침원이 <strong>계단 B 수도계량기의 소재지 행정동 불일치</strong>를 보고. 이후 12년간 「검침 불가」로 추정 부과</td></tr><tr><td>1991. 4.</td><td>관할 지자체 경유 이첩. <strong>병급 지정.</strong> 담당자 1명 배정</td></tr><tr><td>1993. 8.</td><td>계단 B 예정 지점 굴착 조사. 지하 구조물 없음</td></tr><tr><td>1997. 2.</td><td>최초 미귀환 사례(붙임 3-가)</td></tr><tr><td>2003. 4. ~ 10.</td><td><strong>폐쇄 시행 및 해제</strong>(붙임 3-나)</td></tr><tr><td>2004. 6.</td><td>수요 억제 조치 개시(관리 지침 제3항 신설)</td></tr><tr><td>2009. 11.</td><td>사업장 근태 자료 최초 확보. 행정상 피해 유형 확인(붙임 2-나)</td></tr><tr><td>2021. 3.</td><td>통근자 김○○ 징계해고. 구제신청 기각</td></tr><tr><td>2026. 5.</td><td><strong>계단 B 지상 출입구 위치 변동 확인</strong>(붙임 5)</td></tr><tr><td>2026. 6.</td><td>관리 지침 제7항 개정. 을급 상향 및 관할 이관 심의 요청 — <strong>계류 중</strong></td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 통행량 조사 및 수요 억제 조치 시행 결과</h2>
+<h3>가. 통행량 (2019. 10. 평일 3일 평균, 계수기 및 영상 판독)</h3>
+<div class='tw'><table><thead><tr><th>시간대</th><th>A → B</th><th>B → A</th><th>계</th></tr></thead><tbody><tr><td>05:00 ~ 07:00</td><td>412</td><td>38</td><td>450</td></tr><tr><td>07:00 ~ 09:00</td><td><strong>1,847</strong></td><td>71</td><td>1,918</td></tr><tr><td>09:00 ~ 12:00</td><td>336</td><td>204</td><td>540</td></tr><tr><td>12:00 ~ 17:00</td><td>291</td><td>388</td><td>679</td></tr><tr><td>17:00 ~ 20:00</td><td>118</td><td><strong>1,592</strong></td><td>1,710</td></tr><tr><td>20:00 ~ 24:00</td><td>84</td><td>397</td><td>481</td></tr><tr><td>24:00 ~ 05:00</td><td>19</td><td>43</td><td>62</td></tr><tr><td><strong>일계</strong></td><td><strong>3,107</strong></td><td><strong>2,733</strong></td><td><strong>5,840</strong></td></tr></tbody></table></div>
+<ul><li>계단 A 측 배후는 <span class="redact">██</span>1동 주거지(약 <span class="redact">██</span>세대), 계단 B 측은 <span class="redact">██</span>3동 상업지역 및 <span class="redact">██</span>산업단지임. 이용하지 아니하는 경우 동일 구간의 대중교통 소요 시간은 <strong>환승 2회, 편도 47분</strong>임</li><li><em>비고: 월 전력 사용량이 설치 조명·환기설비 정격 총합의 약 <strong>189배</strong>임. 한국전력 회신 「계량기 정상」. 2013년 이후 매년 자체감사에서 「지하보도 전기요금 과다 집행」으로 지적되고 있음. 조치결과: 전건 「주의」</em></li></ul>
+<h3>나. 조치별 통행량 감소 효과</h3>
+<div class='tw'><table><thead><tr><th>조치</th><th>시행</th><th>직후 감소율</th><th>24개월 후</th></tr></thead><tbody><tr><td>평균 조도 하향 (118lx → 42lx)</td><td>2004. 6.</td><td>-9.1%</td><td>-1.2%</td></tr><tr><td>계단 보수 지연 (논슬립 탈락 방치)</td><td>2006. ~</td><td>-4.4%</td><td>-0.8%</td></tr><tr><td>「범죄예방 안내문」 게시</td><td>2008. 3.</td><td>-11.6%</td><td>-2.1%</td></tr><tr><td>CCTV 「고장」 표시 스티커 부착</td><td>2011. 9.</td><td>-13.2%</td><td>-3.0%</td></tr><tr><td>물청소 주기 축소 (주 3회 → 월 1회)</td><td>2013. 4.</td><td>-6.8%</td><td>-0.4%</td></tr><tr><td>승강설비 설치 대상 제외</td><td>2015. ~</td><td>-2.9%</td><td><strong>-2.9%</strong></td></tr><tr><td>노숙인 응급잠자리 안내소 설치</td><td>2017. 11.</td><td>-17.4%</td><td>-5.6%</td></tr></tbody></table></div>
+<p><strong>분석:</strong></p>
+<ul><li>전 조치가 시행 직후 감소를 보이나 <strong>24개월 내에 대부분 원복</strong>됨</li><li>유지되는 감소는 승강설비 미설치분에 한하며, 이는 <strong>65세 이상 및 이동보조기구 이용자의 통행 감소</strong>(해당 계층 -31.2%)에 기인함. 즉 억제된 것은 통행량이 아니라 특정 계층임</li><li>2026년 일평균 통행량은 <strong>5,912명</strong>으로 조치 시행 전(2003년 5,204명)보다 많음. 관리 목표(2,000명)는 2004년 이후 <strong>한 차례도 달성되지 아니하였음</strong></li></ul>
+<p><strong>결론:</strong> 통행 수요는 조도·청결·안전·심리적 기피 요인에 의하여 억제되지 아니함. 대체 경로가 47분인 한, 이용자는 조치를 <strong>불편으로 수용</strong>하고 통과함. 끝.</p>
+<blockquote><p><em>(수요관리 조치 3년차 평가서 여백, 담당자 자필)</em></p>
+<p><em>우리가 한 일을 정리하면 이렇다. 불을 어둡게 했고, 계단을 안 고쳤고, 범죄가 날 것 같다고 써 붙였고, 청소를 안 했고, 노인이 못 올라오게 했다. 그러고도 5,900명이 지나간다.</em> <em>줄인 것은 노인 통행량뿐이다. 조치별 효과 표를 만들어 결재를 올렸다. 표는 잘 만들어졌다.</em></p></blockquote>
+<h2 class='sec'>붙임 2. 시각 편차 누계 및 행정상 피해</h2>
+<h3>가. 편차 누계 구간별 관측 사항</h3>
+<p>2009년 이후 계단 A 측 배후 거주자 중 왕복 통근 이력이 확인된 <span class="redact">██</span>█명에 대하여, 교통카드 이용 내역 및 사업장 근태 자료를 임의 제출받아 대조하였음.</p>
+<div class='tw'><table><thead><tr><th>누계 편차</th><th>대상 인원</th><th>관측되는 사항</th></tr></thead><tbody><tr><td>30분 미만</td><td><span class="redact">██</span>명</td><td>이상 없음</td></tr><tr><td>30 ~ 90분</td><td><span class="redact">██</span>명</td><td>교통카드 하차 태그 실패, 환승 미인정, 정산 오류 발생</td></tr><tr><td>90 ~ 240분</td><td><span class="redact">██</span>명</td><td>출퇴근기록기상 지각 기록 증가. 본인 인식 시각과 5~9분 불일치</td></tr><tr><td>240 ~ 600분</td><td><strong>41명</strong></td><td>무단결근 처리, 근태 징계 절차 개시, 공동인증서 시각 동기 오류로 금융·행정 전자민원 이용 제한</td></tr><tr><td>600분 초과</td><td><strong>7명</strong></td><td>붙임 3-가 참조</td></tr></tbody></table></div>
+<p><strong>주요 사항:</strong></p>
+<ul><li>교통카드 오류 유형은 <strong>하차 태그 시각이 승차 태그 시각보다 앞서는 역행 태그</strong>임. 정산 시스템이 부정 사용으로 판정하여 카드를 정지시킨 사례 <span class="redact">██</span>건</li><li>지문인식 기록기는 사업장 서버 시각으로 기록되므로 본인의 인식과 무관하게 <strong>객관적 자료로 취급</strong>됨</li><li>신체적·정신적 이상 소견은 전 구간에서 확인되지 아니함. <strong>피해는 전부 기록상으로 발생함</strong></li></ul>
+<h3>나. 사례 (김○○, 당시 43세)</h3>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>2016. 4.</td><td><span class="redact">██</span>3동 <span class="redact">██</span>사업장 입사. 당해 관리물 왕복 통근 개시(주 5일)</td></tr><tr><td>2019. ~ 2020.</td><td>근태 기록상 지각 누계 <strong>41회.</strong> 본인은 매회 시업 10분 전 도착하였다고 진술</td></tr><tr><td>2020. 11.</td><td>취업규칙(지각 3회를 결근 1일로 간주)에 따라 무단결근 13일 처리</td></tr><tr><td>2021. 3.</td><td><strong>징계해고.</strong> 사유: 무단결근 및 근무태만</td></tr><tr><td>2021. 5.</td><td>지방노동위원회 구제신청 <strong>기각.</strong> 사유: "출퇴근기록기 자료가 객관적 증거로 인정됨"</td></tr><tr><td>2021. 6.</td><td>징계해고로 실업급여 수급자격 제한. 미지급</td></tr><tr><td>2021. 9.</td><td><span class="redact">██</span>3동 내 타 사업장 재취업. <strong>동일 경로 통근 재개</strong></td></tr><tr><td>2023. 8.</td><td>실종 신고 접수(붙임 3-가 제6호)</td></tr></tbody></table></div>
+<p>본 공단은 위 구제신청에 관여하지 아니하였음. 내부 검토 결과란 기재는 다음과 같음.</p>
+<pre class='doc-pre'>  당해 관리물의 존재를 소명자료로 제출하는 경우
+  관리물 지정 사실이 공개됨.
+  또한 소명하여도 근태 기록 자체는 사실이므로
+  결론에 영향을 미치지 아니할 것으로 판단됨.
+  부관여로 함.</pre>
+<h2 class='sec'>붙임 3. 미귀환 사례 및 폐쇄 시행 결과</h2>
+<h3>가. 미귀환 사례 (1997. ~ 현재, 7건)</h3>
+<p>진입 기록이 있고 진출 기록이 없는 건은 다음과 같음. 전건 실종 신고가 접수되었으며, 전건 <strong>누계 편차 600분 초과자</strong>임.</p>
+<div class='tw'><table><thead><tr><th>연번</th><th>발생</th><th>진입 방향</th><th>비고</th></tr></thead><tbody><tr><td>1</td><td>1997. 2.</td><td>A → B</td><td>최초 사례. 당시 CCTV 미설치, 목격자 진술에 의함</td></tr><tr><td>2</td><td>2005. 7.</td><td>B → A</td><td>진입 후 4분 12초 지점에서 영상 결번 1초</td></tr><tr><td>3</td><td>2012. 1.</td><td>B → A</td><td>—</td></tr><tr><td>4</td><td>2018. 9.</td><td>A → B</td><td>진입 19초 후 계단 B 카메라에 <strong>미기록</strong></td></tr><tr><td>5</td><td>2020. 12.</td><td>B → A</td><td>—</td></tr><tr><td>6</td><td>2023. 8.</td><td>A → B</td><td>김○○(붙임 2-나). 실종 신고 전에 <strong>결근 처리 및 해고</strong>가 선행됨</td></tr><tr><td>7</td><td>2025. 4.</td><td>B → A</td><td>—</td></tr></tbody></table></div>
+<p><strong>영상 대조상의 제약:</strong> 계단 A 카메라는 <span class="redact">██</span>1동 권역, 계단 B 카메라는 <strong>3.4km 떨어진 <span class="redact">██</span>3동 권역</strong>에 소재하여 서로 다른 CCTV통합관제센터에 편성되어 있음. 두 센터의 서버 시각은 NTP로 동기화되어 있으나 계단 B 계통만 <strong>4분 12초 ~ 11분 38초 범위에서 지속적으로 이탈</strong>함. 소관 부서는 이를 「회선 지연」으로 처리하고 있음.</p>
+<p>즉 진입·진출 시각을 대조할 공통 기준이 없음. 미귀환 7건은 <strong>자료상 진출 시각을 특정할 수 없는 건</strong>으로도 정리될 수 있으나, 2011년 심의에서 이를 채택하지 아니하였음. 채택하지 아니한 사유란: <strong>"실종 신고가 접수된 건임."</strong></p>
+<h3>나. 폐쇄 시행 결과 (2003. 4. ~ 10.)</h3>
+<p>2003년, 지부는 「노후 지하보도 정비사업」을 활용하여 폐쇄를 시행하였음. 양단 계단실 셔터 설치 및 지상 평면횡단 전환을 내용으로 하였음.</p>
+<div class='tw'><table><thead><tr><th>경과</th><th>내용</th></tr></thead><tbody><tr><td>4. 7.</td><td>계단 A·B 셔터 설치. 폐쇄. 우회 안내 게시</td></tr><tr><td>4. ~ 5.</td><td>평면횡단 전환 불가 확인. 당해 지점은 <strong>철도 선로</strong>이므로 횡단보도 설치 불가</td></tr><tr><td>5. 19.</td><td>남측 1.2km 지점 <span class="redact">██</span>굴다리 통행량 <strong>3.1배 증가</strong>. 동종 현상 발생 확인 (지상 출입구 — <strong><span class="redact">██</span>면 <span class="redact">██</span>면, 7.8km</strong>)</td></tr><tr><td>6. ~ 9.</td><td><span class="redact">██</span>선 선로 무단횡단 사상 사고 <strong>4건</strong>(사망 3명). 전건 계단 A 인근 옹벽 구간. 셔터 절단·무단 을급 3회</td></tr><tr><td>9. 30.</td><td>○○시 의회 「<span class="redact">██</span>굴다리 폐쇄 철회 요구 결의」 채택. 청원 서명 <span class="redact">██</span>,<span class="redact">██</span>█명</td></tr><tr><td>10. 6.</td><td><strong>폐쇄 해제.</strong> 통행량 3일 내 회복. 10. 21. <span class="redact">██</span>굴다리 현상 <strong>소멸</strong> 확인</td></tr></tbody></table></div>
+<p><strong>결론:</strong> 당해 관리물은 특정 구조물에 속한 것이 아니라 <strong>그 지점을 통과하려는 통행 수요에 속한 것</strong>으로 사료됨. 폐쇄하는 경우 수요가 인접 통로로 이동하고 현상도 함께 이동하며, 이동 후의 거리 불일치는 <strong>확대</strong>되었음(3.4km → 7.8km).</p>
+<p>이에 폐쇄를 금지하고(제2항), 관리 방향을 <strong>구조물의 처분이 아닌 통행 수요의 억제</strong>로 전환하였음(제3항). 끝.</p>
+<h2 class='sec'>붙임 4. 통근자 면담 (2024. 10.)</h2>
+<p><em>면담 대상: 계단 A 인근 <span class="redact">██</span>아파트 거주 이○○(당시 51세). 왕복 통근 8년차. 누계 편차 추정 <span class="redact">██</span>█분. 면담은 퇴근 시간대 계단 A 상단에서 시행하였음. 진술 중 감정적 반응은 관찰되지 아니하였음.</em></p>
+<blockquote><p><strong>문:</strong> 매일 이용하십니까.</p>
+<p><strong>답:</strong> 네. 아침에 저기로 내려가서 회사 앞으로 나와요. 20초 걸립니다.</p>
+<p><strong>문:</strong> 반대편 출구가 3.4km 떨어져 있다는 사실을 알고 계십니까.</p>
+<p><strong>답:</strong> 그건 다 알아요. 여기 사람들은 다 알죠. 그래서 다니는 거예요. 안 그러면 왜 굴다리로 다니겠어요.</p>
+<p><strong>문:</strong> 이상하게 생각하지는 아니하십니까.</p>
+<p><strong>답:</strong> 처음엔 좀 그랬어요. 지금은 그냥 빠른 길이에요. 올 때는 좀 걸리죠. 5분, 10분, 매번 달라요. 계단 밑에서 담배 피우는 사람들 있잖아요, 그 사람들도 그거 기다리는 거예요.</p>
+<p><strong>문:</strong> 시각이 어긋나는 것은 어떻게 하십니까.</p>
+<p><strong>답:</strong> <strong>시간 좀 이상해지는 건 아는데요, 안 그러면 버스 두 번 타야 해요.</strong> 여기서 회사까지 버스로 50분입니다. 애 어린이집 등원시키고 가야 하는데 50분이 어디 있어요.</p>
+<p><strong>문:</strong> 근태 기록에 문제가 생긴 경우가 있습니까.</p>
+<p><strong>답:</strong> 작년에 지각 몇 번 찍혔어요. 팀장한테 말했더니 폰 시계 맞추라고 하더라고요. 맞췄어요. 그래도 찍히더라고요. 지금은 20분 일찍 나옵니다.</p>
+<p><strong>문:</strong> 그러면 절약되는 시간이 없는 것이 아닙니까.</p>
+<p><strong>답:</strong> <em>(잠시 후)</em> 그러네요. 근데 버스는 그것보다 더 걸려요.</p></blockquote>
+<p><em>면담 종료 후 진술인은 다음과 같이 부기하였음. 별도 질문에 대한 답변이 아님.</em></p>
+<blockquote><p>"아래에 사는 분들 있잖아요. 노숙하시는 분들. 저는 그분들이 제일 부러울 때가 있어요. 안 건너잖아요. 저는 매일 건너야 하고요."</p></blockquote>
+<h2 class='sec'>붙임 5. 계단 B 지상 출입구 위치 변동 및 통로 실측 길이 감소 (2026. 5. ~ 현재)</h2>
+<p><strong>가.</strong> 2026. 5. 12. 정기 실측 중 계단 B 지상 출입구의 소재지가 종전과 상이함이 확인되었음. 이후 경과는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>실측일</th><th>계단 B 출입구 소재지</th><th>계단 A로부터의 직선거리</th><th>통로 실측 연장</th><th>B→A 소요 시간</th></tr></thead><tbody><tr><td>2026. 3. 10.</td><td><span class="redact">██</span>구 <span class="redact">██</span>3동</td><td>3.4km</td><td>18.0m</td><td>6분 38초</td></tr><tr><td>2026. 5. 12.</td><td><span class="redact">██</span>구 <span class="redact">██</span>3동 (<span class="redact">██</span>로 <span class="redact">██</span>█)</td><td><strong>4.1km</strong></td><td><strong>17.2m</strong></td><td>9분 04초</td></tr><tr><td>2026. 6. 2.</td><td><span class="redact">██</span>구 <span class="redact">██</span>6동</td><td><strong>5.8km</strong></td><td><strong>16.1m</strong></td><td>14분 27초</td></tr><tr><td>2026. 6. 30.</td><td><strong><span class="redact">██</span>면 <span class="redact">██</span>읍</strong></td><td><strong>7.1km</strong></td><td><strong>15.3m</strong></td><td>19분 52초</td></tr><tr><td>2026. 7. 21.</td><td><strong><span class="redact">██</span>면 <span class="redact">██</span>면</strong></td><td><strong>9.6km</strong></td><td><strong>14.2m</strong></td><td>26분 11초</td></tr></tbody></table></div>
+<p><strong>나.</strong> 즉 지상 거리는 증가하고 지하 실측 연장은 감소하고 있음. A→B 소요 시간은 실측 연장에 계속 부합하며(중위값 15.4초) 함께 단축되고 있음. 감소 추세를 선형 회귀한 결과 <strong>0m 도달 시점은 2033년 상반기</strong>로 산출됨. 0m에 도달하는 경우의 상태는 확인된 바 없으며, 확인 방법도 검토되지 아니하였음.</p>
+<p><strong>다.</strong> 계단 B 출입구가 <span class="redact">██</span>면 관내로 이동함에 따라 관할 이관 협의를 개시하였음.</p>
+<ul><li>외곽관리소 → <span class="redact">██</span>관리소 이관 요청. <strong>반송.</strong> 사유: "계단 A 및 통로 본체가 관내에 있음. 동일성은 구조물 기준으로 판단함"</li><li><span class="redact">██</span>관리소 회신: "출입구는 부속물이며 단독 관리 대상이 아님. 위치가 계속 변동 중이므로 관할 확정 불가"</li><li>지부 조정 결과: <strong>양 관리소 공동관리로 하되 실무 담당은 확정하지 아니함.</strong> 조서 비고란: "위치 안정 후 재협의"</li><li>을급 상향 및 담당자 1명 증원 요청 <strong>계류.</strong> 사유란: "예산 편성 시기 도과. 2027년도 반영 여부 검토"</li><li>2026. 7. <span class="redact">██</span>관리소가 <strong>「지정보류」 전환 심의를 요청</strong>하였음. 사유: "관할 및 관리 범위 불확정." 심의 예정일 미정</li></ul>
+<p><strong>라.</strong> 상기 기간 중 통행 상황은 다음과 같음.</p>
+<ul><li>일평균 통행량 <strong>5,912명.</strong> 감소하지 아니하였음</li><li>계단 B로 나온 이용자는 <strong>종전과 동일한 버스정류장에서 승차</strong>하여 정상 출근하고 있음. 해당 정류장은 <span class="redact">██</span>구 <span class="redact">██</span>3동 소재이며, 계단 B의 현재 출입구(<span class="redact">██</span>면 <span class="redact">██</span>면)와 9.4km 떨어져 있음</li><li>출구 위치 변동을 인지한 자는 면담 <span class="redact">██</span>명 중 <strong>3명</strong>임. 나머지는 "요즘 올 때 좀 더 걸린다"고 진술함</li><li>신규 미귀환 사례는 없음. 다만 누계 편차 600분 초과자는 <strong>7명에서 19명</strong>으로 증가하였음</li></ul>
+<blockquote><p><em>(담당자 인수인계서 여백, 자필 / 2026. 7. 작성. 후임 미정)</em></p>
+<p><em>지상 거리는 늘고 통로는 짧아진다. 어긋난 만큼을 누가 가져가는지는 15년 동안 못 밝혔다.</em> <em>분명한 건 하나다. 어긋난 값은 사라지지 않고 매일 건너는 사람들의 기록에 적립된다. 몸은 멀쩡하고 근태만 망가진다.</em> <em>이관 협의는 결렬됐고 지정보류 심의가 올라갔다. 보류가 되면 점검도 실측도 없다. 서류상 그 통로는 계속 18미터다.</em> <em>18미터는 아무 문제가 없는 숫자다. 그래서 아무도 안 볼 것이다.</em></p></blockquote>
+<p>끝.</p>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">이○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">권○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">허○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;기획조정실-2026-0277 (2026. 7. 30.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;외곽관리소 (도로시설관리부)<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (031) ███-████<span class="sep">/</span>전송 (031) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-263.html'>← 제263호 지방</a><a href='index.html'>문서 대장</a><a href='doc-288.html'>제288호 305호 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>
