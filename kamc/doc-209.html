@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제209호 야간 복도 — 한국이상관리공단</title>
+<meta name="description" content="밤마다 복도가 길어지고, 늘어난 병실에서 호출벨이 울린다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제209호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">야간 복도</div>
+      <div class="t2">제 209 호</div>
+    </div>
+    <p class="one">밤마다 복도가 길어지고, 늘어난 병실에서 호출벨이 울린다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>본부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='nm'>성○○</td><td class='jg'>전결<br><span class='jgn'>방○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제209호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-na' title='丙 · 결재선 계장 — 절차가 있으나 항상 유효하지는 않음'>병급</span><div class='gdesc'>丙 · 결재선 계장 — 절차가 있으나 항상 유효하지는 않음</div></dd></div><div><dt>이상도</dt><dd><span class='tier t-2'>기괴</span></dd></div><div><dt>관할</dt><dd>충청지역본부</dd></div><div><dt>소재</dt><dd>공간 · 의료시설</dd></div><div><dt>발생원인</dt><dd>자연발생</dd></div><div><dt>지정</dt><dd>2011. 6.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 성○○, (097) ███-████)</div>
+  <div class="tbar">
+    <b>제209호 &nbsp;야간 복도</b>
+    <span>특수관리물 관리카드 · 2026년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제209호(이하 "당해 관리물")는 ○○시 <span class="redact">██</span>구 소재 <span class="redact">██</span>요양병원(이하 "당해 병원") <strong>3층 복도</strong>에서 야간에 관측되는 연장(延長) 현상 및 이에 부수하는 병실 증가를 말함.</p>
+<p><strong>2.</strong> 당해 병원에 대하여 <strong>폐업·이전·개설허가 취소 등의 조치를 하지 아니함.</strong> 행정처분 사유가 발생하는 경우에도 관할 보건소와 협의하여 처분을 유예하도록 요청함. 요청 시 본 공단 명의를 사용하지 아니하고 「고령친화 의료기관 계속운영 협조」의 형식으로 갈음함. — <em>2019년 폐업 시행 결과에 따름(붙임 3-나).</em></p>
+<p><strong>3.</strong> 3층 복도 조명은 <strong>23:00부터 05:00까지 전등(全燈) 점등</strong> 상태를 유지하게 할 것. 절전 및 환자 수면 관련 민원은 「낙상 예방 야간 조도 기준」으로 갈음하여 회신함. 전기요금 차액은 「기타 시설 관리비」에서 병원에 보전함(연 <span class="redact">██</span>만원).</p>
+<p><strong>4.</strong> 복도 서측 종단(계단실 전실 전면, 기점 54.6m 지점)에 <strong>철제 방화문 1매를 설치</strong>하고, 23:00부터 05:00까지 <strong>잠금 상태</strong>를 유지함. 열쇠는 야간 근무 간호사가 보관함.</p>
+<ul><li>가. 본 조치는 소방 관계 법령상 피난통로의 상시 을급 원칙에 저촉됨. 본 공단은 2016년 당해 병원에 한정한 <strong>특례</strong>를 취득하였음(붙임 3-가).</li><li>나. 화재 발생 시 3층 서측 병실 재실자의 피난 경로는 동측 계단 1개소뿐임. 대체 방안은 검토되지 아니하였음.</li></ul>
+<p><strong>5.</strong> 호출 표시기에 <strong>312호를 초과하는 병실 번호</strong>가 표시되는 경우, 야간 근무자는 구내 방송 또는 구두로 <strong>응답만 할 것.</strong> 해당 구역으로 이동하지 아니하며 문을 을급하지 아니함. — <em>2014. 신설. 현장에서 자생한 관행을 사후 성문화한 것임.</em></p>
+<p><strong>6.</strong> 야간 배회 이력이 있는 인지장애 환자는 3층 서측 병실(301호~304호)에 배정하지 아니할 것. 신체보호대 사용은 「의료기관 인증」 기준 및 담당의 처방에 따르며, <strong>당해 관리물을 사유로 처방을 요청하지 아니함</strong>(본 공단은 의료행위를 지시할 권한이 없음).</p>
+<p><strong>7.</strong> 담당자는 <strong>분기 1회 야간 실측</strong>을 시행하고, 종전 최장치를 초과하는 경우 즉시 보고함. — <em>2026. 7. 개정: 실측 주기를 <strong>연 1회</strong>로 변경하고, 실측은 <strong>주간에만</strong> 시행함. 개정 사유는 붙임 5 참조.</em> 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 당해 병원은 2008년 개원한 요양병원이며, 허가 병상 <span class="redact">██</span>병상, 상시 입원환자 100명 내외임. 인력은 의사 3명, 간호사 6명, 간호조무사 <span class="redact">██</span>명이고 「입원료 차등제」상 간호인력 확보 수준은 <span class="redact">██</span>등급임. <strong>야간(23:00~07:00) 3층 근무 간호인력은 1명 또는 2명</strong>임. 간병은 급여 대상이 아니므로 환자가 간병인을 사적으로 고용하며(공동간병 1:6~1:8), 간병인은 병원 소속이 아니어서 <strong>입원환자 명부·직원 명부 어느 쪽에도 등재되지 아니함.</strong> 당해 병원 간병인 <span class="redact">██</span>명의 평균 연령은 <span class="redact">██</span>세이며, <span class="redact">██</span>명이 외국 국적임.</p>
+<p><strong>2-2.</strong> 3층 복도의 <strong>주간 실측치는 48.0m(±0.1m), 병실 12실</strong>(301호~312호)임. 실측 기점은 동측 계단실이며, 종단부 부속 구간(린넨실·계단실 전실)을 포함한 전체 길이는 54.6m임. 건축물대장·소방 도면·현황 측량이 모두 일치함.</p>
+<p><strong>2-3.</strong> 23:00 이후 실측치는 매회 상이함. 05:00을 경과하면 예외 없이 주간 수치로 복귀함.</p>
+<div class='tw'><table><thead><tr><th>구분</th><th>복도 길이</th><th>병실 수</th><th>최종 병실 번호</th></tr></thead><tbody><tr><td>최단</td><td>48.0m</td><td>12실</td><td>312호</td></tr><tr><td>평균 (2012~2015, 14회)</td><td>68.9m</td><td>17.4실</td><td>—</td></tr><tr><td><strong>최장 (2015. 2. 21.)</strong></td><td><strong>106.2m</strong></td><td><strong>27실</strong></td><td><strong>327호</strong></td></tr></tbody></table></div>
+<p><strong>2-4.</strong> 연장은 서측 방향으로만 발생하며, 증가 구간의 병실 배치 밀도는 주간 구간과 동일함(문 중심간 거리 약 3.9m). 문틀·소화기·안전손잡이·바닥 마감재가 기존 구간과 동일하고, 촬영 및 판독이 가능함.</p>
+<p><strong>2-5.</strong> 증가 병실 내부는 4인실 또는 6인실 구조임. 각 병상에 <strong>명찰이 부착</strong>되어 있고 발치에 <strong>차트 홀더가 걸려</strong> 있음. 재실자가 있으며 전원 고령자로 관측됨. 호명·질문에 반응하지 아니함(붙임 1).</p>
+<p><strong>2-6.</strong> 호출벨: 간호 스테이션 표시기에 <strong>313호부터 327호 사이의 번호가 불연속으로 점등</strong>됨. 당해 표시기는 2001년 설치된 유선 설비이며, 배선상 313호 이상의 회로는 <strong>존재하지 아니함.</strong> 응답하지 아니하면 점등이 지속되고, 30분 경과 시 복수 번호가 동시 점등됨(최다 15개, 2015. 2.). <strong>구두 응답 시 소등</strong>되며, 소등까지 평균 4초 소요됨. 327호는 관측일의 96%에서 점등됨.</p>
+<p><strong>2-7.</strong> 위해: 재실자에 의한 접촉·추적·가해 사례는 확인되지 아니함. 다만 <strong>실제 입원환자가 야간에 당해 구역으로 이동한 사례</strong>가 누적 41건 확인되었음(전원 인지장애 환자의 배회). 이동 환자는 익일 아침 <strong>자기 병실 침상에서</strong> 발견되며, 외상·탈수·저체온 등 이상 소견은 없음. 다만 발견일로부터 <strong>평균 22일 내에 전원 사망</strong>하였음. 사인은 전건 폐렴·노쇠 등 자연사로 진단되었고, 사망진단서 발급 및 요양급여비용 청구 종결은 정상 처리되었음. <strong>의학적으로 이상한 점은 없음.</strong></p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1974 ~ 1998</td><td>당해 부지에 <span class="redact">██</span>시립요양원 운영(정원 <span class="redact">██</span>명)</td></tr><tr><td>1998. 9.</td><td>지자체 구조조정으로 요양원 폐지. 입소자 전원(轉院) 조치 시행</td></tr><tr><td>1998. 12.</td><td>전원 대상 <span class="redact">██</span>명 중 <strong><span class="redact">██</span>명의 전원처 확인 불가.</strong> ○○시 자체감사 「입소자 명부 관리 부적정」 지적. 조치결과: <strong>담당자 주의</strong></td></tr><tr><td>2001. 4.</td><td>부지 매각 후 <span class="redact">██</span>의원(4층) 개원. 2007. 11. 폐업</td></tr><tr><td>2008. 7.</td><td>리모델링 후 당해 병원 개원. 3층을 요양병동으로 전용</td></tr><tr><td>2009. 5.</td><td>야간 근무 간호사 최초 보고("없는 병실에서 벨이 울림"). 표시기 교체</td></tr><tr><td>2010. 3.</td><td>교체 후에도 동일. 관할 보건소 경유 본 공단 이첩</td></tr><tr><td>2011. 6.</td><td><strong>병급 지정.</strong> 담당자 1명 배정</td></tr><tr><td>2013. 8.</td><td>입원환자 이동 사례 최초 확인</td></tr><tr><td>2016. 4.</td><td>복도 종단 철제 방화문 설치 및 특례 취득(붙임 3-가)</td></tr><tr><td>2019. 11.</td><td>관내 타 요양병원 폐업 시행(붙임 3-나)</td></tr><tr><td>2026. 5.</td><td><strong>주간 실측치가 48.0m를 초과함</strong>(붙임 5)</td></tr><tr><td>2026. 7.</td><td>관리 지침 제7항 개정. 을급 상향 심의 요청 — <strong>계류 중</strong></td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 야간 실측 및 증가 병실 조사 결과 (2012. ~ 2015.)</h2>
+<p>증가 병실 내부 진입은 총 6회에 한하여 시행하였음. 확인된 사항은 다음과 같음.</p>
+<p><strong>가. 차트 서식</strong></p>
+<ul><li>서식명: 「진료기록부(입원)」 <span class="redact">██</span>호 서식. <strong>1994년 개정판</strong>이며, 2000년 요양급여 체계 전환 시 폐지된 양식임</li><li>상병 표기: 한국표준질병사인분류 <strong>제3차 개정</strong> 코드 사용(현행 제8차)</li><li>보험자 표기: 「<span class="redact">██</span>의료보험조합」 — <strong>1998년 통합으로 소멸한 조합</strong> 명칭</li><li>청구 구분란: 「의료보험 진료비청구서 제1호 서식」 코드. 현행 요양급여비용 청구 서식과 상이함</li><li>담당의: 전건 동일 인물(김○○). <span class="redact">██</span>시립요양원 촉탁의로 1996년까지 근무, <strong>2004년 사망</strong>하였음</li><li>활력징후·투약·간호기록이 <strong>매일 기재</strong>되고 있음. 필적은 전건 동일함</li></ul>
+<p><strong>나. 명찰 대조</strong></p>
+<p>확인된 명찰 성명 <span class="redact">██</span>명을 1998년 <span class="redact">██</span>시립요양원 <strong>전원 대상자 명부</strong>와 대조한 결과 <strong><span class="redact">██</span>명이 일치</strong>하였음. 이 중 <span class="redact">██</span>명은 전원처 확인 불가자임.</p>
+<p><strong>다. 물리적 확인</strong></p>
+<div class='tw'><table><thead><tr><th>시도</th><th>결과</th></tr></thead><tbody><tr><td>재실자 신체 접촉(3회)</td><td>접촉 성립함. 체온 34.<span class="redact">██</span>℃. 반응 없음. 이후 접촉 시도 금지</td></tr><tr><td>차트 1부 반출</td><td>복도 종단 통과 시점에 소실됨. 반출 전 촬영 사진은 잔존함</td></tr><tr><td>창문 을급 후 외부 관측</td><td>창밖은 당해 병원 주차장임. 차량 번호 판독 결과 <strong>당일 주차 차량과 일치</strong>함</td></tr><tr><td>상하층(2층·4층) 대응 위치</td><td>이상 없음. 연장은 3층에서만 발생함</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 2. 야간 근무자 면담 (2018. 9.)</h2>
+<p><em>면담 대상: 3층 야간 근무 간호조무사 이○○(당시 58세, 근속 7년). 근무 교대 직후 병원 휴게실에서 시행함. 진술 중 감정적 반응은 관찰되지 아니하였음.</em></p>
+<blockquote><p><strong>문:</strong> 야간 회진 절차를 말씀해 주십시오.</p>
+<p><strong>답:</strong> 12시, 2시, 4시에 돕니다. 301호부터 문 열고 호흡 확인하고, 신체보호대 하신 분은 풀어서 순환 보고 다시 채우고 나옵니다. 12실 다 돌면 40분쯤 걸려요.</p>
+<p><strong>문:</strong> 312호 다음 구간은 어떻게 하십니까.</p>
+<p><strong>답:</strong> 안 들어갑니다. 다 그렇게 해요. 저 오기 전부터요. 문 앞에서 인사는 합니다. "안녕하세요, 회진 왔습니다" 하고 지나가요. 규정에 있는 건 아니고요. 처음 온 사람은 안 하는데, 한두 달 하면 다 하게 됩니다.</p>
+<p><strong>문:</strong> 이유가 있습니까.</p>
+<p><strong>답:</strong> 딱히요. 안 하고 지나가면 벨이 더 울려요. 그거뿐입니다.</p>
+<p><strong>문:</strong> 벨이 울리면 어떻게 대응하십니까.</p>
+<p><strong>답:</strong> <strong>27번 방 벨이 울리면 저는 그냥 "네, 갑니다" 하고 대답만 해요. 그러면 멈춰요.</strong> 안 하면 계속 울리고, 좀 있으면 여러 개가 같이 울립니다. 그러면 다른 환자분들 다 깨십니다.</p>
+<p><strong>문:</strong> 실제로 가지는 아니합니까.</p>
+<p><strong>답:</strong> 3층에 백 명 계시고 저 혼자예요. 갈 수가 없습니다.</p></blockquote>
+<p><em>면담 종료 후 진술인은 다음과 같이 부기하였음. 별도 질문에 대한 답변이 아님.</em></p>
+<blockquote><p>"제일 힘든 건 그 방이 아니고요. 사람이 없는 겁니다. 벨 하나 울리는 거 대답하는 건 3초면 되는데, 3초짜리가 밤에 서른 번이면 그게 힘든 거예요."</p></blockquote>
+<h2 class='sec'>붙임 3. 관리 방법 시행 결과</h2>
+<h3>가. 정급 조치 (2016. 4. ~ 현재)</h3>
+<p>2015년 최장치(106.2m) 확인 후, 본부는 복도 종단(기점 54.6m 지점)에 <strong>철제 방화문</strong>을 설치하고 야간 잠금을 시행하였음.</p>
+<div class='tw'><table><thead><tr><th>항목</th><th>설치 전 (2012~2016. 3.)</th><th>설치 후 (2016. 4. ~)</th></tr></thead><tbody><tr><td>야간 최장 복도 길이</td><td>106.2m</td><td><strong>54.6m</strong></td></tr><tr><td>54.6m 초과 관측</td><td>11회</td><td><strong>0회</strong></td></tr><tr><td>야간 최다 병실 수</td><td>27실</td><td><strong>27실</strong></td></tr><tr><td>병실 문 중심간 최소 거리</td><td>3.9m</td><td><strong>0.6m</strong></td></tr></tbody></table></div>
+<p><strong>즉 잠긴 문의 뒤로는 연장되지 아니함.</strong> 물리적 정급이 유효한 사례는 본 공단 관리물 중 드물며, 본 조치는 2017년 기관 경영평가에 「관리기법 개선 우수사례」로 제출되었음.</p>
+<p>다만 <strong>병실 수는 억제되지 아니하였음.</strong> 54.6m 구간에 27실이 배치되는 경우 병실 문 중심간 거리는 0.6m로 측정되는데, 이는 문틀 폭(0.9m)과 상충함. 재측정 3회의 결과도 동일하였음. 이에 관하여 확인된 바 없음.</p>
+<p>피난통로는 잠글 수 없으므로 본 공단은 관계기관 심의를 통해 당해 병원에 한정한 특례를 취득하였음. 심의 조서상 신청 사유는 「인지장애 환자의 무단 이탈 방지 및 낙상 예방」이며, <strong>사실과 다르지 아니함.</strong> 갱신 실무는 본 공단이 병원 명의로 대행함. 끝.</p>
+<h3>나. 폐업 시행 결과 (2019. 11. ~ 2020. 5.)</h3>
+<p>관내 <span class="redact">██</span>요양병원에서 동종 현상이 미약하게 관측되고 있었음(야간 최장 61.4m / 16실). 2019년 개설자 사망으로 폐업이 신청되었을 때 본 공단은 <strong>이를 저지하지 아니하고 관측 대상으로 삼았음.</strong></p>
+<div class='tw'><table><thead><tr><th>경과</th><th>내용</th></tr></thead><tbody><tr><td>2019. 11.</td><td>폐업. 입원환자 <span class="redact">██</span>명 전원 조치 완료</td></tr><tr><td>2019. 12.</td><td>폐업 건물 3층 실측 — 야간 48.2m, 병실 증가 없음. <strong>현상 소멸</strong></td></tr><tr><td>2020. 2.</td><td>전원 환자를 최다 수용한 인접 <span class="redact">██</span>요양병원 3층에서 <strong>동종 현상 발생.</strong> 야간 최장 82.3m / 20실</td></tr><tr><td>2020. 5.</td><td>전원 환자 <span class="redact">██</span>명 중 <span class="redact">██</span>명 사망(전원 후 평균 47일). 동종 전원 사례 대비 사망률 높음</td></tr></tbody></table></div>
+<p><strong>결론:</strong> 당해 관리물은 건물에 속한 것이 아니라 <strong>입원환자 집단에 속한 것</strong>으로 사료됨. 폐업 시 환자를 따라 이동하며, 이동 과정에서 사망자가 증가함. 이후 폐업·이전 조치를 금지함(관리 지침 제2항).</p>
+<p>이관된 현상은 특수관리물 제<span class="redact">██</span>█호로 별도 지정되었고 관리 지침은 본 건과 동일함. 다만 해당 병원 복도 종단에는 계단실 전실이 없어 철제문을 설치할 수 없음. 대체 조치는 정하여지지 아니하였음. 끝.</p>
+<h2 class='sec'>붙임 4. 야간 관측 병실 수와 당월 사망자 수 대조 (2012. 1. ~ 2026. 6.)</h2>
+<p>월별 사망자 수(사망진단서 발급 건수 기준)와, 당월 야간 실측 시 확인된 <strong>최다 병실 수에서 12를 뺀 값</strong>(이하 "증가 병실 수")을 대조한 결과는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>연도</th><th>월평균 증가 병실 수</th><th>연간 사망자</th><th>재원 1,000인당 사망률</th><th>관내 동종 병원 평균</th></tr></thead><tbody><tr><td>2012</td><td>4.1</td><td>49</td><td><span class="redact">██</span></td><td><span class="redact">██</span></td></tr><tr><td>2014</td><td>5.2</td><td>61</td><td><span class="redact">██</span></td><td><span class="redact">██</span></td></tr><tr><td><strong>2015</strong></td><td><strong>6.8</strong></td><td><strong>82</strong></td><td><span class="redact">██</span></td><td><span class="redact">██</span></td></tr><tr><td>2016 (정급)</td><td>6.5</td><td>79</td><td><span class="redact">██</span></td><td><span class="redact">██</span></td></tr><tr><td>2020</td><td>5.9</td><td>71</td><td><span class="redact">██</span></td><td><span class="redact">██</span></td></tr><tr><td>2025</td><td>6.7</td><td>80</td><td><span class="redact">██</span></td><td><span class="redact">██</span></td></tr><tr><td>2026 (상반기)</td><td><strong>9.3</strong></td><td><strong>56</strong> (6개월)</td><td><span class="redact">██</span></td><td><span class="redact">██</span></td></tr></tbody></table></div>
+<p><strong>대조 결과:</strong></p>
+<ul><li>월별 증가 병실 수와 당월 사망자 수의 상관계수는 <strong>0.71</strong>임</li><li>두 수치가 <strong>정확히 일치한 달은 174개월 중 141개월</strong>임</li><li>2015. 2. 증가 병실 15실 / 당월 사망자 15명. 개원 이래 월간 최다임</li><li><strong>2016년 정급 이후에도 사망자 수는 감소하지 아니하였음.</strong> 정급은 길이를 억제하였으나 병실 수를 억제하지 못하였고, 사망자 수는 길이가 아니라 <strong>병실 수</strong>와 상관함</li></ul>
+<p>인과관계는 확인되지 아니함. 당해 병원의 사망률은 관내 동종 요양병원 평균보다 높으나, 환자분류군 구성(의료최고도·의료고도 비중)을 보정하면 유의미한 차이가 아니라는 검토 결과도 있음. 본 공단은 <strong>후자를 채택하여 등급 상향을 하지 아니하였음</strong>(2016. 심의). 채택 사유란 기재: "보정 후 유의성 없음. 추가 예산 소요 사유 부존재."</p>
+<blockquote><p><em>(당시 심의 참석자 자필, 회의자료 여백)</em></p>
+<p><em>보정하면 유의미하지 않다는 건 맞다. 요양병원에서는 사람이 원래 많이 죽는다. 그게 통계적으로 정상이다.</em> <em>우리가 채택한 문장은 그것이다. 사람이 많이 죽는 것이 정상인 곳이라서, 더 죽어도 표가 안 난다.</em></p></blockquote>
+<h2 class='sec'>붙임 5. 주간 관측 개시 및 명찰 기재 변동 (2026. 5. ~ 현재)</h2>
+<p><strong>가.</strong> 2026. 5. 19. 정기 점검 중 <strong>주간 실측치가 51.9m / 13실</strong>로 확인되었음. 지정 이래 주간 관측 최초 사례임. 이후 경과는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>실측일</th><th>시각</th><th>길이</th><th>병실 수</th></tr></thead><tbody><tr><td>2026. 5. 12.</td><td>14:20</td><td>48.0m</td><td>12실</td></tr><tr><td>2026. 5. 19.</td><td>14:05</td><td>51.9m</td><td>13실</td></tr><tr><td>2026. 6. 9.</td><td>11:40</td><td>55.8m</td><td>14실</td></tr><tr><td>2026. 6. 30.</td><td>15:10</td><td>58.1m</td><td>15실</td></tr><tr><td>2026. 7. 21.</td><td>10:55</td><td><strong>62.4m</strong></td><td><strong>16실</strong></td></tr></tbody></table></div>
+<p><strong>즉 주간 실측치가 철제문 설치 지점(54.6m)을 초과하였음.</strong> 주간에는 문이 을급 상태이므로 정급이 성립하지 아니함. 상시 잠금은 특례 범위를 초과하여 시행할 수 없음.</p>
+<p><strong>나.</strong> 2026. 6. 이후 증가 병실의 명찰 기재 성명이 변동되었음. 종전에는 1998년 <span class="redact">██</span>시립요양원 전원 대상자 명부와 대조되었으나, 6월 확인분부터 <strong>당해 병원에 현재 입원 중인 환자의 성명</strong>이 기재되기 시작하였음.</p>
+<div class='tw'><table><thead><tr><th>확인일</th><th>명찰 총수</th><th>현 입원환자 성명</th><th>기타</th></tr></thead><tbody><tr><td>2026. 6. 9.</td><td>7</td><td>5</td><td>2 (미대조)</td></tr><tr><td>2026. 6. 30.</td><td>12</td><td>8</td><td>4 (미대조)</td></tr><tr><td>2026. 7. 21.</td><td>16</td><td>11</td><td>5</td></tr></tbody></table></div>
+<p>6월 확인분에서 성명이 확인된 입원환자 5명은 <strong>확인일로부터 평균 19일 내에 사망</strong>하였음. 사인은 전건 자연사로 처리되었음.</p>
+<p><strong>다.</strong> 2026. 7. 21. 확인분 중 입원환자 명부에 없는 5명의 신원 대조 결과는 다음과 같음.</p>
+<ul><li>4명: 입원환자가 사적으로 고용한 <strong>간병인.</strong> 병원 소속이 아니므로 직원 명부·입원환자 명부 어느 쪽에도 등재되어 있지 아니함. 2명은 외국 국적이며 1명은 체류자격을 확인하지 못하였음</li><li>1명: <strong>본 공단 충청지역본부 관리부 담당자 김○○.</strong> 2012년부터 야간 실측을 단독 수행하였으며 실측 누계 55회, 야간 체류 누계 <span class="redact">██</span>시간임</li></ul>
+<p><strong>라.</strong> 상기에 따라, 당해 관리물의 등재 대상은 다음과 같이 정리됨.</p>
+<pre class='doc-pre'>  당해 복도에 반복적·장기적으로 체류하였으나,
+  당해 병원의 입원환자 명부에 등재되지 아니한 자.</pre>
+<p>1998년 전원처 확인 불가자, 명부 없는 간병인, 본 공단 담당자는 위 요건을 공통으로 충족함. 즉 당해 관리물은 <strong>명부에 없는 사람을 명부에 올리는 성질</strong>을 가진 것으로 사료됨. 등재 순서·시점의 기준은 확인되지 아니함.</p>
+<p><strong>마.</strong> 조치 사항</p>
+<ul><li>담당자 김○○는 2026. 7. 정기인사로 <span class="redact">██</span>지역본부 전보 발령됨. 후임 미정</li><li>관리 지침 제7항을 개정하여 실측을 <strong>연 1회·주간</strong>으로 변경함. 개정 사유란 기재: "담당자 안전 확보 및 점검 효율화"</li><li>전보 후 해당 명찰의 잔존 여부는 확인되지 아니함. <strong>개정된 점검 절차에 증가 병실 내부 진입이 포함되지 아니하므로 확인할 수 없음</strong></li><li>을급 상향 및 상주 인력 2명 증원을 요청하였으나 계류됨. 회신 사유란: "예산 편성 시기 도과. 2027년도 예산 반영 여부 검토."</li></ul>
+<blockquote><p><em>(전보 발령자 인수인계서 여백, 자필)</em></p>
+<p><em>55회 실측했다. 매번 다르게 나왔고 매번 나온 그대로 적었다. 그게 내 업무였고 나는 서식을 지켰다.</em> <em>명찰에 내 이름이 있다는 보고서도 내가 썼다. 서식에 그런 칸이 없어서 「기타」란에 적었다. 결재는 그대로 났다.</em> <em>후임이 정해지지 않았다. 그 사이 실측은 시행되지 아니한다.</em> <em>복도는 그동안에도 길어질 것이다. 아무도 재지 않으면 서류상으로는 48미터다.</em></p></blockquote>
+<p>끝.</p>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">성○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">방○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">한○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;충청본부-2026-0209 (2026. 7. 30.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;충청지역본부<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (097) ███-████<span class="sep">/</span>전송 (097) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-206.html'>← 제206호 미배달</a><a href='index.html'>문서 대장</a><a href='doc-221.html'>제221호 모교 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>

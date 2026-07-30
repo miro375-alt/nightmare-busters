@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제329호 분리배출 — 한국이상관리공단</title>
+<meta name="description" content="없어진 주소에서, 규정을 완벽히 지킨 쓰레기가 나온다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제329호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">분리배출</div>
+      <div class="t2">제 329 호</div>
+    </div>
+    <p class="one">없어진 주소에서, 규정을 완벽히 지킨 쓰레기가 나온다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>본부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='nm'>장○○</td><td class='jg'>전결<br><span class='jgn'>고○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제329호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-na' title='丙 · 결재선 계장 — 절차가 있으나 항상 유효하지는 않음'>병급</span><div class='gdesc'>丙 · 결재선 계장 — 절차가 있으나 항상 유효하지는 않음</div></dd></div><div><dt>관할</dt><dd>전 지역본부 공통 (주관: 중부지역본부 자원순환관리부)</dd></div><div><dt>소재</dt><dd>폐기물 처리</dd></div><div><dt>발생원인</dt><dd>제2기 (구조조정기)</dd></div><div><dt>지정</dt><dd>2003. 4.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 장○○, (097) ███-████)</div>
+  <div class="tbar">
+    <b>제329호 &nbsp;분리배출</b>
+    <span>특수관리물 관리카드 · 2026년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제329호(이하 "당해 관리물")는 전국 생활폐기물 수거 경로 및 재활용 선별장에 반입되는 <strong>분류 불가 품목</strong>을 말함. 본 공단은 당해 관리물의 <strong>재질·성분·용도를 규명하는 것을 관리 목적으로 하지 아니함.</strong> 규명 시도는 2005년 이후 중단되었음(붙임 1).</p>
+<p><strong>2.</strong> 선별장 운영주체 및 종사 근로자에 대하여는 지정 사실을 통보하지 아니함. 근로자가 당해 관리물을 <strong>「잔재물」로 분류하여 소각 반출하는 현행 처리 관행에 개입하지 아니할 것.</strong> 개입 시 선별 라인 정지에 따른 처리 지연 및 지정 사실 노출이 우려됨.</p>
+<p><strong>3.</strong> 소각 및 매립을 시도하지 아니함. 소각은 효과가 없음(붙임 1). 매립은 2007년 1회 시행되었으며, 매립 2개월 후 동일 품목이 관할 선별장으로 <strong>재반입</strong>되었음. 이후 재시행하지 아니함.</p>
+<p><strong>4.</strong> 회수된 당해 관리물은 「제329호 처리 절차」에 따라 <strong>재활용 가능 자원으로 재분류</strong>하여 민간 재생원료 취급업체에 인계함. 인계 이후의 소재는 <strong>추적하지 아니함</strong>(붙임 4).</p>
+<p><strong>5.</strong> 배출 지점에 대한 사전 잠복·감시를 시행하지 아니함. 2004년 2개 지점에서 총 6일간 시행하였으며, 시행 기간 중 배출은 발생하지 아니하였고 <strong>철수 익일 배출이 확인</strong>되었음.</p>
+<p><strong>6.</strong> 담당자는 관할 구역의 월별 배출 건수를 집계하여 보고함. 특정 구역에서 <strong>전월 대비 3배 이상 증가</strong>가 확인될 경우 즉시 본부에 보고하고, 해당 자료를 「정비사업 예정구역 예측 지표」로 이관할 것. — <em>2025. 2. 신설(붙임 5).</em> 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 당해 관리물의 형태는 <strong>「가정용 폐기물로 보이는 것」</strong>으로 표기함. 그 이상의 형상 기술은 문서화하지 아니함. 관측자별 기술이 일치하지 아니하며, 동일 관측자의 재기술도 일치하지 아니함.</p>
+<p><strong>2-2.</strong> 2003~2005년 3개 공인시험기관에 성분 분석을 의뢰한 결과는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>시험 항목</th><th>시험 방법</th><th>결과</th></tr></thead><tbody><tr><td>재질 판별</td><td>근적외선 분광</td><td>판별 불가 (스펙트럼 미검출)</td></tr><tr><td>원소 분석</td><td>탄소·수소·질소·황</td><td>전 항목 <strong>해당 없음</strong></td></tr><tr><td>밀도</td><td>침지법</td><td>측정 불가 (재현성 없음)</td></tr><tr><td>함수율</td><td>105℃ 건조</td><td><strong>-0.3%</strong> (건조 후 중량 증가)</td></tr><tr><td>강열감량</td><td>550℃, 3시간</td><td>0.0%</td></tr><tr><td>발열량</td><td>봄브 열량계</td><td>측정 불가</td></tr><tr><td>유해물질 용출</td><td>폐기물공정시험기준</td><td>전 항목 불검출</td></tr></tbody></table></div>
+<p>시험기관 3개소의 종합 의견은 다음과 같이 동일하였음.</p>
+<blockquote><p>"본 결과는 <strong>시료를 투입하지 아니한 공(空)시험 결과와 구별되지 아니함.</strong> 재의뢰를 권고함."</p></blockquote>
+<p><strong>2-3.</strong> 당해 관리물은 예외 없이 <strong>완결된 형태로 배출</strong>됨. 확인된 1,847건 전건의 배출 상태는 다음과 같음.</p>
+<ul><li>해당 지방자치단체의 <strong>지정 종량제 봉투</strong> 사용 (규격 20L, 정품)</li><li>관할 구역의 <strong>지정 배출 요일</strong> 준수 (일치율 100%)</li><li>관할 구역의 <strong>지정 배출 시각</strong> 준수 (평균 22시 41분, 허용 시간대 내)</li><li>이물질 및 음식물 혼입 없음</li><li>부착 라벨 <strong>제거 완료</strong> (접착 흔적 없음)</li><li>봉투 입구 결속 완료, 규격 허용 하중 이내</li><li><strong>과태료 부과 사유 없음.</strong> 1,847건 전건이 적법 배출임</li></ul>
+<p><strong>2-4.</strong> 배출 지점은 전국에 분산되어 있으나 다음의 공통점이 있음.</p>
+<ul><li>철거가 완료되고 신축이 착공되지 아니한 구역</li><li>행정기구 통폐합으로 <strong>폐지된 동사무소의 종전 관할 구역</strong></li><li>지번 정리 또는 합병으로 <strong>삭제된 지번</strong></li></ul>
+<p>즉 배출 지점은 <strong>현행 청소 대행 노선에 포함되지 아니하는 위치</strong>임. 그럼에도 수거 대행업체 운행일지에는 해당 지점의 수거 실적이 기재되어 있음. 노선도에 해당 지점은 없음.</p>
+<p><strong>2-5.</strong> 배출 지점 중 일부는 특수관리물 제158호(거주불명) 관리 대상자의 <strong>직전 주소지</strong>와 중복됨(2019년 이후 <span class="redact">██</span>건). 두 관리물 간 관련성은 확인되지 아니하였으며, 확인을 위한 합동 조사는 예산상 편성되지 아니함.</p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1995. 1.</td><td>쓰레기 종량제 전국 시행. 이 시기 이전의 유사 사례 기록은 확인되지 아니함</td></tr><tr><td>1998. 6.</td><td><span class="redact">██</span>시 <span class="redact">██</span>선별장 최초 보고. 「전산 계량 오류」로 자체 종결</td></tr><tr><td>2003. 2.</td><td>5개 시·도 선별장에서 동일 사례 동시 보고</td></tr><tr><td>2003. 4.</td><td><strong>정급 지정.</strong> 지정 사유란: "인명 피해 없음. 처리 경로 기(旣) 확보"</td></tr><tr><td>2005. 9.</td><td>소각 처리 실적 대조 결과 확인. <strong>병급 상향</strong>(붙임 1)</td></tr><tr><td>2009. 11.</td><td>감사 지적 — 소각 위탁비 집행 부적정</td></tr><tr><td>2011. 4.</td><td>「제329호 처리방식 개선방안」 시행(붙임 4)</td></tr><tr><td>2016. 3.</td><td>인계분의 <strong>재배출</strong> 최초 확인(붙임 4)</td></tr><tr><td>2024. 3.</td><td>특정 구역 배출량 급증 개시(붙임 5)</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 소각 처리 실적 대조 (2005. 9.)</h2>
+<p>2004~2005년 <span class="redact">██</span>광역시 자원회수시설에 반입된 당해 관리물 12회분의 소각 실적을 대조하였음.</p>
+<div class='tw'><table><thead><tr><th>회차</th><th>반입 중량(kg)</th><th>1차 연소실 최고온도(℃)</th><th>체류시간(초)</th><th>소각 후 잔재 중량(kg)</th></tr></thead><tbody><tr><td>1</td><td>3.5</td><td>912</td><td>2.4</td><td>3.5</td></tr><tr><td>4</td><td>7.0</td><td>948</td><td>2.6</td><td>7.0</td></tr><tr><td>12</td><td>11.0</td><td>936</td><td>2.5</td><td>11.0</td></tr></tbody></table></div>
+<ul><li>12회 전건에서 <strong>반입 중량과 잔재 중량이 일치</strong>함. 계량기 최소 눈금은 0.5kg이며, 오차는 12회 전건에서 <strong>0.00kg</strong>임.</li><li>소각재 성상 분석 시 당해 관리물이 <strong>원형 그대로</strong> 확인됨. 종량제 봉투도 함께 확인되었으며, 봉투의 결속 상태는 반입 시와 동일하였음.</li><li>반입 투입 시각 전후 3~5분간 1차 연소실 온도가 평균 <strong>12℃ 하강</strong>함. 동 시간대 연료 공급량 및 송풍량 변동은 없음.</li></ul>
+<p><strong>결론:</strong> 당해 관리물은 소각되지 아니함. 소각 위탁은 처리가 아니라 <strong>이송</strong>에 해당함. 끝.</p>
+<h2 class='sec'>붙임 2. 선별장 근로자 면담 기록 (2012. 8. 발췌)</h2>
+<p><em>면담 대상: <span class="redact">██</span>시 재활용 선별장 근로자 3인. 면담자는 환경 관련 연구용역 수행자로 신분을 표기함.</em></p>
+<p><strong>김○○ (여, 근속 3년):</strong></p>
+<blockquote><p>그런 거 하루에도 몇 개씩 나와요. 다들 알아요. 근데 라인 안 세워요. <strong>세우면 그날 물량 못 맞춥니다.</strong></p></blockquote>
+<p><strong>— 어떻게 처리하십니까.</strong></p>
+<blockquote><p>집어서 잔재물 통에 던져요. 그게 규정이에요. 모르는 건 다 잔재물이에요.</p></blockquote>
+<p><strong>— 만졌을 때 특이한 점은 없었습니까.</strong></p>
+<blockquote><p>장갑 끼고 일해요. 안 끼면 손 베어요.</p></blockquote>
+<p><strong>— 무게나 감촉은 어떻습니까.</strong></p>
+<blockquote><p>무겁지도 가볍지도 않아요. 그냥 봉투예요.</p></blockquote>
+<p><strong>이○○ (남, 근속 11년):</strong></p>
+<blockquote><p>신입들은 처음엔 물어봐요. 이게 뭐냐고. 한 달쯤 지나면 안 물어봐요. 나도 안 가르쳐주고요. 가르쳐줄 게 없어요.</p></blockquote>
+<p><strong>— 상급자나 관계 기관에 보고하신 적은 있습니까.</strong></p>
+<blockquote><p>(무응답) …어디다 보고해요.</p></blockquote>
+<p><em>면담 대상 3인 중 2인은 면담 후 6개월 이내에 퇴직하였음. 이는 해당 사업장의 평균 근속기간(7.2개월)과 유의미한 차이가 없음.</em> 끝.</p>
+<h2 class='sec'>붙임 3. 배출량 추이 및 인구통계 대조</h2>
+<div class='tw'><table><thead><tr><th>연도</th><th>확인 배출 건수</th><th>1인 가구 비율(%)</th><th>무연고 사망(건)</th></tr></thead><tbody><tr><td>2003</td><td>41</td><td>22.9</td><td>682</td></tr><tr><td>2013</td><td>214</td><td>27.6</td><td>1,271</td></tr><tr><td>2018</td><td>503</td><td>31.4</td><td>2,447</td></tr><tr><td>2023</td><td>1,109</td><td>36.1</td><td>4,842</td></tr><tr><td>2026(추계)</td><td><strong>1,847</strong></td><td>38.9</td><td><strong>6,100</strong></td></tr></tbody></table></div>
+<ul><li>배출 건수와 1인 가구 비율의 상관계수는 <strong>0.98</strong>임.</li><li>시·군·구 단위 대조 시, 배출 건수 상위 20개 지역은 <strong>인구 감소율 상위 20개 지역과 17개가 중복</strong>됨.</li><li>인과관계는 확인되지 아니함. <strong>본 공단은 확인을 시도하지 아니함.</strong></li></ul>
+<blockquote><p><em>(통계 담당자 여백 자필): 이 표는 국정감사 요구자료로 제출할 수 없다. 제출하면 왜 공단이 이런 걸 세고 있느냐는 질문이 온다. 그 질문에 대한 답변은 준비되어 있지 않다.</em></p></blockquote>
+<h2 class='sec'>붙임 4. 처리방식 개선방안 및 시행 결과 (2011. 4. ~ 현재)</h2>
+<p><strong>가. 지적사항 (2009. 11.)</strong></p>
+<blockquote><p><strong>지적:</strong> 소각되지 아니하는 물량에 대하여 소각 위탁 수수료를 계속 지급하고, 반출된 잔재물을 재차 회수·보관함으로써 동일 물량에 대해 <strong>처리비와 보관비를 이중 집행</strong>하고 있음. 예산 집행의 경제성이 결여됨.</p>
+<p><strong>조치 요구:</strong> 처리방식을 개선하고 결과를 보고할 것.</p></blockquote>
+<p><strong>나. 개선안 (2011. 4. 시행)</strong></p>
+<div class='tw'><table><thead><tr><th>구분</th><th>종전</th><th>개선 후</th></tr></thead><tbody><tr><td>처리 경로</td><td>소각 위탁 → 잔재 회수 → 임차 창고 보관</td><td><strong>재활용 가능 자원으로 재분류 → 민간 인계</strong></td></tr><tr><td>품목 코드</td><td>없음(잔재물)</td><td><strong>기타 합성수지류</strong> 준용</td></tr><tr><td>연간 소요 예산</td><td><span class="redact">██</span>억 <span class="redact">██</span>백만 원</td><td><strong><span class="redact">██</span>백만 원</strong> (운반비만 계상)</td></tr><tr><td>절감액</td><td>—</td><td>연 <span class="redact">██</span>억 원 (예산 절감 우수사례 표창)</td></tr></tbody></table></div>
+<p>재질이 확인되지 아니하는 물질은 「폐기물관리법」상 <strong>어느 항목에도 해당하지 아니하므로</strong>, 본 공단은 이를 재활용 가능 자원으로 분류하는 데 법령상 저촉이 없다는 자체 법률 검토를 거쳤음. 인계 시점에서 관리 책임은 종료되며, 이후 유통 경로에 대한 확인 의무는 없음.</p>
+<p><strong>다. 시행 실적</strong></p>
+<ul><li>2011~2026 누적 인계량: <strong><span class="redact">██</span>톤</strong></li><li>인계처: 재생원료 취급업체 <span class="redact">██</span>개소 (수의계약, 무상 양도, 운반비 본 공단 부담)</li><li>인계 이후 소재: 확인되지 아니함</li></ul>
+<p><strong>라. 특이사항 (2016. 3. 최초 확인)</strong></p>
+<p>2016년 이후 배출 지점에서 회수된 품목 중 <strong><span class="redact">██</span>건</strong>에서, 본 공단이 인계 시 부착한 품목 코드 스티커의 <strong>접착 흔적</strong>이 확인되었음. 스티커 자체는 제거되어 있었음.</p>
+<p>배출 상태는 2-3항의 기준을 전건 충족하였음. <strong>라벨 제거 완료 항목 포함.</strong></p>
+<blockquote><p><em>(당시 자원순환관리부 실무자 자필, 결재 문서 여백): 우리는 그것을 없애지 못해서 팔았다. 그것은 어딘가에서 무언가가 되었고, 어느 집에 들어갔고, 그 집이 없어질 때 다시 나왔다. <strong>라벨을 떼고 나왔다.</strong> 우리는 그렇게 하라고 가르친 적이 없다.</em></p></blockquote>
+<h2 class='sec'>붙임 5. 배출량 급증 구역 분석 (2026. 7.)</h2>
+<p>2024년 이후 특정 구역에서 배출 건수가 단기간 급증하는 사례가 확인되었음. 급증 구역과 이후 행정 조치를 대조한 결과는 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>구역</th><th>급증 개시</th><th>이후 조치</th><th>고시일</th><th>선행 기간</th></tr></thead><tbody><tr><td><span class="redact">██</span>시 <span class="redact">██</span>동</td><td>2024. 3.</td><td>정비구역 지정</td><td>2025. 7.</td><td>16개월</td></tr><tr><td><span class="redact">██</span>시 <span class="redact">██</span>구 <span class="redact">██</span>동</td><td>2024. 9.</td><td>정비구역 지정</td><td>2025. 11.</td><td>14개월</td></tr><tr><td><span class="redact">██</span>군 <span class="redact">██</span>읍</td><td>2025. 1.</td><td>이주 대책 수립</td><td>2026. 2.</td><td>13개월</td></tr><tr><td><span class="redact">██</span>시 <span class="redact">██</span>동</td><td>2025. 4.</td><td>정비구역 지정</td><td>2026. 6.</td><td>14개월</td></tr></tbody></table></div>
+<p>평균 선행 기간은 <strong>14.2개월</strong>임. 즉 배출량 급증은 해당 구역의 정비사업 결정보다 <strong>앞서 발생</strong>함.</p>
+<p>본 공단은 2025. 2. 관리 지침 제6항을 신설하여 배출량 자료를 「정비사업 예정구역 예측 지표」로 내부 활용하고 있음. 국토교통부에 대한 자료 요청 절차 없이 확보 가능하여 <strong>업무 효율이 개선되었음.</strong> 동 지표는 2025년도 자체 혁신과제로 등재되었음.</p>
+<p><strong>현재 급증 1위 구역</strong>은 다음과 같음.</p>
+<pre class='doc-pre'>구      역 : ██시 ██구 ██동
+급증 개시 : 2026. 6.
+전월 대비 : 7.2배
+정비계획   : 해당 없음 (어떠한 계획에도 포함되어 있지 아니함)
+비      고 : 본 공단 ██지역본부 청사 소재지</pre>
+<ol><li>6. 이후 당해 청사 후문 분리수거장에서 총 <strong>4건</strong>이 수거되었음. 배출 요일 및 시각은 <strong>청사 자체 배출 기준</strong>을 준수하였음.</li></ol>
+<p>본 공단 청사의 배출 요일 및 시각은 대외에 공개되어 있지 아니함.</p>
+<p>관리등급 상향(을급) 상신 여부를 검토 중임. 상신 시 소요 예산은 연 <strong>약 <span class="redact">██</span>억 원</strong>으로 추계되나, 현행 처리방식이 예산 절감 우수사례로 등재되어 있어 <strong>처리비 증액 사유를 소명하기 어려움.</strong> 끝.</p>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">장○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">고○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">곽○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;중부본부-2026-0329 (2026. 7. 30.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;전 지역본부 공통 (주관: 중부지역본부 자원순환관리부)<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (097) ███-████<span class="sep">/</span>전송 (097) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-312.html'>← 제312호 정상</a><a href='index.html'>문서 대장</a><a href='doc-339.html'>제339호 매몰지 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제366호 미분류 폴리곤 — 한국이상관리공단</title>
+<meta name="description" content="지도에는 있고 현장에는 없다. 매년 커지면서, 원점 쪽으로 온다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제366호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">미분류 폴리곤</div>
+      <div class="t2">제 366 호</div>
+    </div>
+    <p class="one">지도에는 있고 현장에는 없다. 매년 커지면서, 원점 쪽으로 온다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>본부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='nm'>서○○</td><td class='nm'>배○○</td><td class='jg'>전결<br><span class='jgn'>우○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제366호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-ga' title='乙 · 결재선 과장 — 대규모 절차가 필요하거나 실패가 반복됨'>을급</span><div class='gdesc'>乙 · 결재선 과장 — 대규모 절차가 필요하거나 실패가 반복됨</div></dd></div><div><dt>이상도</dt><dd><span class='tier t-3'>아주기괴</span></dd></div><div><dt>관할</dt><dd>본부 직할 (공간정보관리팀)</dd></div><div><dt>소재</dt><dd>공간 · 공간정보</dd></div><div><dt>발생원인</dt><dd>제1기 (전란기)</dd></div><div><dt>지정</dt><dd>1996. 4.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 서○○, (028) ███-████)</div>
+  <div class="tbar">
+    <b>제366호 &nbsp;미분류 폴리곤</b>
+    <span>특수관리물 관리카드 · 2026년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제366호(이하 "당해 관리물")는 국가기본도 축척 1:5,000 수치지형도에 등재되어 있으나 <strong>분류 체계상 존재하지 아니하는</strong> 면(面) 데이터 1개를 말함.</p>
+<p><strong>2.</strong> 당해 폴리곤은 <strong>삭제하지 아니함.</strong> 종전 삭제 시행 8회의 결과는 붙임 3과 같음.</p>
+<p><strong>3.</strong> 갱신 시마다 다음 사항을 조치할 것. 조치는 국토지리정보원 국가기본도과와의 실무 협의(비공식)로 갈음하며, 협의 사실을 문서로 남기지 아니함.</p>
+<ul><li>가. 당해 폴리곤의 <strong>「비고」 속성에 "측량 부적합 구역"을 기재</strong>할 것. 레이어명·지형지물부호는 원상태로 둘 것</li><li>나. 국가공간정보 오픈플랫폼 및 대외 제공 API의 응답에서 당해 폴리곤이 <strong>누락되도록 필터를 재적용</strong>할 것. 갱신 시 UFID가 변경되므로, 필터는 갱신 회차마다 신규 작성함</li><li>다. 당해 폴리곤이 포함된 도엽의 성과에 대하여는, 공공측량 시행계획 심사 시 본 공단과 <strong>사전 협의</strong>를 거치게 할 것</li></ul>
+<p><strong>4.</strong> 당해 폴리곤 경계 내에서의 측량을 금함. 경계 내 진입이 필요한 점검은 시행하지 아니하며, 폴리곤의 위치·면적은 <strong>원격 자료로만 확인</strong>함.</p>
+<p><strong>5.</strong> 폴리곤 경계 내에서 측량을 시행한 자가 사후에 확인된 경우, 해당 성과에 대한 <strong>성과심사 부적합 처리 및 소급 심사 절차를 지연시키거나 유보하지 아니할 것.</strong> 당해 관리물에 관한 사항을 본인·소속 업체·발주처에 통지하지 아니함. 처리 사유는 「측량 성과의 정합성 유지」로 기재함.</p>
+<p><strong>6.</strong> 소요 예산은 통계목 「전산개발비」 및 「일반연구용역비」로 계상함. API 필터 유지 용역은 수의계약으로 함. 계약 건명은 「공간정보 자료 정합성 검증」으로 함. 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 당해 폴리곤은 축척 1:5,000 수치지형도 상에 <strong>면 데이터로 정상 구조화</strong>되어 있으며, 위상(位相) 오류가 없고, 경계선이 폐합되어 있음. 즉 자료로서는 결함이 없음.</p>
+<p><strong>2-2.</strong> 속성값은 다음과 같음(붙임 1 참조). 지형지물부호 「00000000」은 <strong>국가기본도 지형지물 표준코드 체계에 정의되지 아니한 값</strong>임. 레이어명은 공란임.</p>
+<p><strong>2-3.</strong> 당해 폴리곤이 지시하는 위치에 대한 현지 확인 및 원격탐사 판독 결과, <strong>어떠한 지형·지물도 확인되지 아니함</strong>(붙임 2). 지정 이후 30년간 위치가 지시한 곳은 논, 임야 사면, 밭, 하천 제외지, 물류창고 주차장 등이며, 전부 통상의 지형이었음.</p>
+<p><strong>2-4.</strong> 당해 폴리곤은 <strong>위치가 이동하며, 면적이 증가함.</strong> 이동은 지형도 수정 주기(당해 도엽 기준 연 1회 갱신)에 맞추어 발생하고, 갱신 사이의 기간에는 변동이 없음.</p>
+<div class='tw'><table><thead><tr><th>확인 시점</th><th>면적(㎡)</th><th>전기 대비</th></tr></thead><tbody><tr><td>1996. (지정 시)</td><td>8,214</td><td>—</td></tr><tr><td>2006.</td><td>21,447</td><td>2.61배</td></tr><tr><td>2016.</td><td>88,340</td><td>4.12배</td></tr><tr><td>2021.</td><td>244,617</td><td>2.77배</td></tr><tr><td>2024.</td><td>601,338</td><td>2.46배</td></tr><tr><td>2025.</td><td>1,109,442</td><td>1.85배</td></tr><tr><td><strong>2026.</strong></td><td><strong>2,204,918</strong></td><td><strong>1.99배</strong></td></tr></tbody></table></div>
+<p><strong>2-5.</strong> 당해 폴리곤 경계 내에서 측량을 시행한 인력에게 발생하는 사항은 다음과 같음. 신체적 위해는 확인된 바 없음.</p>
+<ul><li>가. GNSS 관측 자체는 정상임. 위성 수신 기수, 고정해(Fix) 취득, 기지점 검사 모두 정상 범위임</li><li>나. 다만 산출되는 좌표에 <strong>방위각과 크기가 일정한 편의(偏倚)</strong>가 발생함. 크기는 0.031m, 방위각은 43°24′임</li><li>다. 당해 편의는 이후 그 인력이 수행하는 <strong>모든 측량 성과에 계속 나타남.</strong> 장비·기지점·현장을 변경하여도 동일함</li><li>라. 편의의 크기는 각종 측량의 <strong>허용오차 이내</strong>임. 그러나 다수 성과에 동일 방향으로 일관되게 나타나므로, 성과심사에서 「계통오차 있음」으로 부적합 처리됨</li><li>마. 부적합 판정 시 종전 성과에 대한 소급 심사가 개시되며, 통상 <strong>전건이 부적합 처리</strong>됨. 이에 따라 측량기술자 업무정지 및 측량업 등록취소 절차가 진행됨</li></ul>
+<p><strong>2-6.</strong> 즉 당해 관리물의 피해는 사망·부상이 아니라 <strong>자격의 갑급</strong>임. 확인된 사례는 4건이며, 4명 전원이 현재 측량 관련 업무에 종사하지 아니함.</p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1974.</td><td>당해 도엽의 축척 1:5,000 지형도 신규 <strong>도화(圖化)</strong> 시, 원도에 분류 불명의 면 1개가 기재됨. 도화자 및 기재 근거 확인 불가</td></tr><tr><td>1995.</td><td>국가지리정보체계(NGIS) 1단계 사업 착수. 종이 지형도의 수치화 개시</td></tr><tr><td>1996. 2.</td><td>수치화 성과 검수 중 지형지물부호 「00000000」 1건 확인. 입력 오류로 판단하여 <strong>삭제 처리</strong></td></tr><tr><td>1996. 3.</td><td>후속 검수에서 동일 폴리곤 재확인. 삭제 처리 이력은 전산상 남아 있었음</td></tr><tr><td>1996. 4.</td><td>국립지리원(현 국토지리정보원)이 본 공단에 협조 요청. <strong>을급 지정</strong></td></tr><tr><td>1999. 3.</td><td>제1차 삭제 시행 (붙임 3)</td></tr><tr><td>2008.</td><td>수치지형도 2.0 전환 및 DB 재구축. <strong>전환 대상에서 제외</strong>하였으나 전환 후 DB에 존재함</td></tr><tr><td>2013. 6.</td><td>공간정보 오픈 API 응답 필터 최초 적용. 이후 민간 지도 서비스에는 표출되지 아니함</td></tr><tr><td>2016. 3.</td><td>폴리곤 경계 내 공공측량 시행 (붙임 4)</td></tr><tr><td>2019. 8.</td><td>이동 방향의 규칙성 최초 산출 (붙임 5)</td></tr><tr><td>2026. 7.</td><td><strong>국가기준점 도달 확인</strong> (붙임 5)</td></tr></tbody></table></div>
+<h2 class='sec'>붙임 1. 속성값 조회 결과 (2026. 6.)</h2>
+<p><em>국토지리정보원 국가기본도 DB 직접 조회. 조회 권한은 본 공단 담당자 1명에 한하여 부여되어 있음.</em></p>
+<pre class='doc-pre'>  UFID           : 4B███████████████████████████████1
+  레이어명        : (공란)
+  지형지물부호     : 00000000
+  지형지물명       : (공란)
+  구조화 여부      : Y
+  면적(㎡)        : 2204918.4
+  둘레(m)         : 6318.7
+  좌표계          : GRS80 / UTM-K (EPSG:5179)
+  자료취득원       : 도화
+  축척            : 1:5000
+  최초등재일       : 1974-██-██
+  최종갱신일       : 2026-05-21
+  비고            : 측량 부적합 구역</pre>
+<ul><li>「지형지물부호」란은 8자리 필수 입력 항목이며, <strong>「00000000」은 코드표에 없음.</strong> 정의되지 아니한 값이 필수 항목 검수를 통과한 사유는 확인되지 아니함</li><li>「최초등재일」의 연도는 1974년으로 기재되어 있으나, 당해 DB는 1995년 이후 구축된 것임. <strong>1995년 이전 일자가 기재될 수 있는 항목이 아님</strong></li><li>「비고」란의 기재는 본 공단이 관리 지침 제3항 가목에 따라 매 갱신 시 입력하는 것임. 다만 <strong>2018년 이후로는 갱신 후에도 기재가 유지되고 있음.</strong> 재입력이 불요한 상태임</li></ul>
+<h2 class='sec'>붙임 2. 현지 확인 및 원격탐사 판독 결과 (1996 ~ 2026, 요약)</h2>
+<div class='tw'><table><thead><tr><th>확인 방법</th><th>결과</th></tr></thead><tbody><tr><td>현지 조사 (30회, 폴리곤 경계 <strong>외곽 50m 지점</strong>에서 관측)</td><td>이상 없음. 지형은 논·임야·밭·주차장 등 통상의 지형임</td></tr><tr><td>항공사진 판독 (촬영 축척 1:20,000, GSD 25cm, 1974년분 이후 전량)</td><td>이상 없음. 판독 대상 지물 없음</td></tr><tr><td>정사영상 및 위성영상 (해상도 50cm급)</td><td>이상 없음</td></tr><tr><td>항공레이저측량(LiDAR) 점군 분석</td><td>지표 및 지하 구조물 이상 없음. 표고 이상 없음</td></tr><tr><td>종이 지형도 원도 확인 (1974년 도화 원도, 국토지리정보원 지도박물관 수장고)</td><td>해당 위치에 <strong>연필선으로 폐합된 면 1개</strong> 있음. 범례에 없는 형상임. 채색·부호·주기 없음</td></tr><tr><td>1974년 도화 작업일지 확인</td><td>해당 도엽 작업일지 <strong>1매 결번.</strong> 앞뒤 쪽수는 연속함</td></tr></tbody></table></div>
+<p><strong>부기.</strong> 항공사진 판독에서는 지물이 확인되지 아니하였으나, 당해 폴리곤을 포함하는 사진의 <strong>항공삼각측량 잔차</strong>에 특이사항이 있음. 잔차는 허용범위 이내이나, 해당 사진에 한하여 <strong>방위각 43°24′ 방향의 일관된 편의</strong>가 산출됨. 크기는 0.030 ~ 0.032m임. 이는 붙임 4의 사례에서 산출된 편의와 동일함.</p>
+<h2 class='sec'>붙임 3. 삭제 시행 결과 (1999 ~ 2026)</h2>
+<div class='tw'><table><thead><tr><th>회차</th><th>시행</th><th>삭제 방법</th><th>복구 확인</th><th>복구 소요</th></tr></thead><tbody><tr><td>1차</td><td>1999. 3. 12.</td><td>원본 파일에서 폴리곤 삭제</td><td>1999. 9. 8.</td><td><strong>180일</strong></td></tr><tr><td>2차</td><td>2003. 5. 6.</td><td>도엽 단위 재작성(해당 면 미포함)</td><td>2003. 9. 15.</td><td>132일</td></tr><tr><td>3차</td><td>2008. 4. 21.</td><td>수치지형도 2.0 전환 대상에서 제외</td><td>2008. 7. 24.</td><td>94일</td></tr><tr><td>4차</td><td>2013. 2. 4.</td><td>DB 레코드 삭제 + UFID 말소</td><td>2013. 4. 6.</td><td>61일</td></tr><tr><td>5차</td><td>2017. 6. 19.</td><td>상기 조치 + 백업본 3세대 동시 삭제</td><td>2017. 7. 27.</td><td>38일</td></tr><tr><td>6차</td><td>2021. 3. 8.</td><td>상기 조치 + 인접 4개 도엽 동시 재작성</td><td>2021. 3. 25.</td><td>17일</td></tr><tr><td>7차</td><td>2024. 9. 2.</td><td>상기 조치 + 국가기본도 통합 DB에서 제외</td><td>2024. 9. 8.</td><td>6일</td></tr><tr><td>8차</td><td>2026. 3. 17.</td><td>상기 조치 (7차와 동일)</td><td>2026. 3. 17.</td><td><strong>32분</strong></td></tr></tbody></table></div>
+<p><strong>공통 확인 사항.</strong></p>
+<ul><li>각 회차의 <strong>삭제 로그는 전량 정상 생성</strong>되어 있음. 시행자·시각·대상 UFID가 기재되어 있음</li><li>각 회차의 <strong>복구에 관한 로그는 존재하지 아니함.</strong> 변경이력 테이블에 INSERT 기록 없음. DB 트랜잭션 로그, 파일시스템 감사 로그, 백업 복원 이력 전부 해당 없음</li><li>즉 전산상 당해 폴리곤은 <strong>8회 삭제되었고 0회 생성되었으며, 현재 존재함</strong></li><li>복구 시 UFID는 종전과 상이한 값이 부여됨. 부여 규칙은 확인되지 아니함</li><li>복구 시 면적은 종전보다 크며, 중심좌표는 종전보다 원점에 가까움. <strong>삭제는 이동을 지연시키지 아니함</strong></li></ul>
+<p><strong>결론:</strong> 8차 시행의 복구 소요가 32분임에 따라, 시행과 복구를 구분하여 관측하는 것이 사실상 불가능해졌음. 이후 삭제를 시도하지 아니함. 관리 지침 제2항은 본 건에 따름. 끝.</p>
+<h2 class='sec'>붙임 4. 측량기술자 면담 기록 (2018. 11.)</h2>
+<p><em>진술인: 김○○(당시 47세). 측량 및 지형공간정보기사. 경력 19년. 2017. 4. 업무정지 2년 처분. 처분 만료 후 자격 갱신을 신청하지 아니하였음. 면담 당시 직업은 화물운송업임.</em></p>
+<p><em>면담자는 본 공단 직원이며, 소속을 「국토 관련 업무 수탁기관」으로 밝혔음. 당해 관리물에 관한 사항은 고지하지 아니하였음.</em></p>
+<blockquote><p>"2016년 3월에 <span class="redact">██</span>군 도로 개설 노선측량을 했습니다. 공공측량이고 발주처는 군청입니다. 논 가운데였습니다. 특별한 현장이 아니었습니다."</p>
+<p>"GNSS 세우고 네트워크 RTK로 초기화했습니다. 위성 열네 기 잡혔고 고정해 걸렸습니다. 기지점 검사도 했습니다. 이상 없었습니다. 그날 성과는 다 정상으로 나왔습니다."</p>
+<p>"성과심사에서 부적합이 나왔습니다. 재작성했습니다. 또 부적합이었습니다. 세 번째는 장비를 다른 회사 것으로 바꿨습니다. 같았습니다."</p>
+<p>"그러고 나서 그 전에 했던 것도 다시 보라고 했습니다. 2009년 것부터 봤습니다. 열아홉 건 중에 열일곱 건이 부적합이었습니다. 그중에 아홉 건은 이미 준공된 도로입니다."</p>
+<p>"편차가 얼마냐고 물어봤습니다. 3센티라고 했습니다. 허용오차 안이라고 했습니다. 그런데 전부 같은 방향이라서 안 된다고 했습니다. 계통오차라고 합니다."</p>
+<p>"저는 방향을 맞추는 방법을 모릅니다. 장비가 주는 값을 적었습니다. 그것 말고는 하는 게 없습니다."</p>
+<p>"<strong>저는 성과를 조작한 적이 없습니다. 다만 제 성과가 다 틀렸다고 합니다. 저도 이해가 안 갑니다.</strong>"</p>
+<p>"회사는 등록이 취소돼서 없어졌습니다. 직원 넷이었습니다. 그중 한 명은 제 처제입니다."</p>
+<p>"한 가지만 여쭙겠습니다. 제가 그날 서 있던 자리에 뭐가 있었습니까. 아무것도 없었던 건 제가 압니다. 제가 거기 서 있었으니까요. 그런데 아무것도 없는 데서 이렇게 되는 게 맞는 겁니까."</p></blockquote>
+<p><em>면담자는 답변하지 아니하였음. 면담 종료.</em></p>
+<p><strong>동종 사례.</strong> 확인된 4건의 처분 내역은 다음과 같음. 4건 전부 폴리곤 경계 내 측량이 사후 확인된 건임.</p>
+<div class='tw'><table><thead><tr><th>연도</th><th>자격</th><th>소급 부적합 성과</th><th>처분</th></tr></thead><tbody><tr><td>2004</td><td>지적기사</td><td>8건 / 8건</td><td>업무정지 1년</td></tr><tr><td>2011</td><td>측량기사</td><td>23건 / 26건</td><td>업무정지 2년, 업체 등록취소</td></tr><tr><td>2016</td><td>측량기사</td><td>17건 / 19건</td><td>업무정지 2년, 업체 등록취소</td></tr><tr><td>2022</td><td>측량기술자(중급)</td><td>41건 / 41건</td><td>업무정지 2년</td></tr></tbody></table></div>
+<blockquote><p><em>(담당자 처리 메모, 자필 / 2018. 11.)</em></p>
+<p><em>우리는 저 사람에게 왜 성과가 틀렸는지 말해줄 수 있었다. 말하지 않았다.</em></p>
+<p><em>말하면 이 폴리곤이 있다는 것을 인정하는 것이 되고, 그러면 이 폴리곤이 30년간 지나간 도엽의 성과를 전부 다시 심사해야 한다. 그 건수를 산출해봤다. <span class="redact">██</span>만 건이다.</em></p>
+<p><em>열일곱 건과 <span class="redact">██</span>만 건 중에서 우리는 열일곱 건을 골랐다. 그게 관리다. 지침에 그렇게 적혀 있고, 그 문장은 내가 썼다.</em></p></blockquote>
+<h2 class='sec'>붙임 5. 이동 이력 및 국가기준점 도달 확인 (2026. 7.)</h2>
+<ol><li>8., 담당자가 이동 이력의 중심좌표를 대한민국 경위도원점 성과와 대조한 결과, 이동에 규칙이 있음이 산출되었음. 종전까지 이동은 「불규칙」으로 기재되어 왔음.</li></ol>
+<p><strong>규칙:</strong> 이동은 <strong>경위도원점 방향의 일직선</strong>이며, 1회 이동 거리는 축척 1:5,000 도엽 1매의 경도 방향 폭(2,221m)의 정수배임. 즉 당해 폴리곤은 <strong>도엽을 세면서 이동함.</strong></p>
+<div class='tw'><table><thead><tr><th>확인 시점</th><th>중심좌표 X</th><th>중심좌표 Y</th><th>도엽번호</th><th>원점까지(m)</th><th>잔여 도엽</th></tr></thead><tbody><tr><td>1996.</td><td>892,410</td><td>1,847,304</td><td><span class="redact">██</span><span class="redact">██</span>2321</td><td>99,945</td><td>45</td></tr><tr><td>2001.</td><td>900,039</td><td>1,855,366</td><td><span class="redact">██</span><span class="redact">██</span>2317</td><td>88,840</td><td>40</td></tr><tr><td>2006.</td><td>907,668</td><td>1,863,428</td><td><span class="redact">██</span><span class="redact">██</span>2313</td><td>77,735</td><td>35</td></tr><tr><td>2011.</td><td>915,297</td><td>1,871,491</td><td><span class="redact">██</span><span class="redact">██</span>2309</td><td>66,630</td><td>30</td></tr><tr><td>2016.</td><td>922,926</td><td>1,879,553</td><td><span class="redact">██</span><span class="redact">██</span>2305</td><td>55,525</td><td>25</td></tr><tr><td>2019.</td><td>932,081</td><td>1,889,227</td><td><span class="redact">██</span><span class="redact">██</span>2417</td><td>42,199</td><td>19</td></tr><tr><td>2022.</td><td>941,236</td><td>1,898,902</td><td><span class="redact">██</span><span class="redact">██</span>2405</td><td>28,873</td><td>13</td></tr><tr><td>2023.</td><td>947,340</td><td>1,905,352</td><td><span class="redact">██</span><span class="redact">██</span>1421</td><td>19,989</td><td>9</td></tr><tr><td>2024.</td><td>953,443</td><td>1,911,802</td><td><span class="redact">██</span><span class="redact">██</span>1409</td><td>11,105</td><td>5</td></tr><tr><td>2025.</td><td>959,546</td><td>1,918,251</td><td><span class="redact">██</span><span class="redact">██</span>1401</td><td>2,221</td><td>1</td></tr><tr><td><strong>2026.</strong></td><td><strong>961,072.312</strong></td><td><strong>1,919,864.807</strong></td><td><strong><span class="redact">██</span><span class="redact">██</span>1301</strong></td><td><strong>0</strong></td><td><strong>0</strong></td></tr></tbody></table></div>
+<p>2026년 확인분의 중심좌표는 <strong>대한민국 경위도원점의 등재 성과와 소수점 셋째 자리까지 일치</strong>함. 원점은 당해 폴리곤 경계의 내부에 포함되어 있으며, 경계로부터 원점까지의 최단거리는 792m임.</p>
+<p><strong>2026. 7. 원점 검측 결과.</strong> 국토지리정보원은 2026. 6. 정기 검측(24시간 연속관측 7일, 정밀궤도력 적용)을 시행하였음. 산출된 원점 성과는 등재 성과와 대비하여 다음과 같음.</p>
+<pre class='doc-pre'>  편의 크기   : 0.031 m
+  편의 방위각 : 43°24′
+  판정        : 허용범위 이내 (계통성 검토 필요)</pre>
+<p>당해 수치는 붙임 4 김○○의 성과에서 산출된 편의 및 붙임 2 항공삼각측량 잔차의 편의와 <strong>동일</strong>함.</p>
+<p><strong>조치.</strong> 본 공단은 상기 사항을 국토지리정보원에 통보하지 아니하였음. 검토 요지는 다음과 같음.</p>
+<ul><li>통보 시 국가기준점 성과의 개정 고시 절차가 개시됨</li><li>개정 시, 개정 전 성과를 기준으로 시행된 전국의 측량 성과에 <strong>동일 방향의 계통오차가 존재</strong>하게 됨. 이는 붙임 4의 4명에게 적용된 것과 같은 판정 기준임</li><li>대상 규모: 지적측량 <span class="redact">██</span>,<span class="redact">██</span>█,<span class="redact">██</span>█건, 공공측량 <span class="redact">██</span>█,<span class="redact">██</span>█건, 국가기본도 도엽 전량</li><li>상기 성과를 소급 심사할 인력·예산은 편성되어 있지 아니하며, 편성 가능한 규모가 아님</li></ul>
+<p>따라서 본 공단은 <strong>관리 지침 제5항의 적용 대상을 확대하지 아니하기로 하였음.</strong> 적용 대상은 종전과 같이 개인으로 함.</p>
+<p><strong>부기 1.</strong> 2-4의 면적 증가 추세를 외삽할 경우 당해 폴리곤의 면적이 국토 면적에 도달하는 시점이 산출됨. 본 공단은 해당 산출값을 문서에 기재하지 아니함.</p>
+<p><strong>부기 2.</strong> 당해 폴리곤의 이동 규칙은 「국가기준점으로의 접근」이었음. 원점에 도달한 이후의 규칙은 확인된 바 없음. 다음 갱신은 2027. 5.임.</p>
+<p><strong>부기 3.</strong> 원점보다 북동쪽에 위치한 국가기준점은 삼각점 <span class="redact">██</span>█개, 수준점 <span class="redact">██</span>개, 통합기준점 <span class="redact">██</span>개임. 끝.</p>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">서○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">배○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">우○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;기획조정실-2026-0366 (2026. 7. 30.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;본부 직할 (공간정보관리팀)<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (028) ███-████<span class="sep">/</span>전송 (028) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-356.html'>← 제356호 씨간장</a><a href='index.html'>문서 대장</a><a href='doc-371.html'>제371호 종점 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>
