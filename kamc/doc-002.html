@@ -119,7 +119,7 @@ a{color:inherit}
 
 /* 등급 배지 */
 .gr{
-  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
   padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
 }
 .g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
@@ -340,10 +340,10 @@ article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
     <p class="one">등급은 얼마나 위험한지가 아니라, 얼마나 관리하기 어려운지를 적는 칸이다.</p>
     <table class="approve">
       <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>본부장</th><th>이사장</th></tr></thead>
-      <tbody><tr><td class='nm'>권○○</td><td class='nm'>허○○</td><td class='nm'>민○○</td><td class='nm'>박○○</td><td class='nm'>황○○</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td></tr></tbody>
+      <tbody><tr><td class='nm'>권○○</td><td class='nm'>허○○</td><td class='nm'>민○○</td><td class='nm'>박○○</td><td class='jg'>전결</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>—</td></tr></tbody>
     </table>
     <div class="appcap">결 &nbsp;재</div>
-    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제002호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-teuk' title='국가 존립 관련 — 관리할 수 없음이 확정된 상태'>특급</span><div class='gdesc'>국가 존립 관련 — 관리할 수 없음이 확정된 상태</div></dd></div><div><dt>관할</dt><dd>본부 직할 (기획조정실)</dd></div><div><dt>소재</dt><dd>내부지침</dd></div><div><dt>발생원인</dt><dd>해당 없음</dd></div><div><dt>지정</dt><dd>1978. 4.</dd></div></dl>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제002호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-teuk' title='管理不能 · 관리할 수 없음이 확정됨 (국가가 편입함)'>관리불능</span><div class='gdesc'>管理不能 · 관리할 수 없음이 확정됨 (국가가 편입함)</div></dd></div><div><dt>관할</dt><dd>본부 직할 (기획조정실)</dd></div><div><dt>소재</dt><dd>내부지침</dd></div><div><dt>발생원인</dt><dd>해당 없음</dd></div><div><dt>지정</dt><dd>1978. 4.</dd></div></dl>
   </div>
 </div>
 
@@ -361,61 +361,71 @@ article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
 <p><strong>1.</strong> 본 문서는 특수관리물이 아니며, <strong>관리등급의 분류 기준을 정하는 내부지침</strong>임.</p>
 <p><strong>2.</strong> 관리등급은 <strong>격리(관리)의 난이도</strong>를 기준으로 분류함. <strong>위해의 정도는 분류 기준이 아니며</strong>, 등급으로부터 위험성을 추정하지 아니할 것.</p>
 <p><strong>3.</strong> 본 항은 반복적으로 오해되므로 명시함.</p>
-<blockquote><p><strong>○ 접촉 시 즉시 사망하는 대상이라도, 관리 절차가 확립되어 그 절차만 이행하면 사고가 발생하지 아니한다면 「다급」임.</strong></p>
-<p><strong>○ 아무런 위해를 가하지 아니하는 대상이라도, 관리 방법이 확립되지 아니하여 소재·상태를 파악할 수 없다면 「가급」임.</strong></p></blockquote>
+<blockquote><p><strong>○ 접촉 시 즉시 사망하는 대상이라도, 관리 절차가 확립되어 그 절차만 이행하면 사고가 발생하지 아니한다면 「수칙관리」임.</strong></p>
+<p><strong>○ 아무런 위해를 가하지 아니하는 대상이라도, 관리 방법이 확립되지 아니하여 소재·상태를 파악할 수 없다면 「관측관리」임.</strong></p></blockquote>
 <p><strong>4.</strong> 신규 배치자는 상기 제3항을 숙지할 것. 종전 배치자 중 등급을 위험도로 이해하고 있는 자가 다수 확인되었으며, 이는 사고의 원인이 된 바 있음(제021호 참조). 끝.</p>
 <h2 class='sec'>등급 체계</h2>
-<h3>다급 (丙) — 관리 절차 확립</h3>
+<h3>수칙관리 (守則管理) — 관리 절차 확립</h3>
 <p><strong>가.</strong> 다음 각 호에 해당하는 것.</p>
 <ul><li><strong>○</strong> 관리 절차가 확립되어 있고, 절차를 이행하는 한 상태가 안정적으로 유지되는 것</li><li><strong>○</strong> 변칙성이 <strong>특정 조건에서만 발현</strong>하며, 그 조건을 회피할 수 있는 것</li><li><strong>○</strong> 관리에 별도의 시설·인력·기술이 요구되지 아니하는 것</li></ul>
-<p><strong>나.</strong> 다급은 <strong>위해가 적다는 뜻이 아님.</strong> 관내 다급 관리물 중 접촉·근접만으로 인명 피해가 발생하는 것이 <strong>11건</strong> 있음. 이들이 다급인 이유는 접촉하지 않는 방법이 확립되어 있기 때문임.</p>
-<p><strong>다.</strong> ★ 다급의 구조적 취약점 — 반드시 인지할 것.</p>
-<blockquote><p>다급 지정의 요건은 <strong>「절차의 확립」</strong>임. 그런데 「절차의 이행 여부를 점검하는 업무」에 대하여는 <strong>다급에 예산이 배정되지 아니함.</strong></p>
-<p>즉 본 공단은 다급 관리물의 절차가 실제로 이행되고 있는지를 <strong>확인하지 못하고 있음.</strong> 확인하려면 예산이 필요하고, 예산을 받으려면 등급을 올려야 하고, 등급을 올리려면 <strong>절차가 무너졌다는 증거</strong>가 필요함. 그 증거는 사고가 발생한 뒤에만 생김.</p>
-<p>따라서 다급은 <strong>가장 안전한 등급이 아니라, 가장 확인되지 않은 등급</strong>임.</p></blockquote>
-<p><strong>라.</strong> 절차가 이행되지 아니한 것이 확인된 경우 즉시 나급 이상으로 상향함. 1998년 이후 다급에서 가급으로 <strong>2단계 직상향</strong>된 사례는 <strong>7건</strong>이며, 전건이 인명 피해 발생 후의 조치였음.</p>
-<h3>나급 (乙) — 관리 절차 불완전</h3>
+<p><strong>나.</strong> 수칙관리는 <strong>위해가 적다는 뜻이 아님.</strong> 관내 수칙관리 관리물 중 접촉·근접만으로 인명 피해가 발생하는 것이 <strong>11건</strong> 있음. 이들이 수칙관리인 이유는 접촉하지 않는 방법이 확립되어 있기 때문임.</p>
+<p><strong>다.</strong> ★ 수칙관리의 구조적 취약점 — 반드시 인지할 것.</p>
+<blockquote><p>수칙관리 지정의 요건은 <strong>「절차의 확립」</strong>임. 그런데 「절차의 이행 여부를 점검하는 업무」에 대하여는 <strong>수칙관리에 예산이 배정되지 아니함.</strong></p>
+<p>즉 본 공단은 수칙관리 관리물의 절차가 실제로 이행되고 있는지를 <strong>확인하지 못하고 있음.</strong> 확인하려면 예산이 필요하고, 예산을 받으려면 등급을 올려야 하고, 등급을 올리려면 <strong>절차가 무너졌다는 증거</strong>가 필요함. 그 증거는 사고가 발생한 뒤에만 생김.</p>
+<p>따라서 수칙관리는 <strong>가장 안전한 등급이 아니라, 가장 확인되지 않은 등급</strong>임.</p></blockquote>
+<p><strong>라.</strong> 절차가 이행되지 아니한 것이 확인된 경우 즉시 감시관리 이상으로 상향함. 1998년 이후 수칙관리에서 관측관리로 <strong>2단계 직상향</strong>된 사례는 <strong>7건</strong>이며, 전건이 인명 피해 발생 후의 조치였음.</p>
+<h3>감시관리 (監視管理) — 관리 절차 불완전</h3>
 <p><strong>가.</strong> 다음 각 호에 해당하는 것.</p>
-<ul><li><strong>○</strong> 관리 절차가 있으나 <strong>항상 유효하지는 않은</strong> 것</li><li><strong>○</strong> 대상에 대한 이해가 부족하여 <strong>반응을 예측할 수 없는</strong> 것</li><li><strong>○</strong> 대상이 <strong>자체적으로 상태를 변경</strong>할 수 있는 것 (증가·이동·확산 등)</li><li><strong>○</strong> 상기 어느 항에도 해당하지 아니하나, 다급으로 확정할 근거가 없는 것</li></ul>
-<p><strong>나.</strong> 나급은 <strong>기본 등급</strong>임. 분류가 곤란한 경우 나급으로 지정하며, 관내 관리물의 <strong>절반 이상</strong>이 나급임. 이는 분류가 정확해서가 아니라, <strong>판단을 보류한 상태가 축적된 결과</strong>임.</p>
-<p><strong>다.</strong> 이해가 진전되면 다급으로 하향할 수 있고, 관리 실패가 확인되면 가급으로 상향함. 실제 이력에서는 <strong>하향이 상향의 3.1배</strong>임. 하향에는 예산 절감 효과가 있고, 상향에는 소명 부담이 있기 때문임.</p>
-<h3>가급 (甲) — 안정적 관리 곤란</h3>
+<ul><li><strong>○</strong> 관리 절차가 있으나 <strong>항상 유효하지는 않은</strong> 것</li><li><strong>○</strong> 대상에 대한 이해가 부족하여 <strong>반응을 예측할 수 없는</strong> 것</li><li><strong>○</strong> 대상이 <strong>자체적으로 상태를 변경</strong>할 수 있는 것 (증가·이동·확산 등)</li><li><strong>○</strong> 상기 어느 항에도 해당하지 아니하나, 수칙관리로 확정할 근거가 없는 것</li></ul>
+<p><strong>나.</strong> 감시관리는 <strong>기본 등급</strong>임. 분류가 곤란한 경우 감시관리로 지정하며, 관내 관리물의 <strong>절반 이상</strong>이 감시관리임. 이는 분류가 정확해서가 아니라, <strong>판단을 보류한 상태가 축적된 결과</strong>임.</p>
+<p><strong>다.</strong> 이해가 진전되면 수칙관리로 하향할 수 있고, 관리 실패가 확인되면 관측관리로 상향함. 실제 이력에서는 <strong>하향이 상향의 3.1배</strong>임. 하향에는 예산 절감 효과가 있고, 상향에는 소명 부담이 있기 때문임.</p>
+<h3>관측관리 (觀測管理) — 안정적 관리 곤란</h3>
 <p><strong>가.</strong> 다음 각 호에 해당하는 것.</p>
 <ul><li><strong>○</strong> 관리 절차가 <strong>대규모·복잡</strong>하여 상시 인력·시설이 요구되는 것</li><li><strong>○</strong> 제한적으로만 관리되고 있는 것</li><li><strong>○</strong> <strong>관리를 포기하고 관측만 하고 있는 것</strong></li><li><strong>○</strong> 원천적으로 관리가 성립하지 아니하는 것 (대상이 장소·문서·제도·구전 등 물리적 격리가 불가능한 형태인 경우)</li></ul>
-<p><strong>나.</strong> 가급은 <strong>위해가 크다는 뜻이 아님.</strong> 관내 가급 관리물 중 인명 피해가 확인된 바 없는 것이 <strong>4건</strong> 있으며, 그중 1건은 대상이 인간에게 <strong>이로운 작용</strong>을 하는 것으로 판단됨. 이들이 가급인 이유는 <strong>본 공단이 그것을 관리할 수단을 보유하지 아니하기 때문</strong>임.</p>
-<p><strong>다.</strong> 가급 지정 시 예산이 실제로 배정됨. 이 때문에 가급 상신은 <strong>엄격하게 심사</strong>되며, 반려 사유의 다수는 「객관적 자료 부족」임. 자료를 확보하려면 관측이 필요하고, 관측에는 예산이 필요함.</p>
-<h3>특급 — 국가 존립 관련</h3>
-<p><strong>가.</strong> 관리의 성패가 국가의 존립·영토·기본 제도에 영향을 미치는 것. 현재 <strong>4건</strong>임.</p>
-<p><strong>나.</strong> 특급의 실무적 의미는 다음과 같음 — <strong>관리할 수 없음이 확정된 상태.</strong> 가급은 수단이 부족한 것이고, 특급은 <strong>국가가 이미 대상을 자국의 일부로 편입하여 되돌릴 수 없는 것</strong>임(제444호 참조).</p>
+<p><strong>나.</strong> 관측관리는 <strong>위해가 크다는 뜻이 아님.</strong> 관내 관측관리 관리물 중 인명 피해가 확인된 바 없는 것이 <strong>4건</strong> 있으며, 그중 1건은 대상이 인간에게 <strong>이로운 작용</strong>을 하는 것으로 판단됨. 이들이 관측관리인 이유는 <strong>본 공단이 그것을 관리할 수단을 보유하지 아니하기 때문</strong>임.</p>
+<p><strong>다.</strong> 관측관리 지정 시 예산이 실제로 배정됨. 이 때문에 관측관리 상신은 <strong>엄격하게 심사</strong>되며, 반려 사유의 다수는 「객관적 자료 부족」임. 자료를 확보하려면 관측이 필요하고, 관측에는 예산이 필요함.</p>
+<h3>관리불능 (管理不能) — 국가 존립 관련</h3>
+<p><strong>가.</strong> 관리의 성패가 국가의 존립·영토·기본 제도에 영향을 미치는 것. 현재 <strong>5건</strong>임.</p>
+<p><strong>나.</strong> 관리불능의 실무적 의미는 다음과 같음 — <strong>관리할 수 없음이 확정된 상태.</strong> 관측관리는 수단이 부족한 것이고, 관리불능은 <strong>국가가 이미 대상을 자국의 일부로 편입하여 되돌릴 수 없는 것</strong>임(제444호 참조).</p>
 <p><strong>다.</strong> 목록은 이사장 및 이사장이 지명하는 1인만 열람함.</p>
-<h3>등급외 안전 — 지정 가치 미달 ★2026년 신설</h3>
+<h3>관리불요 (管理不要) — 지정 가치 미달 ★2026년 신설</h3>
 <p><strong>가.</strong> 이상현상으로 확인되었으나, 다음 각 호에 모두 해당하여 <strong>관리 대상으로 지정하지 아니하는</strong> 것.</p>
 <ul><li><strong>○</strong> 인명·재산 피해가 확인되지 아니할 것</li><li><strong>○</strong> 관리 절차가 <strong>불요</strong>할 것 (방치하여도 상태가 변하지 아니함)</li><li><strong>○</strong> 확산·증가·이동이 관측되지 아니할 것</li><li><strong>○</strong> 대외 노출 시 사회적 파급이 경미할 것</li></ul>
-<p><strong>나.</strong> 등급외 안전은 <strong>문서만 작성하고 관리하지 아니함.</strong> 담당자를 지정하지 아니하며, 예산을 편성하지 아니하며, 점검하지 아니함. 연 1회 존재 여부만 유선으로 확인함.</p>
-<p><strong>다.</strong> 신설 사유: 종전에는 이러한 대상도 다급으로 지정하였으나, 다급 관리물이 누적되어 <strong>점검 계획의 신뢰성이 저하</strong>되었음. 2026년 정비에서 다급 중 상기 요건 해당분을 등급외로 이관하였음.</p>
-<p><strong>라.</strong> ⚠ 등급외 안전에서 등급 내로 재편입된 사례는 <strong>1979년 이후 9건</strong>임. 전건이 「확산 개시」를 사유로 하며, 재편입 시 평균 지정등급은 <strong>나급</strong>이었음. 등급외 안전이라는 명칭은 <strong>관리하지 않아도 된다는 뜻이 아니라, 관리하지 않기로 결정하였다는 뜻</strong>임.</p>
+<p><strong>나.</strong> 관리불요는 <strong>문서만 작성하고 관리하지 아니함.</strong> 담당자를 지정하지 아니하며, 예산을 편성하지 아니하며, 점검하지 아니함. 연 1회 존재 여부만 유선으로 확인함.</p>
+<p><strong>다.</strong> 신설 사유: 종전에는 이러한 대상도 수칙관리로 지정하였으나, 수칙관리 관리물이 누적되어 <strong>점검 계획의 신뢰성이 저하</strong>되었음. 2026년 정비에서 수칙관리 중 상기 요건 해당분을 등급외로 이관하였음.</p>
+<p><strong>라.</strong> ⚠ 관리불요에서 등급 내로 재편입된 사례는 <strong>1979년 이후 9건</strong>임. 전건이 「확산 개시」를 사유로 하며, 재편입 시 평균 지정등급은 <strong>감시관리</strong>이었음. 관리불요라는 명칭은 <strong>관리하지 않아도 된다는 뜻이 아니라, 관리하지 않기로 결정하였다는 뜻</strong>임.</p>
 <h3>지정보류 / 지정해제</h3>
 <ul><li><strong>지정보류</strong> — 지정 요건 심사가 종결되지 아니한 상태. 예산이 편성되지 아니하므로 실질적으로 <strong>등급외와 동일하나, 위험성은 미확정</strong>임. 가장 위험한 상태로 취급함.</li><li><strong>지정해제</strong> — 지정 요건을 충족하지 아니하는 것으로 확인된 상태. 대상이 소멸하였다는 뜻이 아님.</li></ul>
-<h2 class='sec'>붙임 1. 등급 대조표 (참고)</h2>
+<h2 class='sec'>붙임 1. 등급 명칭 변경 (2026. 7. 30. 시행)</h2>
+<p><strong>가.</strong> 종전 등급 명칭은 <strong>「가급·나급·다급」</strong>이었음. 이는 국가중요시설의 가·나·다급 분류를 준용한 것으로, 1978년 특관법 제정 시 별도 검토 없이 차용되었음.</p>
+<p><strong>나.</strong> 변경 사유는 다음과 같음.</p>
+<ul><li><strong>○</strong> 가·나·다는 <strong>순서를 나타내는 기호</strong>이므로, 열람자가 이를 <strong>위험도의 서열</strong>로 인식함. 이는 본 지침 제2항에 정면으로 반함</li><li><strong>○</strong> 2021년 내부 설문에서 <strong>응답자의 81.4%가 「가급 = 가장 위험한 것」으로 답변</strong>하였음. 정답률은 18.6%였음</li><li><strong>○</strong> 종전 명칭은 <strong>본 공단이 그 대상에 대하여 무엇을 하고 있는지</strong>를 전혀 표시하지 못함</li><li><strong>○</strong> 제021호 사건 당시, 대응 기관은 당해 관리물이 「가급」이라는 사실만 통보받았음. 그것이 <strong>「관리를 포기하고 관측만 하고 있다」는 뜻</strong>임을 알지 못하였음. 알았다면 47명이 동시에 진입하지 아니하였을 가능성이 있음</li></ul>
+<p><strong>다.</strong> 신 명칭은 <strong>본 공단의 관리 행위 그 자체</strong>를 명칭으로 삼음. 등급은 대상의 성질이 아니라 <strong>본 공단의 상태</strong>를 적는 칸임을 명칭 단계에서 드러내도록 하였음.</p>
+<div class='tw'><table><thead><tr><th>신 명칭</th><th>종전</th><th>명칭의 뜻 (우리가 하고 있는 일)</th></tr></thead><tbody><tr><td><strong>수칙관리</strong> (守則管理)</td><td>다급</td><td>수칙을 지키게 하고 있음</td></tr><tr><td><strong>감시관리</strong> (監視管理)</td><td>나급</td><td>지켜보고 있음</td></tr><tr><td><strong>관측관리</strong> (觀測管理)</td><td>가급</td><td><strong>보고만 있음</strong></td></tr><tr><td><strong>관리불능</strong> (管理不能)</td><td>특급</td><td><strong>아무것도 하지 못하고 있음</strong></td></tr><tr><td><strong>관리불요</strong> (管理不要)</td><td>등급외 안전</td><td><strong>하지 않기로 정하였음</strong></td></tr></tbody></table></div>
+<p><strong>라.</strong> 「관리불요」와 「관리불능」은 <strong>양 극단에서 동일한 상태</strong>임을 유의할 것. 두 등급 모두 본 공단이 아무런 관리를 하지 아니함. 다만 전자는 <strong>하지 않기로 결정한 것</strong>이고, 후자는 <strong>할 수 없는 것</strong>임.</p>
+<blockquote><p><em>(기획조정실 자필)</em> 명칭을 바꾸면서 표를 만들어 보니, 우리 등급이라는 것이 결국 네 단계였다. 지키게 한다 → 본다 → 보고만 있다 → 못 한다.</p>
+<p>스물세 해 동안 이 표의 오른쪽으로만 이동한 관리물이 41건이고, 왼쪽으로 온 것은 9건이다. 그 9건도 대개는 이해가 늘어서가 아니라 예산이 줄어서 그렇게 적은 것이다.</p></blockquote>
+<p><strong>마.</strong> 종전 문서 중 「가급·나급·다급」 표기가 남아 있는 것은 순차적으로 정정하되, 정정 이력은 별도로 관리하지 아니함.</p>
+<h2 class='sec'>붙임 1-2. 등급 대조표 (참고)</h2>
 <p><em>국외 유사 기관의 분류와의 대응 관계임. 대외 사용을 금함.</em></p>
-<div class='tw'><table><thead><tr><th>본 공단</th><th>대응 개념</th><th>판단 기준</th></tr></thead><tbody><tr><td>다급</td><td>확립된 격리</td><td>절차만 지키면 안정적임</td></tr><tr><td>나급</td><td>불완전한 격리</td><td>절차가 있으나 항상 통하지는 않음</td></tr><tr><td>가급</td><td>격리 곤란·포기</td><td>관리 수단이 없거나 관측만 함</td></tr><tr><td>특급</td><td>—</td><td>국가가 이미 편입함</td></tr><tr><td>등급외 안전</td><td>—</td><td>관리하지 않기로 결정함</td></tr></tbody></table></div>
+<div class='tw'><table><thead><tr><th>본 공단</th><th>대응 개념</th><th>판단 기준</th></tr></thead><tbody><tr><td>수칙관리</td><td>확립된 격리</td><td>절차만 지키면 안정적임</td></tr><tr><td>감시관리</td><td>불완전한 격리</td><td>절차가 있으나 항상 통하지는 않음</td></tr><tr><td>관측관리</td><td>격리 곤란·포기</td><td>관리 수단이 없거나 관측만 함</td></tr><tr><td>관리불능</td><td>—</td><td>국가가 이미 편입함</td></tr><tr><td>관리불요</td><td>—</td><td>관리하지 않기로 결정함</td></tr></tbody></table></div>
 <h2 class='sec'>붙임 2. 2026년 정기 재분류 결과</h2>
 <p>2026년 정비에서 전 관리물의 등급을 <strong>격리 난이도 기준으로 전면 재분류</strong>하였음. 종전 분류는 「위해의 정도」와 「소요 예산」이 혼재되어 있었음.</p>
-<div class='tw'><table><thead><tr><th>등급</th><th>종전</th><th>재분류 후</th><th>증감</th></tr></thead><tbody><tr><td>다급</td><td>5</td><td><strong>12</strong></td><td><strong>+7</strong></td></tr><tr><td>나급</td><td>26</td><td><strong>17</strong></td><td>−9</td></tr><tr><td>가급</td><td>7</td><td><strong>8</strong></td><td>+1</td></tr><tr><td>특급</td><td>6</td><td><strong>5</strong></td><td>−1</td></tr><tr><td><strong>등급외 안전</strong></td><td>—</td><td><strong>2</strong></td><td>+2</td></tr><tr><td>지정보류</td><td>2</td><td>2</td><td>—</td></tr><tr><td>지정해제</td><td>1</td><td>1</td><td>—</td></tr><tr><td>계</td><td>47</td><td>47</td><td>—</td></tr></tbody></table></div>
-<p><strong>다급이 순증 7건</strong>임. 나급에서 <strong>9건이 하향 유입</strong>되고, 다급에서 <strong>2건이 등급외로 이관</strong>된 결과임.</p>
+<div class='tw'><table><thead><tr><th>등급</th><th>종전</th><th>재분류 후</th><th>증감</th></tr></thead><tbody><tr><td>수칙관리</td><td>5</td><td><strong>12</strong></td><td><strong>+7</strong></td></tr><tr><td>감시관리</td><td>26</td><td><strong>17</strong></td><td>−9</td></tr><tr><td>관측관리</td><td>7</td><td><strong>8</strong></td><td>+1</td></tr><tr><td>관리불능</td><td>6</td><td><strong>5</strong></td><td>−1</td></tr><tr><td><strong>관리불요</strong></td><td>—</td><td><strong>2</strong></td><td>+2</td></tr><tr><td>지정보류</td><td>2</td><td>2</td><td>—</td></tr><tr><td>지정해제</td><td>1</td><td>1</td><td>—</td></tr><tr><td>계</td><td>47</td><td>47</td><td>—</td></tr></tbody></table></div>
+<p><strong>수칙관리가 순증 7건</strong>임. 감시관리에서 <strong>9건이 하향 유입</strong>되고, 수칙관리에서 <strong>2건이 등급외로 이관</strong>된 결과임.</p>
 <p>하향 유입 9건의 하향 사유는 전건 동일함 — <strong>「관리 절차가 확립되어 있고, 그 절차를 이행하는 한 상태가 유지됨」.</strong></p>
 <div class='tw'><table><thead><tr><th>관리물</th><th>확립된 절차</th><th>절차 이행 주체</th></tr></thead><tbody><tr><td>제037호 106동</td><td>관리비를 정상 수납할 것</td><td>위탁관리업체 (지정 사실 미고지)</td></tr><tr><td>제088호 마을회관</td><td>의료 후송을 하지 아니할 것</td><td>지자체·보건지소</td></tr><tr><td>제158호 거주불명</td><td>청사 야간 난방을 끄지 아니할 것</td><td>전국 읍·면·동 (지정 사실 미고지)</td></tr><tr><td>제206호 미배달</td><td>배송 상태를 「배송 중」으로 유지할 것</td><td>택배사 3사 (협약)</td></tr><tr><td>제233호 어린이보호구역</td><td>노면 표시를 지우지 아니할 것</td><td>지자체</td></tr><tr><td>제263호 지방</td><td>제사를 계속 지낼 것</td><td>문중 종손 (개인)</td></tr><tr><td>제356호 씨간장</td><td>항아리를 옮기지 아니할 것</td><td>종부 (개인, 80대)</td></tr><tr><td>제452호 규격 사진</td><td>사진 미부착 확인증을 계속 발급할 것</td><td>본 공단 (근거 법령 없음)</td></tr><tr><td>제477호 예약곡</td><td>해당 곡 번호를 결번 처리할 것</td><td>반주기 제조사 (위탁, 매월)</td></tr></tbody></table></div>
-<p><strong>상향 조정 2건:</strong> 제391호 「대발생」(나급→가급, 방제로 관리가 성립하지 아니함이 확인됨), 제182호 「연면적」(가급→나급, 이행강제금 부과로 진행이 억제됨이 확인됨).</p>
-<p><strong>하향 조정 1건:</strong> 제406호 「윤초」(특급→가급). 종전 특급 지정은 대상이 국가표준시라는 점을 근거로 하였으나, 본 공단이 <strong>삽입을 저지하지 아니하고 1초를 내주는 방식으로 관리하고 있으므로</strong>, 「관리를 포기하고 관측만 하는 것」에 해당하여 가급이 타당함.</p>
+<p><strong>상향 조정 2건:</strong> 제391호 「대발생」(감시관리→관측관리, 방제로 관리가 성립하지 아니함이 확인됨), 제182호 「연면적」(관측관리→감시관리, 이행강제금 부과로 진행이 억제됨이 확인됨).</p>
+<p><strong>하향 조정 1건:</strong> 제406호 「윤초」(관리불능→관측관리). 종전 관리불능 지정은 대상이 국가표준시라는 점을 근거로 하였으나, 본 공단이 <strong>삽입을 저지하지 아니하고 1초를 내주는 방식으로 관리하고 있으므로</strong>, 「관리를 포기하고 관측만 하는 것」에 해당하여 관측관리가 타당함.</p>
 <blockquote><p><em>(기획조정실 검토 의견, 여백 자필)</em></p>
 <p><em>표를 만들고 나서 한참을 봤다.</em></p>
 <p><em>오른쪽 칸을 보면 된다. 우리가 확립했다는 절차를 실제로 이행하는 사람들이다. 위탁관리업체, 동사무소 직원, 택배 기사, 지자체 도로과, 그리고 종손 한 명과 여든 넘은 종부 한 명.</em></p>
 <p><em>이 사람들 중에 자기가 무엇을 하고 있는지 아는 사람은 없다. 우리가 안 알려줬다. 알려주면 안 하게 될 것 같아서다.</em></p>
-<p><em>다급 열두 건의 안전은 이 사람들이 계속 그 일을 해준다는 가정 위에 서 있다. 그 가정을 우리는 점검하지 않는다. 점검 예산이 다급에는 없기 때문이다.</em></p>
+<p><em>수칙관리 열두 건의 안전은 이 사람들이 계속 그 일을 해준다는 가정 위에 서 있다. 그 가정을 우리는 점검하지 않는다. 점검 예산이 수칙관리에는 없기 때문이다.</em></p>
 <p><em>제356호의 종부는 여든셋이다. 제263호의 종손은 제사를 그만두겠다고 했다.</em></p>
-<p><em>나는 이 문서를 「다급 12건」으로 결재했다. 예산이 7건분 줄었다. 그 실적으로 우리 실은 올해 경영평가에서 가점을 받을 것이다.</em></p></blockquote>
-<h2 class='sec'>붙임 3. 등급외 안전 이관분 (2건)</h2>
-<div class='tw'><table><thead><tr><th>관리물</th><th>종전</th><th>이관 사유</th></tr></thead><tbody><tr><td>제044호 유도등</td><td>다급</td><td>인명 피해 없음(오히려 생존율 상승). 절차는 「고치지 아니할 것」 1개항뿐이며, 고치더라도 원상 복귀함. 관리 실익 없음</td></tr><tr><td>제073호 B2-137</td><td>다급</td><td>인명 피해 없음. 피해는 주차 등록 말소에 따른 이웃 간 마찰에 한정되며, 이는 본 공단 소관이 아님</td></tr></tbody></table></div>
+<p><em>나는 이 문서를 「수칙관리 12건」으로 결재했다. 예산이 7건분 줄었다. 그 실적으로 우리 실은 올해 경영평가에서 가점을 받을 것이다.</em></p></blockquote>
+<h2 class='sec'>붙임 3. 관리불요 이관분 (2건)</h2>
+<div class='tw'><table><thead><tr><th>관리물</th><th>종전</th><th>이관 사유</th></tr></thead><tbody><tr><td>제044호 유도등</td><td>수칙관리</td><td>인명 피해 없음(오히려 생존율 상승). 절차는 「고치지 아니할 것」 1개항뿐이며, 고치더라도 원상 복귀함. 관리 실익 없음</td></tr><tr><td>제073호 B2-137</td><td>수칙관리</td><td>인명 피해 없음. 피해는 주차 등록 말소에 따른 이웃 간 마찰에 한정되며, 이는 본 공단 소관이 아님</td></tr></tbody></table></div>
 <p>두 건 모두 <strong>확산·증가가 관측되지 아니함</strong>을 이관 요건으로 확인하였음.</p>
 <blockquote><p><em>(주: 제044호는 2026년 점검에서 지상 3층 유도등 1개소가 동일 방위를 지시하는 것이 확인되었으며, 제073호는 구획 번호가 137에서 138로 변경되고 등록 구획 수가 137면으로 증가한 것이 확인되었음.</em></p>
 <p><em>상기 사항은 이관 심의 시 보고되지 아니하였음. 보고 대상 여부가 지침에 정해져 있지 아니하기 때문임.</em></p>
