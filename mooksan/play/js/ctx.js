@@ -7,6 +7,7 @@ export const G = {
   BAL: null,                           // data/balance.json — 밸런스 수치는 전부 여기서 (D00)
   K: {},                               // 눌린 키 상태
   rng: null, rngFx: null,              // 시드 PRNG — 논리/연출 분리 (B02)
+  STEP: 1/60,                          // 고정 논리 스텝 — 결정론의 기반 (B03)
 };
 G.cx = G.cv.getContext('2d');
 G.cx.imageSmoothingEnabled = false;

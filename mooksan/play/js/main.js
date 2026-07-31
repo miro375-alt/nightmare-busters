@@ -17,11 +17,17 @@ addEventListener('keydown',e=>{ const k=KM[e.code]; if(!k)return; e.preventDefau
   G.K[k]=1; if(DIRK[k]!==undefined) S.lastDir=DIRK[k]; press(k); });
 addEventListener('keyup',e=>{ const k=KM[e.code]; if(k)G.K[k]=0; });
 
-/* ══ 루프 (B03에서 __H.tick으로 분리 예정) ══ */
-let last=performance.now();
+/* ══ 루프 — 고정 타임스텝 (B03) ══
+   렌더는 프레임률을 따르고, 논리는 항상 G.STEP 단위로만 전진한다.
+   같은 시드 + 같은 입력열이면 프레임률과 무관하게 같은 판이다. */
+let last=performance.now(), acc=0;
 function loop(now){
-  const dt=Math.min(0.05,(now-last)/1000); last=now;
-  if(S.scene==='play' && G.ready>=G.READY_NEED) update(dt);
+  let frame=(now-last)/1000; last=now;
+  if(frame>0.25) frame=0.25;              // 탭 복귀 시 폭주 방지
+  if(S.scene==='play' && G.ready>=G.READY_NEED){
+    acc+=frame;
+    while(acc>=G.STEP){ update(G.STEP); acc-=G.STEP; }
+  } else acc=0;
   render(); requestAnimationFrame(loop);
 }
 
