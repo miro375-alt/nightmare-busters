@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제300호 같은 자리 — 한국이상관리공단</title>
+<meta name="description" content="그 땅은 두 사람의 것이다. 절반씩이 아니라, 각각 전부다.">
+<style>
+:root{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+    --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+    --rule:#2a2e33; --rule2:#23262a;
+    --stamp:#c4453c; --accent:#7fa6bd;
+    --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+    --thead:#1e2429;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1113; --paper2:#0a0c0e; --card:#15181b;
+  --ink:#dcd8cf; --ink2:#a4a49e; --ink3:#75767a;
+  --rule:#2a2e33; --rule2:#23262a;
+  --stamp:#c4453c; --accent:#7fa6bd;
+  --da:#75767a; --na:#c9a227; --ga:#c4453c; --teuk:#9d86c9; --boryu:#7fa6bd;
+  --thead:#1e2429;
+}
+:root[data-theme="light"]{
+  --paper:#efece4; --paper2:#e6e2d8; --card:#f7f5f0;
+  --ink:#17191d; --ink2:#4b4f57; --ink3:#7b8089;
+  --rule:#cfc9bb; --rule2:#ddd8cc;
+  --stamp:#9d2a24; --accent:#2f4858;
+  --da:#7b8089; --na:#8a6d1f; --ga:#9d2a24; --teuk:#3d2a5c; --boryu:#2f4858;
+  --thead:#e4e8dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  font-size:16px; line-height:1.78; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+a{color:inherit}
+
+/* 상단 관인 바 */
+.topbar{
+  border-bottom:1px solid var(--rule); background:var(--paper2);
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(6px);
+}
+.topbar .in{
+  max-width:820px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;min-width:0}
+.brand b{font-size:14px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.brand span{font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.tbtns{display:flex;gap:6px;flex:none}
+.tbtn{
+  font:inherit;font-size:11.5px;color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:3px;padding:4px 9px;cursor:pointer;
+  text-decoration:none;line-height:1.6;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* 표제부 */
+.masthead{padding:52px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:34px;position:relative}
+.masthead .eyebrow{font-size:11.5px;letter-spacing:.22em;color:var(--ink3);margin-bottom:14px}
+.masthead h1{
+  font-size:clamp(26px,5.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+  text-wrap:balance;
+}
+.masthead .sub{margin-top:14px;color:var(--ink2);font-size:14.5px;max-width:60ch}
+.stamp{
+  position:absolute;top:44px;right:0;
+  border:2px solid var(--stamp);color:var(--stamp);
+  font-size:12px;font-weight:800;letter-spacing:.16em;
+  padding:7px 11px;transform:rotate(-7deg);opacity:.85;
+  white-space:nowrap;
+}
+@media (max-width:640px){.stamp{position:static;display:inline-block;margin-top:16px;transform:rotate(-2deg)}}
+
+/* 문서 대장(목록) */
+.ledger{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.ledger thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:700;
+  padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+.ledger td{padding:13px 10px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.ledger tr:hover td{background:var(--card)}
+.ledger .no{
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13px;color:var(--ink3);white-space:nowrap;
+}
+.ledger .ti a{font-weight:700;text-decoration:none;font-size:16px}
+.ledger .ti a:hover{text-decoration:underline;text-underline-offset:3px}
+.ledger .ln{color:var(--ink2);font-size:13.5px;margin-top:3px;line-height:1.6}
+.ledger .meta{color:var(--ink3);font-size:12px;white-space:nowrap}
+@media (max-width:640px){
+  .ledger thead{display:none}
+  .ledger td{display:block;border:none;padding:2px 0}
+  .ledger tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule2)}
+}
+
+.othernote{
+  margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+  border-left:3px solid var(--dim);background:var(--paper2);font-size:13px;line-height:1.8;color:var(--sub);
+}
+.othernote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.othernote a{display:inline-block;margin-top:7px;text-decoration:underline;text-underline-offset:2px}
+.tbtn.alt{opacity:.72}
+.gnote{
+  border-left:3px solid var(--stamp);background:var(--card);
+  padding:13px 16px;margin:22px 0 26px;font-size:13.5px;line-height:1.8;color:var(--ink2);
+}
+.gnote b{display:block;color:var(--ink);margin-bottom:5px;font-size:14px}
+.gnote a{text-decoration:underline;text-underline-offset:2px}
+
+/* 등급 배지 */
+.gr{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid currentColor;border-radius:2px;white-space:nowrap;
+}
+.g-da{color:var(--da)} .g-na{color:var(--na)} .g-ga{color:var(--ga)}
+.g-teuk{color:var(--teuk)} .g-boryu{color:var(--boryu)}
+.g-hae{color:var(--ink3);border-style:dashed;opacity:.75}
+.g-out{color:var(--ink3);border-style:dotted;opacity:.7}
+
+/* 인명피해 */
+.casu{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  color:var(--ga);border:1px solid currentColor;
+}
+
+/* 이상도 층위 */
+.tier{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:2px 6px;border-radius:2px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.t-1{color:var(--ink3);border-color:var(--rule)}
+.t-2{color:var(--na);border-color:currentColor}
+.t-3{color:var(--ga);border-color:currentColor;background:color-mix(in srgb,currentColor 9%,transparent)}
+
+/* 계열 섹션 */
+.series{margin:52px 0 8px;padding:22px 0 0;border-top:2px solid var(--ink)}
+.series h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.series p{margin-top:9px;color:var(--ink2);font-size:13.5px;max-width:62ch}
+.tiergroup{margin-top:26px}
+.tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:7px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tierhead .tname{font-size:14.5px;font-weight:800}
+.tierhead .tdesc{font-size:12px;color:var(--ink3)}
+
+/* ══════════ 공문서 서식 ══════════ */
+:root{ --mj:'AppleMyungjo','Nanum Myeongjo','Batang',Batang,serif; }
+
+/* 표지 */
+.cover{
+  border:2px solid var(--ink);padding:0;margin:34px 0 44px;
+  background:var(--card);position:relative;
+}
+.cover .cbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--rule);
+  font-size:11.5px;color:var(--ink2);letter-spacing:.04em;flex-wrap:wrap;
+}
+.cover .cbar .sec3{color:var(--stamp);font-weight:800;letter-spacing:.14em;
+  border:1px solid currentColor;padding:1px 6px}
+.cover .cbody{padding:34px 22px 26px;text-align:center}
+.cover .org{
+  font-family:var(--mj);font-size:clamp(21px,4.6vw,30px);font-weight:700;
+  letter-spacing:.22em;margin-bottom:5px;
+}
+.cover .orgsub{font-size:11px;color:var(--ink3);letter-spacing:.18em;margin-bottom:26px}
+.cover .kind{font-size:12px;color:var(--ink2);letter-spacing:.22em;margin-bottom:12px}
+.cover .tbox{
+  display:inline-block;border:1px solid var(--ink);padding:14px 26px;margin:0 auto 16px;
+  max-width:100%;
+}
+.cover .tbox .t1{
+  font-family:var(--mj);font-size:clamp(22px,5vw,33px);font-weight:700;
+  letter-spacing:.02em;line-height:1.3;text-wrap:balance;
+}
+.cover .tbox .t2{font-size:12.5px;color:var(--ink2);margin-top:7px;letter-spacing:.02em}
+.cover .one{
+  font-family:var(--mj);font-size:14.5px;color:var(--ink2);
+  max-width:52ch;margin:0 auto 28px;line-height:1.8;
+}
+
+/* 결재란 */
+.approve{margin:0 auto 4px;border-collapse:collapse;font-size:12px}
+.approve th,.approve td{
+  border:1px solid var(--rule);padding:5px 4px;text-align:center;
+  min-width:62px;
+}
+.approve th{
+  font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;
+  background:var(--paper2);
+}
+.approve td.nm{font-family:var(--mj);font-size:13px;padding:9px 4px 3px}
+.approve td.dt{font-size:10px;color:var(--ink3);padding:1px 4px 6px;
+  font-variant-numeric:tabular-nums}
+.approve td.jg{font-size:9.5px;color:var(--stamp);font-weight:700;letter-spacing:.06em;
+  padding:5px 4px 3px;line-height:1.5}
+.approve td.jg .jgn{font-family:var(--mj);font-size:12.5px;color:var(--ink);letter-spacing:0}
+.appcap{font-size:10.5px;color:var(--ink3);letter-spacing:.1em;margin-bottom:22px}
+
+/* 문서 정보 그리드 */
+.spec{
+  border-top:1px solid var(--ink);border-top-width:1px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:0;margin:0;text-align:left;border-left:1px solid var(--rule);
+}
+.spec div{padding:9px 11px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.spec dt{font-size:10px;letter-spacing:.12em;color:var(--ink3);margin-bottom:4px}
+.spec dd{font-size:13px;font-weight:600}
+.spec .gdesc{font-size:10px;color:var(--ink3);font-weight:400;margin-top:4px;line-height:1.5}
+.spec dd.mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* 본문 머리 (표준보고서 양식) */
+.rpthead{margin:0 0 26px}
+.rpthead .who{
+  text-align:right;font-size:11.5px;color:var(--ink3);margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.rpthead .tbar{
+  border:1px solid var(--ink);padding:11px 16px;text-align:center;
+  background:var(--paper2);
+}
+.rpthead .tbar b{font-family:var(--mj);font-size:clamp(17px,3.6vw,22px);letter-spacing:.02em}
+.rpthead .tbar span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px;letter-spacing:.06em}
+.rpthead .double{border-top:1px solid var(--ink);margin-top:3px}
+
+/* 시행 블록 */
+.issue{margin-top:56px;font-size:12px;font-family:var(--mj)}
+.issue .gbar{height:9px;background:var(--rule);margin-bottom:9px}
+.issue .line{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:baseline;
+  padding:3px 0;
+}
+.issue .line .lb{font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.issue .line .nm{font-weight:700}
+.issue .line .dt{font-size:10px;color:var(--ink3);vertical-align:super;
+  font-variant-numeric:tabular-nums;margin-right:2px}
+.issue .rule{border-top:1px solid var(--ink);margin:9px 0 7px}
+.issue .foot{color:var(--ink2);line-height:1.95;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+.issue .foot .sep{color:var(--ink3);margin:0 6px}
+.sender{
+  font-family:var(--mj);text-align:center;font-size:clamp(17px,3.8vw,23px);
+  font-weight:700;letter-spacing:.5em;margin:46px 0 30px;padding-left:.5em;
+}
+
+article{font-family:var(--mj);font-size:16px;line-height:1.92}
+article h2.sec{
+  font-family:var(--mj);font-size:19px;font-weight:700;letter-spacing:0;
+  margin:44px 0 16px;padding:6px 0 7px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+article h2.sec::before{content:"□ ";color:var(--ink3);font-weight:400}
+article h3{font-size:16px;font-weight:700;margin:30px 0 12px}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:20px}
+article li{margin-bottom:7px}
+article strong{font-weight:700}
+article code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;
+  background:var(--card);padding:1px 5px;border-radius:3px;
+}
+.redact{background:currentColor;opacity:.82;letter-spacing:-.06em}
+
+blockquote{
+  margin:0 0 20px;padding:15px 18px;background:var(--card);
+  border-left:2px solid var(--ink3);font-size:14.5px;
+}
+blockquote p{margin:0 0 9px}
+blockquote p:last-child{margin:0}
+blockquote em{color:var(--ink2)}
+
+.doc-pre{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.72;
+  background:var(--card);border:1px solid var(--rule);padding:16px;
+  overflow-x:auto;margin:0 0 20px;white-space:pre;
+}
+/* 증거 도판 */
+.fig{margin:26px auto 30px;max-width:400px}
+.figbox{border:1px solid var(--ink);background:#0b0c0d;line-height:0}
+.figsvg{display:block;width:100%;height:auto}
+.fig figcaption{
+  border:1px solid var(--rule);border-top:none;background:var(--paper2);
+  padding:7px 10px;font-size:11.5px;color:var(--ink2);text-align:center;line-height:1.6;
+  font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+@media (max-width:520px){.fig{max-width:100%}}
+
+.tw{overflow-x:auto;margin:0 0 22px;-webkit-overflow-scrolling:touch}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px;
+  border:1px solid var(--ink)}
+.tw th{
+  text-align:left;font-size:12px;letter-spacing:.02em;color:var(--ink);font-weight:700;
+  padding:8px 11px;border:1px solid var(--rule);white-space:nowrap;
+  background:var(--thead);
+}
+.tw td{padding:9px 11px;border:1px solid var(--rule2);vertical-align:top;
+  font-variant-numeric:tabular-nums}
+article hr{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+/* 꼬리말 */
+.docfoot{
+  margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink3);
+}
+.nav{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;font-size:13px;color:var(--ink2);
+  border:1px solid var(--rule);padding:8px 13px;border-radius:3px;
+}
+.nav a:hover{border-color:var(--ink3);color:var(--ink)}
+.sitefoot{
+  margin-top:70px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3);line-height:1.8;
+}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html"><b>한국이상관리공단</b><span>문서보관소</span></a>
+  <div class="tbtns">
+    <a class="tbtn" href="index.html">문서 대장</a>
+    <a class="tbtn" href="about.html">기관 개요</a>
+    <a class="tbtn alt" href="../mooksan/" title="별도 세계관 — 2026년 묵산시">묵산 ↗</a>
+    <button class="tbtn" id="themebtn" type="button">명암</button>
+  </div>
+</div></div>
+<div class="wrap">
+
+<div class="cover">
+  <div class="cbar">
+    <span class="sec3">대외비</span>
+    <span>관리번호 &nbsp;특수관리물 제300호</span>
+    <span>보존기간 &nbsp;준영구</span>
+  </div>
+  <div class="cbody">
+    <div class="org">한국이상관리공단</div>
+    <div class="orgsub">행정안전부 산하 기타공공기관</div>
+    <div class="kind">특수관리물 관리카드</div>
+    <div class="tbox">
+      <div class="t1">같은 자리</div>
+      <div class="t2">제 300 호</div>
+    </div>
+    <p class="one">그 땅은 두 사람의 것이다. 절반씩이 아니라, 각각 전부다.</p>
+    <table class="approve">
+      <thead><tr><th>담당</th><th>계장</th><th>과장</th><th>지부장</th><th>이사장</th></tr></thead>
+      <tbody><tr><td class='nm'>임○○</td><td class='nm'>문○○</td><td class='jg'>전결<br><span class='jgn'>성○○</span></td><td class='nm'>&nbsp;</td><td class='nm'>&nbsp;</td></tr><tr><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>26. 7. 30.</td><td class='dt'>&nbsp;</td><td class='dt'>&nbsp;</td></tr></tbody>
+    </table>
+    <div class="appcap">결 &nbsp;재</div>
+    <dl class="spec"><div><dt>관리번호</dt><dd class='mono'>제300호</dd></div><div><dt>관리등급</dt><dd><span class='gr g-ga' title='乙 · 결재선 과장 — 대규모 절차가 필요하거나 실패가 반복됨'>을급</span><div class='gdesc'>乙 · 결재선 과장 — 대규모 절차가 필요하거나 실패가 반복됨</div></dd></div><div><dt>이상도</dt><dd><span class='tier t-3'>아주기괴</span></dd></div><div><dt>관할</dt><dd>동부관리소</dd></div><div><dt>소재</dt><dd>공간 · 토지</dd></div><div><dt>발생원인</dt><dd>제1기 (전란기)</dd></div><div><dt>지정</dt><dd>1999. 5.</dd></div></dl>
+  </div>
+</div>
+
+<div class="rpthead">
+  <div class="who">(담당 임○○, (010) ███-████)</div>
+  <div class="tbar">
+    <b>제300호 &nbsp;같은 자리</b>
+    <span>특수관리물 관리카드 · 2001년 정기 정비분</span>
+  </div>
+  <div class="double"></div>
+</div>
+
+<article>
+<h2 class='sec'>관리 지침</h2>
+<p><strong>1.</strong> 특수관리물 제300호(이하 "당해 관리물")는 <span class="redact">██</span>면 <span class="redact">██</span>리 <strong><span class="redact">██</span>-1번지 및 <span class="redact">██</span>-7번지</strong>를 말함. 두 지번은 지적공부상 별개 필지이나, 경계점좌표등록부상 좌표가 <strong>전 경계점에서 동일</strong>함.</p>
+<p><strong>2.</strong> 두 소유자에게 지정 사실을 통보하지 아니함. 등기, 재산세·종합토지세 부과·수납, 전기·상수도·도시가스 검침, 우편 배달, 주민등록 등재는 <strong>어느 한쪽도 중단하지 아니할 것.</strong></p>
+<p><strong>3.</strong> 지적소관청(<span class="redact">██</span>면 지적민원과)의 <strong>직권정정을 실시하지 아니하도록</strong> 협의함. 본 공단 명의를 사용하지 아니하고 「지적불부합지 정리 유보 대상」 분류의 형식으로 갈음함.</p>
+<p><strong>4.</strong> 「지적불부합지 정리 지침」에 따른 <strong>정리 대상지역 지정에서 당해 리(里)가 제외되도록</strong> 매 차수 사전 협의할 것. 제외 사유는 「토지소유자 동의율 미달」로 기재하며, 실제 동의율은 조사하지 아니함.</p>
+<p><strong>5.</strong> 경계복원측량 신청 접수 시 즉시 지부에 보고하고, 지적측량수행기관에 다음을 요청할 것.</p>
+<ul><li>가. <strong>동일 측량기사가 두 필지를 연속 측량하지 아니할 것.</strong> 같은 날에 배정하지 아니할 것</li><li>나. 성과가 상충하는 경우 통합·평균하지 아니하고 각각 그대로 작성할 것</li></ul>
+<p><strong>6.</strong> 두 소유자를 <strong>동일 일시·동일 장소에 소집하지 아니할 것</strong>(붙임 3).</p>
+<p><strong>7.</strong> 지적통계 및 지방세 세입 통계상 당해 리의 면적 초과분은 <strong>정정하지 아니하며</strong> 「측량 미정리분」으로 표기함.</p>
+<p><strong>8.</strong> 당해 위치에 <strong>새로운 지번이 등록</strong>된 경우 즉시 보고할 것. <em>— 2001. 8. 신설.</em> 끝.</p>
+<h2 class='sec'>현상 개요</h2>
+<p><strong>2-1.</strong> 당해 위치는 <span class="redact">██</span>리 중앙부의 대지이며, 등록사항은 다음과 같음.</p>
+<div class='tw'><table><thead><tr><th>항목</th><th><span class="redact">██</span>-1</th><th><span class="redact">██</span>-7</th></tr></thead><tbody><tr><td>지목 / 면적</td><td>대(垈) / 416㎡</td><td>대(垈) / 416㎡</td></tr><tr><td>등기원인</td><td>매매 (1978. 12.)</td><td>매매 (1981. 6.)</td></tr><tr><td>소유자</td><td>김○○</td><td>박○○</td></tr><tr><td>건축물</td><td>조적조 단층 84.2㎡</td><td>목조 단층 71.6㎡</td></tr><tr><td>사용승인</td><td>1978. 11.</td><td>1981. 5.</td></tr></tbody></table></div>
+<p><strong>2-2.</strong> 당해 리는 <strong>수치지역</strong>이므로 경계는 지적도상 도형이 아니라 <strong>경계점좌표등록부의 좌표에 의함.</strong></p>
+<pre class='doc-pre'>  ── 경계점좌표등록부 (X / Y) ──
+  부호        ██-1                      ██-7
+   1    4██,271.63 / 2██,008.47   4██,271.63 / 2██,008.47
+   2    4██,289.11 / 2██,013.92   4██,289.11 / 2██,013.92
+   3    4██,283.68 / 2██,036.05   4██,283.68 / 2██,036.05
+   4    4██,266.20 / 2██,030.60   4██,266.20 / 2██,030.60</pre>
+<p><strong>2-3.</strong> 좌표는 <strong>소수점 둘째 자리까지 동일</strong>함. 오차 범위 내 근접이 아니라 등록 수치 자체가 같음. 두 필지는 법적으로 <strong>같은 자리</strong>임.</p>
+<p><strong>2-4.</strong> 1976년 분할 당시 지적도상 두 필지는 <strong>서로 접하지 아니하며</strong>, 사이에 <span class="redact">██</span>-2부터 <span class="redact">██</span>-6까지 5필지가 있음. 해당 5필지는 실재하고 각각 다른 소유자가 거주하며 이상 사항이 없음. 도면과 좌표가 상충하며, <strong>제도상 정본은 좌표임.</strong></p>
+<p><strong>2-5.</strong> 두 필지는 각각 별개 등기기록을 가짐. 지번이 상이하므로 <strong>부동산등기법상 이중등기에 해당하지 아니하며</strong> 직권말소 대상도 아님. 서류상 하자가 발견된 바 없음.</p>
+<p><strong>2-6.</strong> 현장에서 관측되는 주택은 <strong>1동</strong>이며, 관측자에 따라 두 건축물 중 한쪽이 관측됨. 동시 관측 사례는 없음(붙임 1).</p>
+<p><strong>2-7.</strong> 계량기는 각각 설치되어 각각 검침되고 있으며, 사용량은 <strong>2인 세대 1개분씩</strong>임. 한 세대분이 둘로 나뉜 것이 아니라 각각 온전한 1세대분임.</p>
+<p><strong>2-8.</strong> 도로명주소는 <strong>건물</strong>에 부여되므로 두 필지는 동일 주소(<span class="redact">██</span>면 <span class="redact">██</span>길 27)와 <strong>하나의 건물번호</strong>를 공유함. 우편·택배는 이 주소로 배달되나 <strong>배달 완료 처리는 두 지번에 각각</strong> 이루어지며, 수령인 서명의 <strong>필적이 상이</strong>함. 집배원 진술: <em>"그 집은 우편함이 하나입니다."</em></p>
+<p><strong>2-9.</strong> 두 소유자는 서로를 인지하지 못함.</p>
+<h2 class='sec'>경위</h2>
+<div class='tw'><table><thead><tr><th>시기</th><th>내용</th></tr></thead><tbody><tr><td>1918</td><td>토지조사사업. 당해 위치는 <strong>1필지</strong>(<span class="redact">██</span>번지)로 등록</td></tr><tr><td>1958. 3.</td><td><span class="redact">██</span>면청 화재로 지적원도 소실. 복구측량 성과가 원도와 불일치하였으나 그대로 등록됨</td></tr><tr><td>1976. 5.</td><td><span class="redact">██</span>번지를 9필지로 분할. 분할측량 성과도 확인되지 아니함</td></tr><tr><td>1985. 8.</td><td>지적공부 전산화 중 <strong>중복 좌표 검출.</strong> 입력 오류로 처리하고 재입력. 결과 동일</td></tr><tr><td>1986. 11.</td><td><span class="redact">██</span>면 직권정정 착수. <strong>어느 쪽을 정정 대상으로 할지 결정하지 못하여</strong> 보류. 「지적불부합지」로 편철하고 종결</td></tr><tr><td>1987 ~ 1998</td><td><span class="redact">██</span>면 지적민원과 민원대장에 당해 지번 관련 민원 <strong>4건</strong> 접수. 전건 「현장 확인 후 종결」</td></tr><tr><td><strong>1998. 9. 30.</strong></td><td>격리 발생</td></tr><tr><td>1999. 5.</td><td>전담반 초동 확인. <strong>을급 지정</strong> (제300호)</td></tr><tr><td>1999. 7.</td><td>경계복원측량 시행(제1차, 붙임 2)</td></tr><tr><td>1999. 11.</td><td>소유자 동시 소집 시행(붙임 3)</td></tr><tr><td>2000. 3.</td><td>상주 관리를 위한 현장관리소 설치 및 토지 매수 계획 수립. <strong>예산 미확보로 취소</strong></td></tr><tr><td>2000. 9.</td><td>경계복원측량 시행(제2차, 붙임 2)</td></tr><tr><td>2001. 2.</td><td><span class="redact">██</span>-1 소유자 사망. 상속등기 정상 완료. 상속인 1명 전입</td></tr><tr><td>2001. 4.</td><td>경계복원측량 시행(제3차, 붙임 2)</td></tr><tr><td>2001. 6.</td><td><span class="redact">██</span>-7 소유자 사망. 상속등기 정상 완료. 상속인 1명 전입</td></tr><tr><td>2001. 8.</td><td><strong>지번 <span class="redact">██</span>-13 신규 등록 및 등기</strong>(붙임 5)</td></tr></tbody></table></div>
+<blockquote><p><strong>비고:</strong> 2001년의 두 상속은 사망신고·상속인 확정·상속등기·취득세 신고가 각각 별개로 정상 처리되었으며, 두 상속인도 서로를 인지하지 못함. <strong>당해 관리물은 소유자가 교체되어도 유지됨.</strong> 끝.</p></blockquote>
+<h2 class='sec'>붙임 1. 현지조사 결과 (1999. 6. / 2001. 7.)</h2>
+<p><strong>1999. 6.</strong> 조사관 2명이 각각 단독 방문(간격 4시간)하여 촬영함. 최○○은 <strong>조적조 단층(<span class="redact">██</span>-1)</strong>과 청색 철제 대문을, 윤○○은 <strong>목조 단층(<span class="redact">██</span>-7)</strong>과 싸리 울타리를 촬영하였음. 같은 지점에서 찍은 두 사진의 배경(전신주 3본, 담장, 원경 산세)은 <strong>완전히 일치</strong>하며 건축물만 상이함.</p>
+<p><strong>2001. 7.</strong> 조사관 2명이 <strong>동시</strong> 방문함. 같은 차량으로 이동, 진입로에서 각각 걸어 들어간 후 20분 뒤 같은 지점에서 재회.</p>
+<ul><li>A는 <span class="redact">██</span>-1을, B는 <span class="redact">██</span>-7을 관측하고 각각 거주자 1명을 면담함</li><li>두 조사관은 <strong>부지 내에서 서로를 관측하지 못하였음.</strong> 각자 "혼자 마당에 서 있었다"고 보고함</li><li>두 조사관의 휴대전화 위치기록(기지국 기준)은 동일 시각 동일 위치임</li></ul>
+<p><strong>3개월분 생활 기록.</strong> 전력 월평균 214kWh / 187kWh, 상수도 11.3㎥ / 9.8㎥, 종량제 봉투 주 20ℓ 1매 / 20ℓ 1매, 택배 수령 14건 / 9건.</p>
+<p>도시가스 검침원은 <strong>계량기 1기만 검침한다</strong>고 진술함. 그러나 도시가스사 전산에는 고객번호 2개, 계량기 2기, 월별 검침값 2건이 등록되어 있고 검침원 입력 단말 로그도 2건임. 두 로그의 <strong>입력 시각 간격은 0초</strong>임. 끝.</p>
+<h2 class='sec'>붙임 2. 경계복원측량 시행 결과 (1999 ~ 2001)</h2>
+<p><strong>1999. 7.</strong> <span class="redact">██</span>-1 담장 개축 신청분. 기사 1명이 <span class="redact">██</span>-1 경계점 4점을 복원하고 성과도를 발급함. 같은 기사가 이어서 <span class="redact">██</span>-7을 측량한 결과 <strong>복원 경계점이 <span class="redact">██</span>-1의 경계점과 동일 위치</strong>로 산출되었고, 성과도 지번란은 <span class="redact">██</span>-1로 기재됨. 해당 기사는 지번란을 정정하지 못하였으며 「측량성과 부실」로 <strong>자격 정지 3개월</strong> 처분을 받았음. 처분은 취소되지 아니하였음.</p>
+<p><strong>2000. 9.</strong> 다른 기사 1명이 <span class="redact">██</span>-7을 측량함. 경계점 4점 복원. 성과 정상. 이후 <span class="redact">██</span>-1의 1999년 성과도를 재확인한 결과 <strong>변동 없음.</strong></p>
+<p><strong>2001. 4.</strong> 본 공단 비용으로 <strong>2개 팀을 동시 투입</strong>함. 1팀(<span class="redact">██</span>-1)·2팀(<span class="redact">██</span>-7) 모두 성과 정상이며 좌표는 등록부와 일치함. 두 팀의 관측 로그는 <strong>기준점·관측 시각이 동일</strong>함. 두 팀은 동일 시각 동일 좌표에서 작업하였으나 <strong>서로를 관측하지 못하였음.</strong> 두 성과도는 각각 유효하고 상호 모순되지 아니함. <strong>각각 다른 필지를 측량하였기 때문임.</strong></p>
+<blockquote><p><strong>분석 의견:</strong> 당해 토지는 측량되기 전에는 어느 필지도 아님. 측량 행위에 의하여 <strong>그 측량자가 측량하려 한 필지가 됨.</strong> 즉 필지는 토지에 있지 아니하고 측량 성과에 있음.</p>
+<p>우리 제도는 토지를 측량하여 지적공부를 만든다고 전제함. 당해 관리물에서는 순서가 반대임. 이 전제가 이곳에서만 반대인지, 원래 반대였고 다른 곳에서는 결과가 우연히 하나로 수렴해 온 것인지 확인할 방법이 없음. 확인하려면 시 전역을 재측량해야 하며, 그것이 <strong>지적불부합지 일제 정리</strong>임. 끝.</p></blockquote>
+<h2 class='sec'>붙임 3. 소유자 동시 소집 및 진술 대조 (1999. 11.)</h2>
+<p>두 소유자를 <strong>동일 일시에 <span class="redact">██</span>면사무소 회의실로 소집</strong>하였음. 통지는 「지적불부합지 정리 관련 소유자 의견청취」 명목으로 각각 발송함.</p>
+<ul><li>두 소유자 모두 <strong>출석하였음.</strong> 출석부에 각각 서명하였고 서명 시각 기재는 동일함</li><li>두 소유자는 서로를 <strong>만나지 못하였음.</strong> 각자 "회의실에 나 혼자 있었다"고 진술함</li><li>배석 조사관 2명은 각각 <strong>1명씩만 관측</strong>하였음. 회의실 출입문은 1개임</li></ul>
+<div class='tw'><table><thead><tr><th>질문</th><th>김○○ (<span class="redact">██</span>-1)</th><th>박○○ (<span class="redact">██</span>-7)</th></tr></thead><tbody><tr><td>대문</td><td>청색 철제. 1985년 교체</td><td>없음. 싸리 울타리</td></tr><tr><td>마당의 나무</td><td>감나무 1주</td><td>대추나무 1주</td></tr><tr><td>마당 우물</td><td>있음. 1980년 매립</td><td>없음</td></tr><tr><td>맞은편 집</td><td>최○○</td><td><strong>최○○</strong></td></tr><tr><td>마을 이장</td><td>정○○</td><td><strong>정○○</strong></td></tr><tr><td>집 앞 도로</td><td>1986년 콘크리트 포장</td><td>비포장. 흙길</td></tr></tbody></table></div>
+<p>이웃 및 이장의 성명은 <strong>일치</strong>하며 두 사람 모두 실존 인물임. 즉 두 소유자는 <strong>같은 마을에 살고 있음.</strong></p>
+<p>이장 정○○ 면담(조사관 2명 동석)에서 진술인은 <em>"그 집은 한 채고, 사는 사람은 한 사람"</em>이라고 답하였음. 성명을 묻자 1회 답하였으나 <strong>두 조사관이 기록한 성명이 상이함.</strong> A는 「김○○」, B는 「박○○」으로 기재하였음. 녹음은 실시하지 아니하였음.</p>
+<blockquote><p><em>(당시 담당 과장 자필, 복명서 여백): 나는 오늘 회의실에서 한 사람을 만났고 옆자리 직원은 다른 사람을 만났다. 우리는 나란히 앉아 있었다. 이걸 복명서에 뭐라고 쓰나. <strong>"소유자 2인 출석. 대면 성립하지 아니함."</strong> 이렇게 쓰고 결재를 올렸다. 반려되지 않았다.</em></p></blockquote>
+<h2 class='sec'>붙임 4. 면적 통계 대조 (2001. 8.)</h2>
+<p>당해 리의 <strong>지적공부상 면적 합계는 행정구역 실측 면적보다 416㎡ 많음.</strong> 두 필지의 등록면적이 각각 계상되어 발생한 것으로, 당해 리는 1985년 전산화 이후 지적통계상 실제보다 416㎡ 넓게 반영되어 왔음. 지방세 세입 통계에서도 같은 면적이 두 번 과세 대상으로 계상되며, 징수액은 정상 세입 처리되고 있음.</p>
+<p>초과분의 상대 계정을 확인하기 위하여 인접 4개 리를 대조한 결과, 당해 리 <strong>+416㎡</strong>, 인접 <span class="redact">██</span>리(북) <strong>−416㎡</strong>, 나머지 3개 리는 ±0(오차 범위 내)임. <strong>부족분이 초과분과 정확히 일치</strong>함.</p>
+<p>다만 인접 <span class="redact">██</span>리에서 특정 필지가 줄어든 것이 아님. 리 내 전 필지의 경계복원측량 성과가 대장 등록면적보다 <strong>각각 평균 0.31% 작게</strong> 산출되고 있음. 이는 「지적측량 시행규칙」상 <strong>허용 오차 범위 내</strong>여서 정정 대상이 아니고, 민원이 제기된 사례도 없음.</p>
+<blockquote><p><strong>분석 의견:</strong> 당해 관리물은 없는 땅을 만드는 것이 아니라 <strong>인접 리에서 조금씩 가져오고 있음.</strong> 한 필지를 삭제하는 방식이 아니라 전 필지에서 허용 오차만큼씩 거두는 방식이므로 어느 소유자도 손실을 인지하지 못함. 우리 지적 제도는 오차를 허용하도록 설계되어 있으며, 당해 관리물은 그 허용치를 <strong>재원(財源)으로 사용하고 있음.</strong></p>
+<p>본 건의 면적 증감은 <strong>합계가 0</strong>이므로, 관내 총면적의 순증을 내용으로 하는 특수관리물 제444호와는 구분하여 관리함. 다만 인접 <span class="redact">██</span>리의 부족분이 <strong>다시 그 인접 리에서 보전되고 있는지</strong>는 확인하지 아니하였음. 확인은 리 단위 대조를 계속 확장하는 방식으로만 가능하며, 종료 조건이 정해지지 아니함. 끝.</p></blockquote>
+<p><strong>2001. 8. 31. 재확인 결과 당해 리의 초과분은 832㎡, 인접 <span class="redact">██</span>리의 부족분은 832㎡로 각각 증가하였음.</strong> 증가가 확인된 날은 붙임 5의 등기 접수일과 같음.</p>
+<h2 class='sec'>붙임 5. 지번 <span class="redact">██</span>-13 (2001. 8. ~ 현재)</h2>
+<p><strong>1.</strong> 2001. 8. <span class="redact">██</span>., <span class="redact">██</span>면 정기 제출분에서 당해 위치에 <strong>신규 지번 <span class="redact">██</span>-13</strong>이 등록되어 있음이 확인되었음. 등록면적 416㎡, 지목 대, 좌표는 <strong><span class="redact">██</span>-1 및 <span class="redact">██</span>-7과 동일</strong>함.</p>
+<pre class='doc-pre'>  ── 등기사항전부증명서 (토지) 발췌 ──
+  지번    : ██면 ██리 ██-13
+  등기목적 : 소유권이전
+  등기원인 : 매매 (2000. 3. ██.)
+  접수    : 2001. 8. ██.
+  소유자  : 한국이상관리공단</pre>
+<p><strong>2.</strong> 등기원인 일자 <strong>2000. 3. <span class="redact">██</span>.</strong>은 본 공단이 당해 토지 매수 계약을 예정하였다가 <strong>예산 미확보로 취소한 날</strong>임. 취소 결재 문서는 문서고에 보존되어 있고, 계약은 체결된 바 없으며 매매대금 지급 기록도 없음.</p>
+<p><strong>3.</strong> 건축물대장상 <span class="redact">██</span>-13에는 건축물 1동이 등재되어 있음 — 명칭 <strong>「한국이상관리공단 동부관리소 <span class="redact">██</span>리 현장관리소」</strong>, 용도 제1종 근린생활시설(공공업무시설), 철근콘크리트조 단층 46.8㎡, 사용승인 <strong>2000. 6.</strong> 본 공단은 당해 위치에 현장관리소를 <strong>설치한 바 없으며</strong> 관련 공사 발주·기성 지급 내역이 없음.</p>
+<p><strong>4.</strong> <span class="redact">██</span>-13의 재산세는 <strong>본 공단을 납세의무자로 하여 부과되고 있으며, 1999년 이후 세 해분 전액 완납</strong>되어 있음. 체납 없음. 회계 대조 결과 해당 세액은 일반회계 「기타 시설 관리비」 통계목에서 매년 지출되고 있으나, <strong>각 연도의 지출 결재 문서는 확인되지 아니함.</strong> 결산은 매년 승인되었고 자체 감사에서 지적된 바 없음.</p>
+<p><strong>5.</strong> 지부 문서 접수 대장 확인 결과, 당해 관리소 명의의 <strong>근무일지가 1999. 10.부터 결번 없이 총 4█건 접수</strong>되고 있음. 근무일지는 관리 대상 필지별로 각각 작성되어 <strong>월 2건씩</strong> 접수됨. 작성자 서명란은 기재되어 있으나 판독 불가함.</p>
+<pre class='doc-pre'>  점검 대상 : ██리 ██-1, ██-7
+  점검 결과 : 이상 없음
+  특이사항  : 관내 신규 지번 등록 없음. 관리 대상 2필지 유지 중.   ← 2001. 9. 접수분</pre>
+<p><strong>6.</strong> 본 공단이 <strong>1999년 이래 세 해 동안</strong> 시(市) 및 감사실에 보고한 제300호 점검 실적 누계는 위 근무일지 접수 건수와 <strong>정확히 일치</strong>함. 지부 인력으로 실시한 현지조사는 1999년과 2001년의 <strong>2회</strong>임.</p>
+<blockquote><p><strong>지부장 검토 의견 (2001. 9.)</strong></p>
+<p><strong>1.</strong> 지금까지 우리는 이 관리물을 「두 필지가 같은 자리를 쓰는 사례」로 정리해 왔음. 사실과 다름. 당해 위치의 필지는 <strong>셋</strong>이며, 그중 하나는 본 공단 소유임.</p>
+<p><strong>2.</strong> <span class="redact">██</span>-13의 소유자·건축물·납세 실적은 2000년 3월에 본 공단이 하려다 못 한 일과 정확히 일치함. 당해 관리물은 <strong>행정적으로 성립하려 한 것을 성립시키는 성질</strong>이 있는 것으로 사료됨. 우리는 예산이 없어 포기하였으나, 그 자리는 포기를 등록하지 아니하였음.</p>
+<p><strong>3.</strong> 저쪽 관리소의 근무일지는 관리 대상을 2필지로 보고하고 있음. <strong>즉 그쪽에서는 우리가 보이지 아니함.</strong> 두 소유자가 서로를 만나지 못하는 것과 같은 방식으로 본 공단도 그 방식에 편입되었다고 판단함.</p>
+<p><strong>4.</strong> 가장 시급한 사항은 위 사실이 아니라 다음임 — 국토교통부는 <strong>2003년도</strong> 정리 대상지역 지정에서 <strong>동의율 요건 완화 및 소관청 직권 지정 확대</strong> 계획을 예고하였음. 종전의 「동의율 미달」 사유로는 당해 리를 제외시킬 수 없음.</p>
+<p><strong>5.</strong> 정리가 시행되면 세 필지는 <strong>1필지로 정리됨.</strong> 나머지 둘이 어떻게 되는지 확인된 바 없음. 1918년 지적원도상 당해 위치가 1필지였다는 점만 확인됨. 남는 1필지가 어느 것인지는 <strong>정리 측량을 수행하는 기사가 어느 필지를 측량하는지에 따라 결정될 것</strong>으로 사료됨(붙임 2). 본 공단에 측량기사 지정 권한은 없음.</p>
+<p><strong>6.</strong> 조치 사항: 협의를 계속함. 협의 근거 법령 없음. 담당자는 지부 사원 1명임.</p>
+<p><strong>7.</strong> 아울러 검토 요청함 — 정리 결과 <span class="redact">██</span>-13이 소멸하는 경우 <strong>1999년 이래 세 해 동안의 관리 실적 4█건이 소급하여 근거를 상실함.</strong> 국정감사 대응 방안은 정해진 바 없음. 끝.</p></blockquote>
+<blockquote><p><em>(여백 자필): 우리가 그 땅을 산 게 아니다. 사려고 했던 마음이 거기에 등기됐다. 그리고 그게 세 해 동안 우리 대신 일했고, 우리 대신 세금을 냈고, 우리 실적이 됐다.</em></p>
+<p><em>정리 나가는 기사한테 뭐라고 부탁해야 하나. 우리 쪽을 측량해달라고 하면 그 집 두 채에 사는 사람들은 어떻게 되나. 그 사람들 쪽을 측량해달라고 하면 우리 기관의 세 해는 어떻게 되나. 나는 이 세 줄을 결재에 못 쓴다. 그래서 여기 쓴다.</em></p></blockquote>
+</article>
+
+<div class="sender">한국이상관리공단이사장</div>
+
+<div class="issue">
+  <div class="gbar"></div>
+  <div class="line">
+    <span><span class="lb">담당</span> <span class="nm">임○○</span></span>
+    <span><span class="lb">계장</span> <span class="nm">문○○</span></span>
+    <span><span class="lb">과장</span> <span class="dt">7/30</span><span class="nm">성○○</span></span>
+  </div>
+  <div class="line"><span class="lb">협조자</span></div>
+  <div class="rule"></div>
+  <div class="foot">
+    시행 &nbsp;기획조정실-2001-0300 (2001. 9. 28.)<span class="sep">/</span>접수 &nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+    우 ██████ &nbsp;동부관리소<span class="sep">/</span>공개여부 비공개(제9조제1항제2호)<br>
+    전화 (010) ███-████<span class="sep">/</span>전송 (010) ███-████<span class="sep">/</span>대외비 3급 · 무단 복제·유출 금지
+  </div>
+</div>
+<div class='nav'><a href='doc-288.html'>← 제288호 305호</a><a href='index.html'>문서 대장</a><a href='doc-308.html'>제308호 파도 →</a></div>
+
+</div>
+<script>
+(function(){
+  var r=document.documentElement, k='kamc-theme';
+  try{var s=localStorage.getItem(k); if(s) r.setAttribute('data-theme',s);}catch(e){}
+  var b=document.getElementById('themebtn');
+  if(b) b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    var nx = cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx);
+    try{localStorage.setItem(k,nx);}catch(e){}
+  });
+})();
+</script>
+</body></html>
