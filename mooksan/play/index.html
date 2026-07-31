@@ -64,8 +64,16 @@ const A={
   BBT:[[4,1],[5,1],[6,1],[7,1]], BBB:[[4,2],[5,2],[6,2],[7,2]],
   DESK:[8,1], TDL:[9,1], TDR:[9,2], LOCKT:[10,2], LOCKB:[11,2], RWIN:[12,2],
   PROP:{book:[0,3],tag:[1,3],case:[2,3],shoe:[3,3],bag:[4,3]},
-  RFLOOR:[[5,3],[6,3]]
+  RFLOOR:[[5,3],[6,3]],
+  HP:{ lock:{a:[9,4],b:[10,4]}, board_l:{a:[0,4]}, board_r:{a:[1,4]},
+       clock:{a:[2,4]}, hyd:{a:[3,4],b:[4,4]}, cool:{a:[5,4],b:[6,4]},
+       clean:{a:[7,4],b:[8,4]}, bin:{b:[11,4]}, plant:{b:[12,4]}, poster:{a:[13,4]} }
 };
+/* 복도 오브젝트 배치 — 단위(36타일) 안의 고정 위치. 어느 단위나 똑같다 */
+const HPLACE={0:'lock',1:'lock',2:'lock', 6:'board_l',7:'board_r',
+  12:'clock',13:'hyd', 18:'cool',19:'bin',20:'plant', 24:'clean',25:'poster',
+  30:'lock',31:'lock',32:'lock'};
+const hpAt=wx=>HPLACE[((wx%36)+36)%36]||null;
 function tile(a,x,y){ cx.drawImage(IMG.tile,a[0]*T,a[1]*T,T,T,x|0,y|0,T,T); }
 
 /* 9-슬라이스 창 (LimeZu Modern UI) */
@@ -95,7 +103,7 @@ const RM={ x0:5, x1:19, y0:2, yBB:3, yBase:4, f0:5, f1:14, yDoor:15, cx:12 };
 
 const S={
   scene:'title', map:'hall',
-  wx:3, wy:10, dir:0, anim:0, mv:0, run:false,
+  wx:3, wy:10, dir:0, anim:0, mv:0, mvx:0, mvy:0, diag:false, lastDir:3, run:false,
   unit:0, noteUnit:null, drift:0, lastDoor:null,
   num:0, outMin:0, pages:14, room:0,
   found:{}, foundN:0,
@@ -138,13 +146,51 @@ const CLUES={
    '「누가 벽을 막고 있는 것 같음.」','봉인은 72시간 뒤였다.']}
 };
 
+/* ── 복도 오브젝트 조사 ── */
+const HTEXT={
+ lock:e=>['복도 사물함이다.'].concat(
+   e===2026?['내 건 2층에 있다.','여긴 전부 모르는 이름이다.']
+  :e===2017?['문이 전부 조금씩 열려 있다.','안은 비어 있다.']
+  :e===2008?['이름표가 새로 붙어 있다.','글씨가 전부 같다.']
+  :['이름표가 스물두 개.','자물쇠는 하나도 안 잠겨 있다.']),
+ board:e=>['게시판이다.'].concat(
+   e===2026?['「9월 야간자율학습 운영 계획」','2교시 20:40 ~ 21:30','3교시 21:40 ~ 22:30',
+             '3교시 명단에 내 이름이 있다.']
+  :e===2017?['종이가 한 장뿐이다.','「출입 통제 ─ 특수재난 현장대응반」','날짜 칸이 비어 있다.']
+  :e===2008?['「귀가 확인서」 양식이 잔뜩 꽂혀 있다.','전부 백지다.','한 장 뽑으니 밑에 또 있다.']
+  :['압정 자국만 남아 있다.','종이는 없다.','자국은 스물두 개다.']),
+ clock:e=>['벽시계다.','20 : 41','초침은 움직이고 있다.'].concat(
+   S.outMin>0?['밖에서는 '+fmtOut(S.outMin)+'이 지났다.','시계는 아직 20시 41분이다.']
+             :['아까도 20시 41분이었다.']),
+ hyd:e=>['소화전이다.','유리 안에 점검표가 붙어 있다.'].concat(
+   e===2017?['「점검자 ██ / 2017. 6. 12.」','그 뒤로는 서명이 없다.']
+  :e===2026?['마지막 점검란이 이번 달이다.','서명은 있는데 읽을 수가 없다.']
+  :['점검란이 전부 비어 있다.']),
+ cool:e=>['정수기다.','전원은 들어와 있다.','냉수도 나온다.','종이컵이 하나도 없다.',
+   '컵꽂이만 남아 있다.'],
+ bin:e=>['쓰레기통이다.','비어 있다.','비운 게 아니라 한 번도 안 쓴 것 같다.'],
+ plant:e=>['화분이다.','만져보니 조화(造花)다.','그런데 먼지가 없다.'],
+ clean:e=>['청소도구함이다.','대걸레가 여섯 자루 걸려 있다.','교실은 다섯 개인데.',
+   '……여섯 번째는 비상구다.'],
+ poster:e=>['포스터다.'].concat(
+   e===2026?['「제38회 교내 체육대회」','날짜가 다음 주 금요일이다.']
+  :['볕에 바래서 글자가 안 보인다.','이 복도엔 볕이 안 드는데.'])
+};
+function hallProp(hp){
+  const key=hp.replace(/_[lr]$/,''), e=era(S.unit), k='h:'+e+'/'+key;
+  if(!S.found[k]){ S.found[k]=1; S.num=Math.max(0,S.num-4); }   // 확실한 것을 봤다
+  say(HTEXT[key](e));
+}
+
 /* ══════════ 입력 ══════════ */
 const K={};
 const KM={ArrowUp:'up',KeyW:'up',ArrowDown:'down',KeyS:'down',ArrowLeft:'left',KeyA:'left',
   ArrowRight:'right',KeyD:'right',Space:'ok',Enter:'ok',KeyZ:'ok',KeyF:'ok',
   Escape:'cancel',KeyX:'cancel',KeyE:'note',ShiftLeft:'run',ShiftRight:'run'};
+const DIRK={down:0,left:1,right:2,up:3};
 addEventListener('keydown',e=>{ const k=KM[e.code]; if(!k)return; e.preventDefault();
-  if(e.repeat&&k!=='up'&&k!=='down'&&k!=='left'&&k!=='right')return; K[k]=1; press(k); });
+  if(e.repeat&&k!=='up'&&k!=='down'&&k!=='left'&&k!=='right')return;
+  K[k]=1; if(DIRK[k]!==undefined) S.lastDir=DIRK[k]; press(k); });
 addEventListener('keyup',e=>{ const k=KM[e.code]; if(k)K[k]=0; });
 function press(k){
   if(S.scene!=='play')return;
@@ -233,22 +279,25 @@ function blocked(x,y){
   if(x<=RM.x0||x>=RM.x1||y<RM.f0||y>RM.f1) return true;
   if(y===RM.f0 && x>=RM.cx-1 && x<=RM.cx) return true;          // 교탁
   return DESKS.some(p=>p[0]===x&&p[1]===y); }
-function tryMove(d,run){
-  const v=[[0,1],[-1,0],[1,0],[0,-1]][d]; S.dir=d;
-  const nx=S.wx+v[0], ny=S.wy+v[1];
+function tryMove(dx,dy,run){
+  if(!dx&&!dy) return false;
+  const nx=S.wx+dx, ny=S.wy+dy;
   if(blocked(nx,ny)) return false;
-  if(S.map==='hall' && v[0]!==0){
+  // 대각선은 두 직교 칸이 모두 비어 있어야 한다 (모서리 관통 금지)
+  if(dx&&dy && (blocked(S.wx+dx,S.wy)||blocked(S.wx,S.wy+dy))) return false;
+  if(S.map==='hall' && dx!==0){
     const to=doorAt(nx);
-    if(to && to.k!==S.lastDoor){ S.lastDoor=to.k; S.drift+=v[0]; }
+    if(to && to.k!==S.lastDoor){ S.lastDoor=to.k; S.drift+=dx; }
     const P=DOORW*DOORS, nb=Math.floor(nx/P), ob=Math.floor(S.wx/P);
     if(nb!==ob){
-      if(v[0]>0) S.unit++;
+      if(dx>0) S.unit++;
       else if(run){ S.unit++; say(['뛰니까 문이 더 나온다.','……돌아가고 있는 게 맞나.']); }
       else S.unit=Math.max(0,S.unit-1);
       onUnit();
     }
   }
-  S.wx=nx; S.wy=ny; S.mv=1; return true; }
+  S.wx=nx; S.wy=ny; S.mv=1; S.mvx=dx; S.mvy=dy; S.diag=!!(dx&&dy);
+  return true; }
 
 function interact(){
   const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir];
@@ -257,6 +306,8 @@ function interact(){
     if(S.dir===3 && S.wy===R.f0){
       const d=doorAt(S.wx)||doorAt(S.wx-1);
       if(d){ d.n===DOORS?openExit():enterRoom(d.n); return; }
+      const hp=hpAt(S.wx);
+      if(hp){ hallProp(hp); return; }
       say(['벽이다.','문 사이에는 아무것도 없다.']); return;
     }
     if(fy>R.f1) say(['창이다. 밖은 운동장.','조명이 켜져 있다.','이 시간에 켜져 있을 리가 없다.']);
@@ -343,6 +394,7 @@ function drawHall(){
   const camX=(S.wx+ox())*T - VW/2 + T/2;
   cx.fillStyle='#07080b'; cx.fillRect(0,0,VW,VH);
   const x0=Math.floor(camX/T)-1, x1=x0+Math.ceil(VW/T)+2;
+  const plates=[];
   for(let wx=x0;wx<=x1;wx++){
     const sx=wx*T-camX;
     // 천장
@@ -359,12 +411,18 @@ function drawHall(){
     const d=doorAt(wx), dL=doorAt(wx-1);
     if(d){                                        // 문 왼쪽 절반
       const ex=(d.n===DOORS), set=ex?A.EXITD:A.DOOR;
-      tile(ex?A.SIGN:A.PLATE, sx, R.plate*T);
+      plates.push([sx, d.n, ex]);                 // 명판은 벽 타일에 덮이지 않게 나중에
       tile(set[0], sx, R.door*T); tile(set[2], sx, (R.door+1)*T);
     } else if(dL){                                // 문 오른쪽 절반
       const ex=(dL.n===DOORS), set=ex?A.EXITD:A.DOOR;
       tile(set[1], sx, R.door*T); tile(set[3], sx, (R.door+1)*T);
-    } else { tile(A.WUP,sx,R.door*T); tile(A.WUP,sx,(R.door+1)*T); }
+    } else {
+      tile(A.WUP,sx,R.door*T); tile(A.WUP,sx,(R.door+1)*T);
+      const hp=hpAt(wx);
+      if(hp){ const o=A.HP[hp];
+        if(o.a) tile(o.a, sx, R.door*T);
+        if(o.b) tile(o.b, sx, (R.door+1)*T); }
+    }
     tile(A.WAINT, sx, R.wain*T); tile(A.BASE, sx, R.base*T);
     for(let y=R.f0;y<=R.f1;y++){
       const vs=(((wx%3)+3)%3===0), hs=(y===R.f0||y===R.f1);
@@ -375,15 +433,16 @@ function drawHall(){
     tile(A.WAINT, sx, R.sillT*T);
     tile(A.HWIN[((wx%2)+2)%2], sx, R.win*T);
     tile(A.BASE, sx, R.bot*T);
-    // 문패 글자
-    if(d && d.n!==DOORS){
-      txt('3-'+d.n, sx+T+1, R.plate*T+6, 'rgba(255,255,255,.35)', 9, 'center');
-      txt('3-'+d.n, sx+T,   R.plate*T+5, '#2e2a1e', 9, 'center'); }
   }
+  // 문패 · 비상구 표지 (별도 패스)
+  plates.forEach(([sx,n,ex])=>{
+    tile(ex?A.SIGN:A.PLATE, sx+T/2, R.plate*T);
+    if(!ex) txt('3-'+n, sx+T, R.plate*T+3, '#2b2820', 10, 'center');
+  });
   // 문 앞 안내
-  const dn=doorAt(S.wx)||doorAt(S.wx-1);
-  if(dn && S.wy===R.f0 && !S.msg && !S.choice && !S.numin && Math.sin(S.t*5)>-0.3)
-    txt('▲', VW/2, (R.base)*T+4, '#e8c76a', 9, 'center');
+  const dn=doorAt(S.wx)||doorAt(S.wx-1), hpn=hpAt(S.wx);
+  if((dn||hpn) && S.wy===R.f0 && !S.msg && !S.choice && !S.numin && Math.sin(S.t*5)>-0.3)
+    txt(dn?'▲':'!', VW/2, (R.base)*T+4, '#e8c76a', dn?9:10, 'center');
   drawChar(VW/2-T/2, (S.wy+oy())*T-16);
 }
 const ROX=0, ROY=16;                        // 교실 화면 오프셋
@@ -470,8 +529,8 @@ function drawRoom(){
 
   if(LIT<0.95){ cx.fillStyle='rgba(0,0,0,'+(0.40*(1-LIT))+')'; cx.fillRect(0,0,VW,VH); }
 }
-const ox=()=>{ if(!S.mv)return 0; const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir]; return -v[0]*S.mv; };
-const oy=()=>{ if(!S.mv)return 0; const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir]; return -v[1]*S.mv; };
+const ox=()=>S.mv? -S.mvx*S.mv : 0;
+const oy=()=>S.mv? -S.mvy*S.mv : 0;
 const DIRROW={0:0,3:1,1:2,2:3};      // 아래 / 위 / 왼 / 오른
 function drawChar(x,y){
   cx.save(); cx.globalAlpha=0.28; cx.fillStyle='#000';
@@ -504,22 +563,28 @@ function drawHUD(){
 }
 
 /* ══════════ 루프 ══════════ */
-let last=performance.now(), turnCd=0;
+let last=performance.now();
 function loop(now){
   const dt=Math.min(0.05,(now-last)/1000); last=now;
   if(S.scene==='play' && ready>=3){
     S.t+=dt;
     const busy=S.msg||S.choice||S.numin;
     S.run=!!K.run;
-    if(S.mv>0){ S.mv-=dt*(S.run?11:6.4); S.anim+=dt*(S.run?17:10); if(S.mv<0)S.mv=0; }
+    if(S.mv>0){
+      const sp=(S.run?11:6.4)*(S.diag?0.72:1);     // 대각선은 √2 만큼 느리게
+      S.mv-=dt*sp; S.anim+=dt*(S.run?17:10); if(S.mv<0)S.mv=0; }
     if(!busy && S.mv===0){
-      let d=-1;
-      if(K.up)d=3; else if(K.down)d=0; else if(K.left)d=1; else if(K.right)d=2;
-      if(d>=0){
-        if(S.dir!==d && turnCd<=0){ S.dir=d; turnCd=0.08; }
-        else if(turnCd<=0){ if(tryMove(d,S.run)) stepSfx(); }
+      const dx=(K.right?1:0)-(K.left?1:0), dy=(K.down?1:0)-(K.up?1:0);
+      if(dx||dy){
+        // 바라보는 방향 = 마지막으로 누른 방향키 (아직 누르고 있으면)
+        const KN=['down','left','right','up'];
+        if(K[KN[S.lastDir]]) S.dir=S.lastDir;
+        else S.dir = dy ? (dy>0?0:3) : (dx>0?2:1);
+        if(tryMove(dx,dy,S.run)) stepSfx();
+        else if(dx&&dy){                            // 대각 막히면 한 축으로라도
+          if(tryMove(dx,0,S.run)||tryMove(0,dy,S.run)) stepSfx();
+        }
       } else S.anim=0;
-      turnCd-=dt;
     }
     if(!busy){
       S.num+=dt*(1.1+(S.run&&S.mv?2.0:0)+Math.pow(S.unit,1.55)*0.09);
@@ -551,7 +616,7 @@ function render(){
 
 /* ══════════ 시작 ══════════ */
 function reset(){
-  Object.assign(S,{scene:'play',map:'hall',wx:3,wy:10,dir:2,anim:0,mv:0,
+  Object.assign(S,{scene:'play',map:'hall',wx:3,wy:10,dir:2,anim:0,mv:0,mvx:0,mvy:0,diag:false,lastDir:2,
     unit:0,noteUnit:null,drift:0,lastDoor:null,num:0,outMin:0,pages:14,room:0,
     found:{},foundN:0,t:0,lastCall:-99,dead:false,won:false,_warned:0,
     msg:null,choice:null,numin:null});
