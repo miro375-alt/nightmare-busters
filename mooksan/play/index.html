@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>묵산 — 레벨 1 「복도」</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden;
+  font:14px/1.6 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  color:#d8d4cc;-webkit-font-smoothing:antialiased;user-select:none}
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000}
+canvas{display:block;width:100%;height:100%;object-fit:contain;image-rendering:auto}
+
+/* ── HUD ── */
+#hud{position:fixed;inset:0;pointer-events:none;z-index:5}
+.pane{position:absolute;background:rgba(10,11,13,.62);border:1px solid rgba(150,145,135,.22);
+  padding:9px 13px;font-size:12px;letter-spacing:.02em;backdrop-filter:blur(3px)}
+#unit{top:16px;left:16px;min-width:150px}
+#unit b{display:block;font-size:27px;line-height:1.15;letter-spacing:.04em;color:#fff;font-weight:600}
+#unit .lb{font-size:10px;color:#8a857c;letter-spacing:.18em}
+#unit .warn{margin-top:5px;font-size:11px;color:#c47a4a}
+#phone{top:16px;right:16px;text-align:right;font-family:ui-monospace,Menlo,monospace}
+#phone .t{font-size:20px;color:#fff;letter-spacing:.06em}
+#phone .s{font-size:10px;color:#8a857c;letter-spacing:.1em;margin-top:3px}
+#num{bottom:16px;left:16px;min-width:190px}
+#num .lb{font-size:10px;color:#8a857c;letter-spacing:.18em;margin-bottom:6px}
+#bar{height:5px;background:rgba(120,115,105,.22);overflow:hidden}
+#barf{height:100%;width:0%;background:#7d8a72;transition:width .25s linear}
+#num .st{margin-top:6px;font-size:11px;color:#8a857c;min-height:17px}
+#party{bottom:16px;right:16px;min-width:132px}
+#party .lb{font-size:10px;color:#8a857c;letter-spacing:.18em;margin-bottom:6px}
+#party .p{display:flex;justify-content:space-between;gap:12px;font-size:12px;padding:1px 0}
+#party .p i{font-style:normal;color:#6f6a62;font-size:10px}
+#party .p.ok i{color:#7d8a72}
+#party .p.bad i{color:#b4453a}
+
+/* ── 자막 ── */
+#sub{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);
+  max-width:min(660px,86vw);text-align:center;font-size:15px;line-height:1.65;
+  text-shadow:0 1px 6px #000;opacity:0;transition:opacity .4s;pointer-events:none}
+#sub.on{opacity:1}
+#sub .who{color:#c9a227;font-size:12px;letter-spacing:.1em;display:block;margin-bottom:3px}
+
+/* ── 조작 안내 ── */
+#keys{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+  font-size:11px;color:#6f6a62;letter-spacing:.05em;white-space:nowrap}
+#keys b{color:#a29c92;font-weight:600}
+
+/* ── 문서 ── */
+#doc{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.86);padding:22px;pointer-events:auto}
+#doc.on{display:flex}
+#docin{max-width:620px;width:100%;max-height:84vh;overflow-y:auto;background:#e9e5d9;color:#1e1c18;
+  padding:34px 36px;border:1px solid #b9b2a2;
+  font-family:ui-monospace,Menlo,'D2Coding',monospace;font-size:13.5px;line-height:1.95;
+  box-shadow:0 24px 70px rgba(0,0,0,.7)}
+#docin h3{font-size:15px;letter-spacing:.1em;margin-bottom:4px;font-weight:700}
+#docin .meta{font-size:11px;color:#6d675b;letter-spacing:.06em;
+  padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid #c3bcac}
+#docin p{margin:0 0 12px;white-space:pre-wrap}
+#docin .cl{margin-top:20px;padding-top:12px;border-top:1px solid #c3bcac;
+  font-size:11px;color:#6d675b;letter-spacing:.08em;text-align:right}
+
+/* ── 오버레이 ── */
+#veil{position:fixed;inset:0;z-index:20;pointer-events:none;opacity:0;transition:opacity 1.2s}
+#title,#over{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:#000;text-align:center;padding:26px}
+#over{display:none}
+h1{font-size:36px;letter-spacing:.3em;font-weight:700;color:#fff;margin-bottom:8px}
+.sb{font-size:12px;letter-spacing:.24em;color:#7a746b;margin-bottom:34px}
+.desc{font-size:13.5px;line-height:2;color:#9c968c;max-width:430px;margin-bottom:34px}
+button{pointer-events:auto;background:none;color:#d8d4cc;border:1px solid #4a4740;
+  padding:12px 34px;font:inherit;font-size:13px;letter-spacing:.16em;cursor:pointer;transition:.18s}
+button:hover{background:#d8d4cc;color:#0c0d0f;border-color:#d8d4cc}
+#over h2{font-size:23px;letter-spacing:.1em;color:#fff;margin-bottom:14px}
+#over .r{font-size:13px;color:#9c968c;line-height:2;max-width:460px;margin-bottom:30px}
+#over .r b{color:#c9a227}
+@media(max-width:620px){
+  h1{font-size:27px}#keys{font-size:9.5px}
+  .pane{padding:7px 10px;font-size:11px}#unit b{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<div id="stage"><canvas id="cv" width="960" height="600"></canvas></div>
+<div id="veil"></div>
+
+<div id="hud">
+  <div class="pane" id="unit">
+    <span class="lb">반복 단위</span><b id="uv">0</b>
+    <div class="warn" id="uw"></div>
+  </div>
+  <div class="pane" id="phone">
+    <div class="t" id="ph">20:41</div>
+    <div class="s" id="pb">100%</div>
+  </div>
+  <div class="pane" id="num">
+    <div class="lb">무감각</div>
+    <div id="bar"><div id="barf"></div></div>
+    <div class="st" id="nst"></div>
+  </div>
+  <div class="pane" id="party">
+    <div class="lb">동행</div>
+    <div class="p ok" data-n="지우"><span>서지우</span><i>응답</i></div>
+    <div class="p ok" data-n="태오"><span>문태오</span><i>응답</i></div>
+    <div class="p ok" data-n="세라"><span>강세라</span><i>응답</i></div>
+  </div>
+  <div id="sub"><span class="who"></span><span class="tx"></span></div>
+  <div id="keys">
+    <b>W</b> 걷기 &nbsp;·&nbsp; <b>Shift+W</b> 뛰기 &nbsp;·&nbsp; <b>R</b> 돌아서기 &nbsp;·&nbsp;
+    <b>E</b> 출석<span id='cd'></span> &nbsp;·&nbsp; <b>F</b> 조사
+  </div>
+</div>
+
+<div id="doc"><div id="docin"></div></div>
+
+<div id="title">
+  <h1>묵 산</h1>
+  <div class="sb">레벨 1 — 복도</div>
+  <div class="desc">
+    2026년 10월, 목요일. 야간자율학습 2교시.<br>
+    정전이 왔고, 차단기를 올렸고, 불이 들어왔다.<br><br>
+    그런데 복도가 길다.
+  </div>
+  <button id="go">시작</button>
+</div>
+
+<div id="over">
+  <h2 id="oh"></h2>
+  <div class="r" id="or"></div>
+  <button id="again">다시</button>
+</div>
+
+<script>
+'use strict';
+const cv=document.getElementById('cv'), cx=cv.getContext('2d');
+const W=cv.width, H=cv.height, HZ=H*0.5;
+
+/* ═══ 상태 ═══ */
+const S={
+  run:false, unit:0, z:0,          // z: 현재 단위 내 진행 (0~6, 문 6개)
+  face:1,                          // 1=전진 방향, -1=돌아선 상태
+  turning:0, num:0,                // num: 무감각 0~100
+  outMin:0, walked:0, docs:[],
+  party:{지우:1,태오:1,세라:1},    // 1=정상, 0=응답 지연, -1=없음
+  lastCall:0, t:0, dead:false, won:false, subT:0
+};
+const K={};
+addEventListener('keydown',e=>{
+  K[e.code]=1;
+  if(e.code==='KeyR')turn();
+  if(e.code==='KeyE')call();
+  if(e.code==='KeyF')inspect();
+  if(e.code==='Escape')closeDoc();
+  if(['KeyW','KeyS','KeyR','KeyE','KeyF','Space'].includes(e.code))e.preventDefault();
+});
+addEventListener('keyup',e=>K[e.code]=0);
+
+/* ═══ 수집 문서 ═══ */
+const DOCS=[
+ {u:1,t:'책상 밑 쪽지',m:'별관 자습실 · 필기구 미상',
+  b:'4/17. 사흘째. 배 안 고픔. 물도 안 마셨는데 목 안 마름.\n\n밖에서 소리가 남. 공사하는 소리 같음.\n누가 벽을 막고 있는 것 같음.',
+  c:'— 기재 연도 1997'},
+ {u:3,t:'복도 게시판 · 청소 당번표',m:'3학년 4반 · 당월분',
+  b:'월  김██  이██\n화  박██  정██\n수  최██  강██\n목  ██   ██\n금  윤██  한██',
+  c:'목요일 칸만 성명이 지워져 있음'},
+ {u:5,t:'발생 구역 조사표 (발췌)',m:'특수재난 현장대응반 · 제 ██ 구역',
+  b:'위험 등급 : 3급 (요주의)\n  · 인적 위해 : 확인\n  · 구조 안정 : 불안정\n  · 개체      : 미확인\n\n□ 진입 및 이탈\n  이탈은 역방향 보행으로만 성립함.\n  주행(走行) 시 단위 수가 증가함. 사유 미상.\n\n□ 조치 의견\n  봉인',
+  c:'조치 의견란 — 봉인'}
+];
+
+/* ═══ 오디오 ═══ */
+let AC=null,hum=null,humG=null;
+function audioOn(){
+  try{
+    AC=new (window.AudioContext||window.webkitAudioContext)();
+    hum=AC.createOscillator(); humG=AC.createGain();
+    hum.type='sawtooth'; hum.frequency.value=60;
+    const f=AC.createBiquadFilter(); f.type='lowpass'; f.frequency.value=220;
+    humG.gain.value=0.028;
+    hum.connect(f); f.connect(humG); humG.connect(AC.destination); hum.start();
+  }catch(e){}
+}
+function blip(freq,dur,vol){
+  if(!AC)return;
+  const o=AC.createOscillator(),g=AC.createGain();
+  o.frequency.value=freq; o.type='triangle';
+  g.gain.setValueAtTime(vol*(1-S.num/140),AC.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001,AC.currentTime+dur);
+  o.connect(g); g.connect(AC.destination); o.start(); o.stop(AC.currentTime+dur);
+}
+function step(){ blip(90+Math.random()*40,0.09,0.05); }
+
+/* ═══ 행동 ═══ */
+function turn(){ if(S.turning||!S.run)return; S.turning=1; setTimeout(()=>{S.face*=-1;S.turning=0;},620); }
+
+const NAMES=['지우','태오','세라'];
+function call(){
+  if(!S.run||S.t-S.lastCall<6)return;
+  S.lastCall=S.t;
+  say('나','야.');
+  let delay=380;
+  NAMES.forEach((n,i)=>{
+    const st=S.party[n];
+    if(st===-1)return;                      // 없는 사람은 대답 안 함
+    setTimeout(()=>{
+      if(st===1){ say(n,'응.'); }
+      else { say(n,'······ 응.'); }
+      blip(300+i*70,0.11,0.05);
+    }, delay + i*(st===1?260:640));
+  });
+  // 무감각 회복 — 응답한 인원 수에 비례
+  const alive=NAMES.filter(n=>S.party[n]!==-1).length;
+  S.num=Math.max(0,S.num - 4.5*alive);
+  setTimeout(()=>{ if(alive<3) say('','대답이 하나 모자란다.'); }, delay+1400);
+}
+
+function inspect(){
+  const d=DOCS.find(d=>d.u===S.unit && !S.docs.includes(d.u));
+  if(!d){ say('','여기엔 아무것도 없다.'); return; }
+  S.docs.push(d.u); openDoc(d); S.num=Math.max(0,S.num-10);
+}
+function openDoc(d){
+  document.getElementById('docin').innerHTML=
+    '<h3>'+d.t+'</h3><div class="meta">'+d.m+'</div><p>'+d.b+'</p><div class="cl">'+d.c+'</div>';
+  document.getElementById('doc').classList.add('on'); S.run=false;
+}
+function closeDoc(){
+  const e=document.getElementById('doc');
+  if(e.classList.contains('on')){ e.classList.remove('on'); S.run=true; }
+}
+document.getElementById('doc').onclick=closeDoc;
+
+function say(who,tx){
+  const s=document.getElementById('sub');
+  s.querySelector('.who').textContent=who;
+  s.querySelector('.tx').textContent=tx;
+  s.classList.add('on'); S.subT=S.t+2.6;
+}
+
+/* ═══ 진행 ═══ */
+const DOORS=6;                     // 반복 단위 = 교실 문 6개
+function advance(dt,running){
+  const sp=(running?3.4:1.55)*dt;
+  S.z += sp; S.walked+=sp;
+  if(S.walked>0.62){ S.walked=0; step(); }
+  if(S.z>=DOORS){
+    S.z-=DOORS;
+    if(S.face===1 || running){
+      S.unit++;                     // 전진 = 증가. 뛰면 돌아서 있어도 증가(기획서)
+      if(running && S.face===-1) say('','뛰니까 문이 더 나온다.');
+    } else {
+      S.unit--;
+      if(S.unit<0){ S.unit=0; win(); }
+    }
+    onUnit();
+  }
+}
+function onUnit(){
+  // 외부 경과 시간 — 4단위부터 급증
+  const u=S.unit;
+  const ext = u<=3 ? u*6 : 6*3 + Math.pow(u-3,2.35)*22;
+  S.outMin=Math.round(ext);
+  if(DOCS.some(d=>d.u===u && !S.docs.includes(u))) say('','뭔가 있다. (F)');
+  if(u===4) say('태오','여기부터 밖이랑 시간이 안 맞을걸.');
+  if(u===8) say('지우','여덟이야. 여기서 안 나온 사람 둘 있댔지.');
+}
+
+function win(){
+  S.run=false; S.won=true;
+  document.getElementById('oh').textContent='복도가 끝났다';
+  const left=NAMES.filter(n=>S.party[n]===-1);
+  document.getElementById('or').innerHTML=
+    '2학년 4반 교실 앞이다. 교무실 불이 켜져 있다.<br><br>'+
+    '수집한 문서 <b>'+S.docs.length+' / '+DOCS.length+'</b><br>'+
+    '밖에서 지난 시간 <b>'+fmtOut(S.outMin)+'</b><br>'+
+    (left.length? '나오지 못한 사람 <b>'+left.join(', ')+'</b>'
+                : '넷 다 나왔다.')+
+    '<br><br><span style="color:#6f6a62">봉인까지 72시간.</span>';
+  document.getElementById('over').style.display='flex';
+}
+function lose(msg){
+  S.run=false; S.dead=true;
+  document.getElementById('oh').textContent='그 자리에 앉았다';
+  document.getElementById('or').innerHTML=msg+
+    '<br><br>수집한 문서 <b>'+S.docs.length+' / '+DOCS.length+'</b>'+
+    '<br>도달 단위 <b>'+S.unit+'</b>';
+  document.getElementById('over').style.display='flex';
+}
+function fmtOut(m){
+  if(m<60)return m+'분';
+  const h=Math.floor(m/60), r=m%60;
+  return h+'시간 '+(r?r+'분':'');
+}
+
+/* ═══ 렌더 ═══ */
+function shade(c,k){
+  return 'rgb('+c.map(v=>Math.max(0,Math.min(255,Math.round(v*k)))).join(',')+')';
+}
+// 무감각이 오르면 화면이 「평온해진다」 — 따뜻해지고 대비가 낮아진다
+function warmth(){ return S.num/100; }
+
+function draw(){
+  const n=warmth();
+  const FOV=0.72, CH=2.9, CW=2.4;            // 복도 높이/폭 (m)
+  const eye=1.55;
+  cx.fillStyle='#05060a'; cx.fillRect(0,0,W,H);
+
+  const SEG=14;                               // 그릴 슬라이스 수
+  const off=S.z%1;
+  for(let i=SEG;i>=1;i--){
+    const z0=i-off, z1=z0+1;
+    if(z1<=0.25)continue;
+    const p0=proj(z0), p1=proj(z1);
+    const fog=Math.max(0,1-z0/SEG);
+    const lit=Math.pow(fog,1.25);
+    const k=(0.34+lit*0.66)*(1-n*0.16);
+
+    // 색: 무감각이 오르면 따뜻한 쪽으로
+    const cCeil=[214-n*4,210-n*10,196-n*26];
+    const cUp  =[224-n*2,218-n*8,200-n*24];
+    const cLow =[132-n*24,158-n*22,140-n*20];  // 민트 허리높이
+    const cFlr =[ 74-n*8 , 92-n*10, 78-n*6 ];  // 녹색 리놀륨
+
+    // 천장 / 바닥
+    q(cx, p0.l,p0.cy, p1.l,p1.cy, p1.r,p1.cy, p0.r,p0.cy, shade(cCeil,k*0.86));
+    q(cx, p0.l,p0.fy, p1.l,p1.fy, p1.r,p1.fy, p0.r,p0.fy, shade(cFlr,k));
+
+    // 좌측 벽 (교실 문)
+    const midY0=p0.cy+(p0.fy-p0.cy)*0.55, midY1=p1.cy+(p1.fy-p1.cy)*0.55;
+    q(cx, p0.l,p0.cy, p1.l,p1.cy, p1.l,midY1, p0.l,midY0, shade(cUp,k*0.94));
+    q(cx, p0.l,midY0, p1.l,midY1, p1.l,p1.fy, p0.l,p0.fy, shade(cLow,k*0.94));
+    // 문
+    const idx=Math.floor(S.z)+i-1;
+    const dn=((idx%DOORS)+DOORS)%DOORS+1;
+    const dTop0=p0.cy+(p0.fy-p0.cy)*0.14, dTop1=p1.cy+(p1.fy-p1.cy)*0.14;
+    q(cx, p0.l,dTop0, p1.l,dTop1, p1.l,p1.fy, p0.l,p0.fy, shade([96-n*10,72-n*6,54],k*0.9));
+    // 문패
+    if(z0>0.7&&z0<7){
+      cx.save(); cx.globalAlpha=Math.min(1,fog*1.5);
+      cx.fillStyle=shade([236,232,220],k);
+      const px=(p0.l+p1.l)/2, py=dTop0+(p0.fy-dTop0)*0.16, pw=(p0.l-p1.l)*0.34;
+      cx.fillRect(px-pw/2,py,Math.abs(pw),Math.abs(pw)*0.42);
+      cx.fillStyle='#3a352c'; cx.textAlign='center'; cx.textBaseline='middle';
+      cx.font=Math.max(6,Math.abs(pw)*0.3)+'px monospace';
+      cx.fillText('3-'+dn,px,py+Math.abs(pw)*0.21);
+      cx.restore();
+    }
+
+    // 우측 벽 (창 — 운동장)
+    q(cx, p0.r,p0.cy, p1.r,p1.cy, p1.r,midY1, p0.r,midY0, shade(cUp,k*0.88));
+    q(cx, p0.r,midY0, p1.r,midY1, p1.r,p1.fy, p0.r,p0.fy, shade(cLow,k*0.88));
+    const wTop0=p0.cy+(p0.fy-p0.cy)*0.2, wTop1=p1.cy+(p1.fy-p1.cy)*0.2;
+    q(cx, p0.r,wTop0, p1.r,wTop1, p1.r,midY1, p0.r,midY0, shade([16,20,26],k*1.1));
+    // 운동장 조명 (창 안쪽 점광)
+    if(z0>1&&z0<8&&dn%2===0){
+      cx.save(); cx.globalAlpha=Math.min(.85,fog*1.2);
+      const gx=(p0.r+p1.r)/2, gy=(wTop0+midY0)/2, gr=Math.abs(p0.r-p1.r)*0.2;
+      const g=cx.createRadialGradient(gx,gy,0,gx,gy,gr);
+      g.addColorStop(0,'rgba(255,236,190,.9)'); g.addColorStop(1,'rgba(255,236,190,0)');
+      cx.fillStyle=g; cx.beginPath(); cx.arc(gx,gy,gr,0,7); cx.fill(); cx.restore();
+    }
+
+    // 형광등
+    if(dn%2===1){
+      cx.save(); cx.globalAlpha=Math.min(1,fog*1.35)*(0.55+0.45*Math.sin(S.t*47+i)*0.12+0.35);
+      const lx=(p0.l+p0.r)/2, lw=Math.abs(p0.r-p0.l)*0.3, lh=Math.abs(p0.cy-p1.cy)*0.4+2;
+      cx.fillStyle='rgba(255,250,232,.92)';
+      cx.fillRect(lx-lw/2,p0.cy,lw,Math.max(1.5,lh));
+      cx.restore();
+    }
+  }
+
+  // 동행 실루엣
+  drawParty(n);
+
+  // 돌아서는 중 — 화면 블러/암전
+  if(S.turning){ cx.fillStyle='rgba(0,0,0,.55)'; cx.fillRect(0,0,W,H); }
+
+  // 비네트 (무감각 오르면 오히려 옅어진다 = 평온해 보임)
+  const vg=cx.createRadialGradient(W/2,H/2,H*0.28,W/2,H/2,H*0.92);
+  vg.addColorStop(0,'rgba(0,0,0,0)');
+  vg.addColorStop(1,'rgba(0,0,0,'+(0.72-n*0.42)+')');
+  cx.fillStyle=vg; cx.fillRect(0,0,W,H);
+
+  // 무감각 = 따뜻한 필름
+  if(n>0.05){
+    cx.save(); cx.globalCompositeOperation='overlay'; cx.globalAlpha=n*0.5;
+    cx.fillStyle='#c98a3a'; cx.fillRect(0,0,W,H); cx.restore();
+  }
+  // 그레인
+  if(n<0.75){
+    cx.save(); cx.globalAlpha=0.05*(1-n);
+    for(let i=0;i<220;i++){
+      cx.fillStyle=Math.random()<.5?'#fff':'#000';
+      cx.fillRect(Math.random()*W,Math.random()*H,1,1);
+    }
+    cx.restore();
+  }
+}
+function proj(z){
+  const CH=2.9,CW=2.4,eye=1.55,F=H*0.86;
+  const s=F/Math.max(0.25,z);
+  return {l:W/2-(CW/2)*s, r:W/2+(CW/2)*s, cy:HZ-(CH-eye)*s, fy:HZ+eye*s};
+}
+function q(c,x1,y1,x2,y2,x3,y3,x4,y4,fill){
+  c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.lineTo(x3,y3);c.lineTo(x4,y4);
+  c.closePath();c.fillStyle=fill;c.fill();
+}
+function drawParty(n){
+  const list=NAMES.filter(x=>S.party[x]!==-1);
+  list.forEach((nm,i)=>{
+    const z=1.7+i*0.85+Math.sin(S.t*1.6+i*2)*0.1;
+    const p=proj(z), fog=Math.max(0,1-z/14);
+    const cxp=W/2+(i-1)*(p.r-p.l)*0.19;
+    const hgt=(p.fy-p.cy)*0.42, wdt=hgt*0.3;
+    cx.save(); cx.globalAlpha=Math.min(.9,fog*1.4)*(S.party[nm]===0?0.55:1);
+    cx.fillStyle=S.party[nm]===0?'rgba(20,22,26,.8)':'rgba(28,30,34,.92)';
+    cx.beginPath();
+    cx.ellipse(cxp,p.fy-hgt*0.86,wdt*0.34,wdt*0.34,0,0,7); cx.fill();
+    cx.fillRect(cxp-wdt/2,p.fy-hgt*0.72,wdt,hgt*0.72);
+    cx.restore();
+  });
+}
+
+/* ═══ 루프 ═══ */
+let last=performance.now();
+function loop(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now; S.t+=dt;
+  if(S.run && !S.turning){
+    const fwd=K['KeyW']||K['ArrowUp'];
+    const running=fwd&&(K['ShiftLeft']||K['ShiftRight']);
+    if(fwd) advance(dt,running);
+
+    // 무감각 상승 — 조용하면 오른다. 뛰면 더 오른다
+    S.num+=dt*(1.1+(running?2.2:0)+S.unit*0.12);
+    if(S.num>=100) lose('걷는 걸 멈췄다. 아무렇지도 않았다.');
+
+    // 동행 이탈 — 무감각이 높을수록 응답이 늦어지고, 결국 없어진다
+    const sinceCall=S.t-S.lastCall;
+    NAMES.forEach(nm=>{
+      if(S.party[nm]===-1)return;
+      if(sinceCall>16 && S.party[nm]===1 && Math.random()<dt*0.35) S.party[nm]=0;
+      if(sinceCall>30 && S.party[nm]===0 && Math.random()<dt*0.16){
+        S.party[nm]=-1; say('','한 명이 없다.');
+      }
+    });
+  }
+  if(S.t>S.subT) document.getElementById('sub').classList.remove('on');
+  draw(); hudUpdate();
+  requestAnimationFrame(loop);
+}
+function hudUpdate(){
+  document.getElementById('uv').textContent=S.unit;
+  const uw=document.getElementById('uw');
+  uw.textContent = S.unit>=8?'8단위 — 귀환 사례 없음'
+                 : S.unit>=4?'외부 경과 '+fmtOut(S.outMin):'';
+  document.getElementById('ph').textContent='20:41';
+  document.getElementById('pb').textContent='100%  ·  전송됨';
+  document.getElementById('barf').style.width=S.num+'%';
+  document.getElementById('barf').style.background=
+    S.num>70?'#b4453a':S.num>40?'#c47a4a':'#7d8a72';
+  const st=document.getElementById('nst');
+  st.textContent = S.num>78?'괜찮은 것 같다.' : S.num>52?'소리가 멀어진다.'
+                 : S.num>28?'조금 나른하다.' : '';
+  NAMES.forEach(nm=>{
+    const el=document.querySelector('#party .p[data-n="'+nm+'"]');
+    const s=S.party[nm];
+    el.className='p '+(s===1?'ok':s===0?'':'bad');
+    el.querySelector('i').textContent = s===1?'응답':s===0?'지연':'없음';
+  });
+  if(AC&&humG) humG.gain.value=0.028*(1-S.num/125);
+  const cd=Math.max(0,6-(S.t-S.lastCall));
+  document.getElementById('cd').textContent=cd>0.1?' ('+cd.toFixed(0)+')':'';
+}
+
+/* ═══ 시작 ═══ */
+function reset(){
+  Object.assign(S,{run:true,unit:0,z:0,face:1,turning:0,num:0,outMin:0,walked:0,
+    docs:[],party:{지우:1,태오:1,세라:1},lastCall:0,dead:false,won:false,subT:0});
+  document.getElementById('over').style.display='none';
+  setTimeout(()=>say('','복도 끝에 창이 있었는데.'),900);
+  setTimeout(()=>say('하윤','일단 걸어보자. 뛰지는 말고.'),3600);
+}
+document.getElementById('go').onclick=()=>{
+  document.getElementById('title').style.display='none'; audioOn(); reset();
+};
+document.getElementById('again').onclick=reset;
+function fit(){
+  const r=Math.min(innerWidth/W,innerHeight/H);
+  cv.style.width=(W*r)+'px'; cv.style.height=(H*r)+'px';
+}
+addEventListener('resize',fit); fit();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
