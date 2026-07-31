@@ -6,6 +6,9 @@ import { blip, stepSfx, setHum } from './audio.js';
 import { hpAt } from './assets.js';
 import { mulberry32 } from './rng.js';
 
+/* ── 이벤트 로그 (B04) — 하네스가 무행동 구간·선택 빈도를 여기서 잰다 ── */
+export function ev(type, p){ G.EV.push(Object.assign({t:+S.t.toFixed(3), type}, p||{})); }
+
 const CLUES={
  2026:{칠판:['9/17 (목) 　야자 2교시 20:40~21:30','아래에 청소 당번표가 붙어 있다.',
    '월 김██  화 박██  수 최██','목 (　　)  금 윤██','목요일 칸만 비어 있다.',
@@ -69,6 +72,7 @@ const HTEXT={
 };
 function hallProp(hp){
   const key=hp.replace(/_[lr]$/,''), e=era(S.unit), k='h:'+e+'/'+key;
+  ev('prop',{key:k});
   if(!S.found[k]){ S.found[k]=1; S.num=Math.max(0,S.num-G.BAL.recover.prop); }
   say(HTEXT[key](e));
 }
@@ -88,6 +92,7 @@ function note(){
   if(S.t-S.lastCall<G.BAL.noteCooldown)return;
   if(S.pages<=0){ say(['수첩에 쓸 자리가 없다.']); return; }
   S.lastCall=S.t; S.pages--; S.noteUnit=S.unit; S.drift=0;
+  ev('note',{unit:S.unit,pages:S.pages});
   S.num=Math.max(0,S.num-G.BAL.recover.note); blip(230,0.08,0.06);
   say([S.unit+'단위. '+(S.map==='hall'?'복도. 문 여섯.':'3-'+S.room+' 안.'),
     S.pages===0?'……마지막 쪽이었다.':S.pages<=3?'세 쪽 남았다.':'적어뒀다.']); }
@@ -111,10 +116,12 @@ function tryMove(dx,dy,run){
       if(dx>0) S.unit++;
       else if(run){ S.unit++; say(['뛰니까 문이 더 나온다.','……돌아가고 있는 게 맞나.']); }
       else S.unit=Math.max(0,S.unit-1);
+      ev('unit',{u:S.unit,run:!!run});
       onUnit();
     }
   }
   S.wx=nx; S.wy=ny; S.mv=1; S.mvx=dx; S.mvy=dy; S.diag=!!(dx&&dy);
+  ev('move',{x:nx,y:ny,run:!!run});
   return true; }
 
 function interact(){
@@ -137,20 +144,24 @@ function interact(){
   if(!sp){ say(['별것 없다.']); return; }
   if(sp==='exit'){ leaveRoom(); return; }
   const e=era(S.unit), key=e+'/'+SPOTS.indexOf(sp);
+  ev('clue',{key});
   if(!S.found[key]){ S.found[key]=1; S.foundN++; S.num=Math.max(0,S.num-G.BAL.recover.clue); }
   const L=CLUES[e][sp].slice();
   if(e!==2026) L.unshift('……'+e+'년.');
   say(L); }
 function enterRoom(n){
+  ev('room_in',{n,unit:S.unit});
   S.map='room'; S.room=n; S.wx=RM.cx; S.wy=RM.f1; S.dir=3; S.mv=0; blip(150,0.13,0.06);
   say(['3-'+n+' 교실.', era(S.unit)===2026?'아까 나온 그 교실이다.':'……아까 그 교실이 아니다.']); }
 function leaveRoom(){
+  ev('room_out',{unit:S.unit});
   S.map='hall'; S.wy=R.f0; S.dir=0; S.mv=0; blip(128,0.12,0.05);
   if(S.num>G.BAL.hallGrow.threshold && G.rng()<G.BAL.hallGrow.chance){
-    S.unit++; onUnit();
+    S.unit++; ev('grow',{u:S.unit}); onUnit();
     say(['복도로 나왔다.','……아까보다 문이 하나 더 있는 것 같다.','아니, 착각이겠지.']); } }
 
 function openExit(){
+  ev('exit_ui',{unit:S.unit});
   say(['비상구다. 잠겨 있지 않다.','옆에 관리 카드 판독기가 있다.',
     '「출입 시 현재 구역을 기재하십시오」','복도는 어느 단위나 똑같이 생겼다.',
     '적어둔 것 말고는 알 방법이 없다.'], ()=>{
@@ -163,6 +174,7 @@ function openExit(){
       else if(o[i]==='옆에 붙은 조사표를 본다') survey(); });
   }); }
 function answerExit(a){
+  ev('exit_answer',{a,actual:S.unit});
   if(a===S.unit){ escaped(); return; }
   const b=S.unit; S.unit=a; onUnit(); if(S.dead)return;
   say(['철문이 열렸다.', b<a?'……복도다. 아까보다 길다.':'……복도다. 아까 그 자리가 아니다.',
@@ -174,7 +186,7 @@ function survey(){
     ()=>choose('조사표',['생존자란에 내 이름을 적는다','그냥 둔다'],i=>{ if(i===0)filled(); })); }
 
 /* ══ 종료 ══ */
-function over(h,html){ S.scene='over'; S.msg=S.choice=S.numin=null;
+function over(h,html){ ev('end',{h}); S.scene='over'; S.msg=S.choice=S.numin=null;
   document.getElementById('oh').textContent=h;
   document.getElementById('or').innerHTML=html+
     '<span class="stat">조사 '+S.foundN+' / '+CLUE_TOTAL+' 　·　 도달 '+S.unit+
@@ -232,8 +244,11 @@ export function update(dt){
 export function reset(seed){
   // 시드 미지정(일반 플레이)은 crypto로 뽑되 S.seed에 기록 — 재현 가능 (D05)
   const sd=(seed!==undefined)?(seed>>>0):crypto.getRandomValues(new Uint32Array(1))[0];
-  G.rng=mulberry32(sd); G.rngFx=mulberry32(sd^0x9E3779B9);
-  Object.assign(S,{scene:'play',seed:sd,map:'hall',wx:3,wy:10,dir:2,anim:0,mv:0,mvx:0,mvy:0,diag:false,lastDir:2,
+  const base=mulberry32(sd);
+  G.rng=()=>{ S.rngN++; return base(); };   // 호출 수 기록 → load 시 fast-forward (B04)
+  G.rngFx=mulberry32(sd^0x9E3779B9);
+  G.EV.length=0;
+  Object.assign(S,{scene:'play',seed:sd,rngN:0,map:'hall',wx:3,wy:10,dir:2,anim:0,mv:0,mvx:0,mvy:0,diag:false,lastDir:2,
     unit:0,noteUnit:null,drift:0,lastDoor:null,num:0,outMin:0,pages:G.BAL?G.BAL.notePages:14,room:0,
     found:{},foundN:0,t:0,lastCall:-99,dead:false,won:false,_warned:0,
     msg:null,choice:null,numin:null});
@@ -251,4 +266,16 @@ export function reset(seed){
     say(['복도로 나왔다.','……복도가 안 끝난다.','문패가 3-1부터 다시 시작한다.',
       '뒤돌아보니, 화장실 문이 없다.','벽이다.']);
   });
+}
+
+/* ── 상태 직렬화 (B04) — S에는 함수·DOM 참조가 없어야 한다 (D05) ── */
+export function stateGet(){
+  const {msg, choice, numin, ...rest} = S;
+  return JSON.parse(JSON.stringify(rest));
+}
+export function stateSet(o){
+  reset(o.seed);                     // 시드로 rng 재생성 + 이벤트 로그 초기화
+  const n = o.rngN || 0;
+  for(let i=0;i<n;i++) G.rng();      // 논리 스트림 fast-forward
+  Object.assign(S, o, {msg:null, choice:null, numin:null});
 }

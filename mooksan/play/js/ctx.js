@@ -8,6 +8,7 @@ export const G = {
   K: {},                               // 눌린 키 상태
   rng: null, rngFx: null,              // 시드 PRNG — 논리/연출 분리 (B02)
   STEP: 1/60,                          // 고정 논리 스텝 — 결정론의 기반 (B03)
+  EV: [],                              // 이벤트 로그 — 하네스 지표의 원천 (B04)
 };
 G.cx = G.cv.getContext('2d');
 G.cx.imageSmoothingEnabled = false;
