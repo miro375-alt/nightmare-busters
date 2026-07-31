@@ -531,7 +531,8 @@ function drawRoom(){
 }
 const ox=()=>S.mv? -S.mvx*S.mv : 0;
 const oy=()=>S.mv? -S.mvy*S.mv : 0;
-const DIRROW={0:0,3:1,1:2,2:3};      // 아래 / 위 / 왼 / 오른
+// LimeZu 시트 블록 순서: 0=오른쪽 1=뒤 2=왼쪽 3=정면 (픽셀 판정)
+const DIRROW={0:3, 1:2, 2:0, 3:1};   // 게임 dir(아래/왼/오른/위) → 시트 블록
 function drawChar(x,y){
   cx.save(); cx.globalAlpha=0.28; cx.fillStyle='#000';
   cx.beginPath(); cx.ellipse((x|0)+8,(y|0)+30,6,2.4,0,0,7); cx.fill(); cx.restore();

@@ -1,0 +1,148 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>엔티티 — 묵산</title>
+<style>
+main img{display:block;width:100%;max-width:760px;margin:20px 0 6px;
+  border:1px solid var(--line);background:#0b0c10;image-rendering:auto}
+
+:root{
+  --bg:#0e0f11; --fg:#d8d4cc; --dim:#8a857c; --line:#26282c;
+  --panel:#141618; --accent:#c9a227; --hot:#b4453a; --ok:#5d7f6a;
+  --mono:ui-monospace,SFMono-Regular,Menlo,'D2Coding',monospace;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+}
+:root[data-theme="light"]{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+:root[data-theme="dark"]{--bg:#0e0f11;--fg:#d8d4cc;--dim:#8a857c;--line:#26282c;--panel:#141618;--accent:#c9a227;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:15.5px/1.85 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+nav{width:250px;flex:0 0 250px;border-right:1px solid var(--line);padding:26px 0 60px;
+  position:sticky;top:0;max-height:100vh;overflow-y:auto;background:var(--panel)}
+nav .brand{padding:0 22px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+nav .brand b{display:block;font-size:21px;letter-spacing:.22em;font-weight:700}
+nav .brand span{display:block;font-size:11px;color:var(--dim);letter-spacing:.16em;margin-top:6px}
+nav a{display:block;padding:7px 22px;text-decoration:none;font-size:13.5px;color:var(--dim);
+  border-left:2px solid transparent}
+nav a:hover{color:var(--fg);background:rgba(127,127,127,.06)}
+nav a.on{color:var(--fg);border-left-color:var(--accent);background:rgba(127,127,127,.08)}
+nav .no{font-family:var(--mono);font-size:11px;opacity:.55;margin-right:8px}
+.othernav{margin:26px 14px 0;padding:13px 12px;border:1px solid var(--line);
+  border-left:2px solid var(--dim);background:rgba(127,127,127,.05)}
+.othernav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--dim);margin-bottom:7px}
+.othernav .ext{display:block;padding:0;border:0;font-size:12.5px;color:var(--fg);
+  text-decoration:underline;text-underline-offset:2px;line-height:1.5}
+.othernav .ext:hover{background:none;color:var(--accent)}
+.othernav .warn{display:block;margin-top:7px;font-size:10.5px;line-height:1.65;color:var(--dim)}
+.playnav{margin:14px 14px 0;padding:12px;border:1px solid var(--accent);
+  background:rgba(201,162,39,.06);text-decoration:none;display:block}
+.playnav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--accent);margin-bottom:6px}
+.playnav .nm{display:block;font-size:13px;color:var(--fg);font-weight:600}
+.playnav .sd{display:block;margin-top:5px;font-size:10.5px;color:var(--dim);line-height:1.6}
+.playnav:hover .nm{color:var(--accent)}
+.othernav .warn b{color:var(--fg);font-weight:650}
+main{flex:1;min-width:0;padding:44px 52px 120px;max-width:960px}
+h1{font-size:31px;letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+h2{font-size:20px;margin:52px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+h3{font-size:16.5px;margin:34px 0 10px;color:var(--fg);font-weight:700}
+h4{font-size:14.5px;margin:24px 0 8px;color:var(--dim);font-weight:700;letter-spacing:.03em}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:5px 0}
+strong{color:#fff;font-weight:650}
+:root[data-theme="light"] strong,@media(prefers-color-scheme:light){strong{color:#000}}
+em{color:var(--dim);font-style:italic}
+code{font-family:var(--mono);font-size:12.5px;background:rgba(127,127,127,.14);padding:1px 5px;border-radius:3px}
+pre.blk{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--dim);padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+blockquote{margin:0 0 18px;padding:14px 20px;background:var(--panel);
+  border-left:3px solid var(--accent)}
+blockquote p{margin:0 0 8px}
+blockquote p:last-child{margin:0}
+.tw{overflow-x:auto;margin:0 0 20px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:0 0 20px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:650;font-size:12.5px;letter-spacing:.02em}
+tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
+.ar{color:var(--dim)}
+.star{color:var(--accent)}
+.foot{margin-top:80px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);letter-spacing:.04em}
+.tt{position:fixed;top:14px;right:16px;z-index:20;background:var(--panel);color:var(--dim);
+  border:1px solid var(--line);border-radius:5px;padding:5px 11px;font-size:11.5px;cursor:pointer}
+@media(max-width:860px){
+  .wrap{display:block}
+  nav{width:auto;position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
+  nav a{display:inline-block;padding:6px 12px;border-left:0;border-bottom:2px solid transparent}
+  nav a.on{border-left:0;border-bottom-color:var(--accent)}
+  main{padding:26px 20px 80px}
+  h1{font-size:25px}
+}
+</style></head><body>
+<div class="wrap"><nav><div class="brand"><b>묵산</b><span>게임 기획 정본</span></div><a class="pg" href="00-개요.html"><span class="no">00</span>개요</a><a class="pg" href="05-참고작.html"><span class="no">05</span>참고작 분석</a><a class="pg" href="10-세계관.html"><span class="no">10</span>세계관 — 「발생」</a><a class="pg" href="15-전사.html"><span class="no">15</span>전사(前史) — 1998년 묵산</a><a class="pg" href="20-채움.html"><span class="no">20</span>채움의 역사</a><a class="pg" href="30-무대.html"><span class="no">30</span>무대 — 묵산시·묵산고</a><a class="pg" href="40-인물.html"><span class="no">40</span>주인공 4인</a><a class="pg" href="50-스토리.html"><span class="no">50</span>스토리 — 3막</a><a class="pg" href="60-레벨.html"><span class="no">60</span>레벨 구성</a><a class="pg" href="62-공략.html"><span class="no">62</span>게임 방식과 공략</a><a class="pg on" href="64-엔티티.html"><span class="no">64</span>엔티티</a><a class="pg" href="66-스토리보드.html"><span class="no">66</span>스토리보드</a><a class="pg" href="70-시스템.html"><span class="no">70</span>게임 시스템</a><a class="pg" href="80-진상.html"><span class="no">80</span>진상 3단</a><a class="pg" href="85-엔딩.html"><span class="no">85</span>엔딩 분기</a><a class="pg" href="90-톤.html"><span class="no">90</span>톤 규칙</a><a class="pg" href="99-작업.html"><span class="no">99</span>다음 작업</a><a class="playnav" href="../play/"><span class="lbl">▶ 플레이 가능</span><span class="nm">레벨 1 — 복도</span><span class="sd">수직 슬라이스. W 걷기 · R 돌아서기 · E 출석. 출석하지 않으면 넷이 흩어지고, 흩어지면 돌아오지 못한다.</span></a><div class="othernav"><span class="lbl">이어지는 정본</span><a class="ext" href="../kamc/">한국이상관리공단 문서보관소 <span class="ar">↗</span></a><span class="warn"><b>28년 전 기록.</b> 1998년 묵산시 전체가 발생했고, 국가는 그 문서로 재난대응반을 만들었다</span></div></nav><main><h1 id="엔티티">엔티티</h1>
+<blockquote><p><strong>원칙: 형태가 아니라 「어떻게 감지되는가」로 구별한다.</strong></p><p>생김새가 다른 괴물 다섯 마리는 결국 같은 괴물이다.</p><p>플레이어가 <strong>다른 감각을 써야</strong> 비로소 다른 적이다.</p></blockquote>
+<hr>
+<h2 id="0-설계-규칙">0. 설계 규칙</h2>
+<ol><li><strong>쫓아오지 않는다.</strong> 추격은 이 게임의 톤이 아니다. 전부 <strong>조건부로 편입시킨다</strong></li><li>죽이는 게 아니라 <strong>수(數)에 넣는다.</strong> 죽으면 조사표 인원란이 하나 는다</li><li>각 엔티티는 <strong>플레이어의 특정 행동을 금지</strong>한다. 그 행동은 대개 <strong>평소에는 안전한 행동</strong>이다</li><li>대응은 <strong>아이템이 아니라 몸가짐</strong>이다 — 서는 위치, 보는 방향, 걷는 속도, 소리</li><li><strong>레벨당 하나.</strong> 두 종류를 동시에 내지 않는다</li></ol>
+<hr>
+<h2 id="1-줄-위치형-레벨-2-급식실">1. 「줄」 — 위치형 · 레벨 2 급식실</h2>
+<p>배식 줄에 서 있는 것들. 앞을 보고 있고, 아주 천천히 앞으로 간다.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td>눈으로 보인다. 숨지 않는다</td></tr><tr><td><strong>금지 행동</strong></td><td><strong>앞지르기.</strong> 줄의 앞으로 나가면 안 된다</td></tr><tr><td><strong>편입 조건</strong></td><td>줄의 어느 개체보다 앞선 x좌표에 3초 이상 머무름</td></tr><tr><td><strong>대응</strong></td><td>줄의 뒤에 붙어 같이 천천히 간다. 급하면 줄 밖으로 완전히 벗어난다</td></tr><tr><td><strong>경고 신호</strong></td><td>앞지르기 시작하면 앞의 개체가 <strong>뒤를 돌아본다</strong></td></tr></tbody></table>
+<blockquote><p>첫 엔티티다. <strong>가장 얌전하고, 규칙이 가장 명확하다.</strong></p><p>「줄 서시오」는 이 게임 전체의 은유이기도 하다.</p></blockquote>
+<hr>
+<h2 id="2-석고-시선형-레벨-3-과학실-미술실">2. 「석고」 — 시선형 · 레벨 3 과학실·미술실</h2>
+<p>인체모형과 석고상. <strong>보고 있는 동안에는 움직이지 않는다.</strong></p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td>화면 안에 들어와 있으면 정지. 화면 밖으로 나가면 이동</td></tr><tr><td><strong>금지 행동</strong></td><td><strong>등 돌리고 걷기</strong></td></tr><tr><td><strong>편입 조건</strong></td><td>접촉</td></tr><tr><td><strong>대응</strong></td><td>대상을 바라본 채 <strong>옆걸음·뒷걸음</strong>으로 이동한다 (8방향 이동이 필수가 되는 지점)</td></tr><tr><td><strong>경고 신호</strong></td><td>화면에 들어온 순간 <strong>아까와 자세가 다르다</strong></td></tr></tbody></table>
+<blockquote><p>8방향 이동을 넣은 진짜 이유다.</p><p>「바라보는 방향」과 「가는 방향」이 분리되어야 이 레벨이 성립한다.</p></blockquote>
+<p><strong>변주:</strong> 미술실 석고상은 <strong>얼굴이 없다.</strong> 어디를 보고 있는지 알 수 없으므로, 정지 조건이 「내가 보고 있는가」가 아니라 「조명이 켜져 있는가」로 바뀐다.</p>
+<hr>
+<h2 id="3-자습-소리형-레벨-5-별관-자습실">3. 「자습」 — 소리형 · 레벨 5 별관 자습실</h2>
+<p>1997년 그 자습실에 남아 있는 것. 형태가 뚜렷하지 않다.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td>보이지 않는다. <strong>소리를 낸 자리로 온다</strong></td></tr><tr><td><strong>금지 행동</strong></td><td><strong>기록(E).</strong> 펜 소리가 부른다</td></tr><tr><td><strong>편입 조건</strong></td><td>기록한 자리에 5초 이상 머무름</td></tr><tr><td><strong>대응</strong></td><td>기록한 즉시 자리를 뜬다. 또는 <strong>기록을 포기하고 버틴다</strong></td></tr><tr><td><strong>경고 신호</strong></td><td>기록 직후 <strong>의자 끄는 소리</strong>가 어딘가에서 한 번 난다</td></tr></tbody></table>
+<blockquote><p><span class="star">★</span> <strong>이 게임의 전환점이다.</strong></p><p>지금까지 회복 수단이던 「기록」이 여기서 처음으로 <strong>위험</strong>이 된다.</p><p>무감각을 낮추려면 기록해야 하는데, 기록하면 불린다.</p></blockquote>
+<hr>
+<h2 id="4-관-청각형-레벨-6-지하-보일러실">4. 「관」 — 청각형 · 레벨 6 지하 보일러실</h2>
+<p>배관 속을 지나다닌다. 시야가 손전등 반경뿐이라 볼 일이 거의 없다.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td><strong>플레이어의 발소리</strong>를 듣는다</td></tr><tr><td><strong>금지 행동</strong></td><td><strong>달리기(Shift).</strong> 뛰면 위치가 노출된다</td></tr><tr><td><strong>편입 조건</strong></td><td>달리는 상태로 3초 이상</td></tr><tr><td><strong>대응</strong></td><td>무조건 걷는다. 배관 두드리는 소리(♪)를 따라 방향을 잡는다</td></tr><tr><td><strong>경고 신호</strong></td><td>배관 소리가 <strong>갑자기 멈춘다</strong></td></tr></tbody></table>
+<blockquote><p>이 레벨은 <strong>길찾기 자체가 청각</strong>이다.</p><p>♪ 신호는 3회 반복 후 방향이 바뀐다 — 세어야 한다. <strong>또 세는 것이다.</strong></p></blockquote>
+<hr>
+<h2 id="5-조회-정렬형-레벨-7-운동장">5. 「조회」 — 정렬형 · 레벨 7 운동장</h2>
+<p>야간 조명 아래 줄 맞춰 서 있는 것들. 처음에는 사람 같다.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td>조명탑 불빛 안에서만 보인다. 그림자 속에서는 아무것도 없다</td></tr><tr><td><strong>금지 행동</strong></td><td><strong>멈춰 서기.</strong> 조명 아래서 정지하면 안 된다</td></tr><tr><td><strong>편입 조건</strong></td><td>조명 반경 안에서 2초 이상 정지</td></tr><tr><td><strong>대응</strong></td><td>그림자 사이로만 이동한다. 조명 아래를 지날 때는 멈추지 않는다</td></tr><tr><td><strong>경고 신호</strong></td><td>정지하는 순간 <strong>양옆의 간격이 맞춰진다</strong></td></tr></tbody></table>
+<blockquote><p>유일하게 <strong>넓은 공간</strong>의 엔티티다.</p><p>여기서 처음으로 「도망칠 곳이 없는 게 아니라 <strong>설 곳이 없다</strong>」가 된다.</p></blockquote>
+<hr>
+<h2 id="6-레벨-8에는-엔티티가-없다">6. 레벨 8에는 엔티티가 없다</h2>
+<p>통제선 바깥에는 <strong>사람이 있다.</strong> 2017년 특수재난 현장대응반 4명이다.</p>
+<ul><li>적대적이지 않다. 말도 한다</li><li>다만 <strong>9년째 근무 중</strong>이고, 본인들은 그걸 모른다</li><li>근무명령서 종료일란은 여전히 공란이다</li></ul>
+<blockquote><p>마지막 레벨의 공포는 괴물이 아니라 <strong>성실함</strong>이다.</p></blockquote>
+<hr>
+<h2 id="7-배치-요약">7. 배치 요약</h2>
+<table><thead><tr><th>레벨</th><th>엔티티</th><th>감지</th><th>금지되는 행동</th></tr></thead><tbody><tr><td>1 복도</td><td>—</td><td>—</td><td>(튜토리얼: 뛰기가 셈을 망친다)</td></tr><tr><td>2 급식실</td><td><strong>줄</strong></td><td>시각</td><td>앞지르기</td></tr><tr><td>3 과학실</td><td><strong>석고</strong></td><td>시선</td><td>등 돌리고 걷기</td></tr><tr><td>4 구름다리</td><td>—</td><td>—</td><td>(쉼터 · 봉인 시계가 표면화)</td></tr><tr><td>5 자습실</td><td><strong>자습</strong></td><td>소리</td><td><strong>기록하기</strong></td></tr><tr><td>6 보일러실</td><td><strong>관</strong></td><td>발소리</td><td>달리기</td></tr><tr><td>7 운동장</td><td><strong>조회</strong></td><td>조명</td><td>멈춰 서기</td></tr><tr><td>8 통제선</td><td>—</td><td>—</td><td>(사람이 있다)</td></tr></tbody></table>
+<p><strong>금지 행동이 전부 다르다.</strong> 그래서 레벨마다 손이 다르게 움직인다.</p>
+<hr>
+<h2 id="8-구현-시-주의">8. 구현 시 주의</h2>
+<ul><li>엔티티는 <strong>경고 신호를 반드시 먼저 낸다.</strong> 예고 없는 사망은 이 게임에 없다</li><li>편입되면 즉시 게임 오버가 아니라 <strong>다음 조사표 인원란이 늘어난 장면</strong>을 보여준다 <span class="ar">→</span> [[85-엔딩]]</li><li>무감각이 높으면 <strong>경고 신호가 들리지 않는다.</strong> 그것이 무감각의 진짜 벌칙이다</li><li>전부 <strong>살아 있는 사람의 잔재</strong>다. 초자연 존재를 새로 만들지 않는다 <span class="ar">→</span> [[90-톤]]</li></ul>
+<div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
+</main></div><script>
+(function(){
+  var r=document.documentElement, k='mooksan-theme', s=localStorage.getItem(k);
+  if(s) r.setAttribute('data-theme',s);
+  var b=document.createElement('button'); b.className='tt'; b.textContent='명암';
+  b.onclick=function(){
+    var cur=r.getAttribute('data-theme')||
+      (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    var nx=cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx); localStorage.setItem(k,nx);
+  };
+  document.body.appendChild(b);
+  document.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tw';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+})();
+</script></body></html>
