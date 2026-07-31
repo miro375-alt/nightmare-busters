@@ -1,0 +1,165 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>문서 체계 — 묵산</title>
+<style>
+.navsec{margin:18px 14px 6px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:10px;letter-spacing:.2em;color:var(--dim)}
+nav .navsec:first-of-type{border-top:0;padding-top:0;margin-top:8px}
+main img{display:block;width:100%;max-width:760px;margin:20px 0 6px;
+  border:1px solid var(--line);background:#0b0c10;image-rendering:auto}
+
+:root{
+  --bg:#0e0f11; --fg:#d8d4cc; --dim:#8a857c; --line:#26282c;
+  --panel:#141618; --accent:#c9a227; --hot:#b4453a; --ok:#5d7f6a;
+  --mono:ui-monospace,SFMono-Regular,Menlo,'D2Coding',monospace;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+}
+:root[data-theme="light"]{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+:root[data-theme="dark"]{--bg:#0e0f11;--fg:#d8d4cc;--dim:#8a857c;--line:#26282c;--panel:#141618;--accent:#c9a227;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:15.5px/1.85 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+nav{width:250px;flex:0 0 250px;border-right:1px solid var(--line);padding:26px 0 60px;
+  position:sticky;top:0;max-height:100vh;overflow-y:auto;background:var(--panel)}
+nav .brand{padding:0 22px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+nav .brand b{display:block;font-size:21px;letter-spacing:.22em;font-weight:700}
+nav .brand span{display:block;font-size:11px;color:var(--dim);letter-spacing:.16em;margin-top:6px}
+nav a{display:block;padding:7px 22px;text-decoration:none;font-size:13.5px;color:var(--dim);
+  border-left:2px solid transparent}
+nav a:hover{color:var(--fg);background:rgba(127,127,127,.06)}
+nav a.on{color:var(--fg);border-left-color:var(--accent);background:rgba(127,127,127,.08)}
+nav .no{font-family:var(--mono);font-size:11px;opacity:.55;margin-right:8px}
+.othernav{margin:26px 14px 0;padding:13px 12px;border:1px solid var(--line);
+  border-left:2px solid var(--dim);background:rgba(127,127,127,.05)}
+.othernav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--dim);margin-bottom:7px}
+.othernav .ext{display:block;padding:0;border:0;font-size:12.5px;color:var(--fg);
+  text-decoration:underline;text-underline-offset:2px;line-height:1.5}
+.othernav .ext:hover{background:none;color:var(--accent)}
+.othernav .warn{display:block;margin-top:7px;font-size:10.5px;line-height:1.65;color:var(--dim)}
+.playnav{margin:14px 14px 0;padding:12px;border:1px solid var(--accent);
+  background:rgba(201,162,39,.06);text-decoration:none;display:block}
+.playnav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--accent);margin-bottom:6px}
+.playnav .nm{display:block;font-size:13px;color:var(--fg);font-weight:600}
+.playnav .sd{display:block;margin-top:5px;font-size:10.5px;color:var(--dim);line-height:1.6}
+.playnav:hover .nm{color:var(--accent)}
+.othernav .warn b{color:var(--fg);font-weight:650}
+main{flex:1;min-width:0;padding:44px 52px 120px;max-width:960px}
+h1{font-size:31px;letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+h2{font-size:20px;margin:52px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+h3{font-size:16.5px;margin:34px 0 10px;color:var(--fg);font-weight:700}
+h4{font-size:14.5px;margin:24px 0 8px;color:var(--dim);font-weight:700;letter-spacing:.03em}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:5px 0}
+strong{color:#fff;font-weight:650}
+:root[data-theme="light"] strong,@media(prefers-color-scheme:light){strong{color:#000}}
+em{color:var(--dim);font-style:italic}
+code{font-family:var(--mono);font-size:12.5px;background:rgba(127,127,127,.14);padding:1px 5px;border-radius:3px}
+pre.blk{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--dim);padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+blockquote{margin:0 0 18px;padding:14px 20px;background:var(--panel);
+  border-left:3px solid var(--accent)}
+blockquote p{margin:0 0 8px}
+blockquote p:last-child{margin:0}
+.tw{overflow-x:auto;margin:0 0 20px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:0 0 20px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:650;font-size:12.5px;letter-spacing:.02em}
+tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
+.ar{color:var(--dim)}
+.star{color:var(--accent)}
+.foot{margin-top:80px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);letter-spacing:.04em}
+.tt{position:fixed;top:14px;right:16px;z-index:20;background:var(--panel);color:var(--dim);
+  border:1px solid var(--line);border-radius:5px;padding:5px 11px;font-size:11.5px;cursor:pointer}
+@media(max-width:860px){
+  .wrap{display:block}
+  nav{width:auto;position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
+  nav a{display:inline-block;padding:6px 12px;border-left:0;border-bottom:2px solid transparent}
+  nav a.on{border-left:0;border-bottom-color:var(--accent)}
+  main{padding:26px 20px 80px}
+  h1{font-size:25px}
+}
+</style></head><body>
+<div class="wrap"><nav><div class="brand"><b>묵산</b><span>게임 기획 정본</span></div><div class="navsec">기획</div><a class="pg" href="00-개요.html"><span class="no">00</span>개요</a><a class="pg" href="05-참고작.html"><span class="no">05</span>참고작 분석</a><a class="pg" href="10-세계관.html"><span class="no">10</span>세계관 — 「발생」</a><a class="pg" href="15-전사.html"><span class="no">15</span>전사(前史) — 1998년 묵산</a><a class="pg" href="20-채움.html"><span class="no">20</span>채움의 역사</a><a class="pg" href="30-무대.html"><span class="no">30</span>무대 — 묵산시·묵산고</a><a class="pg" href="40-인물.html"><span class="no">40</span>주인공 4인</a><a class="pg" href="50-스토리.html"><span class="no">50</span>스토리 — 3막</a><a class="pg" href="60-레벨.html"><span class="no">60</span>챕터 구성</a><a class="pg" href="62-공략.html"><span class="no">62</span>게임 방식과 공략</a><a class="pg" href="64-엔티티.html"><span class="no">64</span>엔티티</a><a class="pg" href="66-스토리보드.html"><span class="no">66</span>스토리보드</a><a class="pg" href="68-조력자.html"><span class="no">68</span>조력자 — 「반원」</a><a class="pg" href="70-시스템.html"><span class="no">70</span>게임 시스템</a><a class="pg" href="80-진상.html"><span class="no">80</span>진상 4단</a><a class="pg" href="85-엔딩.html"><span class="no">85</span>엔딩 분기</a><a class="pg" href="90-톤.html"><span class="no">90</span>톤 규칙</a><a class="pg" href="95-하네스.html"><span class="no">95</span>하네스 &amp; 개선 루프</a><a class="pg" href="99-작업.html"><span class="no">99</span>다음 작업</a><div class="navsec">개발</div><a class="pg on" href="D00-문서체계.html"><span class="no">D00</span>문서 체계</a><a class="pg" href="D05-규약.html"><span class="no">D05</span>규약</a><a class="pg" href="D90-결정기록.html"><span class="no">D90</span>결정 기록</a><a class="pg" href="D99-함정.html"><span class="no">D99</span>함정</a><a class="playnav" href="../play/"><span class="lbl">▶ 플레이 가능</span><span class="nm">챕터 1 — 복도</span><span class="sd">⚠ 구버전 규칙(단위 세기)으로 만든 수직 슬라이스입니다. 새 규격으로 재구현 예정.</span></a><div class="othernav"><span class="lbl">이어지는 정본</span><a class="ext" href="../kamc/">한국이상관리공단 문서보관소 <span class="ar">↗</span></a><span class="warn"><b>28년 전 기록.</b> 1998년 묵산시 전체가 발생했고, 국가는 그 문서로 재난대응반을 만들었다</span></div></nav><main><h1 id="문서-체계">문서 체계</h1>
+<blockquote><p>이 문서는 <strong>문서에 관한 문서</strong>다. 새 문서를 만들기 전에 여기부터 본다.</p></blockquote>
+<hr>
+<h2 id="0-왜-지금-이걸-잡는가-실측">0. 왜 지금 이걸 잡는가 — 실측</h2>
+<p>2026-07-31 기준, 기획 문서 19편 중 <strong>4편이 현재 정본과 어긋난다.</strong></p>
+<table><thead><tr><th>문서</th><th>상태</th><th>원인</th></tr></thead><tbody><tr><td><code>70-시스템</code></td><td>❌ 낡음</td><td>「출석 <span class="ar">→</span> 기록·수첩·단위」 = 폐기된 규칙</td></tr><tr><td><code>62-공략</code></td><td>❌ 낡음</td><td>「항법·비상구 구역 기재」 = 폐기된 규칙</td></tr><tr><td><code>85-엔딩</code></td><td>❌ 낡음</td><td>「넷 중 하나가 남는다」 = 4인 파티 전제</td></tr><tr><td><code>40-인물</code></td><td>❌ 낡음</td><td>4인 파티 전제. <strong>혼자 들어온다</strong></td></tr></tbody></table>
+<p><strong>원인은 하나다.</strong> 같은 규칙이 <code>60-레벨</code> · <code>62-공략</code> · <code>70-시스템</code> 세 곳에 각각 적혀 있었고, <code>60</code>만 갱신되자 나머지 둘이 <strong>거짓말이 되었다.</strong></p>
+<blockquote><p><strong>같은 사실이 두 문서에 있으면, 반드시 어긋난다.</strong></p></blockquote>
+<hr>
+<h2 id="1-두-축">1. 두 축</h2>
+<table><thead><tr><th></th><th>무엇</th><th>읽는 사람</th><th>위치</th></tr></thead><tbody><tr><td><strong>기획</strong></td><td><strong>무엇을 만드는가</strong> — 세계관·규칙의 의도·연출</td><td>기획자</td><td><code>docs/</code> <span class="ar">→</span> 사이트</td></tr><tr><td><strong>개발</strong></td><td><strong>어떻게 만드는가</strong> — 코드 구조·데이터·파이프라인·절차</td><td>코드 만지는 사람</td><td><code>dev/</code> <span class="ar">→</span> 사이트 <code>D</code> 구역</td></tr></tbody></table>
+<p><strong>섞지 않는다.</strong> 기획 문서에 파일 경로를 쓰지 않고, 개발 문서에 세계관을 쓰지 않는다.</p>
+<hr>
+<h2 id="2-정본-1개-원칙">2. <span class="star">★</span> 정본 1개 원칙</h2>
+<p><strong>같은 사실은 한 문서에만 쓴다. 나머지는 링크한다.</strong></p>
+<table><thead><tr><th>사실의 종류</th><th>정본</th><th>다른 문서는</th></tr></thead><tbody><tr><td>챕터 구성 (목표·아이템·기믹·안전지대·엔티티)</td><td><code>60-레벨</code></td><td>링크만</td></tr><tr><td>엔티티 사양</td><td><code>64-엔티티</code></td><td>링크만</td></tr><tr><td>이야기 · 대사</td><td><code>50-스토리</code></td><td>링크만</td></tr><tr><td>조력자</td><td><code>68-조력자</code></td><td>링크만</td></tr><tr><td>데이터 스키마</td><td><code>dev/D20-데이터</code></td><td>링크만</td></tr><tr><td>코드 구조</td><td><code>dev/D10-아키텍처</code></td><td>링크만</td></tr></tbody></table>
+<p><strong>「요약해서 다시 적는 것」이 가장 흔한 사고 원인이다.</strong> 요약도 복사다.</p>
+<hr>
+<h2 id="3-밸런스-수치는-문서에-쓰지-않는다">3. <span class="star">★</span> 밸런스 수치는 문서에 쓰지 않는다</h2>
+<p>숫자를 두 종류로 나눈다.</p>
+<table><thead><tr><th>종류</th><th>예</th><th>어디에</th></tr></thead><tbody><tr><td><strong>정본 수치</strong> — 이야기다. 안 바뀐다</td><td>1997년 22명 · 2017년 4명 · 9년 · 6챕터</td><td><strong>문서에 쓴다</strong></td></tr><tr><td><strong>밸런스 수치</strong> — 조정 대상이다</td><td>무감각 상승률 · 소요 시간 · 감지 반경 · 쿨다운</td><td><strong>데이터 파일에만</strong></td></tr></tbody></table>
+<p>기획 문서는 이렇게 쓴다.</p>
+<blockquote><p>✅ 「무감각은 시간이 지나면 오르고, 안전지대에서 내려간다」</p><p>❌ 「무감각은 초당 1.1 오르고, 기록하면 14 내려간다」</p></blockquote>
+<p>밸런스를 조정할 때마다 문서를 고쳐야 한다면 <strong>문서는 반드시 낡는다.</strong> 수치는 <code>data/balance.json</code>에 있고, 문서는 그 파일을 링크한다.</p>
+<hr>
+<h2 id="4-폐기는-지운다-다만-이유는-남긴다">4. 폐기는 지운다, 다만 이유는 남긴다</h2>
+<p>문서 맨 아래에 <strong>「폐기한 것」</strong> 절을 둔다.</p>
+<pre class='blk'>## 폐기한 설정
+
+| 폐기 | 이유 |
+|---|---|
+| 4인 동행 진입 | 플레이가 1인이다. 동행은 시스템이 아니라 대사로만 남아 있었다 |</pre>
+<p><strong>왜 버렸는지를 남기면 같은 것을 다시 제안하지 않는다.</strong> 이번 세션에 「출석 <span class="ar">→</span> 기록」을 두 번 설계했다가 두 번 다 버렸다. 이유가 안 적혀 있었기 때문이다.</p>
+<hr>
+<h2 id="5-낡은-문서-처리-지우지-말고-배너를-단다">5. 낡은 문서 처리 — 지우지 말고 배너를 단다</h2>
+<p>갱신할 시간이 없으면 <strong>최소한 배너는 즉시 단다.</strong></p>
+<pre class='blk'>&gt; ⚠️ **낡음 (2026-07-31).** 이 문서는 폐기된 규칙을 설명한다. 현행은 → [[60-레벨]]</pre>
+<p><strong>낡은 문서보다 나쁜 건 낡은 줄 모르는 문서다.</strong></p>
+<hr>
+<h2 id="6-개발-문서-목록-계획">6. 개발 문서 목록 (계획)</h2>
+<table><thead><tr><th>#</th><th>문서</th><th>무엇</th><th>언제 쓸 수 있나</th></tr></thead><tbody><tr><td><strong>D00</strong></td><td><strong>문서 체계</strong></td><td>이 문서</td><td>✅ 지금</td></tr><tr><td><strong>D05</strong></td><td><strong>규약</strong></td><td>코드 규약 + 문서 규약 + 커밋 규약</td><td>✅ 지금</td></tr><tr><td><strong>D10</strong></td><td><strong>아키텍처</strong></td><td>코드 지도 · 데이터 흐름 · 「여기 고치면 저기 바뀐다」</td><td>⏸ <strong>모듈 분리 후</strong></td></tr><tr><td><strong>D20</strong></td><td><strong>데이터</strong></td><td><code>chapter.json</code> <code>entity.json</code> <code>dialogue.json</code> <code>balance.json</code> 스키마</td><td>⏸ 스키마 확정 후</td></tr><tr><td><strong>D30</strong></td><td><strong>에셋</strong></td><td>타일 아틀라스 규격 · 캐릭터 시트 규격 · LimeZu 라이선스 · 추가 절차</td><td>✅ 지금</td></tr><tr><td><strong>D40</strong></td><td><strong>하네스</strong></td><td><code>__H</code> 계약 구현 · 봇 · 지표 수집 (기획은 <span class="ar">→</span> [[95-하네스]])</td><td>⏸ 0단계 후</td></tr><tr><td><strong>D50</strong></td><td><strong>빌드·배포</strong></td><td><code>build.py</code> · rsync · GitHub Pages · <strong>캐시 검증 절차</strong></td><td>✅ 지금</td></tr><tr><td><strong>D90</strong></td><td><strong>결정 기록</strong></td><td>왜 이렇게 정했나 + 무엇을 폐기했나 (ADR)</td><td>✅ 지금</td></tr><tr><td><strong>D99</strong></td><td><strong>함정</strong></td><td>실제로 당한 것들</td><td>✅ 지금</td></tr></tbody></table>
+<p><span class="star">★</span> <strong>D10 아키텍처를 지금 쓰면 소설이 된다.</strong> 모듈이 아직 없다. 지금 코드는 단일 HTML 700줄이고, 0단계 리팩터링 후에야 지도를 그릴 수 있다. <span class="ar">→</span> [[99-작업]]</p>
+<hr>
+<h2 id="7-작성-순서">7. 작성 순서</h2>
+<pre class='blk'>지금        D00 문서체계 · D05 규약 · D90 결정기록 · D99 함정
+            + 낡은 기획 문서 4편에 배너
+            + 낡은 기획 문서 4편 재작성
+
+0단계 중    D30 에셋 · D50 빌드
+0단계 후    D10 아키텍처 · D20 데이터
+하네스 후   D40 하네스</pre>
+<p><strong>D90(결정 기록)을 지금 쓰는 이유</strong> — 이번 세션에 내린 결정이 20건 가까이 되는데 어디에도 안 적혀 있다. 시간이 지나면 <strong>왜 그랬는지 아무도 모른다.</strong></p>
+<hr>
+<h2 id="8-유지-규칙">8. 유지 규칙</h2>
+<table><thead><tr><th>언제</th><th>무엇을</th></tr></thead><tbody><tr><td>규칙을 바꿨다</td><td>정본 문서 1개만 고친다. 나머지는 링크라서 저절로 맞는다</td></tr><tr><td>설정을 버렸다</td><td><strong>「폐기한 것」 절에 이유와 함께 추가.</strong> 본문에서는 삭제</td></tr><tr><td>코드 구조를 바꿨다</td><td><code>D10-아키텍처</code> 갱신. 안 하면 다음에 길을 잃는다</td></tr><tr><td>함정에 빠졌다</td><td><code>D99-함정</code>에 즉시 추가. <strong>고치기 전에 적는다</strong></td></tr><tr><td>결정을 내렸다</td><td><code>D90-결정기록</code>에 한 줄. 대안과 기각 사유 포함</td></tr></tbody></table>
+<h3 id="커밋-메시지도-문서다">커밋 메시지도 문서다</h3>
+<p>이 저장소의 커밋 메시지는 이미 <strong>결정 기록 역할</strong>을 하고 있다. <code>git log</code>가 사실상 D90의 초안이다. 계속 그렇게 쓴다.</p>
+<div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
+</main></div><script>
+(function(){
+  var r=document.documentElement, k='mooksan-theme', s=localStorage.getItem(k);
+  if(s) r.setAttribute('data-theme',s);
+  var b=document.createElement('button'); b.className='tt'; b.textContent='명암';
+  b.onclick=function(){
+    var cur=r.getAttribute('data-theme')||
+      (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    var nx=cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx); localStorage.setItem(k,nx);
+  };
+  document.body.appendChild(b);
+  document.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tw';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+})();
+</script></body></html>
