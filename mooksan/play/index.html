@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>묵산 — 레벨 1 「복도」</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden;
+  font:14px/1.6 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  color:#d8d4cc;-webkit-font-smoothing:antialiased;user-select:none}
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000}
+#frame{position:relative;width:min(100vw,calc(100vh*1.6));height:min(100vh,calc(100vw/1.6));
+  container-type:size}
+canvas{display:block;width:100%;height:100%}
+
+/* ── HUD ── */
+#hud{position:absolute;inset:0;pointer-events:none;z-index:5}
+.pane{position:absolute;background:rgba(10,11,13,.62);border:1px solid rgba(150,145,135,.22);
+  padding:9px 13px;font-size:12px;letter-spacing:.02em;backdrop-filter:blur(3px)}
+#unit{top:16px;left:16px;min-width:150px}
+#unit b{display:block;font-size:27px;line-height:1.15;letter-spacing:.04em;color:#fff;font-weight:600}
+#unit .lb{font-size:10px;color:#8a857c;letter-spacing:.18em}
+#unit .sub2{margin-top:2px;font-size:10px;color:#8a857c;letter-spacing:.04em}
+#unit .warn{margin-top:5px;font-size:11px;color:#8a857c}
+#unit .warn.hot{color:#b4453a}
+#note .fnd{margin-top:6px;padding-top:5px;border-top:1px solid rgba(150,145,135,.18);
+  font-size:10px;color:#8a857c;letter-spacing:.06em}
+#note .fnd span{color:#c9a227}
+#phone{top:16px;right:16px;text-align:right;font-family:ui-monospace,Menlo,monospace}
+#phone .t{font-size:20px;color:#fff;letter-spacing:.06em}
+#phone .s{font-size:10px;color:#8a857c;letter-spacing:.1em;margin-top:3px}
+#num{bottom:16px;left:16px;min-width:190px}
+#num .lb{font-size:10px;color:#8a857c;letter-spacing:.18em;margin-bottom:6px}
+#bar{height:5px;background:rgba(120,115,105,.22);overflow:hidden}
+#barf{height:100%;width:0%;background:#7d8a72;transition:width .25s linear}
+#num .st{margin-top:6px;font-size:11px;color:#8a857c;min-height:17px}
+#note{bottom:16px;right:16px;min-width:158px;max-width:212px}
+#note .lb{font-size:10px;color:#8a857c;letter-spacing:.18em;margin-bottom:5px}
+#note .pg{display:flex;align-items:baseline;gap:5px}
+#note .pg b{font-size:23px;color:#fff;font-weight:600;letter-spacing:.02em}
+#note .pg span{font-size:10.5px;color:#8a857c}
+#note.low .pg b{color:#c47a4a}
+#note.out .pg b{color:#b4453a}
+#note .last{margin-top:6px;font-size:10.5px;line-height:1.55;color:#6f6a62;
+  font-family:ui-monospace,Menlo,monospace}
+
+/* ── 자막 ── */
+#sub{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);
+  max-width:min(660px,86vw);text-align:center;font-size:15px;line-height:1.65;
+  text-shadow:0 1px 6px #000;opacity:0;transition:opacity .4s;pointer-events:none}
+#sub.on{opacity:1}
+#sub .who{color:#c9a227;font-size:12px;letter-spacing:.1em;display:block;margin-bottom:3px}
+
+/* ── 조작 안내 ── */
+#keys{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+  font-size:11px;color:#6f6a62;letter-spacing:.05em;white-space:nowrap}
+#keys b{color:#a29c92;font-weight:600}
+
+/* ── 문서 ── */
+#doc{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.86);padding:22px;pointer-events:auto}
+#doc.on{display:flex}
+#docin{max-width:620px;width:100%;max-height:84vh;overflow-y:auto;background:#e9e5d9;color:#1e1c18;
+  padding:34px 36px;border:1px solid #b9b2a2;
+  font-family:ui-monospace,Menlo,'D2Coding',monospace;font-size:13.5px;line-height:1.95;
+  box-shadow:0 24px 70px rgba(0,0,0,.7)}
+#docin h3{font-size:15px;letter-spacing:.1em;margin-bottom:4px;font-weight:700}
+#docin .meta{font-size:11px;color:#6d675b;letter-spacing:.06em;
+  padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid #c3bcac}
+#docin p{margin:0 0 12px;white-space:pre-wrap}
+#docin .cl{margin-top:20px;padding-top:12px;border-top:1px solid #c3bcac;
+  font-size:11px;color:#6d675b;letter-spacing:.08em;text-align:right}
+#docin .era{font-size:11px;color:#8a7a3a;letter-spacing:.14em;vertical-align:middle;
+  border:1px solid #c0b48a;padding:1px 6px;margin-left:6px}
+#docin .hint{margin:14px 0 4px;padding:9px 11px;background:#dcd7c7;border-left:2px solid #8a7a3a;
+  font-size:12px;color:#3a362c}
+#docin .nbs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+#docin .nb{background:#d6d1c1;border:1px solid #a9a291;color:#2a2720;
+  padding:7px 0;width:38px;font:inherit;font-size:13px;cursor:pointer;letter-spacing:0}
+#docin .nb:hover{background:#2a2720;color:#e9e5d9;border-color:#2a2720}
+#docin .board{margin-top:18px;padding:14px 15px;background:#ddd8c8;border:1px solid #b9b2a2}
+#docin .board b{font-size:12.5px;letter-spacing:.12em;display:block;margin-bottom:9px}
+#docin .bl{font-size:12px;line-height:1.9;color:#2e2b24}
+#docin .bl.dim{margin-top:7px;color:#6d675b;font-size:11px}
+#docin .wb{margin-top:12px;width:100%;background:none;border:1px solid #8a5a3a;color:#7a4526;
+  padding:9px;font:inherit;font-size:12px;letter-spacing:.06em;cursor:pointer}
+#docin .wb:hover{background:#7a4526;color:#e9e5d9}
+#over .stat{font-size:11px;color:#6f6a62;letter-spacing:.05em}
+#over .dim{color:#7a746b;font-size:12px;line-height:1.9}
+
+/* ── 오버레이 ── */
+#veil{position:fixed;inset:0;z-index:20;pointer-events:none;opacity:0;transition:opacity 1.2s}
+#veil{position:absolute}
+#title,#over{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:#000;text-align:center;padding:26px}
+#over{display:none}
+h1{font-size:36px;letter-spacing:.3em;font-weight:700;color:#fff;margin-bottom:8px}
+.sb{font-size:12px;letter-spacing:.24em;color:#7a746b;margin-bottom:34px}
+.desc{font-size:13.5px;line-height:2;color:#9c968c;max-width:430px;margin-bottom:34px}
+button{pointer-events:auto;background:none;color:#d8d4cc;border:1px solid #4a4740;
+  padding:12px 34px;font:inherit;font-size:13px;letter-spacing:.16em;cursor:pointer;transition:.18s}
+button:hover{background:#d8d4cc;color:#0c0d0f;border-color:#d8d4cc}
+#over h2{font-size:23px;letter-spacing:.1em;color:#fff;margin-bottom:14px}
+#over .r{font-size:13px;color:#9c968c;line-height:2;max-width:460px;margin-bottom:30px}
+#over .r b{color:#c9a227}
+@container (max-width:640px){
+  #keys{font-size:9px;letter-spacing:0}
+  .pane{padding:6px 9px;font-size:10.5px}
+  #unit b{font-size:20px}#note .pg b{font-size:18px}#phone .t{font-size:16px}
+  #unit,#phone,#num,#note{margin:0}
+  #num{min-width:150px}#note{min-width:120px;max-width:150px}
+  #sub{bottom:62px;font-size:12.5px}
+}
+@container (max-width:400px){
+  #note .last{display:none}
+  #keys{display:none}
+  #num{min-width:112px}#note{min-width:92px}
+  .pane{padding:5px 7px;font-size:9.5px}
+  #unit b{font-size:17px}#note .pg b{font-size:15px}#phone .t{font-size:13px}
+  #unit .warn,#unit .sub2{font-size:8.5px}#num .st,#note .fnd{display:none}
+}
+@media(max-width:620px){ h1{font-size:27px} }
+</style>
+</head>
+<body>
+
+<div id="stage"><div id="frame"><canvas id="cv" width="960" height="600"></canvas>
+<div id="veil"></div>
+
+<div id="hud">
+  <div class="pane" id="unit">
+    <span class="lb">기록 이후</span><b id="uv">?</b>
+    <div class="sub2" id="uw">적어둔 것이 없다</div>
+    <div class="warn" id="uw2"></div>
+  </div>
+  <div class="pane" id="phone">
+    <div class="t" id="ph">20:41</div>
+    <div class="s" id="pb">100%</div>
+  </div>
+  <div class="pane" id="num">
+    <div class="lb">무감각</div>
+    <div id="bar"><div id="barf"></div></div>
+    <div class="st" id="nst"></div>
+  </div>
+  <div class="pane" id="note">
+    <div class="lb">수첩</div>
+    <div class="pg"><b id="pgv">14</b><span>쪽 남음</span></div>
+    <div class="last" id="lastn">아직 아무것도 적지 않았다</div>
+    <div class="fnd">조사 <span id="fnd">0 / 12</span></div>
+  </div>
+  <div id="sub"><span class="who"></span><span class="tx"></span></div>
+  <div id="keys">
+    <b>W</b> 걷기 &nbsp;·&nbsp; <b>Shift+W</b> 뛰기 &nbsp;·&nbsp; <b>R</b> 돌아서기 &nbsp;·&nbsp;
+    <b>E</b> 기록<span id='cd'></span> &nbsp;·&nbsp; <b>F</b> 조사
+  </div>
+</div></div></div>
+
+<div id="doc"><div id="docin"></div></div>
+
+<div id="title">
+  <h1>묵 산</h1>
+  <div class="sb">레벨 1 — 복도</div>
+  <div class="desc">
+    2026년 9월 17일 목요일. 야간자율학습 2교시.<br>
+    정전이 왔고, 차단기를 올렸고, 불이 들어왔다.<br><br>
+    그런데 복도가 길다. 문패는 3-1부터 다시 시작한다.<br><br>
+    <span style="color:#6f6a62;font-size:12px">복도는 어느 단위나 똑같이 생겼다.<br>
+    여기가 어딘지 아는 방법은 <b style="color:#c9a227">적어두는 것</b>뿐이다.</span>
+  </div>
+  <button id="go">시작</button>
+</div>
+
+<div id="over">
+  <h2 id="oh"></h2>
+  <div class="r" id="or"></div>
+  <button id="again">다시</button>
+</div>
+
+<script>
+'use strict';
+const cv=document.getElementById('cv'), cx=cv.getContext('2d');
+const W=cv.width, H=cv.height, HZ=H*0.5;
+
+/* ═══ 상태 ═══ */
+const DOORS=6;                       // 반복 단위 = 문 6개 (3-1~3-5 + 비상구)
+const SEAL=72*60;                    // 봉인까지 72시간 (표준 절차서 제7조)
+const S={
+  run:false, place:'hall',           // hall | room
+  unit:0, z:0.05,                    // z: 단위 안에서의 위치 (0~6). 문은 반정수 자리
+  face:1, turning:0, num:0,
+  outMin:0, walked:0,
+  room:0, spot:1,                    // 들어간 교실 번호 / 조사 지점
+  pages:14, lastNote:'', noteUnit:null, drift:0,   // drift: 기록 이후 지난 문 (부호 있음)
+  found:{}, foundN:0,
+  lastCall:-99, t:0, dead:false, won:false, subT:0, _warned:0
+};
+
+/* ── 깊이가 곧 연대다. 들어갈수록 오래된 「채움」을 만난다 ── */
+function era(u){ return u>=9?1997 : u>=6?2008 : u>=3?2017 : 2026; }
+const ERA_LABEL={2026:'',2017:'2017',2008:'2008',1997:'1997'};
+const SPOTS=['칠판','책상','사물함'];
+
+/* ── 조사 결과: [연대][지점] ── */
+const CLUES={
+ 2026:[
+  {t:'칠판',m:'3학년 █반 · 오늘',
+   b:'9/17 (목)\n\n6교시 자습 / 야자 2교시 20:40~21:30\n\n─ 청소 당번 : 목요일 ( )',
+   c:'목요일 칸만 비어 있다. 지운 게 아니라 처음부터 안 썼다'},
+  {t:'책상',m:'내 자리',
+   b:'문제집이 펼쳐져 있다. 마지막으로 푼 건 3번.\n볼펜은 굴러가서 바닥에 있다.\n\n4번부터는 손을 안 댔다.',
+   c:'나간 게 아니라 그냥 멈춘 자리다'},
+  {t:'사물함',m:'열려 있음',
+   b:'우산이 하나 들어 있다.\n\n오늘은 비가 안 왔다.',
+   c:'내일 온다고 했었다'}],
+ 2017:[
+  {t:'칠판',m:'분필이 아니라 마커로 씀',
+   b:'구역 재확인 요망\n계측기 반납 (미이행)\n상주 3일차\n\n※ 교대 인원 도착 시 기재할 것 ─',
+   c:'그 아래는 비어 있다'},
+  {t:'책상',m:'교탁 위 · 특수재난 현장대응반',
+   b:'인 사 발 령\n\n아래 인원에게 현장 상주 근무를 명함.\n\n  기 간 : 2017. 6. 12. ~ (        )\n  인 원 : 4명\n\n  ※ 종료일은 상황 종료 후 기재한다.',
+   c:'종료일란은 아직 공란이다'},
+  {t:'사물함',m:'대응반 장비함',
+   b:'방독면 4개. 전부 미사용.\n\n봉인 스티커가 뜯겨 있다.\n\n안쪽에서.',
+   c:'장비를 쓰러 온 게 아니라 넣어두러 온 사람들이다'}],
+ 2008:[
+  {t:'칠판',m:'두 사람의 필적',
+   b:'구조 완료. 이송 인원 확인 후 귀가 조치.\n\n\n        ─ 몇 명이었지',
+   c:'아래 문장은 분필을 눕혀 썼다. 급하게'},
+  {t:'책상',m:'이송자 명단 (사본)',
+   b:'연번  성명    조치    확인\n 01   김██   귀가    (인)\n 02   이██   귀가    (인)\n 03   박██   귀가    (인)\n  …\n 1█   ██    귀가    (인)',
+   c:'확인란 서명 1█건이 전부 같은 필적이다'},
+  {t:'사물함',m:'신발장',
+   b:'운동화 1█켤레. 크기가 전부 다르다.\n\n실내화가 아니다.\n\n밖에서 신고 들어온 신발이다.',
+   c:'이 학교 학생이 아니었다'}],
+ 1997:[
+  {t:'칠판',m:'날짜가 멈춰 있음',
+   b:'4 / 17 (목)\n\n正正正正正正正正正正正正正正正正正正正正正丁\n\n',
+   c:'스물둘까지 세다가 멈췄다'},
+  {t:'책상',m:'책상 22개 · 이름표 부착',
+   b:'책상마다 이름표가 붙어 있다.\n스물두 개.\n\n하나만 비어 있다.\n\n그 자리에 지금 내 가방이 있다.',
+   c:'비어 있던 게 아니라 아직 안 쓴 것이다'},
+  {t:'사물함',m:'안쪽에 긁힌 자국',
+   b:'사흘째. 배 안 고픔. 물도 안 마셨는데 목 안 마름.\n\n밖에서 소리가 남. 공사하는 소리 같음.\n\n누가 벽을 막고 있는 것 같음.',
+   c:'봉인은 72시간 뒤였다'}]
+};
+const CLUE_TOTAL=12;
+
+const K={};
+addEventListener('keydown',e=>{
+  if(e.repeat && !['KeyW','ArrowUp'].includes(e.code))return;
+  K[e.code]=1;
+  if(document.getElementById('doc').classList.contains('on')){
+    if(e.code==='Escape')closeDoc(); return;
+  }
+  if(S.place==='room'){
+    if(e.code==='KeyA'||e.code==='ArrowLeft')  S.spot=(S.spot+2)%3;
+    if(e.code==='KeyD'||e.code==='ArrowRight') S.spot=(S.spot+1)%3;
+    if(e.code==='KeyF') inspect();
+    if(e.code==='KeyE') note();
+    if(e.code==='KeyS'||e.code==='Escape') leaveRoom();
+  } else {
+    if(e.code==='KeyR')turn();
+    if(e.code==='KeyE')note();
+    if(e.code==='KeyF')inspect();
+  }
+  if(['KeyW','KeyS','KeyA','KeyD','KeyR','KeyE','KeyF','Space'].includes(e.code))e.preventDefault();
+});
+addEventListener('keyup',e=>K[e.code]=0);
+
+/* ═══ 오디오 ═══ */
+let AC=null,hum=null,humG=null;
+function audioOn(){
+  try{
+    AC=new (window.AudioContext||window.webkitAudioContext)();
+    hum=AC.createOscillator(); humG=AC.createGain();
+    hum.type='sawtooth'; hum.frequency.value=60;
+    const f=AC.createBiquadFilter(); f.type='lowpass'; f.frequency.value=220;
+    humG.gain.value=0.028;
+    hum.connect(f); f.connect(humG); humG.connect(AC.destination); hum.start();
+  }catch(e){}
+}
+function blip(freq,dur,vol){
+  if(!AC)return;
+  const o=AC.createOscillator(),g=AC.createGain();
+  o.frequency.value=freq; o.type='triangle';
+  g.gain.setValueAtTime(vol*(1-S.num/140),AC.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001,AC.currentTime+dur);
+  o.connect(g); g.connect(AC.destination); o.start(); o.stop(AC.currentTime+dur);
+}
+function step(){ blip(90+Math.random()*40,0.09,0.05); }
+
+/* ═══ 행동 ═══ */
+function turn(){ if(S.turning||!S.run||S.place!=='hall')return;
+  S.turning=1; setTimeout(()=>{S.face*=-1;S.turning=0;},560); }
+
+/* ── 기록: 회복이자 유일한 항법 ── */
+function note(){
+  if(!S.run||S.t-S.lastCall<6)return;
+  if(S.pages<=0){ say('','쓸 자리가 없다.'); return; }
+  S.lastCall=S.t; S.pages--;
+  S.noteUnit=S.unit; S.drift=0;                 // ← 여기서 위치가 확정된다
+  S.lastNote=S.unit+'단위. '+(S.place==='room'?'3-'+S.room+' 안.':'복도.');
+  say('나',S.lastNote);
+  blip(220,0.09,0.06); setTimeout(()=>blip(180,0.07,0.05),140);
+  S.num=Math.max(0,S.num-14);
+  if(S.pages===3) setTimeout(()=>say('','세 쪽 남았다.'),1500);
+  if(S.pages===0) setTimeout(()=>say('','마지막 쪽이었다.'),1500);
+}
+
+/* ── 지금 무엇 앞에 서 있는가 ── */
+function atDoor(){
+  const k=Math.floor(S.z), c=k+0.5;
+  if(Math.abs(S.z-c)>0.42) return null;
+  const dn=((k%DOORS)+DOORS)%DOORS+1;
+  return {n:dn, exit:dn===DOORS};
+}
+function inspect(){
+  if(S.place==='room'){ openClue(); return; }
+  const d=atDoor();
+  if(!d){ say('','문 사이다. 벽뿐이다.'); return; }
+  if(d.exit) openExit(); else enterRoom(d.n);
+}
+
+/* ── 교실 ── */
+function enterRoom(n){
+  S.place='room'; S.room=n; S.spot=1;
+  blip(120,0.16,0.07);
+  const e=era(S.unit);
+  say('', e===2026 ? '3-'+n+'. 아까 나온 그 교실이다.' : '3-'+n+'. 아까 그 교실이 아니다.');
+}
+function leaveRoom(){
+  S.place='hall'; blip(100,0.14,0.06);
+  // ★ 무감각이 높으면 나온 사이에 복도가 늘어난다 — 본인은 모른다
+  if(S.num>50 && Math.random()<0.28){ S.unit++; S.drift+=0; onUnit(true); }
+}
+function openClue(){
+  const e=era(S.unit), c=CLUES[e][S.spot];
+  const key=e+'/'+S.spot;
+  if(!S.found[key]){ S.found[key]=1; S.foundN++; S.num=Math.max(0,S.num-8); }
+  openDoc(c, ERA_LABEL[e]);
+}
+
+/* ── 비상구: 나가려면 여기가 몇 단위인지 답해야 한다 ── */
+function openExit(){
+  S.run=false;
+  const maxN=Math.max(12,S.unit+3);
+  let btns='';
+  for(let i=0;i<=maxN;i++) btns+='<button class="nb" data-a="'+i+'">'+i+'</button>';
+  let extra='';
+  if(S.foundN>=5) extra=
+    '<div class="board"><b>발생 구역 조사표</b>'
+    +'<div class="bl">위험 등급 : 3급 (요주의)</div>'
+    +'<div class="bl">인    원 : '+(S.foundN>=9?'2█명':'( )명')+'</div>'
+    +'<div class="bl">생 존 자 : (          )</div>'
+    +'<div class="bl">조치 의견 : 봉인</div>'
+    +'<div class="bl dim">※ 제8조에 따라 생존자 확인 절차는 두지 아니한다.</div>'
+    +'<button class="wb" id="signb">생존자란에 내 이름을 적는다</button></div>';
+  document.getElementById('docin').innerHTML=
+    '<h3>비상구</h3><div class="meta">철문 · 잠겨 있지 않음 · 옆에 관리 카드</div>'
+    +'<p>문은 안 잠겼다. 그런데 열려면 카드에 <b>현재 구역</b>을 적어야 한다.<br>'
+    +'복도는 어느 단위나 똑같이 생겼다. 적어둔 것 말고는 알 방법이 없다.</p>'
+    +'<div class="hint">'+(S.noteUnit===null
+        ? '수첩에 적은 것이 없다.'
+        : '수첩 : <b>'+S.noteUnit+'단위</b> · 그 뒤로 지난 문 <b>'
+          +(S.drift>=0?'+':'')+S.drift+'</b>')+'</div>'
+    +'<div class="nbs">'+btns+'</div>'+extra
+    +'<div class="cl">틀리게 적어도 문은 열린다. 기재한 대로 처리된다.</div>';
+  const dv=document.getElementById('doc'); dv.classList.add('on'); dv.dataset.mode='exit';
+  dv.querySelectorAll('.nb').forEach(b=>b.onclick=ev=>{ev.stopPropagation();answerExit(+b.dataset.a);});
+  const sb=document.getElementById('signb');
+  if(sb) sb.onclick=ev=>{ev.stopPropagation();signSelf();};
+}
+function answerExit(a){
+  const dv=document.getElementById('doc'); dv.classList.remove('on'); dv.dataset.mode='';
+  if(a===S.unit){ S.run=false; escaped(); return; }
+  // ★ 오기(誤記)가 현실이 된다 — 1998년에 이 도시에 일어난 일과 같은 방식으로
+  const before=S.unit; S.unit=a; onUnit(true); S.run=true;
+  say('', a>before ? '문을 열었더니 복도였다. 아까보다 길다.'
+                   : '문을 열었더니 복도였다. 아까 그 자리가 아니다.');
+  setTimeout(()=>say('','적은 대로 됐다.'),2400);
+}
+function signSelf(){ S.run=false; filled(); }
+
+function openDoc(d,tag){
+  document.getElementById('docin').innerHTML=
+    '<h3>'+d.t+(tag?' <span class="era">'+tag+'</span>':'')+'</h3>'
+    +'<div class="meta">'+d.m+'</div><p>'+d.b+'</p><div class="cl">'+d.c+'</div>';
+  const dv=document.getElementById('doc'); dv.classList.add('on'); dv.dataset.mode='doc'; S.run=false;
+}
+function closeDoc(){
+  const e=document.getElementById('doc');
+  if(!e.classList.contains('on'))return;
+  if(e.dataset.mode==='exit'){ e.classList.remove('on'); e.dataset.mode=''; S.run=true; return; }
+  e.classList.remove('on'); S.run=true;
+}
+document.getElementById('doc').onclick=closeDoc;
+
+function say(who,tx){
+  const s=document.getElementById('sub');
+  s.querySelector('.who').textContent=who;
+  s.querySelector('.tx').textContent=tx;
+  s.classList.add('on'); S.subT=S.t+2.8;
+}
+
+/* ═══ 진행 ═══ */
+function advance(dt,running){
+  const sp=(running?3.4:1.55)*dt;
+  const dz=S.face===1?sp:-sp;
+  const before=Math.floor(S.z);
+  S.z+=dz; S.walked+=sp;
+  if(S.walked>0.62){ S.walked=0; step(); }
+  const after=Math.floor(S.z);
+  if(after!==before) S.drift+=(after-before);      // 지난 문 수 — 보이는 대로만 센다
+  if(S.z>=DOORS){ S.z-=DOORS; S.unit++; onUnit(); }
+  else if(S.z<0){
+    S.z+=DOORS;
+    if(running){ S.unit++; say('','뛰니까 문이 더 나온다.'); onUnit(); }   // ★ 뛰면 카운터가 거짓말한다
+    else { S.unit=Math.max(0,S.unit-1); onUnit(); }
+  }
+}
+function onUnit(silent){
+  const u=S.unit;
+  const ext = u<=3 ? u*6 : 18 + Math.pow(u-3,2.35)*22;
+  S.outMin=Math.max(S.outMin,Math.round(ext));      // 밖의 시간은 되돌아오지 않는다
+  if(S.outMin>=SEAL){ sealed(); return; }
+  if(silent)return;
+  const e=era(u);
+  if(u===3) say('','문패는 그대론데 교실 안이 달라졌다.');
+  if(u===6) say('','여기 있던 사람들은 우리 학교 학생이 아니었다.');
+  if(u===9) say('','1997년이다.');
+}
+
+/* ═══ 종료 ═══ */
+function over(h,html){
+  S.run=false;
+  document.getElementById('oh').textContent=h;
+  document.getElementById('or').innerHTML=html+
+    '<br><br><span class="stat">조사 '+S.foundN+' / '+CLUE_TOTAL+
+    ' · 도달 '+S.unit+'단위 · 밖에서 '+fmtOut(S.outMin)+' · 수첩 '+S.pages+'쪽</span>';
+  document.getElementById('over').style.display='flex';
+}
+function escaped(){ S.won=true;
+  over('복도가 끝났다',
+    '철문 너머는 2층 계단참이었다. 교무실 불이 켜져 있다.<br><br>'
+    +'<b>정확히 적었기 때문에</b> 정확한 자리로 나왔다.<br>'
+    +'<span class="dim">기재한 대로 처리된다 — 이 문장은 경고가 아니라 설명이었다.</span>'); }
+function sealed(){ S.dead=true;
+  over('밖에서 사흘이 지났다',
+    '복도는 그대로다. 아직 걸을 수 있다.<br><br>'
+    +'다만 밖에서는 <b>'+fmtOut(S.outMin)+'</b>이 지났다.<br>'
+    +'<span class="dim">「발생 후 72시간이 경과한 경우 봉인한다.」<br>'
+    +'「제7조에 따른 봉인 시 생존자 확인 절차는 두지 아니한다.」</span>'); }
+function lose(msg){ S.dead=true; over('그 자리에 앉았다', msg); }
+function filled(){ S.dead=true;
+  over('문이 열렸다',
+    '이름을 적자마자 철문이 열렸다. 조사표가 완성되었기 때문이다.<br><br>'
+    +'계단을 내려가 교문을 나섰다. 집에 갔다. 아무 일도 없었다.<br><br>'
+    +'<span class="dim">다음 발생 구역 조사표의 <b>인원란이 한 명 늘어 있다.</b><br>'
+    +'생존자란은 여전히 공란이다.</span>'); }
+function fmtOut(m){
+  if(m<60)return m+'분';
+  const h=Math.floor(m/60), r=m%60; return h+'시간 '+(r?r+'분':'');
+}
+
+/* ═══ 렌더 ═══ */
+function shade(c,k){
+  return 'rgb('+c.map(v=>Math.max(0,Math.min(255,Math.round(v*k)))).join(',')+')';
+}
+// 무감각이 오르면 화면이 「평온해진다」 — 따뜻해지고 대비가 낮아진다
+function warmth(){ return S.num/100; }
+
+/* ── 벽면 사각형: 측면(sd:-1 좌,+1 우), z구간, 세로비율 t(0=천장,1=바닥) ── */
+function wq(za,zb,t0,t1,sd,fill,alpha){
+  const a=proj(za), b=proj(zb);
+  const ax=sd<0?a.l:a.r, bx=sd<0?b.l:b.r;
+  cx.save(); if(alpha!==undefined)cx.globalAlpha=alpha;
+  q(cx, ax,a.cy+(a.fy-a.cy)*t0, bx,b.cy+(b.fy-b.cy)*t0,
+        bx,b.cy+(b.fy-b.cy)*t1, ax,a.cy+(a.fy-a.cy)*t1, fill);
+  cx.restore();
+}
+/* ── 바닥/천장 가로 이음선 ── */
+function seam(z,t,fill,th){
+  const a=proj(z), b=proj(z+ (th||0.035));
+  q(cx, a.l,a.cy+(a.fy-a.cy)*t, a.r,a.cy+(a.fy-a.cy)*t,
+        b.r,b.cy+(b.fy-b.cy)*t, b.l,b.cy+(b.fy-b.cy)*t, fill);
+}
+
+function draw(){
+  const n=warmth();
+  cx.fillStyle='#05060a'; cx.fillRect(0,0,W,H);
+
+  const SEG=15;
+  const off=S.z%1;
+
+  for(let i=SEG;i>=1;i--){
+    let z0=i-off, z1=z0+1;
+    if(z1<=0.55)continue;
+    z0=Math.max(0.55,z0);
+    const p0=proj(z0), p1=proj(z1);
+    const fog=Math.max(0,1-z0/SEG);
+    const lit=Math.pow(fog,1.2);
+    const k=(0.30+lit*0.70)*(1-n*0.16);
+    const near=Math.abs(p0.r-p0.l)>Math.abs(p1.r-p1.l)*1.02;  // 근경 여부
+
+    const cCeil=[210-n*4,206-n*10,192-n*26];
+    const cUp  =[222-n*2,216-n*8,198-n*24];
+    const cLow =[128-n*24,154-n*22,136-n*20];   // 민트 허리
+    const cBase=[ 58-n*6 , 70-n*8 , 62-n*6 ];   // 걸레받이
+    const cFlr =[ 78-n*8 , 94-n*10, 80-n*6 ];   // 녹색 리놀륨
+    const cDoor=[104-n*10, 78-n*6 , 58 ];       // 나무 문
+    const cFrm =[ 82-n*8 , 60-n*5 , 44 ];       // 문틀
+    const cSash=[196-n*6 ,192-n*10,180-n*20];   // 창틀(알루미늄)
+    const cGlas=[ 20,26,36 ];                   // 유리(밤)
+
+    const T_WIN=0.20, T_SILL=0.55, T_MID=0.58, T_BASE=0.93, T_DOOR=0.13;
+
+    /* 천장 · 바닥 */
+    q(cx, p0.l,p0.cy, p1.l,p1.cy, p1.r,p1.cy, p0.r,p0.cy, shade(cCeil,k*0.82));
+    q(cx, p0.l,p0.fy, p1.l,p1.fy, p1.r,p1.fy, p0.r,p0.fy, shade(cFlr,k));
+    seam(z1,1.0,shade(cFlr,k*0.72));            // 리놀륨 이음선
+    seam(z1,0.0,shade(cCeil,k*0.66));           // 천장 텍스 경계
+
+    /* ── 좌측: 교실 문 ── */
+    wq(z0,z1,0,      T_MID,  -1, shade(cUp ,k*0.94));
+    wq(z0,z1,T_MID,  T_BASE, -1, shade(cLow,k*0.94));
+    wq(z0,z1,T_BASE, 1,      -1, shade(cBase,k*0.94));
+
+    const idxD=Math.floor(S.z)+i-1, dnD=((idxD%DOORS)+DOORS)%DOORS+1;
+    const isExit=(dnD===DOORS);
+    const cThis=isExit?[46-n*4,86-n*8,62-n*6]:cDoor;        // 비상구는 녹색 철문
+    const da=z0+0.16, db=z1-0.16;               // 문 구간 (사이에 벽이 남는다)
+    if(db>da){
+      wq(da,db,T_DOOR-0.035,1,-1, shade(cFrm ,k*0.9));      // 문틀
+      wq(da+0.05,db-0.05,T_DOOR,0.985,-1, shade(cThis,k*0.92)); // 문짝
+      wq(da+0.05,db-0.05,T_DOOR,T_DOOR+0.012,-1, shade(cFrm,k*0.8));
+      // 문 유리창 (교실 안은 꺼져 있다) / 비상구는 유리가 없다
+      if(!isExit){
+        wq(da+0.16,db-0.16,0.24,0.40,-1, shade([14,16,20],k*1.0));
+        wq(da+0.16,db-0.16,0.24,0.252,-1, shade(cFrm,k*0.8));
+      } else {
+        // 비상구 표지등 — 문 위에 초록 불
+        wq(da+0.10,db-0.10,T_DOOR-0.10,T_DOOR-0.045,-1, 'rgba(58,196,110,'+Math.min(.95,fog*1.5)+')');
+      }
+      // 문 손잡이
+      const hz=db-0.13, hp=proj(hz);
+      const hr=Math.max(1,Math.abs(p0.l-p1.l)*0.022);
+      cx.save(); cx.globalAlpha=Math.min(1,fog*1.6); cx.fillStyle=shade([188,178,150],k);
+      cx.beginPath(); cx.arc(hp.l,hp.cy+(hp.fy-hp.cy)*0.56,hr,0,7); cx.fill(); cx.restore();
+      // 문패 (문 옆 벽)
+      const idx=Math.floor(S.z)+i-1, dn=((idx%DOORS)+DOORS)%DOORS+1;
+      if(z0>0.9&&z0<9){
+        const sa=db+0.015, sb=Math.min(z1-0.01,db+0.145);
+        const pa=proj(sa), pb=proj(sb);
+        wq(sa,sb,0.295,0.385,-1, shade([234,230,218],k), Math.min(1,fog*1.5));
+        const px=(pa.l+pb.l)/2, pw=Math.abs(pa.l-pb.l);
+        const ph=Math.abs(pa.fy-pa.cy)*0.09;
+        const fh=Math.min(pw*0.42, ph*0.62);      // 명패 안에 들어가는 크기로
+        if(fh>4.5){
+          cx.save(); cx.globalAlpha=Math.min(1,fog*1.5);
+          cx.beginPath();                          // 명패 밖으로 넘치지 않게
+          cx.rect(Math.min(pa.l,pb.l), pa.cy+(pa.fy-pa.cy)*0.295,
+                  pw, Math.abs((pa.fy-pa.cy)*0.09));
+          cx.clip();
+          cx.fillStyle='#33301f'; cx.textAlign='center'; cx.textBaseline='middle';
+          cx.font='600 '+fh.toFixed(1)+'px monospace';
+          cx.fillText(isExit?'EXIT':'3-'+dn, px, pa.cy+(pa.fy-pa.cy)*0.340);
+          cx.restore();
+        }
+      }
+    }
+
+    /* ── 우측: 운동장 창 ── */
+    wq(z0,z1,0,      T_WIN,  1, shade(cUp ,k*0.88));
+    wq(z0,z1,T_SILL, T_MID,  1, shade(cSash,k*0.7));   // 창턱
+    wq(z0,z1,T_MID,  T_BASE, 1, shade(cLow,k*0.88));
+    wq(z0,z1,T_BASE, 1,      1, shade(cBase,k*0.88));
+
+    const wa=z0+0.10, wb=z1-0.10;
+    if(wb>wa){
+      wq(wa,wb,T_WIN,T_SILL,1, shade(cGlas,1.0));                 // 유리
+      // 운동장 야간 조명 — 유리 너머
+      if(z0>0.9&&z0<10){
+        cx.save(); cx.globalAlpha=Math.min(.9,fog*1.3);
+        const mp=proj((wa+wb)/2);
+        const gx=mp.r, gy=mp.cy+(mp.fy-mp.cy)*(T_WIN+0.09);
+        const gr=Math.abs(proj(wa).r-proj(wb).r)*0.55+3;
+        const g=cx.createRadialGradient(gx,gy,0,gx,gy,gr);
+        g.addColorStop(0,'rgba(255,238,196,.85)'); g.addColorStop(1,'rgba(255,238,196,0)');
+        cx.fillStyle=g; cx.beginPath(); cx.arc(gx,gy,gr,0,7); cx.fill(); cx.restore();
+      }
+      // 유리 반사 띠
+      wq(wa,wb,T_WIN+0.02,T_WIN+0.06,1, 'rgba(180,200,220,.14)');
+      // 창틀 — 위/아래/중간 멀리언
+      wq(wa,wb,T_WIN,T_WIN+0.018,1, shade(cSash,k*0.95));
+      wq(wa,wb,T_SILL-0.018,T_SILL,1, shade(cSash,k*0.95));
+      const mz=(wa+wb)/2, mw=Math.max(0.012,(wb-wa)*0.035);
+      wq(mz-mw,mz+mw,T_WIN,T_SILL,1, shade(cSash,k*0.85));       // 세로 멀리언
+      wq(wa-0.055,wa,T_WIN-0.01,T_SILL+0.01,1, shade(cSash,k*0.75)); // 세로 창틀
+      wq(wb,wb+0.055,T_WIN-0.01,T_SILL+0.01,1, shade(cSash,k*0.75));
+    }
+
+    /* ── 형광등 ── */
+    const idx2=Math.floor(S.z)+i-1, dn2=((idx2%DOORS)+DOORS)%DOORS+1;
+    if(dn2%2===1){
+      const fa=z0+0.30, fb=z1-0.30;
+      if(fb>fa){
+        const flk=(0.62+0.38*Math.sin(S.t*(37+i*3))*0.5+0.19);
+        const pa=proj(fa), pb=proj(fb);
+        cx.save(); cx.globalAlpha=Math.min(1,fog*1.4)*flk;
+        const lw0=Math.abs(pa.r-pa.l)*0.19, lw1=Math.abs(pb.r-pb.l)*0.19;
+        q(cx, W/2-lw0,pa.cy, W/2-lw1,pb.cy, W/2+lw1,pb.cy, W/2+lw0,pa.cy,'rgba(255,250,234,.95)');
+        // 바닥 반사
+        cx.globalAlpha=Math.min(.5,fog*0.6)*flk;
+        q(cx, W/2-lw0*0.7,pa.fy, W/2-lw1*0.7,pb.fy, W/2+lw1*0.7,pb.fy, W/2+lw0*0.7,pa.fy,'rgba(235,240,225,.30)');
+        cx.restore();
+      }
+    }
+  }
+
+  if(S.turning){ cx.fillStyle='rgba(0,0,0,.55)'; cx.fillRect(0,0,W,H); }
+  post(n);
+}
+/* ══ 교실 — 1점 투시 ══ */
+function drawRoom(){
+  const n=warmth(), e=era(S.unit);
+  // 연대별 조명 상태 — 방에 들어서면 눈으로 먼저 안다
+  const LIT={2026:1.0, 2017:0.72, 2008:0.48, 1997:0.18}[e];
+  const k=(0.42+LIT*0.52)*(1-n*0.18);
+  const flick = e===2017 ? (0.72+0.28*Math.sin(S.t*31)*0.5+0.14) : 1;
+
+  cx.fillStyle='#040508'; cx.fillRect(0,0,W,H);
+  const cUp =[212-n*2,206-n*8,188-n*24], cLow=[120-n*24,146-n*22,128-n*20];
+  const cFlr=[ 76-n*8, 92-n*10, 78-n*6], cCei=[198-n*4,194-n*10,180-n*26];
+  const cBd =[ 28-n*2, 50-n*4, 38-n*3];
+  const bw=W*0.44, bh=H*0.50, bx=(W-bw)/2, by=HZ-bh*0.46, bx2=bx+bw, by2=by+bh;
+  const T=0.56, oM=H*T, iM=by+bh*T;
+  // 화면가장자리(f=0) ↔ 정면벽(f=1) 보간
+  const L=f=>({x:0+(bx-0)*f, yT:0+(by-0)*f, yM:oM+(iM-oM)*f, yB:H+(by2-H)*f});
+  const R=f=>({x:W+(bx2-W)*f, yT:0+(by-0)*f, yM:oM+(iM-oM)*f, yB:H+(by2-H)*f});
+  const wl=(P,A,B,t0,t1,fill,al)=>{const a=P(A),b=P(B);
+    const y=(p,tt)=>p.yT+(p.yB-p.yT)*tt;
+    cx.save(); if(al!==undefined)cx.globalAlpha=al;
+    q(cx,a.x,y(a,t0),b.x,y(b,t0),b.x,y(b,t1),a.x,y(a,t1),fill); cx.restore();};
+
+  // 바닥 · 천장 · 벽
+  q(cx, 0,H, bx,by2, bx2,by2, W,H, shade(cFlr,k*0.92));
+  q(cx, 0,0, bx,by,  bx2,by,  W,0, shade(cCei,k*0.70));
+  wl(L,0,1,0,T*0.86, shade(cUp ,k*0.88)); wl(L,0,1,T*0.86,1, shade(cLow,k*0.88));
+  wl(R,0,1,0,T*0.86, shade(cUp ,k*0.80)); wl(R,0,1,T*0.86,1, shade(cLow,k*0.80));
+  q(cx, bx,by, bx2,by, bx2,by2, bx,by2, shade(cUp ,k*0.95));
+  q(cx, bx,iM, bx2,iM, bx2,by2, bx,by2, shade(cLow,k*0.95));
+
+  // 창 (우측) — 밤이므로 운동장 조명만
+  for(let w=0;w<3;w++){
+    const a=0.20+w*0.25, b=a+0.185;
+    wl(R,a,b,0.08,0.44,'#131924');
+    const A=R(a),B=R(b);
+    cx.save(); cx.globalAlpha=0.6;
+    const gx=(A.x+B.x)/2, gy=A.yT+(A.yB-A.yT)*0.22, gr=Math.abs(A.x-B.x)*0.6+4;
+    const g=cx.createRadialGradient(gx,gy,0,gx,gy,gr);
+    g.addColorStop(0,'rgba(255,238,196,.7)'); g.addColorStop(1,'rgba(255,238,196,0)');
+    cx.fillStyle=g; cx.beginPath(); cx.arc(gx,gy,gr,0,7); cx.fill(); cx.restore();
+    wl(R,a,b,0.075,0.095,shade([190,186,174],k*0.9));
+    wl(R,a,b,0.43,0.45,  shade([190,186,174],k*0.9));
+  }
+
+  // 사물함 (좌측 벽 하단 — 바닥에 서 있다)
+  const la=0.16, lb=0.58, LA=L(la), LB=L(lb);
+  wl(L,la,lb,0.42,1, shade([128-n*12,122-n*12,108-n*10],k*0.82));
+  for(let i2=1;i2<5;i2++){ const f=la+(lb-la)*i2/5, P=L(f);
+    cx.strokeStyle='rgba(16,16,16,.4)'; cx.lineWidth=1; cx.beginPath();
+    cx.moveTo(P.x,P.yT+(P.yB-P.yT)*0.42); cx.lineTo(P.x,P.yB); cx.stroke(); }
+  wl(L,la,lb,0.70,0.715, 'rgba(16,16,16,.3)');
+
+  // 천장 형광등 2줄 + 바닥 반사
+  if(LIT>0.25){
+    [0.30,0.62].forEach(f=>{
+      const a=L(f), b=L(f+0.16), a2=R(f), b2=R(f+0.16);
+      cx.save(); cx.globalAlpha=0.80*LIT*flick;
+      const lx0=W/2-(W/2-a.x)*0.26, lx1=W/2-(W/2-b.x)*0.26;
+      q(cx, lx0,a.yT, lx1,b.yT, W-lx1,b.yT, W-lx0,a.yT, 'rgba(255,250,234,.95)');
+      cx.globalAlpha=0.22*LIT*flick;
+      q(cx, lx0,a.yB, lx1,b.yB, W-lx1,b.yB, W-lx0,a.yB, 'rgba(232,238,222,.5)');
+      cx.restore();
+    });
+  }
+
+  // 칠판 + 교탁
+  const bdx=bx+bw*0.10, bdw=bw*0.80, bdy=by+bh*0.14, bdh=bh*0.32;
+  cx.fillStyle=shade(cBd,k); cx.fillRect(bdx,bdy,bdw,bdh);
+  cx.fillStyle=shade([148-n*10,138-n*10,118-n*8],k); cx.fillRect(bdx-2,bdy+bdh,bdw+4,3);
+  cx.fillStyle=shade([94-n*8,70-n*6,52],k*0.9);
+  cx.fillRect(bx+bw*0.34, by2-bh*0.155, bw*0.32, bh*0.155);
+  const BDTX={2026:'9/17 (목)   야자 2교시', 2017:'상주 3일차', 2008:'구조 완료', 1997:'4 / 17 (목)'};
+  cx.save(); cx.globalAlpha=0.55+LIT*0.3; cx.fillStyle='#dfe6da';
+  cx.font=Math.max(8,bh*0.052)+'px monospace'; cx.textAlign='left'; cx.textBaseline='top';
+  cx.fillText(BDTX[e], bdx+bdw*0.05, bdy+bdh*0.14);
+  if(e===1997){ cx.globalAlpha=0.42;
+    cx.font=Math.max(7,bh*0.045)+'px monospace';
+    cx.fillText('正正正正正正正正正正正丁', bdx+bdw*0.05, bdy+bdh*0.52); }
+  cx.restore();
+
+  // 책상 4열 × 5행 — 연대별로 다르게 놓여 있다
+  const SEED=(r,c)=>Math.sin((r*7.3+c*3.1)+S.unit*11.7)*0.5+0.5;
+  for(let r=0;r<4;r++){
+    const f=0.86-r*0.21;                    // f: 1=정면벽, 0=화면앞
+    const P=L(f), yb=P.yB, dw=(W-2*P.x)/7.6, dh=dw*0.44;
+    for(let c=0;c<5;c++){
+      const s=SEED(r,c);
+      const jitter = e===2008 ? (s-0.5)*dw*0.7 : 0;      // 2008 = 흐트러져 있다
+      const rot    = e===2008 ? (s-0.5)*0.18  : 0;
+      const cxm=W/2+(c-2)*dw*1.26+jitter;
+      cx.save(); cx.translate(cxm,yb-dh*1.2); cx.rotate(rot);
+      cx.fillStyle=shade([102-n*10,78-n*7,56],k*(0.55+(1-f)*0.42));
+      cx.fillRect(-dw/2,-dh*0.34,dw,dh*0.34);
+      cx.fillStyle=shade([54,50,45],k*(0.45+(1-f)*0.34));
+      cx.fillRect(-dw*0.42,0,dw*0.07,dh*1.15);
+      cx.fillRect( dw*0.35,0,dw*0.07,dh*1.15);
+      // 연대별 소품
+      if(e===2026 && r<2 && c===2){ cx.fillStyle=shade([224,220,206],k);
+        cx.fillRect(-dw*0.22,-dh*0.42,dw*0.44,dh*0.10); }        // 문제집
+      if(e===1997){ cx.fillStyle=shade([232,228,214],k*0.9);
+        cx.fillRect(-dw*0.16,-dh*0.40,dw*0.32,dh*0.055); }       // 이름표
+      if(e===2017 && c%2===0 && r===0){ cx.fillStyle=shade([40,44,50],k);
+        cx.fillRect(-dw*0.26,-dh*0.46,dw*0.52,dh*0.14); }        // 장비 케이스
+      cx.restore();
+    }
+  }
+  // 2008 — 바닥에 신발
+  if(e===2008){
+    for(let i2=0;i2<6;i2++){
+      const s=Math.sin(i2*4.7+S.unit)*0.5+0.5, f=0.24+s*0.5, P=L(f);
+      cx.save(); cx.globalAlpha=0.9; cx.fillStyle=shade([48,44,40],k*0.8);
+      const sw=(W-2*P.x)/26;
+      cx.beginPath(); cx.ellipse(W*0.18+s*W*0.64, P.yB-sw*0.2, sw, sw*0.42,
+        (s-0.5)*1.4, 0,7); cx.fill(); cx.restore();
+    }
+  }
+  // 2017 — 바닥 케이블
+  if(e===2017){
+    cx.save(); cx.globalAlpha=0.55; cx.strokeStyle='#2a2c30'; cx.lineWidth=Math.max(1.5,H*0.005);
+    cx.beginPath(); cx.moveTo(W*0.06,H*0.97);
+    cx.bezierCurveTo(W*0.34,H*0.86, W*0.42,by2+6, W/2-bw*0.14,by2+2); cx.stroke(); cx.restore();
+  }
+
+  // 조사 지점
+  const MARK=[[bdx+bdw/2, bdy+bdh/2], [W/2, by2+(H-by2)*0.34],
+              [(LA.x+LB.x)/2, LA.yT+(LA.yB-LA.yT)*0.70]];
+  MARK.forEach((m,i2)=>{
+    const on=(i2===S.spot), done=!!S.found[e+'/'+i2];
+    cx.save(); cx.globalAlpha=on?0.95:0.30;
+    cx.strokeStyle=done?'#7d8a72':(on?'#c9a227':'#a8a29a');
+    cx.lineWidth=on?2:1.2;
+    const s=on?H*0.048:H*0.034;
+    cx.beginPath();
+    cx.moveTo(m[0]-s,m[1]-s*0.55); cx.lineTo(m[0]-s,m[1]-s); cx.lineTo(m[0]-s*0.45,m[1]-s);
+    cx.moveTo(m[0]+s*0.45,m[1]-s); cx.lineTo(m[0]+s,m[1]-s); cx.lineTo(m[0]+s,m[1]-s*0.55);
+    cx.moveTo(m[0]+s,m[1]+s*0.55); cx.lineTo(m[0]+s,m[1]+s); cx.lineTo(m[0]+s*0.45,m[1]+s);
+    cx.moveTo(m[0]-s*0.45,m[1]+s); cx.lineTo(m[0]-s,m[1]+s); cx.lineTo(m[0]-s,m[1]+s*0.55);
+    cx.stroke();
+    if(on){ cx.fillStyle='#c9a227'; cx.globalAlpha=0.92;
+      cx.font='600 '+Math.max(9,H*0.021)+'px sans-serif';
+      cx.textAlign='center'; cx.textBaseline='top';
+      cx.fillText(SPOTS[i2]+(done?'  ✓':''), m[0], m[1]+s+4); }
+    cx.restore();
+  });
+
+  // 방은 복도보다 어둡다
+  cx.fillStyle='rgba(0,0,0,'+(0.30*(1-LIT))+')'; cx.fillRect(0,0,W,H);
+  post(n);
+}
+/* 공통 후처리 — 비네트 · 무감각 필름 · 그레인 */
+function post(n){
+  const vg=cx.createRadialGradient(W/2,H/2,H*0.28,W/2,H/2,H*0.92);
+  vg.addColorStop(0,'rgba(0,0,0,0)');
+  vg.addColorStop(1,'rgba(0,0,0,'+(0.72-n*0.42)+')');
+  cx.fillStyle=vg; cx.fillRect(0,0,W,H);
+  if(n>0.05){ cx.save(); cx.globalCompositeOperation='overlay'; cx.globalAlpha=n*0.5;
+    cx.fillStyle='#c98a3a'; cx.fillRect(0,0,W,H); cx.restore(); }
+  if(n<0.75){ cx.save(); cx.globalAlpha=0.05*(1-n);
+    for(let i=0;i<220;i++){ cx.fillStyle=Math.random()<.5?'#fff':'#000';
+      cx.fillRect(Math.random()*W,Math.random()*H,1,1); } cx.restore(); }
+}
+function proj(z){
+  const CH=2.9,CW=2.4,eye=1.55,F=H*0.86;
+  const s=F/Math.max(0.25,z);
+  return {l:W/2-(CW/2)*s, r:W/2+(CW/2)*s, cy:HZ-(CH-eye)*s, fy:HZ+eye*s};
+}
+function q(c,x1,y1,x2,y2,x3,y3,x4,y4,fill){
+  c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.lineTo(x3,y3);c.lineTo(x4,y4);
+  c.closePath();c.fillStyle=fill;c.fill();
+}
+/* ═══ 루프 ═══ */
+let last=performance.now();
+function loop(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now; S.t+=dt;
+  if(S.run && !S.turning){
+    let running=false;
+    if(S.place==='hall'){
+      const fwd=K['KeyW']||K['ArrowUp'];
+      running=fwd&&(K['ShiftLeft']||K['ShiftRight']);
+      if(fwd) advance(dt,running);
+    }
+    S.num+=dt*(1.1+(running?2.2:0)+Math.pow(S.unit,1.55)*0.09);
+    if(S.num>=100) lose('언제부터 걷고 있었는지 기억나지 않는다. 아무렇지도 않았다.');
+    const sc=S.t-S.lastCall;
+    if(sc>13 && !S._warned && S.pages>0){ S._warned=1; say('','뭘 하고 있었는지 잘 모르겠다.'); }
+    if(sc<6) S._warned=0;
+  }
+  if(S.t>S.subT) document.getElementById('sub').classList.remove('on');
+  if(S.place==='room') drawRoom(); else draw();
+  hudUpdate();
+  requestAnimationFrame(loop);
+}
+function hudUpdate(){
+  // ★ 단위는 알려주지 않는다. 적어둔 것과 그 뒤로 지난 문만 보인다
+  const uv=document.getElementById('uv'), uw=document.getElementById('uw');
+  if(S.noteUnit===null){ uv.textContent='?'; uw.textContent='적어둔 것이 없다'; }
+  else { uv.textContent=(S.drift>=0?'+':'')+S.drift;
+    uw.textContent=S.noteUnit+'단위에서 지난 문'; }
+  const warn=document.getElementById('uw2');
+  warn.textContent = S.outMin>=SEAL*0.55 ? '봉인까지 '+fmtOut(SEAL-S.outMin)
+                   : S.outMin>0 ? '외부 경과 '+fmtOut(S.outMin) : '';
+  warn.className='warn'+(S.outMin>=SEAL*0.55?' hot':'');
+
+  document.getElementById('barf').style.width=S.num+'%';
+  document.getElementById('barf').style.background=
+    S.num>70?'#b4453a':S.num>40?'#c47a4a':'#7d8a72';
+  document.getElementById('nst').textContent =
+    S.num>78?'괜찮은 것 같다.' : S.num>52?'소리가 멀어진다.' : S.num>28?'조금 나른하다.' : '';
+  document.getElementById('pgv').textContent=S.pages;
+  document.getElementById('note').className='pane'+(S.pages===0?' out':S.pages<=3?' low':'');
+  document.getElementById('lastn').textContent=S.lastNote||'아직 아무것도 적지 않았다';
+  document.getElementById('fnd').textContent=S.foundN+' / '+CLUE_TOTAL;
+
+  // 조작 안내 — 상황에 맞게 바뀐다
+  const keys=document.getElementById('keys');
+  if(S.place==='room'){
+    keys.innerHTML='<b>A</b>／<b>D</b> 둘러보기 &nbsp;·&nbsp; <b>F</b> 조사 &nbsp;·&nbsp; '
+      +'<b>E</b> 기록<span id="cd"></span> &nbsp;·&nbsp; <b>S</b> 복도로';
+  } else {
+    const d=atDoor();
+    const act=d? (d.exit?'<b>F</b> 비상구':'<b>F</b> 3-'+d.n+' 들어가기') : '<b>F</b> 조사';
+    keys.innerHTML='<b>W</b> 걷기 &nbsp;·&nbsp; <b>Shift+W</b> 뛰기 &nbsp;·&nbsp; <b>R</b> 돌아서기 &nbsp;·&nbsp; '
+      +'<b>E</b> 기록<span id="cd"></span> &nbsp;·&nbsp; '+act;
+  }
+  const cd=Math.max(0,6-(S.t-S.lastCall));
+  const cde=document.getElementById('cd');
+  if(cde) cde.textContent=cd>0.1?' ('+cd.toFixed(0)+')':'';
+  if(AC&&humG) humG.gain.value=0.028*(1-S.num/125);
+}
+
+/* ═══ 시작 ═══ */
+function reset(){
+  Object.assign(S,{run:true,place:'hall',unit:0,z:0.05,face:1,turning:0,num:0,outMin:0,
+    walked:0,room:0,spot:1,pages:14,lastNote:'',noteUnit:null,drift:0,
+    found:{},foundN:0,_warned:0,lastCall:-99,dead:false,won:false,subT:0});
+  document.getElementById('over').style.display='none';
+  document.getElementById('doc').classList.remove('on');
+  setTimeout(()=>say('','복도 끝에 창이 있었는데.'),900);
+  setTimeout(()=>say('','문패가 3-1부터 다시 시작한다.'),3800);
+  setTimeout(()=>say('','E — 적어두자. 안 적으면 여기가 어딘지 알 방법이 없다.'),7200);
+}
+document.getElementById('go').onclick=()=>{
+  document.getElementById('title').style.display='none'; audioOn(); reset();
+};
+document.getElementById('again').onclick=reset;
+function fit(){}
+addEventListener('resize',fit); fit();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
