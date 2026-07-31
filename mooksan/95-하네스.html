@@ -111,7 +111,7 @@ window.__H = {
 <h2 id="2-게임에-먼저-넣어야-할-구조">2. 게임에 먼저 넣어야 할 구조</h2>
 <p>하네스 요구사항 = 어차피 필요한 리팩터링이다. <span class="ar">→</span> [[99-작업]] C항</p>
 <table><thead><tr><th>필요 구조</th><th>왜</th></tr></thead><tbody><tr><td><strong>시드 RNG</strong> (<code>Math.random</code> 전량 제거)</td><td>같은 시드 = 같은 판. 실패를 재현해야 고친다</td></tr><tr><td><strong>틱 분리</strong> (<code>loop</code>에서 <code>update(dt)</code> 떼어내기)</td><td>rAF 없이 돌려야 빠르다</td></tr><tr><td><strong>상태 직렬화</strong> (<code>state()</code> / <code>load()</code>)</td><td>지표 수집 · 세이브 · 특정 상황 재현</td></tr><tr><td><strong>이벤트 로그</strong></td><td><code>{t, type, payload}</code> — 이동·조사·경고·편입·사망·아이템</td></tr><tr><td><strong>맵 데이터 분리</strong> (<code>maps/*.json</code>)</td><td>챕터 점프 · 맵만 바꿔 A/B</td></tr></tbody></table>
-<p><span class="star">★</span> <strong>시드 RNG가 가장 먼저다.</strong> 지금 <code>Math.random()</code>이 무감각 이탈·복도 증식·엔티티 배치에 쓰이는데, 재현이 안 되면 버그를 두 번 볼 수 없다.</p>
+<p><span class="star">★</span> <strong>시드 RNG가 가장 먼저다.</strong> <code>Math.random()</code>이 엔티티 배치·순찰 경로·연출에 쓰이는데, 재현이 안 되면 버그를 두 번 볼 수 없다.</p>
 <hr>
 <h2 id="3-봇-3종">3. 봇 3종</h2>
 <table><thead><tr><th>봇</th><th>행동</th><th>잡아내는 것</th></tr></thead><tbody><tr><td><strong>원숭이</strong></td><td>완전 무작위 입력</td><td>크래시 · 소프트락 · 상태 꼬임</td></tr><tr><td><strong>규칙봇</strong></td><td>[[62-공략]]의 권장 진행을 그대로 수행</td><td><strong>정상 경로가 실제로 통하는가</strong></td></tr><tr><td><strong>탐욕봇</strong></td><td>최대 깊이 · 최대 수집 · 위험 감수</td><td>밸런스 상한. 「깨지는 조합」 탐색</td></tr></tbody></table>
@@ -119,7 +119,7 @@ window.__H = {
 <hr>
 <h2 id="4-지표와-기준선">4. 지표와 기준선</h2>
 <p><code>harness/baseline.json</code>에 통과한 값을 저장하고, 새 변경이 이를 악화시키면 <strong>차단</strong>한다.</p>
-<table><thead><tr><th>지표</th><th>기준</th><th>벗어나면</th></tr></thead><tbody><tr><td>규칙봇 클리어율</td><td>≥ 95%</td><td>불공정</td></tr><tr><td>원숭이 소프트락</td><td>0건</td><td>진행 불가 버그</td></tr><tr><td>챕터 소요 시간</td><td>4~9분</td><td>짧으면 허전, 길면 늘어짐</td></tr><tr><td><strong>무행동 구간 최대치</strong></td><td><strong>≤ 25초</strong></td><td><span class="star">★</span> 지루함</td></tr><tr><td><strong>선택 빈도</strong> (분당 의미 있는 결정)</td><td><strong>≥ 3회</strong></td><td><span class="star">★</span> 사무 노동</td></tr><tr><td>사망 원인 분포</td><td>어느 하나 ≥ 70% 금지</td><td>한 가지 밸런스만 작동 중</td></tr><tr><td>경고 <span class="ar">→</span> 사망 리드타임</td><td>≥ 1.5초</td><td>예고 없는 죽음</td></tr><tr><td>안전지대 복귀 간격</td><td>40~120초</td><td>너무 잦으면 지루, 드물면 무의미</td></tr><tr><td>프레임당 그리기 호출</td><td>기준선 ±20%</td><td>렌더 회귀</td></tr></tbody></table>
+<table><thead><tr><th>지표</th><th>기준</th><th>벗어나면</th></tr></thead><tbody><tr><td>규칙봇 클리어율</td><td>≥ 95%</td><td>불공정</td></tr><tr><td>원숭이 소프트락</td><td>0건</td><td>진행 불가 버그</td></tr><tr><td>챕터 소요 시간</td><td>4~9분</td><td>짧으면 허전, 길면 늘어짐</td></tr><tr><td><strong>무행동 구간 최대치</strong></td><td><strong>≤ 25초</strong></td><td><span class="star">★</span> 지루함</td></tr><tr><td><strong>선택 빈도</strong> (분당 의미 있는 결정)</td><td><strong>≥ 3회</strong></td><td><span class="star">★</span> 사무 노동</td></tr><tr><td>사망 원인 분포 (편입 / 봉인 / 안전지대 상실)</td><td>어느 하나 ≥ 70% 금지</td><td>한 가지 압박만 작동 중</td></tr><tr><td>경고 <span class="ar">→</span> 사망 리드타임</td><td>≥ 1.5초</td><td>예고 없는 죽음</td></tr><tr><td>안전지대 복귀 간격</td><td>40~120초</td><td>너무 잦으면 지루, 드물면 무의미</td></tr><tr><td>프레임당 그리기 호출</td><td>기준선 ±20%</td><td>렌더 회귀</td></tr></tbody></table>
 <p><strong>「무행동 구간」 정의</strong> — 이벤트 로그에서 <code>이동</code> 외의 이벤트가 하나도 없는 최장 구간. 걷기만 하고 아무 일도 안 일어난 시간이다.</p>
 <p><strong>「선택」 정의</strong> — 되돌릴 수 없고, 결과가 갈리는 입력. 조사 · 안전지대 이탈 · 조력자 지시 수용/거부 · 아이템 사용. <strong>단순 이동은 선택이 아니다.</strong></p>
 <hr>
@@ -129,7 +129,7 @@ harness/shots/       →  기준 스크린샷
 harness/shots_new/   →  이번 회차</pre>
 <ol><li>각 상황을 <code>__H</code>로 세팅 <span class="ar">→</span> 브라우저에서 캡처</li><li>기준과 <strong>픽셀 diff.</strong> 임계값 초과 항목만 표시</li><li><strong>판단은 사람이 한다.</strong> diff는 「달라졌다」만 말하지 「나빠졌다」를 말하지 않는다</li></ol>
 <blockquote><p>철칙 — <strong>목업으로 검수하지 않는다.</strong> 실제 빌드 스크린샷만 쓴다.</p></blockquote>
-<p>캡처 목록(초안): 챕터별 ①진입 ②안전지대 안 ③엔티티 조우 ④경고 발생 ⑤아이템 획득 ⑥대화창 ⑦무감각 80% ⑧사망 화면 <span class="ar">→</span> <strong>6챕터 × 8 = 48장</strong></p>
+<p>캡처 목록(초안): 챕터별 ①진입 ②안전지대 안 ③엔티티 조우 ④경고 발생 ⑤아이템 획득 ⑥대화창 ⑦안전지대 만료 임박 ⑧사망 화면 <span class="ar">→</span> <strong>6챕터 × 8 = 48장</strong></p>
 <hr>
 <h2 id="6-루프-절차">6. 루프 절차</h2>
 <pre class='blk'>① 실행     harness/run.mjs  →  봇 3종 × 시드 100 + 스크린샷 48장
@@ -161,7 +161,7 @@ harness/shots_new/   →  이번 회차</pre>
 <p><strong>주의 —</strong> 루프를 오래 돌리면 지표는 좋아지는데 게임은 재미없어질 수 있다. <strong>기준선은 목표가 아니라 하한선이다.</strong> 주기적으로 사람이 직접 플레이해야 한다.</p>
 <hr>
 <h2 id="10-이번-세션에서-얻은-교훈-하네스가-있었으면-잡았을-것">10. 이번 세션에서 얻은 교훈 (하네스가 있었으면 잡았을 것)</h2>
-<table><thead><tr><th>실제로 일어난 일</th><th>어느 지표가 잡았을까</th></tr></thead><tbody><tr><td>캐릭터 정면 스프라이트가 옆모습이었다</td><td>스크린샷 회귀 (4방향 캡처)</td></tr><tr><td>문패가 다음 열 벽 타일에 절반 덮였다</td><td>스크린샷 회귀</td></tr><tr><td>달리기 키가 순수 손해라 아무도 안 쓴다</td><td><strong>선택 빈도</strong> — 사용률 0%</td></tr><tr><td>복도를 걷는 동안 아무 일도 안 일어난다</td><td><strong>무행동 구간</strong> — 25초 초과</td></tr><tr><td>「기록·계산」이 사무 노동이었다</td><td><strong>선택 빈도</strong> — 분당 1회 미만</td></tr><tr><td>외부 시간이 되돌아왔다</td><td>규칙봇 지표 (단조 증가 위반)</td></tr></tbody></table>
+<table><thead><tr><th>실제로 일어난 일</th><th>어느 지표가 잡았을까</th></tr></thead><tbody><tr><td>캐릭터 정면 스프라이트가 옆모습이었다</td><td>스크린샷 회귀 (4방향 캡처)</td></tr><tr><td>문패가 다음 열 벽 타일에 절반 덮였다</td><td>스크린샷 회귀</td></tr><tr><td>달리기 키가 순수 손해라 아무도 안 쓴다</td><td><strong>선택 빈도</strong> — 사용률 0%</td></tr><tr><td>복도를 걷는 동안 아무 일도 안 일어난다</td><td><strong>무행동 구간</strong> — 25초 초과</td></tr><tr><td>「기록·계산」이 사무 노동이었다</td><td><strong>선택 빈도</strong> — 분당 1회 미만</td></tr><tr><td>무감각이 무슨 일을 하는지 불분명했다</td><td><strong>압박 원인별 사망 분포</strong> — 기여도 0에 가까움</td></tr><tr><td>외부 시간이 되돌아왔다</td><td>규칙봇 지표 (단조 증가 위반)</td></tr></tbody></table>
 <blockquote><p><strong>여섯 개 중 다섯 개를 자동으로 잡을 수 있었다.</strong></p><p>나머지 하나(「재미없다」)는 사람이 말해줘야 했고, 실제로 그랬다.</p></blockquote>
 <div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
 </main></div><script>
