@@ -1,0 +1,12 @@
+{
+  "sealMin": 4320,
+  "walkSpeed": 6.4, "runSpeed": 11, "diagFactor": 0.72,
+  "animWalk": 10, "animRun": 17,
+  "noteCooldown": 6, "notePages": 14,
+  "recover": { "note": 14, "clue": 8, "prop": 4 },
+  "numb": { "base": 1.1, "run": 2.0, "unitPow": 1.55, "unitCoef": 0.09, "max": 100 },
+  "hallGrow": { "threshold": 50, "chance": 0.28 },
+  "warnIdle": 15,
+  "typeSpeed": 44,
+  "outCurve": { "linUnits": 3, "linMin": 6, "base": 18, "pow": 2.35, "coef": 22 }
+}
