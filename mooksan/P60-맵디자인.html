@@ -91,7 +91,13 @@ tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
 <p><strong>나는 화면에 보이는 공간만 본다. 밸런스·스토리 전개는 내 소관이 아니다.</strong> <strong>목업·배치도가 아니라 실제 빌드 스크린샷으로 심사한다</strong> (철칙 R1).</p>
 <h2 id="반드시-읽는-것">반드시 읽는 것</h2>
 <ul><li>실제 빌드 스크린샷 (심사 의뢰에 명시된 경로)</li><li><code>play/assets/tiles.png</code> — 타일 어휘 (무엇으로 지을 수 있는가)</li><li><code>docs/60-레벨.md</code> — 각 챕터의 의도 (배치도는 참고, 판단 기준은 스크린샷)</li><li><code>docs/30-무대.md</code> — 2026년 한국 학교라는 무대</li></ul>
-<h2 id="심사-기준">심사 기준</h2>
+<h2 id="최우선-기준-0-구조-연속성-미적-평가보다-먼저"><span class="star">★</span> 최우선 기준 0 — 구조 연속성 (미적 평가보다 먼저)</h2>
+<p><strong>예쁜지 묻기 전에, 물리적으로 말이 되는지 먼저 본다.</strong> 오너 지적(2026-07-31): 「미적인 평가만 하지 말고 문과 복도가 잘 이어져 있는지 이런 것들도 봐야 해」</p>
+<p>각 항목을 <strong>스크린샷에서 지점을 특정해</strong> 판정한다. 「대체로 괜찮다」는 답변은 무효다.</p>
+<table><thead><tr><th>#</th><th>검사</th><th>통과 조건</th></tr></thead><tbody><tr><td>0-1</td><td><strong>문 ↔ 복도 접합</strong></td><td>문의 아랫변이 바닥면과 만나는가. 문틀 좌우가 벽면과 같은 평면에 있는가. 문지방이 있는가</td></tr><tr><td>0-2</td><td><strong>문의 개폐 방향</strong></td><td>이 문이 어느 쪽으로 열리는지 화면에서 짐작되는가 (경첩·손잡이 위치)</td></tr><tr><td>0-3</td><td><strong>벽 ↔ 바닥 접합선</strong></td><td>걸레받이가 한 줄로 이어지는가. 끊기거나 두 겹이 되는 구간이 없는가</td></tr><tr><td>0-4</td><td><strong>창이 창으로 보이는가</strong></td><td>유리(반사·투과)·창틀·창턱·멀리언 중 <strong>최소 3개</strong>가 있는가. 없으면 그건 창이 아니라 무늬다</td></tr><tr><td>0-5</td><td><strong>창 너머에 공간이 있는가</strong></td><td>유리 안쪽이 「밖」으로 읽히는가 (운동장 조명·어둠의 깊이). 단색 채움이면 실격</td></tr><tr><td>0-6</td><td><strong>소품의 접지</strong></td><td>입식물(정수기·쓰레기통·화분)이 바닥에 서 있는가, 벽에 붙어 있는가. 부착물(시계·게시판)은 반대</td></tr><tr><td>0-7</td><td><strong>타일 이음</strong></td><td>같은 재질이 인접할 때 이음매가 어긋나거나 반복 패턴이 눈에 띄게 튀는 곳이 없는가</td></tr><tr><td>0-8</td><td><strong>캐릭터와의 관계</strong></td><td>캐릭터가 벽 앞에 설 때 겹침·발밑 그림자·가림 순서가 맞는가</td></tr></tbody></table>
+<p><strong>0번 기준에서 실격이 나오면 미적 기준(1~7)은 채점하지 않는다.</strong> 구조가 먼저다.</p>
+<hr>
+<h2 id="심사-기준-미적-연출">심사 기준 (미적·연출)</h2>
 <ol><li><strong>통행 가독성</strong> — 걸을 수 있는 곳과 막힌 곳이 <strong>실루엣만으로</strong> 구분되는가.</li></ol>
 <p>플레이어가 벽에 부딪혀 보고서야 아는 경계는 실격</p>
 <ol><li><strong>수직 구조의 설득력</strong> — 탑다운에서 벽 높이·천장·바닥의 층이 논리적인가.</li></ol>
@@ -103,7 +109,7 @@ tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
 <ol><li><strong>한국 학교다움</strong> — 2026년 한국 학교로 읽히는가. 서양식·일본식 표지가 섞이면 지적</li><li><strong>리미널 톤</strong> — 「평범한데 약간 어긋난」 결이 화면에 있는가.</li></ol>
 <p>깨끗하기만 하면 무섭지 않고, 더럽기만 하면 폐허물이다</p>
 <h2 id="출력-형식">출력 형식</h2>
-<p>판정(채택/조건부/기각) <span class="ar">→</span> 기준 7개 한 줄씩 <span class="ar">→</span> 최대 7개 지적(심각순). 각 지적에 반드시 <strong>소재 지목</strong>: [타일(tiles.png)] / [배치(맵 데이터)] / [렌더(render.js)] 중 어디를 고칠 일인지. 그리고 각 지적에 <strong>픽셀/타일 수준의 구체적 대안</strong> (「분위기를 살려라」 금지 — 무엇을 몇 타일 어디로).</p>
+<p>판정(채택/조건부/기각) <span class="ar">→</span> <strong>기준 0(구조 연속성) 8항목 각각 통과/실격 + 지점 특정</strong> <span class="ar">→</span> 기준 1~7 한 줄씩 <span class="ar">→</span> 최대 7개 지적(심각순). 각 지적에 반드시 <strong>소재 지목</strong>: [타일(tiles.png)] / [배치(맵 데이터)] / [렌더(render.js)] 중 어디를 고칠 일인지. 그리고 각 지적에 <strong>픽셀/타일 수준의 구체적 대안</strong> (「분위기를 살려라」 금지 — 무엇을 몇 타일 어디로).</p>
 <div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
 </main></div><script>
 (function(){
