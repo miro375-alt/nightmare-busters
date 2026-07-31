@@ -31,6 +31,8 @@ document.getElementById('go').onclick=()=>{
 document.getElementById('again').onclick=reset;
 function fit(){ let s=Math.min(innerWidth/G.VW, innerHeight/G.VH);
   if(s>=1) s=Math.floor(s*2)/2;
-  G.cv.style.width=(G.VW*s)+'px'; G.cv.style.height=(G.VH*s)+'px'; }
+  const w=G.VW*s;
+  G.cv.style.width=w+'px'; G.cv.style.height=(G.VH*s)+'px';
+  G.applyScale(w); }
 addEventListener('resize',fit); fit();
 requestAnimationFrame(loop);
