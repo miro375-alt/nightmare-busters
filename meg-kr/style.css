@@ -73,6 +73,11 @@ tr.nodata td{color:#5d5a4f; font-style:italic}
 .card b{color:var(--accent); display:block; margin-bottom:6px; letter-spacing:.05em}
 .card span{font-size:13.5px; color:var(--muted)}
 
+/* document photo */
+figure.shot{margin:26px 0; border:1px solid var(--line); background:#101010}
+figure.shot img{display:block; width:100%; height:auto}
+figure.shot figcaption{padding:8px 14px; font-size:12.5px; color:var(--muted); border-top:1px solid var(--line); font-family:ui-monospace,Menlo,monospace}
+
 /* broadcast block */
 .bcast{
   font-family:ui-monospace,Menlo,monospace; font-size:13.5px; line-height:1.9;
