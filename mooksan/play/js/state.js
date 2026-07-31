@@ -6,7 +6,7 @@ export const DESKS=[]; for(let r=0;r<3;r++) for(let c=0;c<5;c++)
   DESKS.push([RM.x0+3+c*2, RM.f0+3+r*3]);
 
 export const S={
-  scene:'title', map:'hall',
+  scene:'title', map:'hall', seed:0,
   wx:3, wy:10, dir:0, anim:0, mv:0, mvx:0, mvy:0, diag:false, lastDir:3, run:false,
   unit:0, noteUnit:null, drift:0, lastDoor:null,
   num:0, outMin:0, pages:14, room:0,

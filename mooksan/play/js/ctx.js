@@ -6,6 +6,7 @@ export const G = {
   IMG: {}, ready: 0, READY_NEED: 4,   // 이미지 3 + balance.json
   BAL: null,                           // data/balance.json — 밸런스 수치는 전부 여기서 (D00)
   K: {},                               // 눌린 키 상태
+  rng: null, rngFx: null,              // 시드 PRNG — 논리/연출 분리 (B02)
 };
 G.cx = G.cv.getContext('2d');
 G.cx.imageSmoothingEnabled = false;

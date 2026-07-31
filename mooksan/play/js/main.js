@@ -28,7 +28,7 @@ function loop(now){
 /* ══ 시작 ══ */
 document.getElementById('go').onclick=()=>{
   document.getElementById('title').style.display='none'; audioOn(); reset(); };
-document.getElementById('again').onclick=reset;
+document.getElementById('again').onclick=()=>reset();
 function fit(){ let s=Math.min(innerWidth/G.VW, innerHeight/G.VH);
   if(s>=1) s=Math.floor(s*2)/2;
   const w=G.VW*s;

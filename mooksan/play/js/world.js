@@ -4,6 +4,7 @@ import { S, R, RM, DOORS, era, SPOTS, CLUE_TOTAL, doorAt, fmtOut, spotAt, blocke
 import { say, advMsg, choose, chKey, askNumber, numKey } from './ui.js';
 import { blip, stepSfx, setHum } from './audio.js';
 import { hpAt } from './assets.js';
+import { mulberry32 } from './rng.js';
 
 const CLUES={
  2026:{칠판:['9/17 (목) 　야자 2교시 20:40~21:30','아래에 청소 당번표가 붙어 있다.',
@@ -145,7 +146,7 @@ function enterRoom(n){
   say(['3-'+n+' 교실.', era(S.unit)===2026?'아까 나온 그 교실이다.':'……아까 그 교실이 아니다.']); }
 function leaveRoom(){
   S.map='hall'; S.wy=R.f0; S.dir=0; S.mv=0; blip(128,0.12,0.05);
-  if(S.num>G.BAL.hallGrow.threshold && Math.random()<G.BAL.hallGrow.chance){ // TODO(B02): 시드 RNG
+  if(S.num>G.BAL.hallGrow.threshold && G.rng()<G.BAL.hallGrow.chance){
     S.unit++; onUnit();
     say(['복도로 나왔다.','……아까보다 문이 하나 더 있는 것 같다.','아니, 착각이겠지.']); } }
 
@@ -224,12 +225,15 @@ export function update(dt){
     if(sc<B.noteCooldown) S._warned=0;
   }
   if(S.msg && S.msg.c<S.msg.lines[S.msg.i].length){
-    S.msg.c+=dt*B.typeSpeed; if(Math.random()<0.45)tick(); }   // TODO(B02): 시드 RNG
+    S.msg.c+=dt*B.typeSpeed; if(G.rngFx()<0.45)tick(); }
   setHum(0.022*(1-S.num/125));
 }
 
-export function reset(){
-  Object.assign(S,{scene:'play',map:'hall',wx:3,wy:10,dir:2,anim:0,mv:0,mvx:0,mvy:0,diag:false,lastDir:2,
+export function reset(seed){
+  // 시드 미지정(일반 플레이)은 crypto로 뽑되 S.seed에 기록 — 재현 가능 (D05)
+  const sd=(seed!==undefined)?(seed>>>0):crypto.getRandomValues(new Uint32Array(1))[0];
+  G.rng=mulberry32(sd); G.rngFx=mulberry32(sd^0x9E3779B9);
+  Object.assign(S,{scene:'play',seed:sd,map:'hall',wx:3,wy:10,dir:2,anim:0,mv:0,mvx:0,mvy:0,diag:false,lastDir:2,
     unit:0,noteUnit:null,drift:0,lastDoor:null,num:0,outMin:0,pages:G.BAL?G.BAL.notePages:14,room:0,
     found:{},foundN:0,t:0,lastCall:-99,dead:false,won:false,_warned:0,
     msg:null,choice:null,numin:null});
