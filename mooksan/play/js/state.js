@@ -7,20 +7,15 @@ export const DESKS=[]; for(let r=0;r<3;r++) for(let c=0;c<5;c++)
 
 export const S={
   scene:'title', map:'hall', seed:0, rngN:0,
-  wx:3, wy:10, dir:0, anim:0, mv:0, mvx:0, mvy:0, diag:false, lastDir:3, run:false,
-  unit:0, noteUnit:null, drift:0, lastDoor:null,
-  num:0, outMin:0, pages:14, room:0,
-  found:{}, foundN:0,
-  t:0, lastCall:-99, dead:false, won:false, _warned:0,
+  wx:8, wy:10, dir:0, anim:0, mv:0, mvx:0, mvy:0, diag:false, lastDir:3, run:false,
+  room:0, roomBack:8, found:{}, foundN:0, hasKey:false, cleared:false,
+  t:0, dead:false, won:false,
   msg:null, choice:null, numin:null
 };
 
 export const era=u=>u>=9?1997:u>=6?2008:u>=3?2017:2026;
 export const ERA_LIT={2026:1.0,2017:0.72,2008:0.46,1997:0.16};
 export const SPOTS=['칠판','책상','사물함'];
-export const CLUE_TOTAL=12;
-export const doorAt=wx=> (((wx%DOORW)+DOORW)%DOORW===3)
-  ? {k:Math.floor(wx/DOORW), n:((Math.floor(wx/DOORW)%DOORS)+DOORS)%DOORS+1} : null;
 export const fmtOut=m=>m<60?m+'분':Math.floor(m/60)+'시간 '+(m%60?m%60+'분':'');
 export function spotAt(x,y){
   if(y===RM.yBase && x>=RM.cx-2 && x<=RM.cx+1) return '칠판';

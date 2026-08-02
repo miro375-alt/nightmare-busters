@@ -1,12 +1,14 @@
 import { G } from './ctx.js';
 import { S } from './state.js';
 import { loadAssets } from './assets.js';
+import { loadMap } from './maps.js';
 import { audioOn } from './audio.js';
 import { press, update, reset } from './world.js';
 import { render } from './render.js';
 import './harness.js';                  // window.__H — 하네스 계약 (B05)
 
 loadAssets();
+loadMap('ch1');
 
 /* ══ 입력 ══ */
 const KM={ArrowUp:'up',KeyW:'up',ArrowDown:'down',KeyS:'down',ArrowLeft:'left',KeyA:'left',

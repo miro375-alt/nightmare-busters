@@ -10,8 +10,9 @@ export function txt(s,x,y,col,size,al){
   cx.textAlign=al||'left'; cx.textBaseline='top'; cx.fillText(s,x,y);
 }
 /* 9-슬라이스 창 (LimeZu Modern UI) */
-export function win9(x,y,w,h){
+export function win9(x,y,w,h,alpha){
   const cx=G.cx, Ssz=32,c=9,m=Ssz-c*2;
+  if(alpha!==undefined){ cx.save(); cx.globalAlpha=alpha; }
   const d=(sx,sy,sw,sh,dx,dy,dw,dh)=>cx.drawImage(G.IMG.ui,sx,sy,sw,sh,dx|0,dy|0,dw|0,dh|0);
   d(0,0,c,c,x,y,c,c); d(Ssz-c,0,c,c,x+w-c,y,c,c);
   d(0,Ssz-c,c,c,x,y+h-c,c,c); d(Ssz-c,Ssz-c,c,c,x+w-c,y+h-c,c,c);
@@ -21,6 +22,7 @@ export function win9(x,y,w,h){
     d(0,c,c,hh,x,j,c,hh); d(Ssz-c,c,c,hh,x+w-c,j,c,hh); }
   for(let j=y+c;j<y+h-c;j+=m) for(let i=x+c;i<x+w-c;i+=m){
     const ww=Math.min(m,x+w-c-i), hh=Math.min(m,y+h-c-j); d(c,c,ww,hh,i,j,ww,hh); }
+  if(alpha!==undefined) cx.restore();
 }
 
 /* ── 메시지 ── */

@@ -20,7 +20,10 @@ export const A={
   RFLOOR:[[5,3],[6,3]],
   HP:{ lock:{a:[9,4],b:[10,4]}, board_l:{a:[0,4]}, board_r:{a:[1,4]},
        clock:{a:[2,4]}, hyd:{a:[3,4],b:[4,4]}, cool:{a:[5,4],b:[6,4]},
-       clean:{a:[7,4],b:[8,4]}, bin:{b:[11,4]}, plant:{b:[12,4]}, poster:{a:[13,4]} }
+       clean:{a:[7,4],b:[8,4]}, bin:{b:[11,4]}, plant:{b:[12,4]}, poster:{a:[13,4]} },
+  // B07 — R002 반영 + 챕터 1 오브젝트
+  HWIN2:[[0,5],[1,5]], SILLB:[2,5],
+  CORPSE:[[3,5],[4,5]], KEY:[5,5], HBPLQ:[6,5], THRESH:[7,5]
 };
 /* 복도 오브젝트 배치 — 단위(36타일) 안의 고정 위치. 어느 단위나 똑같다 */
 const HPLACE={0:'lock',1:'lock',2:'lock', 6:'board_l',7:'board_r',
@@ -28,3 +31,6 @@ const HPLACE={0:'lock',1:'lock',2:'lock', 6:'board_l',7:'board_r',
   30:'lock',31:'lock',32:'lock'};
 export const hpAt=wx=>HPLACE[((wx%36)+36)%36]||null;
 export function tile(a,x,y){ G.cx.drawImage(G.IMG.tile,a[0]*T,a[1]*T,T,T,x|0,y|0,T,T); }
+/** 타일 세로 조각 블릿 — R002: 문 하단 연장·문지방 등 접합부 처리에 사용 */
+export function tileSlice(a,sy,h,x,y){
+  G.cx.drawImage(G.IMG.tile,a[0]*T,a[1]*T+sy,T,h,x|0,y|0,T,h); }
