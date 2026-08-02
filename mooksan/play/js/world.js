@@ -209,6 +209,7 @@ function filled(){ S.dead=true; over('문이 열렸다',
 
 /* ══ 프레임 갱신 (rAF와 분리 — B03에서 __H.tick의 기반이 된다) ══ */
 export function update(dt){
+  if(S.scene!=='play') return;   // 종료 후 틱 무효 — 하네스가 tick을 계속 불러도 상태 오염 없음
   const B=G.BAL;
   S.t+=dt;
   const busy=S.msg||S.choice||S.numin;
