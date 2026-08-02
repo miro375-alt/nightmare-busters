@@ -2,7 +2,7 @@
 import { G } from './ctx.js';
 import { S, R, RM, DOORS, era, SPOTS, CLUE_TOTAL, doorAt, fmtOut, spotAt, blocked } from './state.js';
 import { say, advMsg, choose, chKey, askNumber, numKey } from './ui.js';
-import { blip, stepSfx, setHum } from './audio.js';
+import { blip, stepSfx, setHum, tick } from './audio.js';
 import { hpAt } from './assets.js';
 import { mulberry32 } from './rng.js';
 

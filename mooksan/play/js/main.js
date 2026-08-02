@@ -4,6 +4,7 @@ import { loadAssets } from './assets.js';
 import { audioOn } from './audio.js';
 import { press, update, reset } from './world.js';
 import { render } from './render.js';
+import './harness.js';                  // window.__H — 하네스 계약 (B05)
 
 loadAssets();
 
