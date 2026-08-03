@@ -113,9 +113,9 @@ function drawHall(){
         tile(A.FLOOR[v], sx, y*T);
       }
     }
-    // 남측 — 2단 통유리 (멀리언만, 사선 없음) + 창턱
-    tile(A.WINT, sx, R.sillT*T);
-    tile(A.WINB, sx, R.win*T);
+    // 남측 — 연속 통유리 (32px 판유리: 멀리언은 짝수 칸에만) + 창턱
+    tile(lx%2?A.WINT2:A.WINT, sx, R.sillT*T);
+    tile(lx%2?A.WINB2:A.WINB, sx, R.win*T);
     tile(A.SILLB, sx, R.bot*T);
     // 창 너머 운동장 조명 (은은한 고정 광점 — 6타일마다)
     if(lx%6===3){ cx.save(); cx.globalAlpha=0.3;
