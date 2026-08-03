@@ -30,7 +30,7 @@ export function spotAt(x,y){
 export function bathBlocked(b,x,y){
   if(x<0||x>=b.w) return true;
   if(y<=2) return true;                          // 북벽 (거울·세면대·칸 입면)
-  if(y>=b.h-1) return true;                      // 남벽 (출입문 입면)
+  if(y>=b.h-2) return true;                      // 남벽 2행 (출입문 입면)
   return false;
 }
 export function blocked(x,y){

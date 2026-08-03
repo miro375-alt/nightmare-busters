@@ -44,8 +44,7 @@ function drawHall(){
   const camX=(S.wx+ox())*T - VW/2 + T/2;
   cx.fillStyle='#07080b'; cx.fillRect(0,0,VW,G.VH);
   const x0=Math.floor(camX/T)-1, x1=x0+Math.ceil(VW/T)+2;
-  const plates=[];
-  const DY=3;                                   // R002: 문·소품 기준선 하강 (px)
+  const plates=[]; const PLR=5*T;   // 명판 행 — 문 바로 위
   for(let wx=x0;wx<=x1;wx++){
     const sx=wx*T-camX, lx=localX(wx);
     // 천장
@@ -57,42 +56,53 @@ function drawHall(){
       cx.fillRect(sx-8,R.f0*T,T*2,(R.f1-R.f0+1)*T); cx.restore();
     }
     tile(A.WTOP, sx, R.top*T);
-    tile(A.WUP,  sx, R.plate*T);
+    // 벽 구성 (R003 지적 1): 문·입식물이 6~7행을 차지해 하단이
+    // 벽-바닥 접합선(8행)에 정확히 닿는다 — 문은 더 이상 떠 있지 않다
+    tile(A.WUP, sx, 3*T); tile(A.WUP, sx, 4*T); tile(A.WUP, sx, 5*T);
     const d=doorInfo(wx), dL=doorInfo(wx-1);
     const hb=homebaseAt(wx);
-    if(d){                                      // 문 왼쪽 절반 — DY만큼 내려 접합
+    const DTOP=6*T, DBOT=7*T, JUNC=R.f0*T;
+    let wallBand=true;
+    if(d){
       const set=(d.kind==='steel'||d.kind==='library')?A.EXITD:A.DOOR;
       plates.push([sx, d]);
-      tile(set[0], sx, R.door*T+DY); tile(set[2], sx, (R.door+1)*T+DY);
-      tileSlice(A.THRESH,0,2, sx, (R.door+2)*T+DY-2);      // 문지방
+      tile(set[0], sx, DTOP); tile(set[2], sx, DBOT);
+      tileSlice(A.THRESH,0,2, sx, JUNC);
+      wallBand=false;
     } else if(dL){
       const set=(dL.kind==='steel'||dL.kind==='library')?A.EXITD:A.DOOR;
-      tile(set[1], sx, R.door*T+DY); tile(set[3], sx, (R.door+1)*T+DY);
-      tileSlice(A.THRESH,0,2, sx, (R.door+2)*T+DY-2);
+      tile(set[1], sx, DTOP); tile(set[3], sx, DBOT);
+      tileSlice(A.THRESH,0,2, sx, JUNC);
+      wallBand=false;
+    } else if(hb){
+      tile(A.HP.lock.a, sx, DTOP);
+      tile(A.HP.lock.b, sx, DBOT);
+      contactShadow(sx+T/2, JUNC+2, T-4);
+      const lhx=localX(wx), st=havenState(hb.no);
+      const ty=DTOP+3, sag=(st==='ok'||st==='warn')?0:3;
+      for(let i=0;i<T;i+=4){
+        cx.fillStyle=((i/4|0)%2===0)?'#c9a227':'#1b1b1b';
+        cx.fillRect(sx+i, ty+(sag&&lhx===hb.x+2?sag:0), 4, 3);
+      }
+      if(lhx===hb.x+1) plates.push([sx,{kind:'hb',no:hb.no,st}]);
+      wallBand=false;
     } else {
-      tile(A.WUP,sx,R.door*T); tile(A.WUP,sx,(R.door+1)*T);
-      if(hb){                                   // 홈베이스 — 사물함 + 번호판 + 봉인 테이프 (B09)
-        tile(A.HP.lock.a, sx, R.door*T+DY);
-        tile(A.HP.lock.b, sx, (R.door+1)*T+DY);
-        contactShadow(sx+T/2,(R.door+2)*T+DY, T-4);
-        const lhx=localX(wx), st=havenState(hb.no);
-        // 봉인 테이프 — 유효하면 이어져 있고, 만료·미기재면 한쪽이 처져 있다
-        const ty=(R.wain)*T+5, sag=(st==='ok'||st==='warn')?0:3;
-        for(let i=0;i<T;i+=4){
-          cx.fillStyle=((i/4|0)%2===0)?'#c9a227':'#1b1b1b';
-          cx.fillRect(sx+i, ty+(sag&&lhx===hb.x+2?sag:0), 4, 3);
-        }
-        if(lhx===hb.x+1) plates.push([sx,{kind:'hb',no:hb.no,st}]);
-      } else {
-        const hp=hpAt(lx);
-        if(hp){ const o=A.HP[hp];
-          if(o.a) tile(o.a, sx, R.door*T+(o.b?DY:0));
-          if(o.b){ tile(o.b, sx, (R.door+1)*T+DY);
-            contactShadow(sx+T/2,(R.door+2)*T+DY, T-4); }   // 입식물만 접지 그림자
+      // 허리벽 띠를 먼저 깔고, 그 위에 소품 (검은 구멍 방지)
+      tile(A.WAINT, sx, DTOP); tile(A.BASE, sx, DBOT); wallBand=false;
+      const hp=hpAt(lx);
+      if(hp){ const o=A.HP[hp];
+        if(o.a&&o.b){                            // 입식물 2타일 — 바닥에 선다
+          tile(o.a, sx, DTOP); tile(o.b, sx, DBOT);
+          contactShadow(sx+T/2, JUNC+2, T-4);
+        } else if(o.a){                          // 벽 부착물 — 벽 중단 (떠 있는 게 맞다)
+          tile(o.a, sx, 4*T);
+        } else if(o.b){                          // 소형 입식물 — 하단 1타일
+          tile(o.b, sx, DBOT);
+          contactShadow(sx+T/2, JUNC+2, T-6);
         }
       }
     }
-    tile(A.WAINT, sx, R.wain*T); tile(A.BASE, sx, R.base*T);
+    if(wallBand){ tile(A.WAINT, sx, DTOP); tile(A.BASE, sx, DBOT); }
     for(let y=R.f0;y<=R.f1;y++){
       const hs=(y===R.f0||y===R.f1);
       // 조명 기둥 아래 = 광택 스트릭 (학교 리놀륨의 형광등 반사)
@@ -113,9 +123,10 @@ function drawHall(){
       g.addColorStop(0,'rgba(255,238,196,.8)'); g.addColorStop(1,'rgba(255,238,196,0)');
       cx.fillStyle=g; cx.fillRect(sx-10,R.sillT*T,T+20,T*2); cx.restore(); }
     // 계단 문 (철문 자리에 「계단」 표지)
-    if(lx===M.cur.stairs){ tile(A.EXITD[0], sx, R.door*T+DY); tile(A.EXITD[2], sx, (R.door+1)*T+DY);
-      plates.push([sx,{kind:'stairs'}]); }
-    else if(lx===M.cur.stairs+1){ tile(A.EXITD[1], sx, R.door*T+DY); tile(A.EXITD[3], sx, (R.door+1)*T+DY); }
+    if(lx===M.cur.stairs){ tile(A.EXITD[0], sx, 6*T); tile(A.EXITD[2], sx, 7*T);
+      tileSlice(A.THRESH,0,2,sx,R.f0*T); plates.push([sx,{kind:'stairs'}]); }
+    else if(lx===M.cur.stairs+1){ tile(A.EXITD[1], sx, 6*T); tile(A.EXITD[3], sx, 7*T);
+      tileSlice(A.THRESH,0,2,sx,R.f0*T); }
     // 조력자 B
     if(M.cur.helper && lx===M.cur.helper.x){
       const hy=M.cur.helper.y*T-16;
@@ -126,30 +137,34 @@ function drawHall(){
     }
     // 시신 + 열쇠
     if(corpseAt(wx) && lx===localX(M.cur?M.cur.corpse:-1)){
-      tile(A.CORPSE[0], sx, R.f0*T+2); tile(A.CORPSE[1], sx+T, R.f0*T+2);
-      if(!S.hasKey) tile(A.KEY, sx+T*2, R.f0*T+4);
+      tile(A.CORPSE[0], sx, R.f0*T); tile(A.CORPSE[1], sx+T, R.f0*T);
+      if(!S.hasKey){ cx.save(); cx.globalAlpha=0.25;
+        const kg=cx.createRadialGradient(sx+T*2+8,R.f0*T+10,1,sx+T*2+8,R.f0*T+10,10);
+        kg.addColorStop(0,'rgba(255,224,120,.9)'); kg.addColorStop(1,'rgba(255,224,120,0)');
+        cx.fillStyle=kg; cx.fillRect(sx+T*2-4,R.f0*T-2,T+8,T+8); cx.restore();
+        tile(A.KEY, sx+T*2, R.f0*T+2); }
     }
   }
   // 문패 (별도 패스 — D99 렌더 순서)
   plates.forEach(([sx,d])=>{
     if(d.kind==='hb'){
-      tile(A.HBPLQ, sx, R.plate*T);
-      txt(String(d.no), sx+T/2+1, R.plate*T+4, '#f2e2a0', 9, 'center');
+      tile(A.HBPLQ, sx, PLR);
+      txt(String(d.no), sx+T/2+1, PLR+4, '#f2e2a0', 9, 'center');
       // 점검표 보드 — 상태 표시 (기재됨=밝음 / 만료 임박=주황 / 비어 있음=희미)
-      tile(A.PLATE, sx+G.T, R.plate*T);
+      tile(A.PLATE, sx+G.T, PLR);
       const col=d.st==='ok'?'#2b2820':d.st==='warn'?'#9c5a1e':'rgba(60,54,40,.45)';
-      txt('점검', sx+G.T*1.5, R.plate*T+4, col, 7, 'center');
+      txt('점검', sx+G.T*1.5, PLR+4, col, 7, 'center');
       return;
     }
     if(d.kind==='stairs'){
-      tile(A.PLATE, sx+G.T/2, R.plate*T);
-      txt('계단', sx+G.T, R.plate*T+4, '#2b2820', 8, 'center');
+      tile(A.PLATE, sx+G.T/2, PLR);
+      txt('계단', sx+G.T, PLR+4, '#2b2820', 8, 'center');
       return;
     }
     if(d.kind==='steel') return;                 // 철문은 무패
-    tile(A.PLATE, sx+G.T/2, R.plate*T);
+    tile(A.PLATE, sx+G.T/2, PLR);
     const label = d.kind==='library' ? '도서실' : d.label;
-    txt(label, sx+G.T, R.plate*T+3, '#2b2820', d.kind==='library'?8:10, 'center');
+    txt(label, sx+G.T, PLR+3, '#2b2820', d.kind==='library'?8:10, 'center');
   });
   // 상호작용 표시
   const near = doorInfo(S.wx)||doorInfo(S.wx-1)||homebaseAt(S.wx)||hpAt(localX(S.wx));
@@ -239,13 +254,13 @@ function drawHUD(){
 }
 
 /* ══ 화장실 (챕터 1 시작점) ══ */
-const BOX=104, BOY=76;   // (400-192)/2, (304-144)/2 — 중앙 정렬
+const BOX=104, BOY=68;   // (400-192)/2, (304-160)/2 — h10 기준 중앙
 function drawBath(){
   const cx=G.cx, T=G.T, b=M.cur.bath;
   cx.fillStyle='#0a0c0f'; cx.fillRect(0,0,G.VW,G.VH);
   const TX=x=>x*T+BOX, TY=y=>y*T+BOY;
   // 바닥
-  for(let y=3;y<b.h-1;y++) for(let x=0;x<b.w;x++) tile(A.BFLOOR[(x+y)%2], TX(x), TY(y));
+  for(let y=3;y<b.h-2;y++) for(let x=0;x<b.w;x++) tile(A.BFLOOR[(x+y)%2], TX(x), TY(y));
   if(b.drain) tile(A.DRAIN, TX(b.drain[0]), TY(b.drain[1]));
   // 북벽 — 타일벽 / 좌: 거울+세면대 / 우: 칸 2타일 입면
   for(let x=-1;x<=b.w;x++){ tile(A.BWALL, TX(x), TY(0)); tile(A.BWALL, TX(x), TY(1)); tile(A.BWALL, TX(x), TY(2)); }
@@ -256,15 +271,15 @@ function drawBath(){
     tile(open_?A.STALLO_T:A.STALL_T, TX(x), TY(1));
     tile(open_?A.STALLO_B:A.STALL_B, TX(x), TY(2));
   });
-  // 좌우 벽 + 남벽(출입문 입면)
+  // 좌우 벽 + 남벽 2행(출입문 2타일 입면 — R003 지적 3)
   for(let y=3;y<b.h;y++){ tile(A.BWALL, TX(-1), TY(y)); tile(A.BWALL, TX(b.w), TY(y)); }
-  for(let x=0;x<b.w;x++) tile(A.BWALL, TX(x), TY(b.h-1));
-  tile(A.BDOOR, TX(b.door.x), TY(b.h-1));
-  txt('▼', TX(b.door.x)+T/2, TY(b.h-1)-7, '#e8c76a', 9,'center');
+  for(let x=0;x<b.w;x++){ tile(A.BWALL, TX(x), TY(b.h-2)); tile(A.BWALL, TX(x), TY(b.h-1)); }
+  tile(A.BDOOR2T, TX(b.door.x), TY(b.h-2)); tile(A.BDOOR2B, TX(b.door.x), TY(b.h-1));
+  txt('▼', TX(b.door.x)+T/2, TY(b.h-2)-7, '#e8c76a', 9,'center');
   drawChar(TX(S.wx)+ox()*T, TY(S.wy)+oy()*T-16);
   // 조사 표시
   const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir], fx=S.wx+v[0], fy=S.wy+v[1];
-  const hot=(fy<=2&&(b.sinks.includes(fx)||b.stalls.includes(fx)))||(fy>=b.h-1&&fx===b.door.x);
+  const hot=(fy<=2&&(b.sinks.includes(fx)||b.stalls.includes(fx)))||(fy>=b.h-2&&fx===b.door.x);
   if(hot && !S.msg && Math.sin(S.t*5)>-0.3)
     txt('!', TX(fx)+T/2, TY(Math.max(2,Math.min(fy,b.h-2)))-4, '#e8c76a', 10,'center');
 }

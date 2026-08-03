@@ -166,7 +166,7 @@ function havenBoard(hb){
 function bathInteract(fx,fy){
   const b=M.cur.bath;
   // 출입문 (남벽 입면) — 아래를 보고
-  if(fy>=b.h-1 && Math.abs(fx-b.door.x)<=0){
+  if(fy>=b.h-2 && fx===b.door.x){
     if(S.bathStep<1){ say(['……손은 씻고 가자.']); return; }
     leaveBath(); return;
   }
