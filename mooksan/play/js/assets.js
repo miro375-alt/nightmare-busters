@@ -27,7 +27,9 @@ export const A={
   BWALL:[8,5], BFLOOR:[[9,5],[10,5]], SINK:[13,5], MIRROR:[14,5], BDOOR:[15,5],
   WINT:[0,5], WINB:[1,5],
   STALL_T:[0,6], STALL_B:[1,6], STALLO_T:[2,6], STALLO_B:[3,6], DRAIN:[4,6], FSHEEN:[5,6],
-  BDOOR2T:[6,6], BDOOR2B:[7,6]
+  BDOOR2T:[6,6], BDOOR2B:[7,6],
+  PDESK:[[0,7],[1,7]], PCHAIR:[2,7], PCOT:[[3,7],[4,7]], PLIGHT:[5,7], PBAR:[6,7],
+  SIGNLIB:[7,7], MOP:[8,7], PAPERS:[[7,3],[8,3]], FLASH:[9,3]
 };
 /* 복도 오브젝트 배치 — 단위(36타일) 안의 고정 위치. 어느 단위나 똑같다 */
 const HPLACE={0:'lock',1:'lock',2:'lock', 6:'board_l',7:'board_r',

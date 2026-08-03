@@ -69,6 +69,10 @@ export function press(k){
 /* ══ 이동 — 복도는 loopW마다 반복된다 (S.wx는 무한, 조회만 mod) ══ */
 function isBlocked(x,y){
   if(S.map==='bath') return bathBlocked(M.cur.bath,x,y);
+  if(S.map==='hall' && y===R.f0){
+    const lx=localX(x), P=M.cur.post;
+    if(P && (lx===P.deskL||lx===P.deskR||lx===P.chair)) return true;   // 초소 살림 — 물리적 존재
+  }
   return blocked(x,y);
 }
 function tryMove(dx,dy,run){
@@ -115,6 +119,25 @@ function interact(){
       const hp=hpAt(S.wx);
       if(hp){ hallProp(hp); return; }
       say(['벽이다.']); return;
+    }
+    // 초소 살림 조사 (정면이 아니어도 — 바닥 물건)
+    const P=M.cur.post, plx=localX(fx);
+    if(P && fy===R.f0){
+      if(plx===P.deskL){ ev('prop',{key:'post_desk'});
+        say(['접이식 책상. 서류가 각 맞춰 쌓여 있다.','맨 위는 「근무일지」다.',
+          '오늘 날짜까지, 하루도 빠짐없이 적혀 있다.','……마지막 장의 「교대 예정일」 칸은',
+          '비어 있다.','종이가, 많이 누렇다.']); return; }
+      if(plx===P.deskR){ ev('prop',{key:'post_radio'});
+        say(['무전기다. 전원이 들어와 있다.','수신등이 일정하게 깜빡인다.','들리는 건 백색소음뿐이다.',
+          '송신 버튼 자리가, 손때로 반들반들하다.']); return; }
+      if(plx===P.chair){ say(['접이식 의자.','방석이 하나 깔려 있다. 납작하게 눌린.']); return; }
+    }
+    if(P && S.dir===3 && S.wy===R.f0){
+      const wlx=localX(S.wx);
+      if(wlx===P.cotL||wlx===P.cotR){ ev('prop',{key:'post_cot'});
+        say(['간이침대다.','이불이 각 잡혀 개켜져 있다.','베개가 눌린 자국이,','한 사람 것이다.']); return; }
+      if(wlx===P.light){ say(['작업등이다. 켜져 있다.','전선이 어디로 이어지는지는','따라가 보이지 않는다.']); return; }
+      if(P.barriers.includes(wlx)){ say(['이동식 차단봉.','「관계자 외 출입금지」 테이프가 감겨 있다.']); return; }
     }
     if(fy>R.f1) say(['창이다. 밖은 운동장.','조명이 켜져 있다.','이 시간에 켜져 있을 리가 없다.']);
     else if(fy<R.f0) say(['벽이다.']);
@@ -227,10 +250,12 @@ function helperTalk(){
       say(['「교대 오셨어요?」','「……아. 학생이구나. 미안해요.」',
         '「놀랐죠. 괜찮아요. 이런 일이, 가끔 있어요.」',
         '「일단 — 뛰지 마세요. 숨이 가빠지면 여기선 별로예요.」',
-        '「나가는 길은 도서실이에요. 이 층에선 거기뿐이에요.」',
+        '「나가는 길은 도서실이에요. 여기서 동쪽으로 조금 가면 있어요.」',
         '「문이 잠겨 있을 텐데… 마스터 키가 있어요.」',
-        '「A 반장님이 갖고 계실 거예요. 복도 어딘가에, 계실 겁니다.」',
-        '「저는 여기 있을게요. 초소는 비우면 안 되거든요.」'], ()=>{
+        '「A 반장님이 갖고 계실 거예요. 동쪽 순찰을 도세요.」',
+        '「도서실을 지나서, 한참 더요. 표지판을 따라가다 보면 만나실 거예요.」',
+        '「저는 여기 있을게요. 초소는 비우면 안 되거든요.」',
+        '……책상, 무전기, 간이침대.','한 사람이 아주 오래 산 흔적이었다.'], ()=>{
         if(!S.hasKey) setGoal('key');
       });
     });
@@ -244,7 +269,7 @@ function helperTalk(){
     return;
   }
   ev('helper',{});
-  say(['「반장님은 서쪽 복도 쪽에 계실 거예요.」','「……가시면, 안부 좀 전해 주세요.」']);
+  say(['「반장님은 동쪽이에요. 도서실 지나서, 한참.」','「……가시면, 안부 좀 전해 주세요.」']);
 }
 
 function doorAction(d){

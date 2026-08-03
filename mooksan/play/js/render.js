@@ -135,6 +135,34 @@ function drawHall(){
       const hf=Math.sin(S.t*1.1)>0.95?1:0;                 // 미세하게만 움직인다
       cx.drawImage(G.IMG.helper, (3*6+hf)*16,0,16,32, sx|0,hy|0,16,32);
     }
+    // 초소 (조력자 B의 살림살이 — D-18)
+    const P=M.cur.post;
+    if(P){
+      if(lx===P.cotL){ tile(A.PCOT[0], sx, 7*T); }
+      else if(lx===P.cotR){ tile(A.PCOT[1], sx, 7*T); }
+      else if(lx===P.light){ tile(A.PLIGHT, sx, 7*T);
+        cx.save(); cx.globalAlpha=0.10; cx.fillStyle='#f4ecc0';
+        cx.fillRect(sx-14,R.f0*T,T*3,T*3); cx.restore(); }
+      if(P.barriers.includes(lx)) tile(A.PBAR, sx, 7*T);
+      // 바닥 살림 (통행 차단과 짝)
+      if(lx===P.deskL) tile(A.PDESK[0], sx, R.f0*T);
+      if(lx===P.deskR) tile(A.PDESK[1], sx, R.f0*T);
+      if(lx===P.chair) tile(A.PCHAIR, sx, R.f0*T);
+      if(P.signPlate && lx===P.signPlate[0]) plates.push([sx,{kind:'post'}]);
+    }
+    // 도서실 방향 표지 (품질기준 1 — 단서 다중화)
+    const sg=(M.cur.libSigns||[]).find(s=>s.x===lx);
+    if(sg){ tile(A.SIGNLIB, sx, 4*T);
+      txt('도서실 '+sg.dir, sx+T/2, 4*T+5, '#dce8f4', 7, 'center'); }
+    // 시신 현장 — 흩어진 서류·굴러간 손전등 (사람의 마지막 흔적)
+    const SC=M.cur.scatter;
+    if(SC){
+      const pi=SC.papers.indexOf(lx);
+      if(pi>=0) tile(A.PAPERS[pi%2], sx, (R.f0+(pi%2))*T);
+      if(lx===SC.flash){ tile(A.FLASH, sx, (R.f0+1)*T);
+        cx.save(); cx.globalAlpha=0.12; cx.fillStyle='#fff6c8';
+        cx.fillRect(sx+12,(R.f0+1)*T+2,18,8); cx.restore(); }
+    }
     // 시신 + 열쇠
     if(corpseAt(wx) && lx===localX(M.cur?M.cur.corpse:-1)){
       tile(A.CORPSE[0], sx, R.f0*T); tile(A.CORPSE[1], sx+T, R.f0*T);
@@ -159,6 +187,11 @@ function drawHall(){
     if(d.kind==='stairs'){
       tile(A.PLATE, sx+G.T/2, PLR);
       txt('계단', sx+G.T, PLR+4, '#2b2820', 8, 'center');
+      return;
+    }
+    if(d.kind==='post'){
+      tile(A.PLATE, sx+G.T/2, PLR);
+      txt('임시초소', sx+G.T, PLR+5, '#2b2820', 6, 'center');
       return;
     }
     if(d.kind==='steel') return;                 // 철문은 무패
