@@ -32,6 +32,25 @@ function drawChar(x,y){
   }
 }
 
+/* 야간 패스 (R21) — 전역 한색 암막 + 광원별 빛웅덩이. 호러의 명암 리듬은 여기서 나온다 */
+function nightPass(pools, amb){
+  const cx=G.cx;
+  cx.save();
+  cx.fillStyle='rgba(8,12,24,'+(amb!==undefined?amb:0.42)+')';
+  cx.fillRect(0,0,G.VW,G.VH);
+  cx.globalCompositeOperation='lighter';
+  for(const p of pools){
+    const r=p.r||80;
+    const g=cx.createRadialGradient(p.x,p.y,2,p.x,p.y,r);
+    const c=p.warm?'255,232,178':'226,238,224';         // 작업등=온색 / 형광등=냉백
+    g.addColorStop(0,'rgba('+c+','+(p.a!==undefined?p.a:0.20)+')');
+    g.addColorStop(1,'rgba('+c+',0)');
+    cx.fillStyle=g;
+    cx.fillRect(p.x-r,p.y-r,r*2,r*2);
+  }
+  cx.restore();
+}
+
 /* 접지 그림자 — R002 지적 1: 입식물은 바닥에 서 있어야 한다 */
 function contactShadow(cxp, y, w){
   const cx=G.cx;
@@ -45,6 +64,7 @@ function drawHall(){
   cx.fillStyle='#07080b'; cx.fillRect(0,0,VW,G.VH);
   const x0=Math.floor(camX/T)-1, x1=x0+Math.ceil(VW/T)+2;
   const plates=[]; const PLR=5*T;   // 명판 행 — 문 바로 위
+  const lits=[];                     // 야간 패스 광원 (R21)
   for(let wx=x0;wx<=x1;wx++){
     const sx=wx*T-camX, lx=localX(wx);
     // 천장 3줄 — 벽면은 2줄만 (LimeZu 벽 문법, P60 R004 지적 2·3)
@@ -52,8 +72,7 @@ function drawHall(){
       cx.fillRect(sx|0,y*T,T,T); }
     if(lx%3===0){
       tile(A.LIT, sx, 2*T);                               // 상시 점등 — 깜빡임 없음 (오너 지시)
-      cx.save(); cx.globalAlpha=0.05; cx.fillStyle='#f0f4dc';
-      cx.fillRect(sx-8,R.f0*T,T*2,(R.f1-R.f0+1)*T); cx.restore();
+      lits.push({x:sx+T/2, y:(R.f0+2)*T, r:86, a:0.22});  // 형광등 빛웅덩이 (R21)
     }
     tile(A.WTOP, sx, 3*T);
     // 벽 구성 (R003 지적 1): 문·입식물이 6~7행을 차지해 하단이
@@ -140,8 +159,7 @@ function drawHall(){
     if(P){
       if(lx===P.cotL){ tile(A.PCOT[0], sx, 6*T); tile(A.PCOT[1], sx, 7*T); }
       else if(lx===P.light){ tile(A.PLIGHT, sx, 7*T);
-        cx.save(); cx.globalAlpha=0.10; cx.fillStyle='#f4ecc0';
-        cx.fillRect(sx-14,R.f0*T,T*3,T*3); cx.restore(); }
+        lits.push({x:sx+T/2, y:(R.f0+1)*T, r:64, a:0.30, warm:1}); }   // 작업등 온색 웅덩이
       if(P.barriers.includes(lx)) tile(A.PBAR, sx, 7*T);
       // 바닥 살림 (통행 차단과 짝)
       if(lx===P.deskL) tile(A.PDESK[0], sx, R.f0*T);
@@ -172,6 +190,7 @@ function drawHall(){
         tile(A.KEY, sx+T*2, R.f0*T+2); }
     }
   }
+  nightPass(lits, 0.44);                                 // 밤 (R21) — 문패·캐릭터는 판독성 위해 어둠 위에
   // 문패 (별도 패스 — D99 렌더 순서)
   plates.forEach(([sx,d])=>{
     if(d.kind==='hb'){
@@ -252,10 +271,11 @@ function drawRoom(){
   g.addColorStop(0,'rgba(255,238,196,.9)'); g.addColorStop(1,'rgba(255,238,196,0)');
   cx.fillStyle=g; cx.fillRect(TX(RM.x1-2),TY(RM.f0+1),T*3,T*4); cx.restore();
 
-  [[RM.cx-4,RM.f0+2],[RM.cx+3,RM.f0+2],[RM.cx-4,RM.f0+7],[RM.cx+3,RM.f0+7]]
-    .forEach(([lx,ly])=>{ cx.save(); cx.globalAlpha=0.62; tile(A.LIT, TX(lx), TY(ly)); cx.restore();
-      cx.save(); cx.globalAlpha=0.07; cx.fillStyle='#f0f4dc';
-      cx.fillRect(TX(lx)-10,TY(ly)-8,T*2+20,T*3); cx.restore(); });
+  const rpools=[];                                      // 앞 2등만 점등 — 뒤는 꺼진 교실 (R21)
+  [[RM.cx-4,RM.f0+2,1],[RM.cx+3,RM.f0+2,1],[RM.cx-4,RM.f0+7,0],[RM.cx+3,RM.f0+7,0]]
+    .forEach(([lx,ly,on])=>{ cx.save(); cx.globalAlpha=on?0.62:0.30;
+      tile(on?A.LIT:A.UNLIT, TX(lx), TY(ly)); cx.restore();
+      if(on) rpools.push({x:TX(lx)+T,y:TY(ly)+T,r:92,a:0.20}); });
 
   DESKS.forEach(p=>{
     tile(A.DESKT, TX(p[0]), TY(p[1]-1));
@@ -264,6 +284,7 @@ function drawRoom(){
 
   tile(A.DOOR[2], TX(RM.cx), TY(RM.yDoor)); tile(A.DOOR[3], TX(RM.cx+1), TY(RM.yDoor));
 
+  nightPass(rpools, 0.50);                               // 밤 (R21)
   drawChar(TX(S.wx)+ox()*G.T, TY(S.wy)+oy()*G.T-16);
 
   const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir], sp=spotAt(S.wx+v[0],S.wy+v[1]);
@@ -308,6 +329,7 @@ function drawBath(){
   for(let y=3;y<b.h;y++){ tile(A.BWALL, TX(-1), TY(y)); tile(A.BWALL, TX(b.w), TY(y)); }
   for(let x=0;x<b.w;x++){ tile(A.BWCAP, TX(x), TY(b.h-2)); tile(A.BWBOT, TX(x), TY(b.h-1)); }
   tile(A.BDOOR2T, TX(b.door.x), TY(b.h-2)); tile(A.BDOOR2B, TX(b.door.x), TY(b.h-1));
+  nightPass([{x:TX(b.w/2), y:TY(4), r:96, a:0.22}], 0.34);   // 밤 (R21) — 천장등 하나
   txt('▼', TX(b.door.x)+T/2, TY(b.h-2)-7, '#e8c76a', 9,'center');
   drawChar(TX(S.wx)+ox()*T, TY(S.wy)+oy()*T-16);
   // 조사 표시
@@ -323,8 +345,8 @@ export function render(){
     txt('불러오는 중…',G.VW/2,G.VH/2,'#4a4740',11,'center'); return; }
   if(S.scene==='title'){ cx.fillStyle='#07080b'; cx.fillRect(0,0,G.VW,G.VH); return; }
   if(S.map==='bath') drawBath(); else if(S.map==='hall') drawHall(); else drawRoom();
-  const vg=cx.createRadialGradient(G.VW/2,G.VH/2,G.VH*0.32,G.VW/2,G.VH/2,G.VH*1.0);
-  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.55)');
+  const vg=cx.createRadialGradient(G.VW/2,G.VH/2,G.VH*0.26,G.VW/2,G.VH/2,G.VH*0.95);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.72)');
   cx.fillStyle=vg; cx.fillRect(0,0,G.VW,G.VH);
   drawHUD();
   if(S.numin) drawNum(); else if(S.choice) drawChoice(); else if(S.msg) drawMsg();
