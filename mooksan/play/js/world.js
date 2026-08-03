@@ -2,7 +2,7 @@
 // 목표: A의 시신 → 마스터 키 → 잠긴 도서실 문
 // 폐기: 단위 세기 · 비상구 기재 · 무감각 게이지 · 연대별 교실 (D-05 · D-15)
 import { G } from './ctx.js';
-import { S, R, RM, SPOTS, fmtOut, spotAt, blocked } from './state.js';
+import { S, R, RM, SPOTS, fmtOut, spotAt, blocked, bathBlocked } from './state.js';
 import { say, advMsg, chKey, numKey } from './ui.js';
 import { blip, stepSfx, setHum, tick, breathSfx } from './audio.js';
 import { hpAt } from './assets.js';
@@ -67,11 +67,15 @@ export function press(k){
 }
 
 /* ══ 이동 — 복도는 loopW마다 반복된다 (S.wx는 무한, 조회만 mod) ══ */
+function isBlocked(x,y){
+  if(S.map==='bath') return bathBlocked(M.cur.bath,x,y);
+  return blocked(x,y);
+}
 function tryMove(dx,dy,run){
   if(!dx&&!dy) return false;
   const nx=S.wx+dx, ny=S.wy+dy;
-  if(blocked(nx,ny)) return false;
-  if(dx&&dy && (blocked(S.wx+dx,S.wy)||blocked(S.wx,S.wy+dy))) return false;
+  if(isBlocked(nx,ny)) return false;
+  if(dx&&dy && (isBlocked(S.wx+dx,S.wy)||isBlocked(S.wx,S.wy+dy))) return false;
   const heavy = S.bStage===2 && S.mv===0;         // 헐떡임 — 이동 시작이 반 박자 무겁다
   S.wx=nx; S.wy=ny; S.mv=heavy?G.BAL.breath.heavyStartMv:1;
   S.mvx=dx; S.mvy=dy; S.diag=!!(dx&&dy);
@@ -82,10 +86,25 @@ function tryMove(dx,dy,run){
 }
 
 /* ══ 상호작용 ══ */
+function setGoal(g){ S.goal=g; ev('goal',{g}); }
+
 function interact(){
   const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir];
   const fx=S.wx+v[0], fy=S.wy+v[1];
+  if(S.map==='bath'){ bathInteract(fx,fy); return; }
   if(S.map==='hall'){
+    // 조력자 (B11)
+    const H=M.cur.helper;
+    if(!!H && Math.abs(localX(S.wx)-H.x)<=1 && Math.abs(S.wy-H.y)<=1){ helperTalk(); return; }
+    // 계단 문
+    if(S.dir===3 && S.wy===R.f0){
+      const lx=localX(S.wx), st=M.cur.stairs;
+      if(lx===st||lx===st+1){ useStairs(); return; }
+      // 사라진 화장실 문 자리
+      if(S.stairsUsed>0 && (lx===M.cur.bathExit||lx===M.cur.bathExit+1)){
+        say(['……여기가 화장실 문이었는데.','벽이다.','손자국 하나 없이, 처음부터 벽이었던 것처럼.']); return;
+      }
+    }
     // 시신 · 열쇠 — 인접해 있으면 어느 방향이든
     if(!S.hasKey && (corpseAt(S.wx)||corpseAt(fx)) && S.wy<=R.f0+2){ pickupKey(); return; }
     if(S.dir===3 && S.wy===R.f0){
@@ -126,7 +145,7 @@ export function inHaven(){
 function havenBoard(hb){
   const st=havenState(hb.no);
   ev('homebase',{no:hb.no,st});
-  const goal=S.hasKey?(M.cur?M.cur.goals.hasKey:''):(M.cur?M.cur.goals.start:'');
+  const goal=(M.cur&&M.cur.goals[S.goal])||'';
   const head = st==='empty' ? ['홈베이스 '+hb.no+'. 벽에 점검표가 붙어 있다.',
       '날짜가 매일 채워져 있다. ……어제까지.','오늘 칸이 비어 있다.']
     : st==='expired' ? ['점검표의 오늘 칸이','……지워져 있다. 분명 적었는데.','종이가 조금 낡은 것 같다.']
@@ -141,6 +160,91 @@ function havenBoard(hb){
       say(['날짜를 적었다.','……이상하게, 숨이 놓인다.','여기서는 숨이 빨리 돌아온다.']);
     });
   });
+}
+
+/* ══ 화장실 (챕터 1 시작점 — 전부 플레이로) ══ */
+function bathInteract(fx,fy){
+  const b=M.cur.bath;
+  // 문 (남서쪽)
+  if((S.wx===b.door.x&&S.wy===b.door.y)||(fx===b.door.x&&fy===b.door.y)){
+    if(S.bathStep<1){ say(['……손은 씻고 가자.']); return; }
+    leaveBath(); return;
+  }
+  if(fy<=2 && b.sinks.includes(fx)){                  // 세면대·거울
+    if(S.bathStep===0){
+      S.bathStep=1; ev('bath',{step:1});
+      say(['물을 튼다. 손을 씻는다.','따뜻한 물이 나온다. 밤 9시인데.'], ()=>{
+        say(['……옆 칸에서 휴지 돌아가는 소리가 난다.','누구 있구나.','계속, 돌아간다.']);
+        S.bathStep=2; ev('bath',{step:2});
+      });
+      return;
+    }
+    say(['거울이다.','……낡았다. 아까는 몰랐는데.','은도금이 가장자리부터 검게 번져 있다.',
+      '비친 내가, 반 박자 늦게 움직인 것 같다.','……기분 탓이겠지.']);
+    if(S.bathStep===2){ S.bathStep=3; ev('bath',{step:3}); }
+    return;
+  }
+  if(fy===3 && b.stalls.includes(fx)){                // 칸
+    if(fx===b.openStall){
+      if(S.bathStep>=2){
+        say(['……소리가 나던 칸이다.','열려 있다. 아무도 없다.','휴지가 바닥에 전부 풀려 있다.',
+          '지금까지도, 조금씩, 움직인다.'], ()=>{ if(S.bathStep<3){S.bathStep=3; ev('bath',{step:3});} });
+      } else say(['빈 칸이다.']);
+      return;
+    }
+    say(['잠겨 있다.','……안에서 소리는 안 난다.']); return;
+  }
+  say(['타일 벽이다.','물때가 줄눈을 따라 번져 있다.']);
+}
+function leaveBath(){
+  ev('bath',{step:'exit'});
+  S.map='hall'; S.wx=M.cur.bathExit; S.wy=R.f0; S.dir=0; S.mv=0;
+  blip(120,0.15,0.06);
+  say(['복도로 나왔다.','형광등이 일정한 간격으로, 끝까지 켜져 있다.',
+    '……야자 시간이다. 계단으로 내려가자.'], ()=>setGoal('stairs'));
+}
+
+/* ══ 계단 — 배신 (같은 복도 반대편으로) ══ */
+function useStairs(){
+  S.stairsUsed++; ev('stairs',{n:S.stairsUsed});
+  S.wx=S.wx+90; S.wy=R.f0; S.mv=0;                    // 반대편 (loopW/2)
+  blip(80,0.25,0.07,'square');
+  if(S.stairsUsed===1){
+    say(['계단을 내려간다.','한 층. 두 층.','……문을 열었다.','3층 복도다.','문패가, 3-1부터, 다시 시작한다.',
+      '내려왔는데. 분명히 내려왔는데.'], ()=>{
+      say(['……침착하자.','누군가 있을 거다. 야자 감독 선생님이라도.'], ()=>setGoal('trapped'));
+    });
+  } else if(S.stairsUsed===2){
+    say(['다시 계단.','……같은 복도다.','이번엔 세지 않았다. 세고 싶지 않았다.']);
+  } else say(['같은 복도다.']);
+}
+
+/* ══ 조력자 B — 첫 조우 (B11, 68-조력자) ══ */
+function helperTalk(){
+  if(!S.metHelper){
+    S.metHelper=true; ev('helper',{first:true});
+    say(['……사람이다.','남색 점퍼. 완장. 「특수재난 현장대응반」.','그가 먼저 나를 봤다.'], ()=>{
+      say(['「교대 오셨어요?」','「……아. 학생이구나. 미안해요.」',
+        '「놀랐죠. 괜찮아요. 이런 일이, 가끔 있어요.」',
+        '「일단 — 뛰지 마세요. 숨이 가빠지면 여기선 별로예요.」',
+        '「나가는 길은 도서실이에요. 이 층에선 거기뿐이에요.」',
+        '「문이 잠겨 있을 텐데… 마스터 키가 있어요.」',
+        '「A 반장님이 갖고 계실 거예요. 복도 어딘가에, 계실 겁니다.」',
+        '「저는 여기 있을게요. 초소는 비우면 안 되거든요.」'], ()=>{
+        if(!S.hasKey) setGoal('key');
+      });
+    });
+    return;
+  }
+  if(S.cleared){ say(['「…….」']); return; }
+  if(S.hasKey){
+    ev('helper',{});
+    say(['「찾으셨군요.」','「……반장님은, 어떠셨어요.」','나는 대답하지 못했다.',
+      '「……도서실, 가세요. 저는 여기 있어야 해요.」']);
+    return;
+  }
+  ev('helper',{});
+  say(['「반장님은 서쪽 복도 쪽에 계실 거예요.」','「……가시면, 안부 좀 전해 주세요.」']);
 }
 
 function doorAction(d){
@@ -160,9 +264,12 @@ function doorAction(d){
 
 function pickupKey(){
   S.hasKey=true; ev('item',{key:'master'});
-  say(['사람이 쓰러져 있다.','……숨을 쉬지 않는다. 오래된 것 같다.','남색 점퍼. 「특수재난 현장대응반」.',
-    '손 옆에 열쇠 뭉치가 떨어져 있다.','【마스터 키】를 집었다.','이 학교 문은 이걸로 다 열린다.',
-    '……도서실.'],()=>ev('goal',{g:'hasKey'}));
+  const met=S.metHelper;
+  say(['사람이 쓰러져 있다.','……숨을 쉬지 않는다.','오래된 것 같다. 아주.',
+    '남색 점퍼. 완장. 명찰 — 「반장」.']
+    .concat(met?['……이 사람이, A 반장님.','아까 그 사람은 「계실 거예요」라고 했다.','현재형으로.']:[])
+    .concat(['손 옆에 열쇠 뭉치가 떨어져 있다.','【마스터 키】를 집었다.','……도서실.']),
+    ()=>setGoal('hasKey'));
 }
 
 function enterRoom(n,label){
@@ -250,28 +357,15 @@ export function reset(seed){
   G.rng=()=>{ S.rngN++; return base(); };
   G.rngFx=mulberry32(sd^0x9E3779B9);
   G.EV.length=0;
-  const sp=(M.cur&&M.cur.spawn)||{x:8,y:10};
-  Object.assign(S,{scene:'play',seed:sd,rngN:0,map:'hall',wx:sp.x,wy:sp.y,dir:2,anim:0,
+  const bs=(M.cur&&M.cur.bath&&M.cur.bath.spawn)||{x:5,y:5};
+  Object.assign(S,{scene:'play',seed:sd,rngN:0,map:'bath',wx:bs.x,wy:bs.y,dir:3,anim:0,
     mv:0,mvx:0,mvy:0,diag:false,lastDir:2,run:false,
-    room:0,roomBack:sp.x,found:{},foundN:0,hasKey:false,cleared:false,
+    room:0,roomBack:8,found:{},foundN:0,hasKey:false,cleared:false,
+    goal:'wash',bathStep:0,stairsUsed:0,metHelper:false,
     breath:0,bStage:0,holdBreath:false,_running:0,havens:{},
     t:0,dead:false,won:false,msg:null,choice:null,numin:null});
   document.getElementById('over').style.display='none';
-  // 진입 컷신 — 3층 화장실 (텍스트판. B10에서 맵 컷신으로 승격)
-  say(['볼일을 보는 동안, 밖에서 소리가 났다.',
-    '휴지 돌아가는 소리다. 누구 있구나.',
-    '……소리가, 멈추지 않는다.',
-    '형광등이 한 번 깜빡였다.',
-    '누가 쳐다보는 기분이 들어서, 나왔다.',
-    '옆 칸은 열려 있고, 아무도 없다.',
-    '휴지는 바닥에 다 풀려 있다.',
-    '거울 속 내가 조금 늦게 움직인 것 같았다.',
-    '……기분 탓이겠지.'], ()=>{
-    say(['복도로 나왔다.','……복도가 안 끝난다.','뒤돌아보니, 화장실 문이 없다. 벽이다.',
-      '이 층엔 도서실이 있다. 원래 잠겨 있는 곳이다.',
-      '……교무실 마스터 키가 이 층 어딘가에 있다고 했다.'],
-      ()=>ev('goal',{g:'start'}));
-  });
+  say(['3층 화장실.','1층은 복도 끝이라 밤에 가기 싫었다.','……누가 쓰고 불을 안 껐나 보네.']);
 }
 
 /* ── 상태 직렬화 (B04) — 열린 대화는 직렬화 불가, busy 아닌 시점에 스냅숏 ── */

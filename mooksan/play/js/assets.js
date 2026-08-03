@@ -2,7 +2,7 @@ import { G } from './ctx.js';
 const T = G.T;
 
 export function loadAssets() {
-  [['tile','assets/tiles.png'],['char','assets/char.png'],['ui','assets/ui.png']]
+  [['tile','assets/tiles.png'],['char','assets/char.png'],['ui','assets/ui.png'],['helper','assets/helper.png']]
     .forEach(([k,src])=>{ const i=new Image(); i.onload=()=>G.ready++; i.src=src; G.IMG[k]=i; });
   fetch('data/balance.json').then(r=>r.json()).then(j=>{ G.BAL=j; G.ready++; });
 }
@@ -23,7 +23,9 @@ export const A={
        clean:{a:[7,4],b:[8,4]}, bin:{b:[11,4]}, plant:{b:[12,4]}, poster:{a:[13,4]} },
   // B07 — R002 반영 + 챕터 1 오브젝트
   HWIN2:[[0,5],[1,5]], SILLB:[2,5],
-  CORPSE:[[3,5],[4,5]], KEY:[5,5], HBPLQ:[6,5], THRESH:[7,5]
+  CORPSE:[[3,5],[4,5]], KEY:[5,5], HBPLQ:[6,5], THRESH:[7,5],
+  BWALL:[8,5], BFLOOR:[[9,5],[10,5]], STALL:[11,5], STALL_O:[12,5],
+  SINK:[13,5], MIRROR:[14,5], BDOOR:[15,5]
 };
 /* 복도 오브젝트 배치 — 단위(36타일) 안의 고정 위치. 어느 단위나 똑같다 */
 const HPLACE={0:'lock',1:'lock',2:'lock', 6:'board_l',7:'board_r',

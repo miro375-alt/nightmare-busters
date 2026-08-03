@@ -11,6 +11,7 @@ export const S={
   room:0, roomBack:8, found:{}, foundN:0, hasKey:false, cleared:false,
   breath:0, bStage:0, holdBreath:false,   // 숨 (70-시스템 §3) — holdBreath는 B18 훅
   havens:{},                              // {no:{filledAt}} — 점검표 기재 시각 (B09)
+  goal:'wash', bathStep:0, stairsUsed:0, metHelper:false,
   t:0, dead:false, won:false,
   msg:null, choice:null, numin:null
 };
@@ -26,6 +27,11 @@ export function spotAt(x,y){
   if(y===RM.yDoor && (x===RM.cx||x===RM.cx+1)) return 'exit';
   if(DESKS.some(p=>p[0]===x&&p[1]===y)) return '책상';
   return null; }
+export function bathBlocked(b,x,y){
+  if(x<0||x>=b.w||y<3||y>=b.h) return true;      // y0..2 = 거울·세면대 벽줄
+  if(y===3 && b.stalls.includes(x)) return true; // 칸막이 줄
+  return false;
+}
 export function blocked(x,y){
   if(S.map==='hall') return !(y>=R.f0 && y<=R.f1);
   if(x<=RM.x0||x>=RM.x1||y<RM.f0||y>RM.f1) return true;

@@ -104,6 +104,18 @@ function drawHall(){
     tile(A.WAINT, sx, R.sillT*T);
     tile(A.HWIN2[lx%2], sx, R.win*T);
     tile(A.SILLB, sx, R.bot*T);
+    // 계단 문 (철문 자리에 「계단」 표지)
+    if(lx===M.cur.stairs){ tile(A.EXITD[0], sx, R.door*T+DY); tile(A.EXITD[2], sx, (R.door+1)*T+DY);
+      plates.push([sx,{kind:'stairs'}]); }
+    else if(lx===M.cur.stairs+1){ tile(A.EXITD[1], sx, R.door*T+DY); tile(A.EXITD[3], sx, (R.door+1)*T+DY); }
+    // 조력자 B
+    if(M.cur.helper && lx===M.cur.helper.x){
+      const hy=M.cur.helper.y*T-16;
+      cx.save(); cx.globalAlpha=0.28; cx.fillStyle='#000';
+      cx.beginPath(); cx.ellipse(sx+8,hy+30,6,2.4,0,0,7); cx.fill(); cx.restore();
+      const hf=Math.sin(S.t*1.1)>0.95?1:0;                 // 미세하게만 움직인다
+      cx.drawImage(G.IMG.helper, (3*6+hf)*16,0,16,32, sx|0,hy|0,16,32);
+    }
     // 시신 + 열쇠
     if(corpseAt(wx) && lx===localX(M.cur?M.cur.corpse:-1)){
       tile(A.CORPSE[0], sx, R.f0*T+2); tile(A.CORPSE[1], sx+T, R.f0*T+2);
@@ -119,6 +131,11 @@ function drawHall(){
       tile(A.PLATE, sx+G.T, R.plate*T);
       const col=d.st==='ok'?'#2b2820':d.st==='warn'?'#9c5a1e':'rgba(60,54,40,.45)';
       txt('점검', sx+G.T*1.5, R.plate*T+4, col, 7, 'center');
+      return;
+    }
+    if(d.kind==='stairs'){
+      tile(A.PLATE, sx+G.T/2, R.plate*T);
+      txt('계단', sx+G.T, R.plate*T+4, '#2b2820', 8, 'center');
       return;
     }
     if(d.kind==='steel') return;                 // 철문은 무패
@@ -203,8 +220,7 @@ function drawRoom(){
 /* HUD — 목표가 항상 보인다 (품질 기준 1) */
 function drawHUD(){
   const cx=G.cx, VW=G.VW, VH=G.VH;
-  const goal = S.cleared ? '' :
-    (S.hasKey ? (M.cur?M.cur.goals.hasKey:'') : (M.cur?M.cur.goals.start:''));
+  const goal = S.cleared ? '' : ((M.cur&&M.cur.goals[S.goal])||'');
   if(goal){
     win9(4,4,244,34,0.96);
     txt('목표',16,11,'#8a5a1e',9);
@@ -214,12 +230,43 @@ function drawHUD(){
   txt('조사 '+S.foundN+' / 9', 8, VH-13, 'rgba(190,182,164,.55)',9);
 }
 
+/* ══ 화장실 (챕터 1 시작점) ══ */
+const BOX=112, BOY=80;   // (400-176)/2, (304-128)/2 — 중앙 정렬
+function drawBath(){
+  const cx=G.cx, T=G.T, b=M.cur.bath;
+  cx.fillStyle='#0a0c0f'; cx.fillRect(0,0,G.VW,G.VH);
+  const TX=x=>x*T+BOX, TY=y=>y*T+BOY;
+  // 바닥
+  for(let y=3;y<b.h;y++) for(let x=0;x<b.w;x++) tile(A.BFLOOR[(x+y)%2], TX(x), TY(y));
+  // 북벽 (타일벽 + 거울 + 세면대)
+  for(let x=-1;x<=b.w;x++){ tile(A.BWALL, TX(x), TY(0)); tile(A.BWALL, TX(x), TY(1)); tile(A.BWALL, TX(x), TY(2)); }
+  b.mirror.forEach(x=>tile(A.MIRROR, TX(x), TY(1)));
+  b.sinks.forEach(x=>tile(A.SINK, TX(x), TY(2)));
+  // 칸막이 줄
+  b.stalls.forEach(x=>tile(x===b.openStall&&S.bathStep>=2?A.STALL_O:A.STALL, TX(x), TY(3)));
+  // 좌우 벽
+  for(let y=3;y<b.h;y++){ tile(A.BWALL, TX(-1), TY(y)); tile(A.BWALL, TX(b.w), TY(y)); }
+  // 문
+  tile(A.BDOOR, TX(b.door.x), TY(b.door.y));
+  txt('▼', TX(b.door.x)+T/2, TY(b.door.y)-6, '#e8c76a', 9,'center');
+  // 형광등 (bathStep 2부터 가끔 깜빡)
+  const fl=S.bathStep>=2 && Math.sin(S.t*13)>0.93;
+  if(fl){ cx.save(); cx.globalAlpha=0.12; cx.fillStyle='#0a0c10'; cx.fillRect(0,0,G.VW,G.VH); cx.restore(); }
+  drawChar(TX(S.wx)+ox()*T, TY(S.wy)+oy()*T-16);
+  // 조사 표시
+  const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir], fx=S.wx+v[0], fy=S.wy+v[1];
+  const hot=(fy<=2&&b.sinks.includes(fx))||(fy===3&&b.stalls.includes(fx))||
+            (fx===b.door.x&&fy===b.door.y)||(S.wx===b.door.x&&S.wy===b.door.y);
+  if(hot && !S.msg && Math.sin(S.t*5)>-0.3)
+    txt('!', TX(fx)+T/2, TY(Math.min(fy,3))-4, '#e8c76a', 10,'center');
+}
+
 export function render(){
   const cx=G.cx;
   if(G.ready<G.READY_NEED){ cx.fillStyle='#07080b'; cx.fillRect(0,0,G.VW,G.VH);
     txt('불러오는 중…',G.VW/2,G.VH/2,'#4a4740',11,'center'); return; }
   if(S.scene==='title'){ cx.fillStyle='#07080b'; cx.fillRect(0,0,G.VW,G.VH); return; }
-  if(S.map==='hall') drawHall(); else drawRoom();
+  if(S.map==='bath') drawBath(); else if(S.map==='hall') drawHall(); else drawRoom();
   const vg=cx.createRadialGradient(G.VW/2,G.VH/2,G.VH*0.32,G.VW/2,G.VH/2,G.VH*1.0);
   vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.55)');
   cx.fillStyle=vg; cx.fillRect(0,0,G.VW,G.VH);
