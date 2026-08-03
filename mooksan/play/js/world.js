@@ -8,6 +8,7 @@ import { blip, stepSfx, setHum, tick, breathSfx } from './audio.js';
 import { hpAt } from './assets.js';
 import { mulberry32 } from './rng.js';
 import { M, doorInfo, homebaseAt, corpseAt, localX } from './maps.js';
+import { choose } from './ui.js';
 
 /* ── 이벤트 로그 (B04) — 하네스 지표의 원천 ── */
 export function ev(type,p){ G.EV.push(Object.assign({t:+S.t.toFixed(3),type},p||{})); }
@@ -91,9 +92,7 @@ function interact(){
       const d=doorInfo(S.wx)||doorInfo(S.wx-1);
       if(d){ doorAction(d); return; }
       const hb=homebaseAt(S.wx);
-      if(hb){ ev('homebase',{no:hb.no});
-        say(['홈베이스 '+hb.no+'.','사물함이 모여 있고, 벽에 점검표가 붙어 있다.',
-          '날짜가 매일 채워져 있다. ……어제까지.']); return; }
+      if(hb){ havenBoard(hb); return; }
       const hp=hpAt(S.wx);
       if(hp){ hallProp(hp); return; }
       say(['벽이다.']); return;
@@ -111,6 +110,37 @@ function interact(){
   ev('clue',{key});
   if(!S.found[key]){ S.found[key]=1; S.foundN++; }
   say(CLUES[S.room][sp].slice());
+}
+
+/* ── 안전지대 (B09, 60-레벨 §0) — 사람 손이 매일 닿은 자리 ── */
+export function havenState(no){
+  const h=S.havens[no], D=G.BAL.haven;
+  if(!h||h.filledAt===null) return 'empty';
+  const left=D.duration-(S.t-h.filledAt);
+  return left<=0?'expired' : left<=D.warnAt?'warn' : 'ok';
+}
+export function inHaven(){
+  const hb=homebaseAt(S.wx);
+  return hb && havenState(hb.no)!=='expired' && havenState(hb.no)!=='empty' ? hb : null;
+}
+function havenBoard(hb){
+  const st=havenState(hb.no);
+  ev('homebase',{no:hb.no,st});
+  const goal=S.hasKey?(M.cur?M.cur.goals.hasKey:''):(M.cur?M.cur.goals.start:'');
+  const head = st==='empty' ? ['홈베이스 '+hb.no+'. 벽에 점검표가 붙어 있다.',
+      '날짜가 매일 채워져 있다. ……어제까지.','오늘 칸이 비어 있다.']
+    : st==='expired' ? ['점검표의 오늘 칸이','……지워져 있다. 분명 적었는데.','종이가 조금 낡은 것 같다.']
+    : ['점검표. 오늘 칸이 채워져 있다.','내 글씨다.'];
+  say(head.concat(['여백에 메모가 있다 — 「'+goal+'」']), ()=>{
+    if(st==='ok') return;
+    choose('점검표',['오늘 날짜를 기재한다','그냥 둔다'],i=>{
+      if(i!==0) return;
+      S.havens[hb.no]={filledAt:S.t};
+      ev('haven_fill',{no:hb.no});
+      blip(300,0.07,0.05);
+      say(['날짜를 적었다.','……이상하게, 숨이 놓인다.','여기서는 숨이 빨리 돌아온다.']);
+    });
+  });
 }
 
 function doorAction(d){
@@ -187,13 +217,22 @@ export function update(dt){
   if(S.msg && S.msg.c<S.msg.lines[S.msg.i].length){
     S.msg.c+=dt*B.typeSpeed; if(G.rngFx()<0.45)tick(); }
 
+  /* ── 안전지대 만료 (B09) ── */
+  for(const no of Object.keys(S.havens)){
+    const h=S.havens[no];
+    if(h.filledAt!==null && S.t-h.filledAt>=B.haven.duration && !h._expired){
+      h._expired=true; ev('haven_expire',{no:+no});
+    }
+  }
+
   /* ── 숨 (B08, 70-시스템 §3) — 달릴 여유이자 지금 내가 내는 소리 ── */
   {
     const BR=B.breath, moving=S.mv>0;
+    const hv=inHaven(), mul=hv?B.haven.recoverMul:1;   // 안전지대 — 숨이 빨리 돌아온다
     if(S.run && moving)           S.breath=Math.min(1, S.breath+dt*BR.drainRun);
-    else if(S.run && !moving && !busy) S.breath=Math.max(0, S.breath-dt*BR.recoverHold);  // 숨 고르기
-    else if(moving)               S.breath=Math.max(0, S.breath-dt*BR.recoverWalk);
-    else                          S.breath=Math.max(0, S.breath-dt*BR.recoverIdle);
+    else if(S.run && !moving && !busy) S.breath=Math.max(0, S.breath-dt*BR.recoverHold*mul);
+    else if(moving)               S.breath=Math.max(0, S.breath-dt*BR.recoverWalk*mul);
+    else                          S.breath=Math.max(0, S.breath-dt*BR.recoverIdle*mul);
     const st = S.breath>=BR.stage2?2 : S.breath>=BR.stage1?1 : 0;
     if(st!==S.bStage){ S.bStage=st; ev('breath',{stage:st}); }
     // 호흡음 — 단계별 주기 (연출: rngFx 소비 없음, S.t 기반 결정론)
@@ -215,7 +254,7 @@ export function reset(seed){
   Object.assign(S,{scene:'play',seed:sd,rngN:0,map:'hall',wx:sp.x,wy:sp.y,dir:2,anim:0,
     mv:0,mvx:0,mvy:0,diag:false,lastDir:2,run:false,
     room:0,roomBack:sp.x,found:{},foundN:0,hasKey:false,cleared:false,
-    breath:0,bStage:0,holdBreath:false,_running:0,
+    breath:0,bStage:0,holdBreath:false,_running:0,havens:{},
     t:0,dead:false,won:false,msg:null,choice:null,numin:null});
   document.getElementById('over').style.display='none';
   // 진입 컷신 — 3층 화장실 (텍스트판. B10에서 맵 컷신으로 승격)

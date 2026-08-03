@@ -13,5 +13,10 @@
   "stage1": 0.34,
   "stage2": 0.75,
   "heavyStartMv": 1.4
+ },
+ "haven": {
+  "duration": 90,
+  "warnAt": 20,
+  "recoverMul": 2.2
  }
 }

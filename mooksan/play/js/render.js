@@ -3,6 +3,7 @@ import { S, R, RM, DESKS, fmtOut, spotAt } from './state.js';
 import { A, tile, tileSlice, hpAt } from './assets.js';
 import { txt, win9, INK, INK2, GOLD, drawMsg, drawChoice, drawNum } from './ui.js';
 import { M, doorInfo, homebaseAt, corpseAt, localX } from './maps.js';
+import { havenState } from './world.js';
 
 const ox=()=>S.mv? -S.mvx*S.mv : 0;
 const oy=()=>S.mv? -S.mvy*S.mv : 0;
@@ -71,12 +72,18 @@ function drawHall(){
       tileSlice(A.THRESH,0,2, sx, (R.door+2)*T+DY-2);
     } else {
       tile(A.WUP,sx,R.door*T); tile(A.WUP,sx,(R.door+1)*T);
-      if(hb){                                   // 홈베이스 — 사물함 + 번호판
+      if(hb){                                   // 홈베이스 — 사물함 + 번호판 + 봉인 테이프 (B09)
         tile(A.HP.lock.a, sx, R.door*T+DY);
         tile(A.HP.lock.b, sx, (R.door+1)*T+DY);
         contactShadow(sx+T/2,(R.door+2)*T+DY, T-4);
-        const lhx=localX(wx);
-        if(lhx===hb.x+1) plates.push([sx,{kind:'hb',no:hb.no}]);
+        const lhx=localX(wx), st=havenState(hb.no);
+        // 봉인 테이프 — 유효하면 이어져 있고, 만료·미기재면 한쪽이 처져 있다
+        const ty=(R.wain)*T+5, sag=(st==='ok'||st==='warn')?0:3;
+        for(let i=0;i<T;i+=4){
+          cx.fillStyle=((i/4|0)%2===0)?'#c9a227':'#1b1b1b';
+          cx.fillRect(sx+i, ty+(sag&&lhx===hb.x+2?sag:0), 4, 3);
+        }
+        if(lhx===hb.x+1) plates.push([sx,{kind:'hb',no:hb.no,st}]);
       } else {
         const hp=hpAt(lx);
         if(hp){ const o=A.HP[hp];
@@ -108,6 +115,10 @@ function drawHall(){
     if(d.kind==='hb'){
       tile(A.HBPLQ, sx, R.plate*T);
       txt(String(d.no), sx+T/2+1, R.plate*T+4, '#f2e2a0', 9, 'center');
+      // 점검표 보드 — 상태 표시 (기재됨=밝음 / 만료 임박=주황 / 비어 있음=희미)
+      tile(A.PLATE, sx+G.T, R.plate*T);
+      const col=d.st==='ok'?'#2b2820':d.st==='warn'?'#9c5a1e':'rgba(60,54,40,.45)';
+      txt('점검', sx+G.T*1.5, R.plate*T+4, col, 7, 'center');
       return;
     }
     if(d.kind==='steel') return;                 // 철문은 무패
