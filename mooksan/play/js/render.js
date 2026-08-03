@@ -13,8 +13,22 @@ function drawChar(x,y){
   const cx=G.cx;
   cx.save(); cx.globalAlpha=0.28; cx.fillStyle='#000';
   cx.beginPath(); cx.ellipse((x|0)+8,(y|0)+30,6,2.4,0,0,7); cx.fill(); cx.restore();
+  // 헐떡임 — 정지 프레임 한정 어깨 들썩임 (걷기 바운스에 묻히지 않게)
+  const bob = (S.bStage===2 && S.mv===0) ? Math.round(Math.sin(S.t*9)*1.2) : 0;
   const f=S.mv?(1+Math.floor(S.anim)%5):0;
-  cx.drawImage(G.IMG.char, (DIRROW[S.dir]*6+f)*16,0,16,32, x|0,y|0,16,32);
+  cx.drawImage(G.IMG.char, (DIRROW[S.dir]*6+f)*16,0,16,32, x|0,(y|0)+bob,16,32);
+  // 입김 — 숨 단계 표시이자 6챕터 김 서림의 복선 (게이지 없음 원칙)
+  if(S.bStage>0){
+    const period=S.bStage===2?0.7:1.25, ph=(S.t%period)/period;
+    if(ph<0.62){
+      const puffY=(y|0)-2-ph*5, a=(S.bStage===2?0.5:0.25)*(1-ph);
+      cx.save(); cx.globalAlpha=a; cx.fillStyle='#dfe4ea';
+      const px=(x|0)+8+(S.dir===1?-5:S.dir===2?5:0);
+      cx.fillRect(px-1,puffY,3,2);
+      if(S.bStage===2){ cx.fillRect(px-2,puffY-2,2,2); cx.fillRect(px+1,puffY-2,2,2); }
+      cx.restore();
+    }
+  }
 }
 
 /* 접지 그림자 — R002 지적 1: 입식물은 바닥에 서 있어야 한다 */

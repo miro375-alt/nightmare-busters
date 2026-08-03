@@ -4,7 +4,7 @@
 import { G } from './ctx.js';
 import { S, R, RM, SPOTS, fmtOut, spotAt, blocked } from './state.js';
 import { say, advMsg, chKey, numKey } from './ui.js';
-import { blip, stepSfx, setHum, tick } from './audio.js';
+import { blip, stepSfx, setHum, tick, breathSfx } from './audio.js';
 import { hpAt } from './assets.js';
 import { mulberry32 } from './rng.js';
 import { M, doorInfo, homebaseAt, corpseAt, localX } from './maps.js';
@@ -71,7 +71,11 @@ function tryMove(dx,dy,run){
   const nx=S.wx+dx, ny=S.wy+dy;
   if(blocked(nx,ny)) return false;
   if(dx&&dy && (blocked(S.wx+dx,S.wy)||blocked(S.wx,S.wy+dy))) return false;
-  S.wx=nx; S.wy=ny; S.mv=1; S.mvx=dx; S.mvy=dy; S.diag=!!(dx&&dy);
+  const heavy = S.bStage===2 && S.mv===0;         // 헐떡임 — 이동 시작이 반 박자 무겁다
+  S.wx=nx; S.wy=ny; S.mv=heavy?G.BAL.breath.heavyStartMv:1;
+  S.mvx=dx; S.mvy=dy; S.diag=!!(dx&&dy);
+  if(run&&!S._running){ S._running=1; ev('run_start',{}); }
+  else if(!run&&S._running){ S._running=0; ev('run_end',{}); }
   ev('move',{x:localX(nx),y:ny,run:!!run});
   return true;
 }
@@ -171,16 +175,33 @@ export function update(dt){
     const dx=(K.right?1:0)-(K.left?1:0), dy=(K.down?1:0)-(K.up?1:0);
     if(dx||dy){
       const KN=['down','left','right','up'];
-      if(K[KN[S.lastDir]]) S.dir=S.lastDir;
+      if(S.run){ S.dir = dy ? (dy>0?0:3) : (dx>0?2:1); }        // 전방 질주만
+      else if(K[KN[S.lastDir]]) S.dir=S.lastDir;
       else S.dir = dy ? (dy>0?0:3) : (dx>0?2:1);
-      if(tryMove(dx,dy,S.run)) stepSfx();
+      if(tryMove(dx,dy,S.run)) stepSfx(S.run);
       else if(dx&&dy){
-        if(tryMove(dx,0,S.run)||tryMove(0,dy,S.run)) stepSfx();
+        if(tryMove(dx,0,S.run)||tryMove(0,dy,S.run)) stepSfx(S.run);
       }
     } else S.anim=0;
   }
   if(S.msg && S.msg.c<S.msg.lines[S.msg.i].length){
     S.msg.c+=dt*B.typeSpeed; if(G.rngFx()<0.45)tick(); }
+
+  /* ── 숨 (B08, 70-시스템 §3) — 달릴 여유이자 지금 내가 내는 소리 ── */
+  {
+    const BR=B.breath, moving=S.mv>0;
+    if(S.run && moving)           S.breath=Math.min(1, S.breath+dt*BR.drainRun);
+    else if(S.run && !moving && !busy) S.breath=Math.max(0, S.breath-dt*BR.recoverHold);  // 숨 고르기
+    else if(moving)               S.breath=Math.max(0, S.breath-dt*BR.recoverWalk);
+    else                          S.breath=Math.max(0, S.breath-dt*BR.recoverIdle);
+    const st = S.breath>=BR.stage2?2 : S.breath>=BR.stage1?1 : 0;
+    if(st!==S.bStage){ S.bStage=st; ev('breath',{stage:st}); }
+    // 호흡음 — 단계별 주기 (연출: rngFx 소비 없음, S.t 기반 결정론)
+    if(st>0){
+      const period = st===2?0.7:1.25;
+      if(Math.floor(S.t/period)!==Math.floor((S.t-dt)/period)) breathSfx(st);
+    }
+  }
   setHum(0.02);
 }
 
@@ -194,6 +215,7 @@ export function reset(seed){
   Object.assign(S,{scene:'play',seed:sd,rngN:0,map:'hall',wx:sp.x,wy:sp.y,dir:2,anim:0,
     mv:0,mvx:0,mvy:0,diag:false,lastDir:2,run:false,
     room:0,roomBack:sp.x,found:{},foundN:0,hasKey:false,cleared:false,
+    breath:0,bStage:0,holdBreath:false,_running:0,
     t:0,dead:false,won:false,msg:null,choice:null,numin:null});
   document.getElementById('over').style.display='none';
   // 진입 컷신 — 3층 화장실 (텍스트판. B10에서 맵 컷신으로 승격)

@@ -9,6 +9,7 @@ export const S={
   scene:'title', map:'hall', seed:0, rngN:0,
   wx:8, wy:10, dir:0, anim:0, mv:0, mvx:0, mvy:0, diag:false, lastDir:3, run:false,
   room:0, roomBack:8, found:{}, foundN:0, hasKey:false, cleared:false,
+  breath:0, bStage:0, holdBreath:false,   // 숨 (70-시스템 §3) — holdBreath는 B18 훅
   t:0, dead:false, won:false,
   msg:null, choice:null, numin:null
 };
