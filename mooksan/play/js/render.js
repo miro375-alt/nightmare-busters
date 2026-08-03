@@ -47,18 +47,18 @@ function drawHall(){
   const plates=[]; const PLR=5*T;   // 명판 행 — 문 바로 위
   for(let wx=x0;wx<=x1;wx++){
     const sx=wx*T-camX, lx=localX(wx);
-    // 천장
-    for(let y=0;y<R.top;y++){ cx.fillStyle=y===R.top-1?'#1b1d24':'#101219';
+    // 천장 3줄 — 벽면은 2줄만 (LimeZu 벽 문법, P60 R004 지적 2·3)
+    for(let y=0;y<3;y++){ cx.fillStyle=y===2?'#1b1d24':'#101219';
       cx.fillRect(sx|0,y*T,T,T); }
     if(lx%3===0){
-      tile(A.LIT, sx, (R.top-1)*T);                       // 상시 점등 — 깜빡임 없음 (오너 지시)
+      tile(A.LIT, sx, 2*T);                               // 상시 점등 — 깜빡임 없음 (오너 지시)
       cx.save(); cx.globalAlpha=0.05; cx.fillStyle='#f0f4dc';
       cx.fillRect(sx-8,R.f0*T,T*2,(R.f1-R.f0+1)*T); cx.restore();
     }
-    tile(A.WTOP, sx, R.top*T);
+    tile(A.WTOP, sx, 3*T);
     // 벽 구성 (R003 지적 1): 문·입식물이 6~7행을 차지해 하단이
     // 벽-바닥 접합선(8행)에 정확히 닿는다 — 문은 더 이상 떠 있지 않다
-    tile(A.WUP, sx, 3*T); tile(A.WUP, sx, 4*T); tile(A.WUP, sx, 5*T);
+    tile(A.WUP, sx, 4*T); tile(A.WUP, sx, 5*T);
     const d=doorInfo(wx), dL=doorInfo(wx-1);
     const hb=homebaseAt(wx);
     const DTOP=6*T, DBOT=7*T, JUNC=R.f0*T;
@@ -219,7 +219,7 @@ function drawRoom(){
     tile(A.WTOP, TX(x), TY(RM.y0-1));
     tile(A.WUP,  TX(x), TY(RM.y0));
     tile(A.WUP,  TX(x), TY(RM.yBB));
-    tile(A.WAINT,TX(x), TY(RM.yBase));
+    tile(A.BASE, TX(x), TY(RM.yBase));   // 북벽도 걸레받이 문법 (P60 재심 N1)
   }
   // R002 지적 3: 측벽 문법 — 내연선 + 그림자
   for(let y=RM.f0;y<=RM.yDoor;y++){
@@ -294,8 +294,8 @@ function drawBath(){
   // 바닥
   for(let y=3;y<b.h-2;y++) for(let x=0;x<b.w;x++) tile(A.BFLOOR[(x+y)%2], TX(x), TY(y));
   if(b.drain) tile(A.DRAIN, TX(b.drain[0]), TY(b.drain[1]));
-  // 북벽 — 타일벽 / 좌: 거울+세면대 / 우: 칸 2타일 입면
-  for(let x=-1;x<=b.w;x++){ tile(A.BWALL, TX(x), TY(0)); tile(A.BWALL, TX(x), TY(1)); tile(A.BWALL, TX(x), TY(2)); }
+  // 북벽 — 캡+면 2줄 입면 (P60 R004 지적 7) / 좌: 거울+세면대 / 우: 칸 2타일 입면
+  for(let x=-1;x<=b.w;x++){ tile(A.BWCAP, TX(x), TY(0)); tile(A.BWALL, TX(x), TY(1)); tile(A.BWALL, TX(x), TY(2)); }
   b.mirror.forEach(x=>tile(A.MIRROR, TX(x), TY(1)));
   b.sinks.forEach(x=>tile(A.SINK, TX(x), TY(2)));
   b.stalls.forEach(x=>{
@@ -305,7 +305,7 @@ function drawBath(){
   });
   // 좌우 벽 + 남벽 2행(출입문 2타일 입면 — R003 지적 3)
   for(let y=3;y<b.h;y++){ tile(A.BWALL, TX(-1), TY(y)); tile(A.BWALL, TX(b.w), TY(y)); }
-  for(let x=0;x<b.w;x++){ tile(A.BWALL, TX(x), TY(b.h-2)); tile(A.BWALL, TX(x), TY(b.h-1)); }
+  for(let x=0;x<b.w;x++){ tile(A.BWCAP, TX(x), TY(b.h-2)); tile(A.BWBOT, TX(x), TY(b.h-1)); }
   tile(A.BDOOR2T, TX(b.door.x), TY(b.h-2)); tile(A.BDOOR2B, TX(b.door.x), TY(b.h-1));
   txt('▼', TX(b.door.x)+T/2, TY(b.h-2)-7, '#e8c76a', 9,'center');
   drawChar(TX(S.wx)+ox()*T, TY(S.wy)+oy()*T-16);

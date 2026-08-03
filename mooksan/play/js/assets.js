@@ -30,6 +30,7 @@ export const A={
   BDOOR2T:[6,6], BDOOR2B:[7,6],
   PDESK:[[0,7],[1,7]], PCHAIR:[2,7], PCOT:[[3,7],[4,7]], PLIGHT:[5,7], PBAR:[6,7],
   DESKT:[9,7], TDLT:[10,7], TDRT:[11,7],   // v2 — 책상 상판 (LimeZu 2단 가구)
+  BWCAP:[14,7], BWBOT:[15,7],              // v2 — 화장실 벽 상단 캡·하단 그림자 (P60 R004-7)
   SIGNLIB:[7,7], MOP:[8,7], PAPERS:[[7,3],[8,3]], FLASH:[9,3]
 };
 /* 복도 오브젝트 배치 — 단위(36타일) 안의 고정 위치. 어느 단위나 똑같다 */
