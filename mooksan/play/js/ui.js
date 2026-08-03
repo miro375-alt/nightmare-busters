@@ -6,7 +6,7 @@ export const INK='#3b3125', INK2='#6b5c46', GOLD='#8a5a1e';
 export function txt(s,x,y,col,size,al){
   const cx=G.cx;
   cx.fillStyle=col||INK;
-  cx.font=(size||11)+'px "Apple SD Gothic Neo","Malgun Gothic",sans-serif';
+  cx.font=(size||11)+'px "DungGeunMo","Apple SD Gothic Neo",sans-serif';
   cx.textAlign=al||'left'; cx.textBaseline='top'; cx.fillText(s,x,y);
 }
 /* 9-슬라이스 창 (LimeZu Modern UI) */

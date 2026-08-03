@@ -234,20 +234,19 @@ function drawRoom(){
   cx.restore();
   for(let x=RM.x0-1;x<=RM.x1+1;x++) tile(A.BASE, TX(x), TY(RM.yDoor));
 
-  for(let i=0;i<4;i++){
-    tile(A.BBT[i], TX(RM.cx-2+i), TY(RM.yBB));
-    tile(A.BBB[i], TX(RM.cx-2+i), TY(RM.yBase));
+  for(let i=0;i<4;i++){                       // 칠판은 벽면 줄에 — 교탁과 안 겹친다
+    tile(A.BBT[i], TX(RM.cx-2+i), TY(RM.yBB-1));
+    tile(A.BBB[i], TX(RM.cx-2+i), TY(RM.yBB));
   }
-  const BD={1:'9/17 (목)  야자 2교시',2:'제출 기한 : 9/17 (목)',3:''}[S.room]||'';
-  cx.save(); cx.globalAlpha=0.8;
-  txt(BD,TX(RM.cx),TY(RM.yBB)+5,'#dfe6da',8,'center'); cx.restore();
+  const BD={1:'야자 2교시',2:'제출 9/17',3:''}[S.room]||'';   // 긴 판서는 칠판 조사 대사에
+  cx.save(); cx.globalAlpha=0.9;
+  txt(BD,TX(RM.cx),TY(RM.yBB-1)+7,'#dfe6da',8,'center'); cx.restore();
 
   tile(A.TDLT,TX(RM.cx-1),TY(RM.f0-1)); tile(A.TDRT,TX(RM.cx),TY(RM.f0-1));
   tile(A.TDL,TX(RM.cx-1),TY(RM.f0)); tile(A.TDR,TX(RM.cx),TY(RM.f0));
-  for(let i=0;i<4;i++){
-    tile(i===0?A.LOCKT:A.LOCKB, TX(RM.x0), TY(RM.f0+1+i));
-    tile(A.RWIN,                TX(RM.x1), TY(RM.f0+1+i));  // R002: 측벽 창은 창턱 스트립 위 — RWIN엔 창턱 有
-  }
+  for(let i=0;i<4;i++) tile(i===0?A.LOCKT:A.LOCKB, TX(RM.x0), TY(RM.f0+1+i));
+  tile(A.RWIN, TX(RM.x1), TY(RM.f0+1));                     // 측벽 창 2개 — 사이 벽 (연속 4개는 모니터처럼 읽힘)
+  tile(A.RWIN, TX(RM.x1), TY(RM.f0+3));
   cx.save(); cx.globalAlpha=0.28;
   const g=cx.createLinearGradient(TX(RM.x1+1),0,TX(RM.x1-2),0);
   g.addColorStop(0,'rgba(255,238,196,.9)'); g.addColorStop(1,'rgba(255,238,196,0)');
@@ -277,10 +276,12 @@ function drawHUD(){
   const cx=G.cx, VW=G.VW, VH=G.VH;
   const goal = S.cleared ? '' : ((M.cur&&M.cur.goals[S.goal])||'');
   if(goal){
-    win9(4,4,244,34,0.96);
-    txt('목표',16,11,'#8a5a1e',9);
-    txt(goal,16,21,INK,10);
-    if(S.hasKey) tile(A.KEY, 224, 12);
+    cx.font='9px "DungGeunMo",sans-serif';
+    const w=Math.min(300, cx.measureText(goal).width+58);
+    win9(4,4,w,22,0.94);
+    txt('목표',14,10,'#8a5a1e',8);
+    txt(goal,44,10,INK,9);
+    if(S.hasKey) tile(A.KEY, w-18, 3);
   }
   txt('조사 '+S.foundN+' / 9', 8, VH-13, 'rgba(190,182,164,.55)',9);
 }

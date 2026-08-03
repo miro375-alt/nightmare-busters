@@ -9,6 +9,7 @@ import './harness.js';                  // window.__H — 하네스 계약 (B05)
 
 loadAssets();
 loadMap('ch1');
+document.fonts.load('16px DungGeunMo').then(()=>{ G.ready++; });   // 픽셀폰트 (텍스트 뭉개짐 방지)
 
 /* ══ 입력 ══ */
 const KM={ArrowUp:'up',KeyW:'up',ArrowDown:'down',KeyS:'down',ArrowLeft:'left',KeyA:'left',
