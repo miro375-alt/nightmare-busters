@@ -20,7 +20,7 @@ export const A={
   RFLOOR:[[5,3],[6,3]],
   HP:{ lock:{a:[9,4],b:[10,4]}, board_l:{a:[0,4]}, board_r:{a:[1,4]},
        clock:{a:[2,4]}, hyd:{a:[3,4],b:[4,4]}, cool:{a:[5,4],b:[6,4]},
-       clean:{a:[7,4],b:[8,4]}, bin:{b:[11,4]}, plant:{b:[12,4]}, poster:{a:[13,4]} },
+       clean:{a:[7,4],b:[8,4]}, bin:{b:[11,4]}, plant:{a:[12,7],b:[12,4]}, poster:{a:[13,4]} },
   // B07 — R002 반영 + 챕터 1 오브젝트
   HWIN2:[[0,5],[1,5]], SILLB:[2,5],
   CORPSE:[[3,5],[4,5]], KEY:[5,5], HBPLQ:[6,5], THRESH:[7,5],
@@ -29,6 +29,7 @@ export const A={
   STALL_T:[0,6], STALL_B:[1,6], STALLO_T:[2,6], STALLO_B:[3,6], DRAIN:[4,6], FSHEEN:[5,6],
   BDOOR2T:[6,6], BDOOR2B:[7,6],
   PDESK:[[0,7],[1,7]], PCHAIR:[2,7], PCOT:[[3,7],[4,7]], PLIGHT:[5,7], PBAR:[6,7],
+  DESKT:[9,7], TDLT:[10,7], TDRT:[11,7],   // v2 — 책상 상판 (LimeZu 2단 가구)
   SIGNLIB:[7,7], MOP:[8,7], PAPERS:[[7,3],[8,3]], FLASH:[9,3]
 };
 /* 복도 오브젝트 배치 — 단위(36타일) 안의 고정 위치. 어느 단위나 똑같다 */

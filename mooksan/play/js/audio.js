@@ -1,11 +1,17 @@
 import { G } from './ctx.js';
 
-let AC=null, humG=null;
+let AC=null, humG=null, muted=false;
+try{ muted = localStorage.getItem('mooksan_mute')==='1'; }catch(e){}
+export const isMuted=()=>muted;
+export function setMuted(m){ muted=!!m;
+  try{ localStorage.setItem('mooksan_mute', muted?'1':'0'); }catch(e){}
+  if(AC){ if(muted) AC.suspend(); else AC.resume(); } }
 export function audioOn(){ try{
   AC=new (window.AudioContext||window.webkitAudioContext)();
   const o=AC.createOscillator(), f=AC.createBiquadFilter(); humG=AC.createGain();
   o.type='sawtooth'; o.frequency.value=60; f.type='lowpass'; f.frequency.value=190;
   humG.gain.value=0.022; o.connect(f); f.connect(humG); humG.connect(AC.destination); o.start();
+  if(muted) AC.suspend();
 }catch(e){} }
 export function blip(fr,dur,vol,ty){ if(!AC)return;
   const o=AC.createOscillator(), g=AC.createGain();

@@ -138,8 +138,7 @@ function drawHall(){
     // 초소 (조력자 B의 살림살이 — D-18)
     const P=M.cur.post;
     if(P){
-      if(lx===P.cotL){ tile(A.PCOT[0], sx, 7*T); }
-      else if(lx===P.cotR){ tile(A.PCOT[1], sx, 7*T); }
+      if(lx===P.cotL){ tile(A.PCOT[0], sx, 6*T); tile(A.PCOT[1], sx, 7*T); }
       else if(lx===P.light){ tile(A.PLIGHT, sx, 7*T);
         cx.save(); cx.globalAlpha=0.10; cx.fillStyle='#f4ecc0';
         cx.fillRect(sx-14,R.f0*T,T*3,T*3); cx.restore(); }
@@ -243,6 +242,7 @@ function drawRoom(){
   cx.save(); cx.globalAlpha=0.8;
   txt(BD,TX(RM.cx),TY(RM.yBB)+5,'#dfe6da',8,'center'); cx.restore();
 
+  tile(A.TDLT,TX(RM.cx-1),TY(RM.f0-1)); tile(A.TDRT,TX(RM.cx),TY(RM.f0-1));
   tile(A.TDL,TX(RM.cx-1),TY(RM.f0)); tile(A.TDR,TX(RM.cx),TY(RM.f0));
   for(let i=0;i<4;i++){
     tile(i===0?A.LOCKT:A.LOCKB, TX(RM.x0), TY(RM.f0+1+i));
@@ -258,11 +258,10 @@ function drawRoom(){
       cx.save(); cx.globalAlpha=0.07; cx.fillStyle='#f0f4dc';
       cx.fillRect(TX(lx)-10,TY(ly)-8,T*2+20,T*3); cx.restore(); });
 
-  DESKS.forEach((p,i)=>{
+  DESKS.forEach(p=>{
+    tile(A.DESKT, TX(p[0]), TY(p[1]-1));
     tile(A.DESK, TX(p[0]), TY(p[1]));
-    if(S.room===1 && i===7) tile(A.PROP.book, TX(p[0]), TY(p[1])-2);
   });
-  if(S.room===3) tile(A.PROP.bag, TX(RM.x0+4), TY(RM.f0+2)-3);
 
   tile(A.DOOR[2], TX(RM.cx), TY(RM.yDoor)); tile(A.DOOR[3], TX(RM.cx+1), TY(RM.yDoor));
 

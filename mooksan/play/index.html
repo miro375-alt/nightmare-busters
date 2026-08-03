@@ -23,10 +23,13 @@ button:hover{background:#d8d4cc;color:#0c0d0f;border-color:#d8d4cc}
 #over .dim{color:#7a746b;font-size:12px;line-height:1.95}
 #over .stat{display:block;margin-top:16px;font-size:11px;color:#5f5b54}
 .cr{position:fixed;bottom:6px;right:8px;z-index:50;font-size:9.5px;color:#3f3d39;letter-spacing:.02em}
+#mute{position:fixed;top:10px;right:10px;z-index:60;padding:5px 9px;font-size:15px;line-height:1;border:1px solid #3a3833;background:rgba(10,11,13,.55);color:#d8d4cc;cursor:pointer}
+#mute:hover{background:#1c1e22;color:#fff;border-color:#5a564e}
 </style>
 
 <div id="stage"><canvas id="cv" width="400" height="304"></canvas></div>
-<div class="cr">Character &amp; UI: Modern Exteriors / Modern UI © LimeZu</div>
+<button id="mute" title="소리 켜기·끄기 (M)">🔊</button>
+<div class="cr">Art: Modern Interiors / Modern Exteriors / Modern UI © LimeZu</div>
 
 <div id="title">
   <h1>묵 산</h1>
@@ -39,7 +42,7 @@ button:hover{background:#d8d4cc;color:#0c0d0f;border-color:#d8d4cc}
     <span style="color:#6f6a62;font-size:12px">
     1층 화장실은 복도 끝이라 밤에 가기 싫다.<br>
     누가 쓰고 불 안 껐나 보네.<br><br>
-    ↑↓←→ 이동　·　Space 조사　·　Shift 달리기</span>
+    ↑↓←→ 이동　·　Space 조사　·　Shift 달리기　·　M 음소거</span>
   </div>
   <button id="go">시 작</button>
 </div>

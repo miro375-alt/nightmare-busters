@@ -2,7 +2,7 @@ import { G } from './ctx.js';
 import { S } from './state.js';
 import { loadAssets } from './assets.js';
 import { loadMap } from './maps.js';
-import { audioOn } from './audio.js';
+import { audioOn, setMuted, isMuted } from './audio.js';
 import { press, update, reset } from './world.js';
 import { render } from './render.js';
 import './harness.js';                  // window.__H — 하네스 계약 (B05)
@@ -19,6 +19,14 @@ addEventListener('keydown',e=>{ const k=KM[e.code]; if(!k)return; e.preventDefau
   if(e.repeat&&k!=='up'&&k!=='down'&&k!=='left'&&k!=='right')return;
   G.K[k]=1; if(DIRK[k]!==undefined) S.lastDir=DIRK[k]; press(k); });
 addEventListener('keyup',e=>{ const k=KM[e.code]; if(k)G.K[k]=0; });
+
+/* ══ 음소거 (오너 요청 — 형광등 험이 시끄럽다) ══ */
+const muteBtn=document.getElementById('mute');
+const syncMute=()=>{ muteBtn.textContent=isMuted()?'🔇':'🔊';
+  muteBtn.title=(isMuted()?'소리 켜기':'소리 끄기')+' (M)'; };
+muteBtn.onclick=()=>{ setMuted(!isMuted()); syncMute(); muteBtn.blur(); };
+addEventListener('keydown',e=>{ if(e.code==='KeyM'){ setMuted(!isMuted()); syncMute(); } });
+syncMute();
 
 /* ══ 루프 — 고정 타임스텝 (B03) ══
    렌더는 프레임률을 따르고, 논리는 항상 G.STEP 단위로만 전진한다.
