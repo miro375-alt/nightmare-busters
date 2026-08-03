@@ -165,8 +165,8 @@ function havenBoard(hb){
 /* ══ 화장실 (챕터 1 시작점 — 전부 플레이로) ══ */
 function bathInteract(fx,fy){
   const b=M.cur.bath;
-  // 문 (남서쪽)
-  if((S.wx===b.door.x&&S.wy===b.door.y)||(fx===b.door.x&&fy===b.door.y)){
+  // 출입문 (남벽 입면) — 아래를 보고
+  if(fy>=b.h-1 && Math.abs(fx-b.door.x)<=0){
     if(S.bathStep<1){ say(['……손은 씻고 가자.']); return; }
     leaveBath(); return;
   }
@@ -184,7 +184,7 @@ function bathInteract(fx,fy){
     if(S.bathStep===2){ S.bathStep=3; ev('bath',{step:3}); }
     return;
   }
-  if(fy===3 && b.stalls.includes(fx)){                // 칸
+  if(fy<=2 && b.stalls.includes(fx)){                 // 칸 (북벽 입면 — 위를 보고)
     if(fx===b.openStall){
       if(S.bathStep>=2){
         say(['……소리가 나던 칸이다.','열려 있다. 아무도 없다.','휴지가 바닥에 전부 풀려 있다.',

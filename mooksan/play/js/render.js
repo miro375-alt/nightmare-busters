@@ -52,10 +52,9 @@ function drawHall(){
     for(let y=0;y<R.top;y++){ cx.fillStyle=y===R.top-1?'#1b1d24':'#101219';
       cx.fillRect(sx|0,y*T,T,T); }
     if(lx%3===0){
-      const fl=Math.sin(S.t*17+lx*2)>-0.9;
-      cx.save(); cx.globalAlpha=fl?1:0.45; tile(fl?A.LIT:A.UNLIT, sx, (R.top-1)*T); cx.restore();
-      if(fl){ cx.save(); cx.globalAlpha=0.07; cx.fillStyle='#f0f4dc';
-        cx.fillRect(sx-8,R.f0*T,T*2,(R.f1-R.f0+1)*T); cx.restore(); }
+      tile(A.LIT, sx, (R.top-1)*T);                       // 상시 점등 — 깜빡임 없음 (오너 지시)
+      cx.save(); cx.globalAlpha=0.05; cx.fillStyle='#f0f4dc';
+      cx.fillRect(sx-8,R.f0*T,T*2,(R.f1-R.f0+1)*T); cx.restore();
     }
     tile(A.WTOP, sx, R.top*T);
     tile(A.WUP,  sx, R.plate*T);
@@ -95,15 +94,24 @@ function drawHall(){
     }
     tile(A.WAINT, sx, R.wain*T); tile(A.BASE, sx, R.base*T);
     for(let y=R.f0;y<=R.f1;y++){
-      const vs=(lx%3===0), hs=(y===R.f0||y===R.f1);
-      let v = hs&&vs?3 : hs?1 : vs?2 : 0;
-      if(!hs && !vs && ((lx*13+y*7)%29)===0) v=4;
-      tile(A.FLOOR[v], sx, y*T);
+      const hs=(y===R.f0||y===R.f1);
+      // 조명 기둥 아래 = 광택 스트릭 (학교 리놀륨의 형광등 반사)
+      if(!hs && lx%3===0) tile(A.FSHEEN, sx, y*T);
+      else{
+        let v = hs?1 : (lx%3===0?2:0);
+        if(!hs && ((lx*13+y*7)%29)===0) v=4;
+        tile(A.FLOOR[v], sx, y*T);
+      }
     }
-    // R002 지적 2: 남측 창 — 유리 사선 + 창턱, 이중 띠 제거
-    tile(A.WAINT, sx, R.sillT*T);
-    tile(A.HWIN2[lx%2], sx, R.win*T);
+    // 남측 — 2단 통유리 (멀리언만, 사선 없음) + 창턱
+    tile(A.WINT, sx, R.sillT*T);
+    tile(A.WINB, sx, R.win*T);
     tile(A.SILLB, sx, R.bot*T);
+    // 창 너머 운동장 조명 (은은한 고정 광점 — 6타일마다)
+    if(lx%6===3){ cx.save(); cx.globalAlpha=0.3;
+      const g=cx.createRadialGradient(sx+T/2,R.win*T,1,sx+T/2,R.win*T,14);
+      g.addColorStop(0,'rgba(255,238,196,.8)'); g.addColorStop(1,'rgba(255,238,196,0)');
+      cx.fillStyle=g; cx.fillRect(sx-10,R.sillT*T,T+20,T*2); cx.restore(); }
     // 계단 문 (철문 자리에 「계단」 표지)
     if(lx===M.cur.stairs){ tile(A.EXITD[0], sx, R.door*T+DY); tile(A.EXITD[2], sx, (R.door+1)*T+DY);
       plates.push([sx,{kind:'stairs'}]); }
@@ -231,34 +239,34 @@ function drawHUD(){
 }
 
 /* ══ 화장실 (챕터 1 시작점) ══ */
-const BOX=112, BOY=80;   // (400-176)/2, (304-128)/2 — 중앙 정렬
+const BOX=104, BOY=76;   // (400-192)/2, (304-144)/2 — 중앙 정렬
 function drawBath(){
   const cx=G.cx, T=G.T, b=M.cur.bath;
   cx.fillStyle='#0a0c0f'; cx.fillRect(0,0,G.VW,G.VH);
   const TX=x=>x*T+BOX, TY=y=>y*T+BOY;
   // 바닥
-  for(let y=3;y<b.h;y++) for(let x=0;x<b.w;x++) tile(A.BFLOOR[(x+y)%2], TX(x), TY(y));
-  // 북벽 (타일벽 + 거울 + 세면대)
+  for(let y=3;y<b.h-1;y++) for(let x=0;x<b.w;x++) tile(A.BFLOOR[(x+y)%2], TX(x), TY(y));
+  if(b.drain) tile(A.DRAIN, TX(b.drain[0]), TY(b.drain[1]));
+  // 북벽 — 타일벽 / 좌: 거울+세면대 / 우: 칸 2타일 입면
   for(let x=-1;x<=b.w;x++){ tile(A.BWALL, TX(x), TY(0)); tile(A.BWALL, TX(x), TY(1)); tile(A.BWALL, TX(x), TY(2)); }
   b.mirror.forEach(x=>tile(A.MIRROR, TX(x), TY(1)));
   b.sinks.forEach(x=>tile(A.SINK, TX(x), TY(2)));
-  // 칸막이 줄
-  b.stalls.forEach(x=>tile(x===b.openStall&&S.bathStep>=2?A.STALL_O:A.STALL, TX(x), TY(3)));
-  // 좌우 벽
+  b.stalls.forEach(x=>{
+    const open_=(x===b.openStall && S.bathStep>=2);
+    tile(open_?A.STALLO_T:A.STALL_T, TX(x), TY(1));
+    tile(open_?A.STALLO_B:A.STALL_B, TX(x), TY(2));
+  });
+  // 좌우 벽 + 남벽(출입문 입면)
   for(let y=3;y<b.h;y++){ tile(A.BWALL, TX(-1), TY(y)); tile(A.BWALL, TX(b.w), TY(y)); }
-  // 문
-  tile(A.BDOOR, TX(b.door.x), TY(b.door.y));
-  txt('▼', TX(b.door.x)+T/2, TY(b.door.y)-6, '#e8c76a', 9,'center');
-  // 형광등 (bathStep 2부터 가끔 깜빡)
-  const fl=S.bathStep>=2 && Math.sin(S.t*13)>0.93;
-  if(fl){ cx.save(); cx.globalAlpha=0.12; cx.fillStyle='#0a0c10'; cx.fillRect(0,0,G.VW,G.VH); cx.restore(); }
+  for(let x=0;x<b.w;x++) tile(A.BWALL, TX(x), TY(b.h-1));
+  tile(A.BDOOR, TX(b.door.x), TY(b.h-1));
+  txt('▼', TX(b.door.x)+T/2, TY(b.h-1)-7, '#e8c76a', 9,'center');
   drawChar(TX(S.wx)+ox()*T, TY(S.wy)+oy()*T-16);
   // 조사 표시
   const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir], fx=S.wx+v[0], fy=S.wy+v[1];
-  const hot=(fy<=2&&b.sinks.includes(fx))||(fy===3&&b.stalls.includes(fx))||
-            (fx===b.door.x&&fy===b.door.y)||(S.wx===b.door.x&&S.wy===b.door.y);
+  const hot=(fy<=2&&(b.sinks.includes(fx)||b.stalls.includes(fx)))||(fy>=b.h-1&&fx===b.door.x);
   if(hot && !S.msg && Math.sin(S.t*5)>-0.3)
-    txt('!', TX(fx)+T/2, TY(Math.min(fy,3))-4, '#e8c76a', 10,'center');
+    txt('!', TX(fx)+T/2, TY(Math.max(2,Math.min(fy,b.h-2)))-4, '#e8c76a', 10,'center');
 }
 
 export function render(){

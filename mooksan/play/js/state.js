@@ -28,8 +28,9 @@ export function spotAt(x,y){
   if(DESKS.some(p=>p[0]===x&&p[1]===y)) return '책상';
   return null; }
 export function bathBlocked(b,x,y){
-  if(x<0||x>=b.w||y<3||y>=b.h) return true;      // y0..2 = 거울·세면대 벽줄
-  if(y===3 && b.stalls.includes(x)) return true; // 칸막이 줄
+  if(x<0||x>=b.w) return true;
+  if(y<=2) return true;                          // 북벽 (거울·세면대·칸 입면)
+  if(y>=b.h-1) return true;                      // 남벽 (출입문 입면)
   return false;
 }
 export function blocked(x,y){
