@@ -231,6 +231,8 @@ function leaveBath(){
 function useStairs(){
   S.stairsUsed++; ev('stairs',{n:S.stairsUsed});
   S.wx=S.wx+90; S.wy=R.f0; S.mv=0;                    // 반대편 (loopW/2)
+  // 착지 보정 (B12-b) — 계단이 2타일(165·166)이라 +90 착지가 초소 살림(76~78) 위일 수 있다
+  for(let g=0; isBlocked(S.wx,S.wy)&&g<8; g++) S.wx--;
   blip(80,0.25,0.07,'square');
   if(S.stairsUsed===1){
     say(['계단을 내려간다.','한 층. 두 층.','……문을 열었다.','3층 복도다.','문패가, 3-1부터, 다시 시작한다.',
