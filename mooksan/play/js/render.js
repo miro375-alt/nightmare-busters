@@ -78,6 +78,7 @@ function drawHall(){
   const plates=[]; const PLR=5*T;   // 명판 행 — 문 바로 위
   const lits=[];                     // 야간 패스 광원 (R21)
   let corpseAtX=null;                // 시신 화면 X — 조명 뒤에 그린다 (P50)
+  const lamps=[];                    // 형광등 스프라이트 — 감쇠 제외 (P60)
   for(let wx=x0;wx<=x1;wx++){
     const sx=wx*T-camX, lx=localX(wx);
     // 천장 3줄 — 벽면은 2줄만 (LimeZu 벽 문법, P60 R004 지적 2·3)
@@ -127,8 +128,8 @@ function drawHall(){
         if(P){
           if(P.tag==='wall'){                    // 벽 부착물 — 허리벽 위에 걸린다
             prop(hp, sx, (6-P.h)*T);
-          } else {                               // 입식물 — 바닥 접합선에 선다
-            prop(hp, sx, (R.f0-P.h)*T);
+          } else {                               // 입식물 — 스프라이트 하단 여백(pad)만큼 더 내려 접지 (P60 0-6)
+            prop(hp, sx, (R.f0-P.h)*T + (P.pad||0));
             contactShadow(sx+P.w*T/2, JUNC+2, P.w*T-4);
           }
         }
@@ -182,11 +183,11 @@ function drawHall(){
     }
     // 방위 표지 (C3, P50) — 「동쪽」이 화면에 있어야 한다
     const dg=(M.cur.dirSigns||[]).find(s=>s.x===lx);
-    if(dg){ tile(A.SIGNLIB, sx, 4*T); txt(dg.t, sx+T/2, 4*T+5, '#dce8f4', 6, 'center'); }
+    if(dg){ tile(A.SIGNLIB, sx, 4*T); txt(dg.t, sx+T/2, 4*T+6, '#dce8f4', 5, 'center'); }
     // 도서실 방향 표지 (품질기준 1 — 단서 다중화)
     const sg=(M.cur.libSigns||[]).find(s=>s.x===lx);
     if(sg){ tile(A.SIGNLIB, sx, 4*T);
-      txt('도서실 '+sg.dir, sx+T/2, 4*T+5, '#dce8f4', 7, 'center'); }
+      txt('도서실'+sg.dir, sx+T/2, 4*T+6, '#dce8f4', 5, 'center'); }   // 판 밖 넘침 방지 (P60 지적7)
     // 시신 현장 — 흩어진 서류·굴러간 손전등 (사람의 마지막 흔적)
     const SC=M.cur.scatter;
     if(SC){
@@ -202,7 +203,8 @@ function drawHall(){
       corpseAtX = sx;                                       // 그리기는 야간 패스 뒤 — 빛에 씻기면 안 된다
     }
   }
-  nightPass(lits, 0.56);          // 복도는 더 어둡게 — 화장실이 유일하게 밝은 곳 (P20)
+  nightPass(lits, 0.52);          // 복도는 더 어둡게 — 화장실이 유일하게 밝은 곳 (P20)
+  lamps.forEach(sx=>tile(A.LIT, sx, 2*T));                 // 점등체는 감쇠 밖
   if(corpseAtX!==null){                                    // 쓰러진 사람 — 조명에 씻기지 않게 패스 뒤에
     const sx2=corpseAtX, CY=(R.f0+1)*T;
     cx.save(); cx.globalAlpha=0.40; cx.fillStyle='#000';
@@ -294,19 +296,19 @@ function drawRoom(){
   tile(A.TDL,TX(RM.cx-1),TY(RM.f0)); tile(A.TDR,TX(RM.cx),TY(RM.f0));
   // 교실 집기 (R23) — 대형 소품. 「빈 교실」이 아니라 「사람이 쓰던 교실」로 보여야 한다.
   // stand: 바닥에 선다(밑변을 지정 행에 맞춤) / hang: 벽에 걸린다(윗변 기준)
-  const stand=(k,x,bottomRow)=>{ const P=propSize(k); if(P) prop(k, TX(x), TY(bottomRow-P.h+1)); };
+  const stand=(k,x,bottomRow)=>{ const P=propSize(k); if(P) prop(k, TX(x), TY(bottomRow-P.h+1)+(P.pad||0)); };
   const hang =(k,x,topRow)=>prop(k, TX(x), TY(topRow));
+  // 북벽 창 밴드 (P60 0-4·0-5) — 교실에 창이 없으면 외기면이 성립하지 않는다
+  for(const wx of [RM.x0+1, RM.x0+3, RM.x1-2, RM.x1-4]) tile(A.HWIN2[0], TX(wx), TY(RM.yBB));
   hang('notice', RM.cx-7, RM.yBB-1);                        // 칠판 좌측 학급 게시물
   hang('map',    RM.cx+3, RM.yBB-1);                        // 칠판 우측 세계지도
-  stand('shelf',  RM.x0+1, RM.f0+1);                        // 후면(교실 앞쪽) 학급문고
-  stand('shelf2', RM.x1-2, RM.f0+1);
+  stand('shelf',  RM.x0+2, RM.f0+1);                        // 서측 학급문고 (벽 절단 회피 — P60 지적1)
+  stand('shelf2', RM.x1-3, RM.f0+1);
   stand('globe',  RM.cx+2, RM.f0+1);                        // 교탁 옆 지구본
-  stand('cabinet',RM.x0+1, RM.yDoor-1);                     // 뒷문 옆 청소도구함
-  stand('plant',  RM.x1-1, RM.yDoor-1);                     // 뒷벽 화분
+  stand('cabinet',RM.x0+2, RM.yDoor-1);                     // 뒷문 옆 청소도구함
+  stand('plant',  RM.x1-2, RM.yDoor-1);                     // 뒷벽 화분
   tile(A.RWIN, TX(RM.x1), TY(RM.f0+4));                     // 측벽 창
   tile(A.RWIN, TX(RM.x1), TY(RM.f0+6));
-  tile(A.LOCKT, TX(RM.x0), TY(RM.f0+4));                    // 측벽 사물함
-  tile(A.LOCKB, TX(RM.x0), TY(RM.f0+5));
   cx.save(); cx.globalAlpha=0.28;
   const g=cx.createLinearGradient(TX(RM.x1+1),0,TX(RM.x1-2),0);
   g.addColorStop(0,'rgba(255,238,196,.9)'); g.addColorStop(1,'rgba(255,238,196,0)');
@@ -325,7 +327,7 @@ function drawRoom(){
 
   tile(A.DOOR[2], TX(RM.cx), TY(RM.yDoor)); tile(A.DOOR[3], TX(RM.cx+1), TY(RM.yDoor));
 
-  nightPass(rpools, 0.50);                               // 밤 (R21)
+  nightPass(rpools, 0.38);                               // 밤 (R21) — 조사 대상이 배경보다 어두우면 안 된다 (P60 지적5)
   drawChar(TX(S.wx)+ox()*G.T, TY(S.wy)+oy()*G.T-16);
 
   const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir], sp=spotAt(S.wx+v[0],S.wy+v[1]);
@@ -400,8 +402,8 @@ export function render(){
     txt('불러오는 중…',G.VW/2,G.VH/2,'#4a4740',11,'center'); return; }
   if(S.scene==='title'){ cx.fillStyle='#07080b'; cx.fillRect(0,0,G.VW,G.VH); return; }
   if(S.map==='bath') drawBath(); else if(S.map==='hall') drawHall(); else drawRoom();
-  const vg=cx.createRadialGradient(G.VW/2,G.VH/2,G.VH*0.26,G.VW/2,G.VH/2,G.VH*0.95);
-  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.72)');
+  const vg=cx.createRadialGradient(G.VW/2,G.VH/2,G.VH*0.34,G.VW/2,G.VH/2,G.VH*1.02);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.44)');   // P60 지적4 — 과감쇠 완화
   cx.fillStyle=vg; cx.fillRect(0,0,G.VW,G.VH);
   drawHUD();
   if(S.numin) drawNum(); else if(S.choice) drawChoice(); else if(S.msg) drawMsg();

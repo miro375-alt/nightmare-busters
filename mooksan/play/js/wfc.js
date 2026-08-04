@@ -208,7 +208,10 @@ export function genCorridorProps(map, rng) {
     fixed[j] = null; if (isContent) content[j] = true;
   };
 
-  for (let lx = 0; lx < W; lx++) if (lx % 6 === 3) { block(lx, true); block(lx + 1, true); }  // 문
+  // 문 + 양옆 1칸 이격 — 가구가 문틀에 붙으면 통행이 막혀 보인다 (P60 지적6)
+  for (let lx = 0; lx < W; lx++) if (lx % 6 === 3) {
+    block(lx, true); block(lx + 1, true); block(lx - 1, false); block(lx + 2, false);
+  }
   block(map.stairs, true); block(map.stairs + 1, true);
   block(map.library, true); block(map.library + 1, true);
   for (const h of map.homebases) { block(h.x, true); block(h.x + 1, true); block(h.x + 2, true); }
