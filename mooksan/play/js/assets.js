@@ -3,10 +3,19 @@ import { M } from './maps.js';
 const T = G.T;
 
 export function loadAssets() {
-  [['tile','assets/tiles.png'],['char','assets/char.png'],['ui','assets/ui.png'],['helper','assets/helper.png']]
+  [['tile','assets/tiles.png'],['char','assets/char.png'],['ui','assets/ui.png'],
+   ['helper','assets/helper.png'],['props','assets/props.png']]
     .forEach(([k,src])=>{ const i=new Image(); i.onload=()=>G.ready++; i.src=src; G.IMG[k]=i; });
   fetch('data/balance.json').then(r=>r.json()).then(j=>{ G.BAL=j; G.ready++; });
+  fetch('assets/props.json').then(r=>r.json()).then(j=>{ G.PROPS=j; G.ready++; });   // 대형 소품 매니페스트 (R23)
 }
+
+/** 대형 소품 — 스프라이트를 통째로 그린다. (bx,by)=좌상단 픽셀 */
+export function prop(key, bx, by){
+  const P=G.PROPS&&G.PROPS[key]; if(!P||!G.IMG.props) return;
+  G.cx.drawImage(G.IMG.props, P.x*T, P.y*T, P.w*T, P.h*T, bx|0, by|0, P.w*T, P.h*T);
+}
+export const propSize = key => (G.PROPS&&G.PROPS[key])||null;
 
 // 아틀라스 좌표 [col,row]
 export const A={
@@ -40,13 +49,13 @@ export const A={
 export const hpAt = wx => {
   const P = M.props; if (!P) return null;
   const lx = ((wx % P.length) + P.length) % P.length;
-  const key = P[lx];
-  if (!key) return null;
-  if (key === 'board') {                                  // 2칸 소품 — 좌/우 파트 판별
-    return (P[(lx - 1 + P.length) % P.length] === 'board' && P[(lx + 1) % P.length] !== 'board')
-      ? 'board_r' : 'board_l';
-  }
-  return key;
+  return P[lx] || null;                                   // 조사용 — 어느 파트를 봐도 같은 소품
+};
+/** 이 칸이 소품의 시작(part 0)인가 — 렌더는 시작 칸에서 스프라이트를 통째로 그린다 */
+export const hpHead = lx => {
+  const P = M.props, N = P && P.length; if (!N) return null;
+  const k = P[lx]; if (!k) return null;
+  return P[(lx - 1 + N) % N] === k ? null : k;
 };
 export function tile(a,x,y){ G.cx.drawImage(G.IMG.tile,a[0]*T,a[1]*T,T,T,x|0,y|0,T,T); }
 /** 타일 세로 조각 블릿 — R002: 문 하단 연장·문지방 등 접합부 처리에 사용 */

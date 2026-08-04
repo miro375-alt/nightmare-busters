@@ -3,8 +3,8 @@ export const G = {
   cv: document.getElementById('cv'),
   cx: null,
   VW: 400, VH: 304, T: 16,
-  IMG: {}, ready: 0, READY_NEED: 7,   // 이미지 4 + balance.json + 맵 + 픽셀폰트
-  BAL: null,                           // data/balance.json — 밸런스 수치는 전부 여기서 (D00)
+  IMG: {}, ready: 0, READY_NEED: 9,   // 이미지 5 + balance.json + 맵 + 폰트 + props.json
+  BAL: null, PROPS: null,              // balance.json / props.json (대형 소품 매니페스트)
   K: {},                               // 눌린 키 상태
   rng: null, rngFx: null,              // 시드 PRNG — 논리/연출 분리 (B02)
   STEP: 1/60,                          // 고정 논리 스텝 — 결정론의 기반 (B03)

@@ -1,6 +1,6 @@
 import { G } from './ctx.js';
 import { S, R, RM, DESKS, fmtOut, spotAt } from './state.js';
-import { A, tile, tileSlice, hpAt } from './assets.js';
+import { A, tile, tileSlice, hpAt, hpHead, prop, propSize } from './assets.js';
 import { txt, win9, INK, INK2, GOLD, drawMsg, drawChoice, drawNum } from './ui.js';
 import { M, doorInfo, homebaseAt, corpseAt, localX } from './maps.js';
 import { havenState } from './world.js';
@@ -108,16 +108,16 @@ function drawHall(){
     } else {
       // 허리벽 띠를 먼저 깔고, 그 위에 소품 (검은 구멍 방지)
       tile(A.WAINT, sx, DTOP); tile(A.BASE, sx, DBOT); wallBand=false;
-      const hp=hpAt(lx);
-      if(hp){ const o=A.HP[hp];
-        if(o.a&&o.b){                            // 입식물 2타일 — 바닥에 선다
-          tile(o.a, sx, DTOP); tile(o.b, sx, DBOT);
-          contactShadow(sx+T/2, JUNC+2, T-4);
-        } else if(o.a){                          // 벽 부착물 — 벽 중단 (떠 있는 게 맞다)
-          tile(o.a, sx, 4*T);
-        } else if(o.b){                          // 소형 입식물 — 하단 1타일
-          tile(o.b, sx, DBOT);
-          contactShadow(sx+T/2, JUNC+2, T-6);
+      const hp=hpHead(lx);                       // 시작 칸에서만 — 스프라이트를 통째로 (R23)
+      if(hp){
+        const P=propSize(hp);
+        if(P){
+          if(P.tag==='wall'){                    // 벽 부착물 — 허리벽 위에 걸린다
+            prop(hp, sx, (6-P.h)*T);
+          } else {                               // 입식물 — 바닥 접합선에 선다
+            prop(hp, sx, (R.f0-P.h)*T);
+            contactShadow(sx+P.w*T/2, JUNC+2, P.w*T-4);
+          }
         }
       }
     }
@@ -263,9 +263,21 @@ function drawRoom(){
 
   tile(A.TDLT,TX(RM.cx-1),TY(RM.f0-1)); tile(A.TDRT,TX(RM.cx),TY(RM.f0-1));
   tile(A.TDL,TX(RM.cx-1),TY(RM.f0)); tile(A.TDR,TX(RM.cx),TY(RM.f0));
-  for(let i=0;i<4;i++) tile(i===0?A.LOCKT:A.LOCKB, TX(RM.x0), TY(RM.f0+1+i));
-  tile(A.RWIN, TX(RM.x1), TY(RM.f0+1));                     // 측벽 창 2개 — 사이 벽 (연속 4개는 모니터처럼 읽힘)
-  tile(A.RWIN, TX(RM.x1), TY(RM.f0+3));
+  // 교실 집기 (R23) — 대형 소품. 「빈 교실」이 아니라 「사람이 쓰던 교실」로 보여야 한다.
+  // stand: 바닥에 선다(밑변을 지정 행에 맞춤) / hang: 벽에 걸린다(윗변 기준)
+  const stand=(k,x,bottomRow)=>{ const P=propSize(k); if(P) prop(k, TX(x), TY(bottomRow-P.h+1)); };
+  const hang =(k,x,topRow)=>prop(k, TX(x), TY(topRow));
+  hang('notice', RM.cx-7, RM.yBB-1);                        // 칠판 좌측 학급 게시물
+  hang('map',    RM.cx+3, RM.yBB-1);                        // 칠판 우측 세계지도
+  stand('shelf',  RM.x0+1, RM.f0+1);                        // 후면(교실 앞쪽) 학급문고
+  stand('shelf2', RM.x1-2, RM.f0+1);
+  stand('globe',  RM.cx+2, RM.f0+1);                        // 교탁 옆 지구본
+  stand('cabinet',RM.x0+1, RM.yDoor-1);                     // 뒷문 옆 청소도구함
+  stand('plant',  RM.x1-1, RM.yDoor-1);                     // 뒷벽 화분
+  tile(A.RWIN, TX(RM.x1), TY(RM.f0+4));                     // 측벽 창
+  tile(A.RWIN, TX(RM.x1), TY(RM.f0+6));
+  tile(A.LOCKT, TX(RM.x0), TY(RM.f0+4));                    // 측벽 사물함
+  tile(A.LOCKB, TX(RM.x0), TY(RM.f0+5));
   cx.save(); cx.globalAlpha=0.28;
   const g=cx.createLinearGradient(TX(RM.x1+1),0,TX(RM.x1-2),0);
   g.addColorStop(0,'rgba(255,238,196,.9)'); g.addColorStop(1,'rgba(255,238,196,0)');

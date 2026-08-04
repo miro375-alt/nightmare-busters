@@ -19,35 +19,51 @@
    w: 가중치(빈도). interact: 조사 가능 여부(밀도 하한 계산에 쓰인다). */
 // 가중치 주의: 문이 6칸마다 2칸을 먹어 자유 구간은 4칸뿐이다.
 // 3칸짜리 사물함 가중치를 높이면 구간을 독식해 복도가 사물함 일색이 된다 (R22 실측).
-export const MODULES = {
-  empty:    { key: null,     w: 2.2, interact: false },
-  lock_l:   { key: 'lock',   w: 0.55, interact: true, gap: 14, next: ['lock_m'] },
-  lock_m:   { key: 'lock',   w: 0,   interact: true,  next: ['lock_r'] },
-  lock_r:   { key: 'lock',   w: 0,   interact: true },
-  board_l:  { key: 'board',  w: 0.9, interact: true,  gap: 22, next: ['board_r'] },
-  board_r:  { key: 'board',  w: 0,   interact: true },
-  clock:    { key: 'clock',  w: 0.9, interact: true,  gap: 46 },
-  hyd:      { key: 'hyd',    w: 1.2, interact: true,  gap: 26 },
-  cool:     { key: 'cool',   w: 1.0, interact: true,  gap: 34, next: ['bin','empty'] },
-  bin:      { key: 'bin',    w: 0,   interact: true },   // 정수기 옆에만 (cool.next) — 복도에 쓰레기통이 널리면 안 된다
-  clean:    { key: 'clean',  w: 1.1, interact: true,  gap: 30 },
-  poster:   { key: 'poster', w: 1.2, interact: true,  gap: 16 },
-  plant:    { key: 'plant',  w: 1.1, interact: true,  gap: 13 },
-};
+// 카탈로그 — 실제 소품 크기(props.json)와 일치해야 한다. w>1이면 파트로 쪼개 인접 규칙이 잇는다.
+// gap: 같은 소품 최소 간격(칸). 한 화면(25칸)에 소화기 여섯 개면 학교가 아니라 소방 창고다.
+export const CATALOG = [
+  { key: 'cabinet', w: 1, weight: 1.6, gap: 8,  interact: true },   // 회색 캐비닛 1×2
+  { key: 'shelf',   w: 2, weight: 0.9, gap: 30, interact: true },   // 책장 2×3
+  { key: 'shelf2',  w: 2, weight: 0.8, gap: 34, interact: true },
+  { key: 'rack',    w: 2, weight: 0.7, gap: 40, interact: true },   // 진열대 2×3
+  { key: 'notice',  w: 2, weight: 1.0, gap: 22, interact: true },   // 학급 게시물 2×2 (벽)
+  { key: 'cork',    w: 2, weight: 0.9, gap: 20, interact: true },   // 코르크 게시판 2×1 (벽)
+  { key: 'map',     w: 2, weight: 0.5, gap: 60, interact: true },   // 세계지도 2×2 (벽)
+  { key: 'board_s', w: 2, weight: 0.5, gap: 52, interact: true },   // 소형 칠판 2×2 (벽)
+  { key: 'hyd',     w: 1, weight: 1.1, gap: 26, interact: true },   // 소화기
+  { key: 'plant',   w: 1, weight: 1.0, gap: 13, interact: true },
+  { key: 'globe',   w: 1, weight: 0.3, gap: 70, interact: true },   // 어긋남 — 복도에 지구본
+];
+
+/* 카탈로그 → WFC 모듈 (파트 분해). part 0만 렌더가 그린다. */
+export const MODULES = { empty: { key: null, w: 2.2, interact: false, part: 0 } };
+for (const c of CATALOG) {
+  for (let i = 0; i < c.w; i++) {
+    const nm = c.w === 1 ? c.key : `${c.key}#${i}`;
+    MODULES[nm] = {
+      key: c.key, part: i, span: c.w, gap: c.gap, interact: c.interact,
+      w: i === 0 ? c.weight : 0,                       // 꼬리 파트는 단독 시작 불가
+      next: i < c.w - 1 ? [c.w === 1 ? c.key : `${c.key}#${i + 1}`] : undefined,
+    };
+  }
+}
+for (const c of CATALOG) if (c.after) {               // 종속 소품 — 지정 소품 뒤에만
+  const host = MODULES[c.after.includes('#') ? c.after : c.after];
+  const tail = MODULES[c.after] || MODULES[`${c.after}#0`];
+  const hostLast = c.after in MODULES ? c.after : `${c.after}#0`;
+  MODULES[hostLast].next = [c.key, 'empty'];
+}
+
 const NAMES = Object.keys(MODULES);
 const HEADS = NAMES.filter(n => MODULES[n].w > 0);      // 스스로 시작할 수 있는 모듈
 
 /* ── 인접 규칙 (a 다음에 b가 올 수 있는가) ──
    다중 칸 모듈은 next로 이어짐을 강제하고, 그 외에는 미학 규칙만 건다. */
 function allowed(a, b) {
-  const A = MODULES[a];
+  const A = MODULES[a], B = MODULES[b];
   if (A.next) return A.next.includes(b);                // 연속체는 정해진 파트만
-  if (MODULES[b].w === 0) return false;                 // 꼬리 파트는 단독 시작 불가
-  if (a === b && a !== 'empty') return false;           // 같은 소품 두 번 연속 금지
-  if (a === 'lock_r' && b === 'lock_l') return false;   // 사물함 6연 금지 (구간 독식 방지)
-  if (a === 'plant' && b === 'plant') return false;
-  if (a === 'poster' && b === 'clock') return false;    // 벽 부착물 연속 — 벽이 게시판처럼 됨
-  if (a === 'clock' && b === 'poster') return false;
+  if (B.w === 0) return false;                          // 꼬리·종속 파트는 단독 시작 불가
+  if (A.key && A.key === B.key) return false;           // 같은 소품 두 번 연속 금지
   return true;
 }
 
@@ -87,7 +103,8 @@ function collapseOnce(loopW, fixed, rng, maxEmptyRun) {
     for (let d = 1; d <= radius; d++) {
       for (const j of [i - d, i + d]) {
         const c = at(j);
-        if (c.length === 1 && MODULES[c[0]].key === key) return true;
+        const M_ = c.length === 1 ? MODULES[c[0]] : null;
+        if (M_ && M_.key === key && M_.part === 0) return true;
       }
     }
     return false;
@@ -147,7 +164,7 @@ function spacingOk(sol, loopW, tol) {
   for (let pass = 0; pass < 2; pass++) {                 // 두 바퀴 — 고리 이음매까지 검사
     for (let i = 0; i < loopW; i++) {
       const n = sol[i], m = MODULES[n];
-      if (!m.gap) continue;
+      if (!m.gap || m.part !== 0) continue;   // 다중 타일 소품의 꼬리 파트는 자기 자신 (R23)
       const key = m.key, prev = last[key];
       if (prev !== undefined) {
         const d = (pass * loopW + i) - prev;
