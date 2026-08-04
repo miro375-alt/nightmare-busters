@@ -32,6 +32,18 @@ function drawChar(x,y){
   }
 }
 
+/* 쓰러진 사람 — 조력자와 같은 스프라이트를 90° 눕혀 한 번만 굽는다 (P50 「사람 형체가 없다」).
+   같은 남색 점퍼가 쓰러져 있다는 사실 자체가 이 장면의 정보다 */
+let _corpseCv=null;
+function corpseSprite(){
+  if(_corpseCv) return _corpseCv;
+  const c=document.createElement('canvas'); c.width=32; c.height=16;
+  const g=c.getContext('2d'); g.imageSmoothingEnabled=false;
+  g.translate(0,16); g.rotate(-Math.PI/2);
+  g.drawImage(G.IMG.helper, 12*16,0,16,32, 0,0,16,32);   // 블록2(좌향) 프레임0
+  _corpseCv=c; return c;
+}
+
 /* 야간 패스 (R21) — 전역 한색 암막 + 광원별 빛웅덩이. 호러의 명암 리듬은 여기서 나온다 */
 function nightPass(pools, amb){
   const cx=G.cx;
@@ -65,6 +77,7 @@ function drawHall(){
   const x0=Math.floor(camX/T)-1, x1=x0+Math.ceil(VW/T)+2;
   const plates=[]; const PLR=5*T;   // 명판 행 — 문 바로 위
   const lits=[];                     // 야간 패스 광원 (R21)
+  let corpseAtX=null;                // 시신 화면 X — 조명 뒤에 그린다 (P50)
   for(let wx=x0;wx<=x1;wx++){
     const sx=wx*T-camX, lx=localX(wx);
     // 천장 3줄 — 벽면은 2줄만 (LimeZu 벽 문법, P60 R004 지적 2·3)
@@ -72,7 +85,7 @@ function drawHall(){
       cx.fillRect(sx|0,y*T,T,T); }
     if(lx%3===0){
       tile(A.LIT, sx, 2*T);                               // 상시 점등 — 깜빡임 없음 (오너 지시)
-      lits.push({x:sx+T/2, y:(R.f0+2)*T, r:86, a:0.22});  // 형광등 빛웅덩이 (R21)
+      lits.push({x:sx+T/2, y:(R.f0+2)*T, r:74, a:0.21});   // 웅덩이 축소 — 사이 어둠 확보  // 형광등 빛웅덩이 (R21)
     }
     tile(A.WTOP, sx, 3*T);
     // 벽 구성 (R003 지적 1): 문·입식물이 6~7행을 차지해 하단이
@@ -167,6 +180,9 @@ function drawHall(){
       if(lx===P.chair) tile(A.PCHAIR, sx, R.f0*T);
       if(P.signPlate && lx===P.signPlate[0]) plates.push([sx,{kind:'post'}]);
     }
+    // 방위 표지 (C3, P50) — 「동쪽」이 화면에 있어야 한다
+    const dg=(M.cur.dirSigns||[]).find(s=>s.x===lx);
+    if(dg){ tile(A.SIGNLIB, sx, 4*T); txt(dg.t, sx+T/2, 4*T+5, '#dce8f4', 6, 'center'); }
     // 도서실 방향 표지 (품질기준 1 — 단서 다중화)
     const sg=(M.cur.libSigns||[]).find(s=>s.x===lx);
     if(sg){ tile(A.SIGNLIB, sx, 4*T);
@@ -182,15 +198,25 @@ function drawHall(){
     }
     // 시신 + 열쇠
     if(corpseAt(wx) && lx===localX(M.cur?M.cur.corpse:-1)){
-      tile(A.CORPSE[0], sx, R.f0*T); tile(A.CORPSE[1], sx+T, R.f0*T);
-      if(!S.hasKey){ cx.save(); cx.globalAlpha=0.25;
-        const kg=cx.createRadialGradient(sx+T*2+8,R.f0*T+10,1,sx+T*2+8,R.f0*T+10,10);
-        kg.addColorStop(0,'rgba(255,224,120,.9)'); kg.addColorStop(1,'rgba(255,224,120,0)');
-        cx.fillStyle=kg; cx.fillRect(sx+T*2-4,R.f0*T-2,T+8,T+8); cx.restore();
-        tile(A.KEY, sx+T*2, R.f0*T+2); }
+      lits.push({x:sx+T, y:(R.f0+2)*T, r:58, a:0.24});     // C2 — 시신 자리는 눈에 들어와야 한다 (P50)
+      corpseAtX = sx;                                       // 그리기는 야간 패스 뒤 — 빛에 씻기면 안 된다
     }
   }
-  nightPass(lits, 0.44);                                 // 밤 (R21) — 문패·캐릭터는 판독성 위해 어둠 위에
+  nightPass(lits, 0.56);          // 복도는 더 어둡게 — 화장실이 유일하게 밝은 곳 (P20)
+  if(corpseAtX!==null){                                    // 쓰러진 사람 — 조명에 씻기지 않게 패스 뒤에
+    const sx2=corpseAtX, CY=(R.f0+1)*T;
+    cx.save(); cx.globalAlpha=0.40; cx.fillStyle='#000';
+    cx.beginPath(); cx.ellipse(sx2+T, CY+13, 16, 4.5, 0, 0, 7); cx.fill(); cx.restore();
+    cx.drawImage(corpseSprite(), sx2|0, (CY+2)|0);
+    txt('반장', sx2+T, CY-12, '#e8cf9a', 8, 'center');      // 명찰 — 「찾았다」를 눈으로 확정
+    if(!S.hasKey){
+      cx.save(); cx.globalAlpha=0.5;
+      const kg=cx.createRadialGradient(sx2+T*2+8,CY+10,1,sx2+T*2+8,CY+10,12);
+      kg.addColorStop(0,'rgba(255,228,140,.95)'); kg.addColorStop(1,'rgba(255,228,140,0)');
+      cx.fillStyle=kg; cx.fillRect(sx2+T*2-8,CY-4,T+16,T+16); cx.restore();
+      tile(A.KEY, sx2+T*2, CY+2);
+    }
+  }                                 // 밤 (R21) — 문패·캐릭터는 판독성 위해 어둠 위에
   // 문패 (별도 패스 — D99 렌더 순서)
   plates.forEach(([sx,d])=>{
     if(d.kind==='hb'){
@@ -220,8 +246,11 @@ function drawHall(){
   // 상호작용 표시
   const near = doorInfo(S.wx)||doorInfo(S.wx-1)||homebaseAt(S.wx)||hpAt(localX(S.wx));
   const nearCorpse = !S.hasKey && (corpseAt(S.wx)||corpseAt(S.wx+1)||corpseAt(S.wx-1));
-  if((near&&S.wy===R.f0||nearCorpse) && !S.msg && !S.choice && !S.numin && Math.sin(S.t*5)>-0.3)
-    txt(nearCorpse?'!':'▲', VW/2, (R.base)*T+4, '#e8c76a', 10, 'center');
+  if((near&&S.wy===R.f0||nearCorpse) && !S.msg && !S.choice && !S.numin && Math.sin(S.t*5)>-0.3){
+    const lab = nearCorpse ? 'Space  조사' : 'Space  조사';
+    win9(VW/2-38, (R.base)*T-4, 76, 18, 0.9);
+    txt(lab, VW/2, (R.base)*T+1, INK, 9, 'center');       // C1 — 조작 키를 화면에 (P50)
+  }
   drawChar(VW/2-G.T/2, (S.wy+oy())*G.T-16);
 }
 
@@ -300,8 +329,11 @@ function drawRoom(){
   drawChar(TX(S.wx)+ox()*G.T, TY(S.wy)+oy()*G.T-16);
 
   const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir], sp=spotAt(S.wx+v[0],S.wy+v[1]);
-  if(sp && !S.msg && !S.choice && Math.sin(S.t*5)>-0.3)
-    txt(sp==='exit'?'▼':'!', TX(S.wx+v[0])+T/2, TY(S.wy+v[1])-4, '#e8c76a',10,'center');
+  if(sp && !S.msg && !S.choice && Math.sin(S.t*5)>-0.3){
+    const lx2=TX(S.wx+v[0])+T/2, ly2=TY(S.wy+v[1])-16;
+    win9(lx2-38, ly2, 76, 18, 0.9);
+    txt(sp==='exit'?'Space  나간다':'Space  조사', lx2, ly2+5, INK, 9, 'center');
+  }
 }
 
 /* HUD — 목표가 항상 보인다 (품질 기준 1) */
@@ -310,13 +342,21 @@ function drawHUD(){
   const goal = S.cleared ? '' : ((M.cur&&M.cur.goals[S.goal])||'');
   if(goal){
     cx.font='9px "DungGeunMo",sans-serif';
-    const w=Math.min(300, cx.measureText(goal).width+58);
+    const w=Math.min(268, cx.measureText(goal).width+56);
     win9(4,4,w,22,0.94);
     txt('목표',14,10,'#8a5a1e',8);
     txt(goal,44,10,INK,9);
-    if(S.hasKey) tile(A.KEY, w-18, 3);
+    if(S.hasKey) tile(A.KEY, w+4, 6);            // C5 — 프레임 물림 방지 (P50)
   }
-  txt('조사 '+S.foundN+' / 9', 8, VH-13, 'rgba(190,182,164,.55)',9);
+  if(S.banner){                                        // 획득 배너 — 3초간
+    const age=S.t-S.banner.t;
+    if(age>3.2) S.banner=null;
+    else { cx.save(); cx.globalAlpha=Math.min(1,(3.2-age)*1.4);
+      win9(VW/2-72, 44, 144, 24, 0.96);
+      txt(S.banner.text, VW/2, 51, '#8a5a1e', 10, 'center'); cx.restore(); }
+  }
+  txt('교실 단서 '+S.foundN+' / 9', 8, VH-13, 'rgba(190,182,164,.5)',8);
+  txt('이동 ↑↓←→   조사 Space   달리기 Shift', VW-8, VH-13, 'rgba(190,182,164,.42)',8,'right');
 }
 
 /* ══ 화장실 (챕터 1 시작점) ══ */
@@ -341,14 +381,17 @@ function drawBath(){
   for(let y=3;y<b.h;y++){ tile(A.BWALL, TX(-1), TY(y)); tile(A.BWALL, TX(b.w), TY(y)); }
   for(let x=0;x<b.w;x++){ tile(A.BWCAP, TX(x), TY(b.h-2)); tile(A.BWBOT, TX(x), TY(b.h-1)); }
   tile(A.BDOOR2T, TX(b.door.x), TY(b.h-2)); tile(A.BDOOR2B, TX(b.door.x), TY(b.h-1));
-  nightPass([{x:TX(b.w/2), y:TY(4), r:96, a:0.22}], 0.34);   // 밤 (R21) — 천장등 하나
+  nightPass([{x:TX(b.w/2), y:TY(4), r:120, a:0.30}], 0.16);   // 화장실 — 밝다 (P20 극성)   // 밤 (R21) — 천장등 하나
   txt('▼', TX(b.door.x)+T/2, TY(b.h-2)-7, '#e8c76a', 9,'center');
   drawChar(TX(S.wx)+ox()*T, TY(S.wy)+oy()*T-16);
   // 조사 표시
   const v=[[0,1],[-1,0],[1,0],[0,-1]][S.dir], fx=S.wx+v[0], fy=S.wy+v[1];
   const hot=(fy<=2&&(b.sinks.includes(fx)||b.stalls.includes(fx)))||(fy>=b.h-2&&fx===b.door.x);
-  if(hot && !S.msg && Math.sin(S.t*5)>-0.3)
-    txt('!', TX(fx)+T/2, TY(Math.max(2,Math.min(fy,b.h-2)))-4, '#e8c76a', 10,'center');
+  if(hot && !S.msg && Math.sin(S.t*5)>-0.3){
+    const px2=TX(fx)+T/2, py2=TY(Math.max(2,Math.min(fy,b.h-2)))-16;
+    win9(px2-38, py2, 76, 18, 0.9);
+    txt('Space  조사', px2, py2+5, INK, 9, 'center');
+  }
 }
 
 export function render(){

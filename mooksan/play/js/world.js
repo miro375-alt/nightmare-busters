@@ -194,7 +194,11 @@ function havenBoard(hb){
       '날짜가 매일 채워져 있다. ……어제까지.','오늘 칸이 비어 있다.']
     : st==='expired' ? ['점검표의 오늘 칸이','……지워져 있다. 분명 적었는데.','종이가 조금 낡은 것 같다.']
     : ['점검표. 오늘 칸이 채워져 있다.','내 글씨다.'];
-  say(head.concat(['여백에 메모가 있다 — 「'+goal+'」']), ()=>{
+  const heard = S.metHelper
+    ? ['그가 한 말을 옮겨 적어 뒀다.','「나가는 길은 도서실이에요.」','「마스터 키는 A 반장님이 갖고 계세요.」',
+       '「동쪽 순찰을 도세요. 표지판을 따라가면 만나실 거예요.」']
+    : [];
+  say(head.concat(['여백에 메모가 있다 — 「'+goal+'」']).concat(heard), ()=>{
     if(st==='ok') return;
     choose('점검표',['오늘 날짜를 기재한다','그냥 둔다'],i=>{
       if(i!==0) return;
@@ -250,7 +254,7 @@ function leaveBath(){
 
 /* ══ 계단 — 배신 (같은 복도 반대편으로) ══ */
 function useStairs(){
-  S.stairsUsed++; ev('stairs',{n:S.stairsUsed});
+  S.stairsUsed++; S._stairT=S.t; ev('stairs',{n:S.stairsUsed});
   S.wx=S.wx+90; S.wy=R.f0; S.mv=0;                    // 반대편 (loopW/2)
   // 착지 보정 (B12-b) — 계단이 2타일(165·166)이라 +90 착지가 초소 살림(76~78) 위일 수 있다
   for(let g=0; isBlocked(S.wx,S.wy)&&g<8; g++) S.wx--;
@@ -273,10 +277,10 @@ function helperTalk(){
       say(['「교대 오셨어요?」','「……아. 학생이구나. 미안해요.」',
         '「놀랐죠. 괜찮아요. 이런 일이, 가끔 있어요.」',
         '「일단 — 뛰지 마세요. 숨이 가빠지면 여기선 별로예요.」',
-        '「나가는 길은 도서실이에요. 여기서 동쪽으로 조금 가면 있어요.」',
+        '「나가는 길은 도서실이에요. 서쪽으로 조금 가면 있어요.」',
         '「문이 잠겨 있을 텐데… 마스터 키가 있어요.」',
-        '「A 반장님이 갖고 계실 거예요. 동쪽 순찰을 도세요.」',
-        '「도서실을 지나서, 한참 더요. 표지판을 따라가다 보면 만나실 거예요.」',
+        '「순찰조가 갖고 다녀요. 동쪽 순찰로를 따라가 보세요.」',
+        '「표지판이 있으니까, 그것만 따라가시면 돼요.」',
         '「저는 여기 있을게요. 초소는 비우면 안 되거든요.」',
         '……책상, 무전기, 간이침대.','한 사람이 아주 오래 산 흔적이었다.'], ()=>{
         if(!S.hasKey) setGoal('key');
@@ -287,12 +291,13 @@ function helperTalk(){
   if(S.cleared){ say(['「…….」']); return; }
   if(S.hasKey){
     ev('helper',{});
-    say(['「찾으셨군요.」','「……반장님은, 어떠셨어요.」','나는 대답하지 못했다.',
+    say(['「찾으셨군요.」','「A 반장님이 주시던가요?」','……현재형이었다.',
+      '나는 대답하지 못했다.',
       '「……도서실, 가세요. 저는 여기 있어야 해요.」']);
     return;
   }
   ev('helper',{});
-  say(['「반장님은 동쪽이에요. 도서실 지나서, 한참.」','「……가시면, 안부 좀 전해 주세요.」']);
+  say(['「순찰조는 동쪽이에요. 표지판 따라가시면 돼요.」','「……만나시면, 안부 좀 전해 주세요.」']);
 }
 
 function doorAction(d){
@@ -312,10 +317,11 @@ function doorAction(d){
 
 function pickupKey(){
   S.hasKey=true; ev('item',{key:'master'});
+  S.banner={t:S.t, text:'【마스터 키】 획득'};        // C2 — 획득을 눈으로 확정 (P50)
   const met=S.metHelper;
   say(['사람이 쓰러져 있다.','……숨을 쉬지 않는다.','오래된 것 같다. 아주.',
-    '남색 점퍼. 완장. 명찰 — 「반장」.']
-    .concat(met?['……이 사람이, A 반장님.','아까 그 사람은 「계실 거예요」라고 했다.','현재형으로.']:[])
+    '남색 점퍼. 완장. 명찰 — 「특수재난 현장대응반 · A」.']
+    .concat(met?['……순찰조.','아까 그 사람이 말한 순찰조가, 이 사람이다.']:[])
     .concat(['손 옆에 열쇠 뭉치가 떨어져 있다.','【마스터 키】를 집었다.','……도서실.']),
     ()=>setGoal('hasKey'));
 }
@@ -396,7 +402,10 @@ export function update(dt){
       if(Math.floor(S.t/period)!==Math.floor((S.t-dt)/period)) breathSfx(st);
     }
   }
-  setHum(0.02);
+  // 침묵 (P20 게이트 조건 2) — 소리가 빠지는 자리를 설계에 둔다.
+  // 안전지대는 귀가 먼저 안다. 계단 직후 3초는 험이 죽었다가 「같은 톤으로」 돌아온다
+  const quietStair = (S.t - (S._stairT||-99)) < 3;
+  setHum(inHaven() ? 0.003 : quietStair ? 0 : 0.02);
 }
 
 export function reset(seed){
@@ -412,7 +421,7 @@ export function reset(seed){
     mv:0,mvx:0,mvy:0,diag:false,lastDir:2,run:false,
     room:0,roomBack:8,found:{},foundN:0,hasKey:false,cleared:false,
     goal:'wash',bathStep:0,stairsUsed:0,metHelper:false,
-    breath:0,bStage:0,holdBreath:false,_running:0,havens:{},
+    breath:0,bStage:0,holdBreath:false,_running:0,havens:{},banner:null,
     t:0,dead:false,won:false,msg:null,choice:null,numin:null});
   document.getElementById('over').style.display='none';
   say(['3층 화장실.','1층은 복도 끝이라 밤에 가기 싫었다.','……누가 쓰고 불을 안 껐나 보네.']);

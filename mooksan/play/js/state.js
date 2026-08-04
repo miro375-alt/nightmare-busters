@@ -11,7 +11,7 @@ export const S={
   room:0, roomBack:8, found:{}, foundN:0, hasKey:false, cleared:false,
   breath:0, bStage:0, holdBreath:false,   // 숨 (70-시스템 §3) — holdBreath는 B18 훅
   havens:{},                              // {no:{filledAt}} — 점검표 기재 시각 (B09)
-  goal:'wash', bathStep:0, stairsUsed:0, metHelper:false,
+  goal:'wash', bathStep:0, stairsUsed:0, metHelper:false, banner:null,
   t:0, dead:false, won:false,
   msg:null, choice:null, numin:null
 };
