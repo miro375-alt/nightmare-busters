@@ -26,6 +26,11 @@ export const CATALOG = [
   { key: 'shelf',   w: 2, weight: 0.9, gap: 30, interact: true },   // 책장 2×3
   { key: 'shelf2',  w: 2, weight: 0.8, gap: 34, interact: true },
   { key: 'rack',    w: 2, weight: 0.7, gap: 40, interact: true },   // 진열대 2×3
+  { key: 'rack2',   w: 2, weight: 0.6, gap: 44, interact: true },
+  { key: 'shelf3',  w: 2, weight: 0.8, gap: 32, interact: true },
+  { key: 'shelf4',  w: 2, weight: 0.8, gap: 32, interact: true },
+  { key: 'ladder',  w: 1, weight: 0.4, gap: 60, interact: true },   // 복도에 놓인 사다리 — 어긋남
+  { key: 'tallboard', w: 2, weight: 0.5, gap: 50, interact: true }, // 이동 칠판 2×3
   { key: 'notice',  w: 2, weight: 1.0, gap: 22, interact: true },   // 학급 게시물 2×2 (벽)
   { key: 'cork',    w: 2, weight: 0.9, gap: 20, interact: true },   // 코르크 게시판 2×1 (벽)
   { key: 'map',     w: 2, weight: 0.5, gap: 60, interact: true },   // 세계지도 2×2 (벽)
@@ -36,7 +41,7 @@ export const CATALOG = [
 ];
 
 /* 카탈로그 → WFC 모듈 (파트 분해). part 0만 렌더가 그린다. */
-export const MODULES = { empty: { key: null, w: 2.2, interact: false, part: 0 } };
+export const MODULES = { empty: { key: null, w: 1.5, interact: false, part: 0 } };   // R23b 밀도 상승
 for (const c of CATALOG) {
   for (let i = 0; i < c.w; i++) {
     const nm = c.w === 1 ? c.key : `${c.key}#${i}`;
