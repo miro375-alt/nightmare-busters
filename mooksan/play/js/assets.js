@@ -1,4 +1,5 @@
 import { G } from './ctx.js';
+import { M } from './maps.js';
 const T = G.T;
 
 export function loadAssets() {
@@ -34,11 +35,19 @@ export const A={
   WINT2:[8,6], WINB2:[9,6],                // v2 — 통유리 멀리언 없는 짝 (32px 판유리, R20)
   SIGNLIB:[7,7], MOP:[8,7], PAPERS:[[7,3],[8,3]], FLASH:[9,3]
 };
-/* 복도 오브젝트 배치 — 단위(36타일) 안의 고정 위치. 어느 단위나 똑같다 */
-const HPLACE={0:'lock',1:'lock',2:'lock', 6:'board_l',7:'board_r',
-  12:'clock',13:'hyd', 18:'cool',19:'bin',20:'plant', 24:'clean',25:'poster',
-  30:'lock',31:'lock',32:'lock'};
-export const hpAt=wx=>HPLACE[((wx%36)+36)%36]||null;
+/* 복도 오브젝트 배치 — WFC가 시드마다 새로 뽑는다 (R22, wfc.js).
+   맵 로드 전이나 생성 실패 시엔 null (소품 없음) — 게임 로직은 앵커만 보므로 안전하다. */
+export const hpAt = wx => {
+  const P = M.props; if (!P) return null;
+  const lx = ((wx % P.length) + P.length) % P.length;
+  const key = P[lx];
+  if (!key) return null;
+  if (key === 'board') {                                  // 2칸 소품 — 좌/우 파트 판별
+    return (P[(lx - 1 + P.length) % P.length] === 'board' && P[(lx + 1) % P.length] !== 'board')
+      ? 'board_r' : 'board_l';
+  }
+  return key;
+};
 export function tile(a,x,y){ G.cx.drawImage(G.IMG.tile,a[0]*T,a[1]*T,T,T,x|0,y|0,T,T); }
 /** 타일 세로 조각 블릿 — R002: 문 하단 연장·문지방 등 접합부 처리에 사용 */
 export function tileSlice(a,sy,h,x,y){

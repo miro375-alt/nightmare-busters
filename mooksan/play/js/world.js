@@ -7,6 +7,7 @@ import { say, advMsg, chKey, numKey } from './ui.js';
 import { blip, stepSfx, setHum, tick, breathSfx } from './audio.js';
 import { hpAt } from './assets.js';
 import { mulberry32 } from './rng.js';
+import { genCorridorProps } from './wfc.js';
 import { M, doorInfo, homebaseAt, corpseAt, localX } from './maps.js';
 import { choose } from './ui.js';
 
@@ -383,6 +384,8 @@ export function reset(seed){
   const base=mulberry32(sd);
   G.rng=()=>{ S.rngN++; return base(); };
   G.rngFx=mulberry32(sd^0x9E3779B9);
+  // 복도 소품 배치 — WFC (R22). 전용 PRNG라 논리 rngN 회계를 건드리지 않는다(직렬화 안전)
+  if(M.cur){ const g=genCorridorProps(M.cur, mulberry32(sd^0x5EED1E)); M.props=g.props; M.wfc=g.stats; }
   G.EV.length=0;
   const bs=(M.cur&&M.cur.bath&&M.cur.bath.spawn)||{x:5,y:5};
   Object.assign(S,{scene:'play',seed:sd,rngN:0,map:'bath',wx:bs.x,wy:bs.y,dir:3,anim:0,
