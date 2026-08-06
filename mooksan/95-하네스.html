@@ -1,0 +1,184 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>하네스 &amp; 개선 루프 — 묵산</title>
+<style>
+.navsec{margin:18px 14px 6px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:10px;letter-spacing:.2em;color:var(--dim)}
+nav .navsec:first-of-type{border-top:0;padding-top:0;margin-top:8px}
+main img{display:block;width:100%;max-width:760px;margin:20px 0 6px;
+  border:1px solid var(--line);background:#0b0c10;image-rendering:auto}
+
+:root{
+  --bg:#0e0f11; --fg:#d8d4cc; --dim:#8a857c; --line:#26282c;
+  --panel:#141618; --accent:#c9a227; --hot:#b4453a; --ok:#5d7f6a;
+  --mono:ui-monospace,SFMono-Regular,Menlo,'D2Coding',monospace;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+}
+:root[data-theme="light"]{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+:root[data-theme="dark"]{--bg:#0e0f11;--fg:#d8d4cc;--dim:#8a857c;--line:#26282c;--panel:#141618;--accent:#c9a227;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:15.5px/1.85 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+nav{width:250px;flex:0 0 250px;border-right:1px solid var(--line);padding:26px 0 60px;
+  position:sticky;top:0;max-height:100vh;overflow-y:auto;background:var(--panel)}
+nav .brand{padding:0 22px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+nav .brand b{display:block;font-size:21px;letter-spacing:.22em;font-weight:700}
+nav .brand span{display:block;font-size:11px;color:var(--dim);letter-spacing:.16em;margin-top:6px}
+nav a{display:block;padding:7px 22px;text-decoration:none;font-size:13.5px;color:var(--dim);
+  border-left:2px solid transparent}
+nav a:hover{color:var(--fg);background:rgba(127,127,127,.06)}
+nav a.on{color:var(--fg);border-left-color:var(--accent);background:rgba(127,127,127,.08)}
+nav .no{font-family:var(--mono);font-size:11px;opacity:.55;margin-right:8px}
+.othernav{margin:26px 14px 0;padding:13px 12px;border:1px solid var(--line);
+  border-left:2px solid var(--dim);background:rgba(127,127,127,.05)}
+.othernav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--dim);margin-bottom:7px}
+.othernav .ext{display:block;padding:0;border:0;font-size:12.5px;color:var(--fg);
+  text-decoration:underline;text-underline-offset:2px;line-height:1.5}
+.othernav .ext:hover{background:none;color:var(--accent)}
+.othernav .warn{display:block;margin-top:7px;font-size:10.5px;line-height:1.65;color:var(--dim)}
+.playnav{margin:14px 14px 0;padding:12px;border:1px solid var(--accent);
+  background:rgba(201,162,39,.06);text-decoration:none;display:block}
+.playnav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--accent);margin-bottom:6px}
+.playnav .nm{display:block;font-size:13px;color:var(--fg);font-weight:600}
+.playnav .sd{display:block;margin-top:5px;font-size:10.5px;color:var(--dim);line-height:1.6}
+.playnav:hover .nm{color:var(--accent)}
+.othernav .warn b{color:var(--fg);font-weight:650}
+main{flex:1;min-width:0;padding:44px 52px 120px;max-width:960px}
+h1{font-size:31px;letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+h2{font-size:20px;margin:52px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+h3{font-size:16.5px;margin:34px 0 10px;color:var(--fg);font-weight:700}
+h4{font-size:14.5px;margin:24px 0 8px;color:var(--dim);font-weight:700;letter-spacing:.03em}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:5px 0}
+strong{color:#fff;font-weight:650}
+:root[data-theme="light"] strong,@media(prefers-color-scheme:light){strong{color:#000}}
+em{color:var(--dim);font-style:italic}
+code{font-family:var(--mono);font-size:12.5px;background:rgba(127,127,127,.14);padding:1px 5px;border-radius:3px}
+pre.blk{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--dim);padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+blockquote{margin:0 0 18px;padding:14px 20px;background:var(--panel);
+  border-left:3px solid var(--accent)}
+blockquote p{margin:0 0 8px}
+blockquote p:last-child{margin:0}
+.tw{overflow-x:auto;margin:0 0 20px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:0 0 20px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:650;font-size:12.5px;letter-spacing:.02em}
+tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
+.ar{color:var(--dim)}
+.star{color:var(--accent)}
+.foot{margin-top:80px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);letter-spacing:.04em}
+.tt{position:fixed;top:14px;right:16px;z-index:20;background:var(--panel);color:var(--dim);
+  border:1px solid var(--line);border-radius:5px;padding:5px 11px;font-size:11.5px;cursor:pointer}
+@media(max-width:860px){
+  .wrap{display:block}
+  nav{width:auto;position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
+  nav a{display:inline-block;padding:6px 12px;border-left:0;border-bottom:2px solid transparent}
+  nav a.on{border-left:0;border-bottom-color:var(--accent)}
+  main{padding:26px 20px 80px}
+  h1{font-size:25px}
+}
+</style></head><body>
+<div class="wrap"><nav><div class="brand"><b>묵산</b><span>게임 기획 정본</span></div><div class="navsec">기획</div><a class="pg" href="00-개요.html"><span class="no">00</span>개요</a><a class="pg" href="05-참고작.html"><span class="no">05</span>참고작 분석</a><a class="pg" href="10-세계관.html"><span class="no">10</span>세계관 — 「발생」</a><a class="pg" href="15-전사.html"><span class="no">15</span>전사(前史) — 1998년 묵산</a><a class="pg" href="20-채움.html"><span class="no">20</span>채움의 역사</a><a class="pg" href="30-무대.html"><span class="no">30</span>무대 — 묵산시·묵산고</a><a class="pg" href="40-인물.html"><span class="no">40</span>주인공 4인</a><a class="pg" href="50-스토리.html"><span class="no">50</span>스토리 — 3막</a><a class="pg" href="60-레벨.html"><span class="no">60</span>챕터 구성</a><a class="pg" href="62-공략.html"><span class="no">62</span>게임 방식과 공략</a><a class="pg" href="64-엔티티.html"><span class="no">64</span>엔티티</a><a class="pg" href="66-스토리보드.html"><span class="no">66</span>스토리보드</a><a class="pg" href="68-조력자.html"><span class="no">68</span>조력자 — 「반원」</a><a class="pg" href="70-시스템.html"><span class="no">70</span>게임 시스템 — 몸과 숨</a><a class="pg" href="80-진상.html"><span class="no">80</span>진상 4단</a><a class="pg" href="85-엔딩.html"><span class="no">85</span>엔딩 분기</a><a class="pg" href="90-톤.html"><span class="no">90</span>톤 규칙</a><a class="pg on" href="95-하네스.html"><span class="no">95</span>하네스 &amp; 개선 루프</a><a class="pg" href="99-작업.html"><span class="no">99</span>다음 작업</a><div class="navsec">개발</div><a class="pg" href="D00-문서체계.html"><span class="no">D00</span>문서 체계</a><a class="pg" href="D05-규약.html"><span class="no">D05</span>규약</a><a class="pg" href="D90-결정기록.html"><span class="no">D90</span>결정 기록</a><a class="pg" href="D99-함정.html"><span class="no">D99</span>함정</a><a class="pg" href="P00-평가단.html"><span class="no">P00</span>평가단 — 기획·검토·개선 프로세스</a><a class="pg" href="P10-게임성.html"><span class="no">P10</span>헌장 P10 — 게임성 심사 (mechanics-critic)</a><a class="pg" href="P20-공포연출.html"><span class="no">P20</span>헌장 P20 — 공포연출 심사 (horror-critic)</a><a class="pg" href="P30-정합성.html"><span class="no">P30</span>헌장 P30 — 정합성 심사 (canon-keeper)</a><a class="pg" href="P40-구현성.html"><span class="no">P40</span>헌장 P40 — 구현성 심사 (feasibility)</a><a class="pg" href="P50-플레이어.html"><span class="no">P50</span>헌장 P50 — 플레이어 대변 (player-advocate)</a><a class="pg" href="P60-맵디자인.html"><span class="no">P60</span>헌장 P60 — 맵 디자인 심사 (map-critic)</a><a class="playnav" href="../play/"><span class="lbl">▶ 플레이 가능</span><span class="nm">챕터 1 — 복도</span><span class="sd">⚠ 구버전 규칙(단위 세기)으로 만든 수직 슬라이스입니다. 새 규격으로 재구현 예정.</span></a><div class="othernav"><span class="lbl">이어지는 정본</span><a class="ext" href="../kamc/">한국이상관리공단 문서보관소 <span class="ar">↗</span></a><span class="warn"><b>28년 전 기록.</b> 1998년 묵산시 전체가 발생했고, 국가는 그 문서로 재난대응반을 만들었다</span></div></nav><main><h1 id="하네스-개선-루프">하네스 &amp; 개선 루프</h1>
+<blockquote><p><strong>목표: 사람이 판단해야 할 것만 사람에게 올린다.</strong></p><p>봇은 재미를 못 잰다. 봇이 거르는 것은 <strong>고장 · 밸런스 · 페이싱</strong>이다.</p></blockquote>
+<hr>
+<h2 id="0-무엇을-자동화할-수-있는가">0. 무엇을 자동화할 수 있는가</h2>
+<table><thead><tr><th>항목</th><th>자동</th><th>이유</th></tr></thead><tbody><tr><td>크래시 · 소프트락 · 진행 불가</td><td>✅</td><td>명확한 실패 조건</td></tr><tr><td>클리어 가능성 (챕터별)</td><td>✅</td><td>규칙봇이 깨는지 보면 된다</td></tr><tr><td>밸런스 (사망 원인 분포, 소요 시간)</td><td>✅</td><td>수치로 나온다</td></tr><tr><td><strong>페이싱 (무행동 구간, 위협 밀도)</strong></td><td>✅</td><td><span class="star">★</span> 「재미없다」의 정량 지표</td></tr><tr><td>예고 없는 사망 (경고<span class="ar">→</span>사망 리드타임)</td><td>✅</td><td>이벤트 로그로 측정</td></tr><tr><td>렌더 깨짐 · UI 겹침</td><td>⚠️ 반자동</td><td>픽셀 diff로 <strong>변화</strong>만 감지. 판단은 사람</td></tr><tr><td><strong>무섭냐 / 재미있냐 / 이야기가 통하냐</strong></td><td>❌</td><td>사람이 본다</td></tr></tbody></table>
+<blockquote><p><span class="star">★</span> <strong>「무행동 구간」이 이 프로젝트의 핵심 지표다.</strong></p><p>「걷기만 하고 아무 일도 안 일어나는 시간」이 길면 재미없다는 지적은 <strong>측정 가능한 결함</strong>이다.</p></blockquote>
+<hr>
+<h2 id="1-제1원칙-시뮬레이터를-따로-만들지-않는다">1. <span class="star">★</span> 제1원칙 — 시뮬레이터를 따로 만들지 않는다</h2>
+<blockquote><p>2026-07-31에 실제로 저지른 실수:</p><p>밸런스 검증용 <code>sim.js</code>를 <strong>게임 로직을 다시 구현해서</strong> 만들었다.</p><p>그러면 게임을 고칠 때마다 시뮬도 같이 고쳐야 하고, <strong>어긋나는 순간 검증이 거짓말이 된다.</strong></p></blockquote>
+<p><strong>하네스는 반드시 실제 게임 코드를 구동한다.</strong> 방법은 게임에 <strong>틱을 분리한 헤드리스 모드</strong>를 넣는 것이다.</p>
+<pre class='blk'>// 게임이 노출해야 하는 계약
+window.__H = {
+  reset(seed),          // 시드 고정 초기화
+  tick(n),              // rAF 없이 n프레임 진행 (수천 프레임을 수 ms에)
+  input(keys),          // {up,down,left,right,ok,note,run} 상태 주입
+  state(),              // 직렬화된 전체 상태
+  events(),             // 이벤트 로그 배열
+  chapter(n),           // 특정 챕터로 점프 (부분 검증용)
+};</pre>
+<p><code>tick()</code>이 있으면 브라우저 한 탭에서 <strong>수백 판을 몇 초에</strong> 돌린다. 그리고 그건 <strong>진짜 게임 코드다.</strong></p>
+<hr>
+<h2 id="2-게임에-먼저-넣어야-할-구조">2. 게임에 먼저 넣어야 할 구조</h2>
+<p>하네스 요구사항 = 어차피 필요한 리팩터링이다. <span class="ar">→</span> [[99-작업]] C항</p>
+<table><thead><tr><th>필요 구조</th><th>왜</th></tr></thead><tbody><tr><td><strong>시드 RNG</strong> (<code>Math.random</code> 전량 제거)</td><td>같은 시드 = 같은 판. 실패를 재현해야 고친다</td></tr><tr><td><strong>틱 분리</strong> (<code>loop</code>에서 <code>update(dt)</code> 떼어내기)</td><td>rAF 없이 돌려야 빠르다</td></tr><tr><td><strong>상태 직렬화</strong> (<code>state()</code> / <code>load()</code>)</td><td>지표 수집 · 세이브 · 특정 상황 재현</td></tr><tr><td><strong>이벤트 로그</strong></td><td><code>{t, type, payload}</code> — 이동·조사·경고·편입·사망·아이템</td></tr><tr><td><strong>맵 데이터 분리</strong> (<code>maps/*.json</code>)</td><td>챕터 점프 · 맵만 바꿔 A/B</td></tr></tbody></table>
+<p><span class="star">★</span> <strong>시드 RNG가 가장 먼저다.</strong> <code>Math.random()</code>이 엔티티 배치·순찰 경로·연출에 쓰이는데, 재현이 안 되면 버그를 두 번 볼 수 없다.</p>
+<hr>
+<h2 id="3-봇-3종">3. 봇 3종</h2>
+<table><thead><tr><th>봇</th><th>행동</th><th>잡아내는 것</th></tr></thead><tbody><tr><td><strong>원숭이</strong></td><td>완전 무작위 입력</td><td>크래시 · 소프트락 · 상태 꼬임</td></tr><tr><td><strong>규칙봇</strong></td><td>[[62-공략]]의 권장 진행을 그대로 수행</td><td><strong>정상 경로가 실제로 통하는가</strong></td></tr><tr><td><strong>탐욕봇</strong></td><td>최대 깊이 · 최대 수집 · 위험 감수</td><td>밸런스 상한. 「깨지는 조합」 탐색</td></tr></tbody></table>
+<ul><li>세 봇을 <strong>시드 100개씩</strong> 돌린다. 브라우저 한 탭에서 수십 초</li><li>규칙봇 클리어율이 <strong>95% 미만이면 그 챕터는 불공정</strong>하다</li><li>원숭이가 소프트락에 걸리면 <strong>그 시드를 케이스로 박제</strong>한다</li></ul>
+<hr>
+<h2 id="4-지표와-기준선">4. 지표와 기준선</h2>
+<p><code>harness/baseline.json</code>에 통과한 값을 저장하고, 새 변경이 이를 악화시키면 <strong>차단</strong>한다.</p>
+<table><thead><tr><th>지표</th><th>기준</th><th>벗어나면</th></tr></thead><tbody><tr><td>규칙봇 클리어율</td><td>≥ 95%</td><td>불공정</td></tr><tr><td>원숭이 소프트락</td><td>0건</td><td>진행 불가 버그</td></tr><tr><td>챕터 소요 시간</td><td>4~9분</td><td>짧으면 허전, 길면 늘어짐</td></tr><tr><td><strong>무행동 구간 최대치</strong></td><td><strong>≤ 25초</strong></td><td><span class="star">★</span> 지루함</td></tr><tr><td><strong>선택 빈도</strong> (분당 의미 있는 결정)</td><td><strong>≥ 3회</strong></td><td><span class="star">★</span> 사무 노동</td></tr><tr><td>사망 원인 분포 (편입 / 봉인 / 안전지대 상실)</td><td>어느 하나 ≥ 70% 금지</td><td>한 가지 압박만 작동 중</td></tr><tr><td>경고 <span class="ar">→</span> 사망 리드타임</td><td>≥ 1.5초</td><td>예고 없는 죽음</td></tr><tr><td>안전지대 복귀 간격</td><td>40~120초</td><td>너무 잦으면 지루, 드물면 무의미</td></tr><tr><td>프레임당 그리기 호출</td><td>기준선 ±20%</td><td>렌더 회귀</td></tr></tbody></table>
+<p><strong>「무행동 구간」 정의</strong> — 이벤트 로그에서 <code>이동</code> 외의 이벤트가 하나도 없는 최장 구간. 걷기만 하고 아무 일도 안 일어난 시간이다.</p>
+<p><strong>「선택」 정의</strong> — 되돌릴 수 없고, 결과가 갈리는 입력. 조사 · 안전지대 이탈 · 조력자 지시 수용/거부 · 아이템 사용. <strong>단순 이동은 선택이 아니다.</strong></p>
+<hr>
+<h2 id="5-시각-회귀">5. 시각 회귀</h2>
+<pre class='blk'>harness/shots.json   →  상황 목록 (챕터 × 상태)
+harness/shots/       →  기준 스크린샷
+harness/shots_new/   →  이번 회차</pre>
+<ol><li>각 상황을 <code>__H</code>로 세팅 <span class="ar">→</span> 브라우저에서 캡처</li><li>기준과 <strong>픽셀 diff.</strong> 임계값 초과 항목만 표시</li><li><strong>판단은 사람이 한다.</strong> diff는 「달라졌다」만 말하지 「나빠졌다」를 말하지 않는다</li></ol>
+<blockquote><p>철칙 — <strong>목업으로 검수하지 않는다.</strong> 실제 빌드 스크린샷만 쓴다.</p></blockquote>
+<p>캡처 목록(초안): 챕터별 ①진입 ②안전지대 안 ③엔티티 조우 ④경고 발생 ⑤아이템 획득 ⑥대화창 ⑦안전지대 만료 임박 ⑧사망 화면 <span class="ar">→</span> <strong>6챕터 × 8 = 48장</strong></p>
+<hr>
+<h2 id="6-루프-절차">6. 루프 절차</h2>
+<pre class='blk'>① 실행     harness/run.mjs  →  봇 3종 × 시드 100 + 스크린샷 48장
+② 판정     기준선 대비 벗어난 항목만 목록화
+③ 분류     [고장] → 즉시 수정
+           [밸런스·페이싱] → 수치 조정 1건
+           [판단 필요] → 사람에게 올린다
+④ 수정     ★ 한 번에 하나만 바꾼다
+⑤ 재실행   개선됐는가 · 다른 지표가 나빠지지 않았는가
+⑥ 확정     좋아졌으면 커밋 + 기준선 갱신 / 아니면 롤백
+⑦ 반복</pre>
+<h3 id="한-턴에-하나만-바꾼다"><span class="star">★</span> 한 턴에 하나만 바꾼다</h3>
+<p>여러 개를 동시에 고치면 <strong>무엇이 효과였는지 알 수 없다.</strong> 루프의 가치는 속도가 아니라 <strong>인과를 붙잡는 것</strong>이다.</p>
+<h3 id="사람에게-올리는-것">사람에게 올리는 것</h3>
+<ul><li>지표는 통과했는데 <strong>화면이 이상한 것</strong></li><li>밸런스는 맞는데 <strong>이야기가 안 맞는 것</strong></li><li>봇이 클리어했는데 <strong>경로가 의도와 다른 것</strong> <span class="ar">←</span> 종종 제일 중요하다</li><li>기준선 자체를 고쳐야 할 것 같은 때</li></ul>
+<hr>
+<h2 id="7-실패-케이스-박제">7. 실패 케이스 박제</h2>
+<pre class='blk'>harness/cases/
+  0031_softlock_ch2_mobile-rack.json   { seed, chapter, inputs[], 기대, 실제 }</pre>
+<ul><li>발견된 버그는 <strong>시드 + 입력 시퀀스</strong>로 저장</li><li>이후 모든 회차에서 자동 재생 <span class="ar">→</span> <strong>같은 버그가 두 번 나오지 않는다</strong></li><li>케이스가 쌓이면 그게 회귀 테스트 묶음이 된다</li></ul>
+<hr>
+<h2 id="8-도입-순서">8. 도입 순서</h2>
+<p>지금 구현된 것은 <strong>구버전 규칙의 1챕터</strong>뿐이고 곧 교체된다. <strong>하네스를 지금 코드에 맞춰 짓는 것은 낭비다.</strong> 순서는 이렇다.</p>
+<table><thead><tr><th>단계</th><th>내용</th><th>선행</th></tr></thead><tbody><tr><td><strong>0</strong></td><td>시드 RNG · 틱 분리 · 상태 직렬화 · 이벤트 로그</td><td>—</td></tr><tr><td><strong>1</strong></td><td><code>__H</code> 계약 노출 + <code>harness/run.mjs</code> 골격</td><td>0</td></tr><tr><td><strong>2</strong></td><td>원숭이봇 + 소프트락 탐지</td><td>1</td></tr><tr><td><strong>3</strong></td><td>챕터 1을 새 규격(목표·아이템·안전지대·엔티티)으로 재구현</td><td>[[60-레벨]]</td></tr><tr><td><strong>4</strong></td><td>규칙봇 + 지표 수집 + 기준선 확정</td><td>2·3</td></tr><tr><td><strong>5</strong></td><td>스크린샷 회귀</td><td>3</td></tr><tr><td><strong>6</strong></td><td>탐욕봇 + 케이스 박제</td><td>4</td></tr><tr><td><strong>7</strong></td><td>챕터 2~6 확장 — <strong>각 챕터는 하네스를 통과해야 다음으로 넘어간다</strong></td><td>4·5</td></tr></tbody></table>
+<p><span class="star">★</span> <strong>0단계가 진짜 시작점이다.</strong> 그리고 0단계는 어차피 해야 할 리팩터링이다.</p>
+<hr>
+<h2 id="9-반복-실행-방식">9. 반복 실행 방식</h2>
+<table><thead><tr><th>방식</th><th>언제</th></tr></thead><tbody><tr><td><strong>수동</strong> — 변경 후 <code>run.mjs</code> 한 번</td><td>기본. 인과가 가장 선명하다</td></tr><tr><td><strong><code>/loop</code></strong> — 스스로 페이스를 잡아 반복</td><td>밸런스 수치 탐색처럼 <strong>같은 작업을 여러 번</strong> 돌릴 때</td></tr><tr><td><strong>예약 실행</strong></td><td>챕터가 여러 개 쌓여 전체 회차가 길어졌을 때</td></tr></tbody></table>
+<p><strong>주의 —</strong> 루프를 오래 돌리면 지표는 좋아지는데 게임은 재미없어질 수 있다. <strong>기준선은 목표가 아니라 하한선이다.</strong> 주기적으로 사람이 직접 플레이해야 한다.</p>
+<hr>
+<h2 id="10-이번-세션에서-얻은-교훈-하네스가-있었으면-잡았을-것">10. 이번 세션에서 얻은 교훈 (하네스가 있었으면 잡았을 것)</h2>
+<table><thead><tr><th>실제로 일어난 일</th><th>어느 지표가 잡았을까</th></tr></thead><tbody><tr><td>캐릭터 정면 스프라이트가 옆모습이었다</td><td>스크린샷 회귀 (4방향 캡처)</td></tr><tr><td>문패가 다음 열 벽 타일에 절반 덮였다</td><td>스크린샷 회귀</td></tr><tr><td>달리기 키가 순수 손해라 아무도 안 쓴다</td><td><strong>선택 빈도</strong> — 사용률 0%</td></tr><tr><td>복도를 걷는 동안 아무 일도 안 일어난다</td><td><strong>무행동 구간</strong> — 25초 초과</td></tr><tr><td>「기록·계산」이 사무 노동이었다</td><td><strong>선택 빈도</strong> — 분당 1회 미만</td></tr><tr><td>무감각이 무슨 일을 하는지 불분명했다</td><td><strong>압박 원인별 사망 분포</strong> — 기여도 0에 가까움</td></tr><tr><td>외부 시간이 되돌아왔다</td><td>규칙봇 지표 (단조 증가 위반)</td></tr></tbody></table>
+<blockquote><p><strong>여섯 개 중 다섯 개를 자동으로 잡을 수 있었다.</strong></p><p>나머지 하나(「재미없다」)는 사람이 말해줘야 했고, 실제로 그랬다.</p></blockquote>
+<div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
+</main></div><script>
+(function(){
+  var r=document.documentElement, k='mooksan-theme', s=localStorage.getItem(k);
+  if(s) r.setAttribute('data-theme',s);
+  var b=document.createElement('button'); b.className='tt'; b.textContent='명암';
+  b.onclick=function(){
+    var cur=r.getAttribute('data-theme')||
+      (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    var nx=cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx); localStorage.setItem(k,nx);
+  };
+  document.body.appendChild(b);
+  document.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tw';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+})();
+</script></body></html>

@@ -1,0 +1,143 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>진상 4단 — 묵산</title>
+<style>
+.navsec{margin:18px 14px 6px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:10px;letter-spacing:.2em;color:var(--dim)}
+nav .navsec:first-of-type{border-top:0;padding-top:0;margin-top:8px}
+main img{display:block;width:100%;max-width:760px;margin:20px 0 6px;
+  border:1px solid var(--line);background:#0b0c10;image-rendering:auto}
+
+:root{
+  --bg:#0e0f11; --fg:#d8d4cc; --dim:#8a857c; --line:#26282c;
+  --panel:#141618; --accent:#c9a227; --hot:#b4453a; --ok:#5d7f6a;
+  --mono:ui-monospace,SFMono-Regular,Menlo,'D2Coding',monospace;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+}
+:root[data-theme="light"]{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+:root[data-theme="dark"]{--bg:#0e0f11;--fg:#d8d4cc;--dim:#8a857c;--line:#26282c;--panel:#141618;--accent:#c9a227;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:15.5px/1.85 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+nav{width:250px;flex:0 0 250px;border-right:1px solid var(--line);padding:26px 0 60px;
+  position:sticky;top:0;max-height:100vh;overflow-y:auto;background:var(--panel)}
+nav .brand{padding:0 22px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+nav .brand b{display:block;font-size:21px;letter-spacing:.22em;font-weight:700}
+nav .brand span{display:block;font-size:11px;color:var(--dim);letter-spacing:.16em;margin-top:6px}
+nav a{display:block;padding:7px 22px;text-decoration:none;font-size:13.5px;color:var(--dim);
+  border-left:2px solid transparent}
+nav a:hover{color:var(--fg);background:rgba(127,127,127,.06)}
+nav a.on{color:var(--fg);border-left-color:var(--accent);background:rgba(127,127,127,.08)}
+nav .no{font-family:var(--mono);font-size:11px;opacity:.55;margin-right:8px}
+.othernav{margin:26px 14px 0;padding:13px 12px;border:1px solid var(--line);
+  border-left:2px solid var(--dim);background:rgba(127,127,127,.05)}
+.othernav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--dim);margin-bottom:7px}
+.othernav .ext{display:block;padding:0;border:0;font-size:12.5px;color:var(--fg);
+  text-decoration:underline;text-underline-offset:2px;line-height:1.5}
+.othernav .ext:hover{background:none;color:var(--accent)}
+.othernav .warn{display:block;margin-top:7px;font-size:10.5px;line-height:1.65;color:var(--dim)}
+.playnav{margin:14px 14px 0;padding:12px;border:1px solid var(--accent);
+  background:rgba(201,162,39,.06);text-decoration:none;display:block}
+.playnav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--accent);margin-bottom:6px}
+.playnav .nm{display:block;font-size:13px;color:var(--fg);font-weight:600}
+.playnav .sd{display:block;margin-top:5px;font-size:10.5px;color:var(--dim);line-height:1.6}
+.playnav:hover .nm{color:var(--accent)}
+.othernav .warn b{color:var(--fg);font-weight:650}
+main{flex:1;min-width:0;padding:44px 52px 120px;max-width:960px}
+h1{font-size:31px;letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+h2{font-size:20px;margin:52px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+h3{font-size:16.5px;margin:34px 0 10px;color:var(--fg);font-weight:700}
+h4{font-size:14.5px;margin:24px 0 8px;color:var(--dim);font-weight:700;letter-spacing:.03em}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:5px 0}
+strong{color:#fff;font-weight:650}
+:root[data-theme="light"] strong,@media(prefers-color-scheme:light){strong{color:#000}}
+em{color:var(--dim);font-style:italic}
+code{font-family:var(--mono);font-size:12.5px;background:rgba(127,127,127,.14);padding:1px 5px;border-radius:3px}
+pre.blk{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--dim);padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+blockquote{margin:0 0 18px;padding:14px 20px;background:var(--panel);
+  border-left:3px solid var(--accent)}
+blockquote p{margin:0 0 8px}
+blockquote p:last-child{margin:0}
+.tw{overflow-x:auto;margin:0 0 20px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:0 0 20px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:650;font-size:12.5px;letter-spacing:.02em}
+tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
+.ar{color:var(--dim)}
+.star{color:var(--accent)}
+.foot{margin-top:80px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);letter-spacing:.04em}
+.tt{position:fixed;top:14px;right:16px;z-index:20;background:var(--panel);color:var(--dim);
+  border:1px solid var(--line);border-radius:5px;padding:5px 11px;font-size:11.5px;cursor:pointer}
+@media(max-width:860px){
+  .wrap{display:block}
+  nav{width:auto;position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
+  nav a{display:inline-block;padding:6px 12px;border-left:0;border-bottom:2px solid transparent}
+  nav a.on{border-left:0;border-bottom-color:var(--accent)}
+  main{padding:26px 20px 80px}
+  h1{font-size:25px}
+}
+</style></head><body>
+<div class="wrap"><nav><div class="brand"><b>묵산</b><span>게임 기획 정본</span></div><div class="navsec">기획</div><a class="pg" href="00-개요.html"><span class="no">00</span>개요</a><a class="pg" href="05-참고작.html"><span class="no">05</span>참고작 분석</a><a class="pg" href="10-세계관.html"><span class="no">10</span>세계관 — 「발생」</a><a class="pg" href="15-전사.html"><span class="no">15</span>전사(前史) — 1998년 묵산</a><a class="pg" href="20-채움.html"><span class="no">20</span>채움의 역사</a><a class="pg" href="30-무대.html"><span class="no">30</span>무대 — 묵산시·묵산고</a><a class="pg" href="40-인물.html"><span class="no">40</span>주인공 4인</a><a class="pg" href="50-스토리.html"><span class="no">50</span>스토리 — 3막</a><a class="pg" href="60-레벨.html"><span class="no">60</span>챕터 구성</a><a class="pg" href="62-공략.html"><span class="no">62</span>게임 방식과 공략</a><a class="pg" href="64-엔티티.html"><span class="no">64</span>엔티티</a><a class="pg" href="66-스토리보드.html"><span class="no">66</span>스토리보드</a><a class="pg" href="68-조력자.html"><span class="no">68</span>조력자 — 「반원」</a><a class="pg" href="70-시스템.html"><span class="no">70</span>게임 시스템 — 몸과 숨</a><a class="pg on" href="80-진상.html"><span class="no">80</span>진상 4단</a><a class="pg" href="85-엔딩.html"><span class="no">85</span>엔딩 분기</a><a class="pg" href="90-톤.html"><span class="no">90</span>톤 규칙</a><a class="pg" href="95-하네스.html"><span class="no">95</span>하네스 &amp; 개선 루프</a><a class="pg" href="99-작업.html"><span class="no">99</span>다음 작업</a><div class="navsec">개발</div><a class="pg" href="D00-문서체계.html"><span class="no">D00</span>문서 체계</a><a class="pg" href="D05-규약.html"><span class="no">D05</span>규약</a><a class="pg" href="D90-결정기록.html"><span class="no">D90</span>결정 기록</a><a class="pg" href="D99-함정.html"><span class="no">D99</span>함정</a><a class="pg" href="P00-평가단.html"><span class="no">P00</span>평가단 — 기획·검토·개선 프로세스</a><a class="pg" href="P10-게임성.html"><span class="no">P10</span>헌장 P10 — 게임성 심사 (mechanics-critic)</a><a class="pg" href="P20-공포연출.html"><span class="no">P20</span>헌장 P20 — 공포연출 심사 (horror-critic)</a><a class="pg" href="P30-정합성.html"><span class="no">P30</span>헌장 P30 — 정합성 심사 (canon-keeper)</a><a class="pg" href="P40-구현성.html"><span class="no">P40</span>헌장 P40 — 구현성 심사 (feasibility)</a><a class="pg" href="P50-플레이어.html"><span class="no">P50</span>헌장 P50 — 플레이어 대변 (player-advocate)</a><a class="pg" href="P60-맵디자인.html"><span class="no">P60</span>헌장 P60 — 맵 디자인 심사 (map-critic)</a><a class="playnav" href="../play/"><span class="lbl">▶ 플레이 가능</span><span class="nm">챕터 1 — 복도</span><span class="sd">⚠ 구버전 규칙(단위 세기)으로 만든 수직 슬라이스입니다. 새 규격으로 재구현 예정.</span></a><div class="othernav"><span class="lbl">이어지는 정본</span><a class="ext" href="../kamc/">한국이상관리공단 문서보관소 <span class="ar">↗</span></a><span class="warn"><b>28년 전 기록.</b> 1998년 묵산시 전체가 발생했고, 국가는 그 문서로 재난대응반을 만들었다</span></div></nav><main><h1 id="진상-4단">진상 4단</h1>
+<blockquote><p>개정 2026-07-31. <strong>안에 있는 것들은 전부 사람이었다.</strong></p><p>다만 얼마나 오래 있었느냐에 따라 남은 정도가 다르다.</p></blockquote>
+<hr>
+<h2 id="0-사다리-오래-있을수록-사람이-아니다">0. 사다리 — 오래 있을수록 사람이 아니다</h2>
+<p>플레이어는 이 사다리를 <strong>눈으로 본다.</strong> 설명하지 않는다.</p>
+<table><thead><tr><th>차수</th><th>안에 있은 기간</th><th>상태</th></tr></thead><tbody><tr><td><strong>1997 학생 22명</strong></td><td>29년</td><td><strong>형태가 무너졌다.</strong> 사람이었다는 것만 겨우 알아본다</td></tr><tr><td><strong>2008 이송자 1█명</strong></td><td>18년</td><td><strong>사람 모양은 남았다.</strong> 반응이 없다. 하던 동작을 반복한다</td></tr><tr><td><strong>2017 대응반 4명</strong></td><td>9년</td><td><strong>셋은 이미 없다.</strong> 남은 하나는 멀쩡해 <strong>보인다</strong></td></tr><tr><td><strong>2026 주인공</strong></td><td>오늘</td><td>아직 사람이다. <strong>혼자 들어왔다</strong></td></tr></tbody></table>
+<h3 id="왜-대응반원만-멀쩡해-보였는가">왜 대응반원만 멀쩡해 보였는가</h3>
+<p><strong>지킬 절차가 있었기 때문이다.</strong> 매일 점검표를 채우고, 계측하고, 교대를 기다렸다. <strong>그 반복이 형태를 붙잡는다.</strong></p>
+<p>1997년 학생들에겐 지킬 절차가 없었다. 그래서 가장 먼저, 가장 많이 무너졌다.</p>
+<blockquote><p>이것은 아카이브가 이미 증명한 법칙과 <strong>같은 법칙</strong>이다.</p><p>20만 명을 28개월간 붙잡은 것도 매일 반복된 사무였다. <span class="ar">→</span> [[15-전사]]</p><p>도시 규모에서 참이면 사람 규모에서도 참이다.</p></blockquote>
+<hr>
+<h2 id="1단-1막-여기서-전에-사람이-죽었다">1단 (1막) — 여기서 전에 사람이 죽었다</h2>
+<p>1997년 쪽지. 22명이 여기 있었다. 그리고 복도 곳곳에 <strong>아직 움직이는 것들</strong>이 있다. 처음엔 괴물로 보인다.</p>
+<h2 id="2단-2막-초-그들은-살아-있을-때-봉인당했다">2단 (2막 초) — 그들은 살아 있을 때 봉인당했다</h2>
+<p>복명서 — 「생존자 확인. <strong>다만 회수 대상 아님.</strong>」 그리고 <strong>표준 절차서 제8조</strong> — 「제7조에 따른 봉인 시 생존자 확인 절차는 두지 아니한다.」</p>
+<p><strong>괴물이 아니라 봉인당한 사람들이었다.</strong></p>
+<h2 id="3단-2막-중-우리는-갇힌-게-아니라-채워진-것이다">3단 (2막 중) — 우리는 갇힌 게 아니라 채워진 것이다</h2>
+<p>2008년 「구조자」 이송, 2017년 상주 근무 명령서. 세 번의 채움. 빈 공간은 자란다. 사람이 있으면 자라지 않는다. <strong>그래서 계속 채웠다.</strong></p>
+<h2 id="4단-3막-도와준-사람이-가장-먼저-변한-사람이다">4단 (3막) — <span class="star">★</span> 도와준 사람이 가장 먼저 변한 사람이다</h2>
+<p>여기까지 오는 동안 당신을 도운 「대응반원」이 <strong>B</strong>다. 반장 A가 괴물에게 죽은 뒤 가장 먼저 엔티티화가 진행됐고, 남은 동료 C를 바로 죽였다. 그 장면을 본 D는 도망쳤다 — 그것이 기록상의 「실종」이다.</p>
+<p>그가 당신을 도운 이유는 <strong>연기가 아니라 필요</strong>였다. 사람이 아주 없으면 그도 굳는다. 사람이 남아 있으면 영역이 안 자란다. <strong>그래서 한 명을 오래 데리고 다니다가 마지막에 죽인다.</strong> <span class="ar">→</span> [[68-조력자]]</p>
+<blockquote><p><strong>「누군가는 여기 있어야 해. 네가 남고, 내가 나갈게.」</strong></p></blockquote>
+<p><strong>그는 규정을 어긴 게 아니라 규정대로 하고 있다.</strong></p>
+<hr>
+<h2 id="최종-나가지-않기로-한다">최종 — 나가지 않기로 한다</h2>
+<p>9년간 숨어 있던 D가 나타나 B를 붙잡고, 문을 열어준다. 이번엔 진짜다.</p>
+<p>그런데 주인공은 나가지 않는다. <strong>화장실 불이 아직 켜져 있기 때문이다.</strong></p>
+<p>그가 여기 온 이유가 그것이었다. 다음 목요일에도 누군가 그 불을 보고 들어올 것이다.</p>
+<blockquote><p>「제가 나가면요. 저 불은 계속 켜져 있는 거잖아요.」</p></blockquote>
+<p><strong>B의 배신 대사와 정확히 같은 구조다.</strong> 누군가는 남아야 한다. 차이는 <strong>누가 남기로 하느냐</strong>뿐이다.</p>
+<p>그리고 주인공은 나가는 대신 <strong>닫기로 한다.</strong> 챕터마다 하나씩 나오는 <strong>부품 6개</strong> — 이름 · 전원 · 수 · 절차 · 입구. <strong>다 모으면 봉인 절차가 나온다.</strong> <span class="ar">→</span> [[60-레벨]]</p>
+<blockquote><p>나가는 게 아니라 <strong>닫는다.</strong> 아무도 다시 못 들어오게.</p></blockquote>
+<hr>
+<h2 id="폐기한-설정">폐기한 설정</h2>
+<p><strong>세라 삼촌 장치는 버린다.</strong> 「가족이 사실은 관계자였다」는 편의적이고, 이 이야기에 필요한 정보는 전부 <strong>안에서 발견되는 기록</strong>으로 충분히 전달된다. 개인 사연으로 진상을 여는 방식 자체가 이 톤과 맞지 않는다. <span class="ar">→</span> [[90-톤]]</p>
+<div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
+</main></div><script>
+(function(){
+  var r=document.documentElement, k='mooksan-theme', s=localStorage.getItem(k);
+  if(s) r.setAttribute('data-theme',s);
+  var b=document.createElement('button'); b.className='tt'; b.textContent='명암';
+  b.onclick=function(){
+    var cur=r.getAttribute('data-theme')||
+      (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    var nx=cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx); localStorage.setItem(k,nx);
+  };
+  document.body.appendChild(b);
+  document.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tw';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+})();
+</script></body></html>

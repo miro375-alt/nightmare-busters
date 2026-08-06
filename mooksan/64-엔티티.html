@@ -1,0 +1,149 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>엔티티 — 묵산</title>
+<style>
+.navsec{margin:18px 14px 6px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:10px;letter-spacing:.2em;color:var(--dim)}
+nav .navsec:first-of-type{border-top:0;padding-top:0;margin-top:8px}
+main img{display:block;width:100%;max-width:760px;margin:20px 0 6px;
+  border:1px solid var(--line);background:#0b0c10;image-rendering:auto}
+
+:root{
+  --bg:#0e0f11; --fg:#d8d4cc; --dim:#8a857c; --line:#26282c;
+  --panel:#141618; --accent:#c9a227; --hot:#b4453a; --ok:#5d7f6a;
+  --mono:ui-monospace,SFMono-Regular,Menlo,'D2Coding',monospace;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+}
+:root[data-theme="light"]{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+:root[data-theme="dark"]{--bg:#0e0f11;--fg:#d8d4cc;--dim:#8a857c;--line:#26282c;--panel:#141618;--accent:#c9a227;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:15.5px/1.85 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+nav{width:250px;flex:0 0 250px;border-right:1px solid var(--line);padding:26px 0 60px;
+  position:sticky;top:0;max-height:100vh;overflow-y:auto;background:var(--panel)}
+nav .brand{padding:0 22px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+nav .brand b{display:block;font-size:21px;letter-spacing:.22em;font-weight:700}
+nav .brand span{display:block;font-size:11px;color:var(--dim);letter-spacing:.16em;margin-top:6px}
+nav a{display:block;padding:7px 22px;text-decoration:none;font-size:13.5px;color:var(--dim);
+  border-left:2px solid transparent}
+nav a:hover{color:var(--fg);background:rgba(127,127,127,.06)}
+nav a.on{color:var(--fg);border-left-color:var(--accent);background:rgba(127,127,127,.08)}
+nav .no{font-family:var(--mono);font-size:11px;opacity:.55;margin-right:8px}
+.othernav{margin:26px 14px 0;padding:13px 12px;border:1px solid var(--line);
+  border-left:2px solid var(--dim);background:rgba(127,127,127,.05)}
+.othernav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--dim);margin-bottom:7px}
+.othernav .ext{display:block;padding:0;border:0;font-size:12.5px;color:var(--fg);
+  text-decoration:underline;text-underline-offset:2px;line-height:1.5}
+.othernav .ext:hover{background:none;color:var(--accent)}
+.othernav .warn{display:block;margin-top:7px;font-size:10.5px;line-height:1.65;color:var(--dim)}
+.playnav{margin:14px 14px 0;padding:12px;border:1px solid var(--accent);
+  background:rgba(201,162,39,.06);text-decoration:none;display:block}
+.playnav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--accent);margin-bottom:6px}
+.playnav .nm{display:block;font-size:13px;color:var(--fg);font-weight:600}
+.playnav .sd{display:block;margin-top:5px;font-size:10.5px;color:var(--dim);line-height:1.6}
+.playnav:hover .nm{color:var(--accent)}
+.othernav .warn b{color:var(--fg);font-weight:650}
+main{flex:1;min-width:0;padding:44px 52px 120px;max-width:960px}
+h1{font-size:31px;letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+h2{font-size:20px;margin:52px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+h3{font-size:16.5px;margin:34px 0 10px;color:var(--fg);font-weight:700}
+h4{font-size:14.5px;margin:24px 0 8px;color:var(--dim);font-weight:700;letter-spacing:.03em}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:5px 0}
+strong{color:#fff;font-weight:650}
+:root[data-theme="light"] strong,@media(prefers-color-scheme:light){strong{color:#000}}
+em{color:var(--dim);font-style:italic}
+code{font-family:var(--mono);font-size:12.5px;background:rgba(127,127,127,.14);padding:1px 5px;border-radius:3px}
+pre.blk{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--dim);padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+blockquote{margin:0 0 18px;padding:14px 20px;background:var(--panel);
+  border-left:3px solid var(--accent)}
+blockquote p{margin:0 0 8px}
+blockquote p:last-child{margin:0}
+.tw{overflow-x:auto;margin:0 0 20px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:0 0 20px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:650;font-size:12.5px;letter-spacing:.02em}
+tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
+.ar{color:var(--dim)}
+.star{color:var(--accent)}
+.foot{margin-top:80px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);letter-spacing:.04em}
+.tt{position:fixed;top:14px;right:16px;z-index:20;background:var(--panel);color:var(--dim);
+  border:1px solid var(--line);border-radius:5px;padding:5px 11px;font-size:11.5px;cursor:pointer}
+@media(max-width:860px){
+  .wrap{display:block}
+  nav{width:auto;position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
+  nav a{display:inline-block;padding:6px 12px;border-left:0;border-bottom:2px solid transparent}
+  nav a.on{border-left:0;border-bottom-color:var(--accent)}
+  main{padding:26px 20px 80px}
+  h1{font-size:25px}
+}
+</style></head><body>
+<div class="wrap"><nav><div class="brand"><b>묵산</b><span>게임 기획 정본</span></div><div class="navsec">기획</div><a class="pg" href="00-개요.html"><span class="no">00</span>개요</a><a class="pg" href="05-참고작.html"><span class="no">05</span>참고작 분석</a><a class="pg" href="10-세계관.html"><span class="no">10</span>세계관 — 「발생」</a><a class="pg" href="15-전사.html"><span class="no">15</span>전사(前史) — 1998년 묵산</a><a class="pg" href="20-채움.html"><span class="no">20</span>채움의 역사</a><a class="pg" href="30-무대.html"><span class="no">30</span>무대 — 묵산시·묵산고</a><a class="pg" href="40-인물.html"><span class="no">40</span>주인공 4인</a><a class="pg" href="50-스토리.html"><span class="no">50</span>스토리 — 3막</a><a class="pg" href="60-레벨.html"><span class="no">60</span>챕터 구성</a><a class="pg" href="62-공략.html"><span class="no">62</span>게임 방식과 공략</a><a class="pg on" href="64-엔티티.html"><span class="no">64</span>엔티티</a><a class="pg" href="66-스토리보드.html"><span class="no">66</span>스토리보드</a><a class="pg" href="68-조력자.html"><span class="no">68</span>조력자 — 「반원」</a><a class="pg" href="70-시스템.html"><span class="no">70</span>게임 시스템 — 몸과 숨</a><a class="pg" href="80-진상.html"><span class="no">80</span>진상 4단</a><a class="pg" href="85-엔딩.html"><span class="no">85</span>엔딩 분기</a><a class="pg" href="90-톤.html"><span class="no">90</span>톤 규칙</a><a class="pg" href="95-하네스.html"><span class="no">95</span>하네스 &amp; 개선 루프</a><a class="pg" href="99-작업.html"><span class="no">99</span>다음 작업</a><div class="navsec">개발</div><a class="pg" href="D00-문서체계.html"><span class="no">D00</span>문서 체계</a><a class="pg" href="D05-규약.html"><span class="no">D05</span>규약</a><a class="pg" href="D90-결정기록.html"><span class="no">D90</span>결정 기록</a><a class="pg" href="D99-함정.html"><span class="no">D99</span>함정</a><a class="pg" href="P00-평가단.html"><span class="no">P00</span>평가단 — 기획·검토·개선 프로세스</a><a class="pg" href="P10-게임성.html"><span class="no">P10</span>헌장 P10 — 게임성 심사 (mechanics-critic)</a><a class="pg" href="P20-공포연출.html"><span class="no">P20</span>헌장 P20 — 공포연출 심사 (horror-critic)</a><a class="pg" href="P30-정합성.html"><span class="no">P30</span>헌장 P30 — 정합성 심사 (canon-keeper)</a><a class="pg" href="P40-구현성.html"><span class="no">P40</span>헌장 P40 — 구현성 심사 (feasibility)</a><a class="pg" href="P50-플레이어.html"><span class="no">P50</span>헌장 P50 — 플레이어 대변 (player-advocate)</a><a class="pg" href="P60-맵디자인.html"><span class="no">P60</span>헌장 P60 — 맵 디자인 심사 (map-critic)</a><a class="playnav" href="../play/"><span class="lbl">▶ 플레이 가능</span><span class="nm">챕터 1 — 복도</span><span class="sd">⚠ 구버전 규칙(단위 세기)으로 만든 수직 슬라이스입니다. 새 규격으로 재구현 예정.</span></a><div class="othernav"><span class="lbl">이어지는 정본</span><a class="ext" href="../kamc/">한국이상관리공단 문서보관소 <span class="ar">↗</span></a><span class="warn"><b>28년 전 기록.</b> 1998년 묵산시 전체가 발생했고, 국가는 그 문서로 재난대응반을 만들었다</span></div></nav><main><h1 id="엔티티">엔티티</h1>
+<blockquote><p>개정 2026-07-31. <strong>전부 사람이었다.</strong> 오래 있을수록 덜 사람이다. <span class="ar">→</span> [[80-진상]]</p><p><strong>원칙: 형태가 아니라 「어떻게 감지되는가」로 구별한다.</strong></p></blockquote>
+<hr>
+<h2 id="0-공통-규칙">0. 공통 규칙</h2>
+<ol><li><strong>쫓아오지 않는다</strong> — 추격전은 이 톤이 아니다. 전부 <strong>조건부로 편입시킨다</strong></li><li><strong>죽이는 게 아니라 수(數)에 넣는다.</strong> 편입되면 조사표 인원란이 하나 는다</li><li>각 엔티티는 <strong>플레이어의 특정 행동을 금지</strong>한다. 그 행동은 대개 <strong>평소엔 안전한 행동</strong>이다</li><li>대응은 아이템이 아니라 <strong>몸가짐</strong>이다 — 서는 위치, 보는 방향, 걷는 속도, 소리</li><li><strong>챕터당 하나.</strong> 두 종류를 동시에 내지 않는다</li><li><span class="star">★</span> <strong>안전지대에는 절대 들어오지 못한다.</strong> 예외 없다 <span class="ar">→</span> [[60-레벨]]</li><li><strong>경고 신호를 반드시 먼저 낸다.</strong> 예고 없는 사망은 없다</li><li>다만 <strong>조력자가 옆에서 말을 걸고 있으면 놓친다.</strong> 그가 하는 말이 경고를 덮는다 <span class="ar">→</span> [[68-조력자]]</li></ol>
+<hr>
+<h2 id="1-열람-소리형-2챕터-도서실">1. 「열람」 — 소리형 · 2챕터 도서실</h2>
+<p><strong>컨셉:</strong> 서가 사이에 낀 사람 형태. 팔다리가 책장 간격에 맞춰 눌려 있다. 1997년 학생들 중 도서실에서 마지막까지 버틴 것.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td><strong>소리.</strong> 시각이 없다</td></tr><tr><td><strong>능력</strong></td><td><strong>서가를 통과한다.</strong> 벽은 못 지나가지만 책장 사이는 지나간다</td></tr><tr><td><strong>금지 행동</strong></td><td>뛰기 · 책 떨어뜨리기 · 문 세게 닫기 · <strong>모빌랙 돌리기</strong></td></tr><tr><td><strong>편입 조건</strong></td><td>소리 난 자리에 3초 이상 머무름</td></tr><tr><td><strong>대응</strong></td><td>소리를 낸 즉시 그 자리를 뜬다. 서가를 돌린 뒤에는 반드시 이동</td></tr><tr><td><strong>경고</strong></td><td>어딘가에서 <strong>책 한 권이 떨어진다</strong></td></tr></tbody></table>
+<p><span class="star">★</span> <strong>길을 만드는 행위(모빌랙)가 곧 위험을 만드는 행위</strong>다. 이 챕터의 전부가 이 한 줄이다.</p>
+<hr>
+<h2 id="2-조회-정렬형-3챕터-체육관">2. 「조회」 — 정렬형 · 3챕터 체육관</h2>
+<p><strong>컨셉:</strong> 조회 서 있는 학생들. 열과 오가 완벽하다. 앞줄만 얼굴이 있다. 2008년 이송자들 — 끌려와 세워진 사람들.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td><strong>조명.</strong> 불빛 안에서만 존재한다. 어두운 데선 아무것도 없다</td></tr><tr><td><strong>능력</strong></td><td><strong>끌어당긴다.</strong> 편입 조건이 차면 대상을 줄로 이동시킨다</td></tr><tr><td><strong>금지 행동</strong></td><td><strong>조명 아래서 멈춰 서기</strong></td></tr><tr><td><strong>편입 조건</strong></td><td>조명 반경 안에서 2초 이상 정지</td></tr><tr><td><strong>대응</strong></td><td>조명 이동을 따라 <strong>계속 걷는다.</strong> 멈출 거면 어두운 데서 멈춘다</td></tr><tr><td><strong>경고</strong></td><td>정지하는 순간 <strong>양옆의 간격이 맞춰진다</strong></td></tr></tbody></table>
+<p><span class="star">★</span> 체육관 조명은 순서대로 꺼진다. <strong>밝은 데로 가야 하는데 밝은 데서 멈추면 안 된다.</strong></p>
+<hr>
+<h2 id="3-줄-위치형-4챕터-급식실">3. 「줄」 — 위치형 · 4챕터 급식실</h2>
+<p><strong>컨셉:</strong> 배식 줄. 식판을 들고 있다. 아주 천천히 앞으로 간다. 표정이 없다. 2008년 이송자들의 다른 무리.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td><strong>눈으로 보인다.</strong> 숨지 않는다. 가장 정직하다</td></tr><tr><td><strong>능력</strong></td><td><strong>동시 반응.</strong> 하나가 반응하면 줄 전체가 동시에 돌아본다</td></tr><tr><td><strong>금지 행동</strong></td><td><strong>앞지르기</strong></td></tr><tr><td><strong>편입 조건</strong></td><td>줄의 어느 개체보다 앞선 위치에 3초 이상</td></tr><tr><td><strong>대응</strong></td><td>줄 뒤에 붙어 같이 간다. 급하면 줄에서 <strong>완전히</strong> 벗어난다</td></tr><tr><td><strong>경고</strong></td><td>앞지르기 시작하면 <strong>바로 앞의 것이 뒤를 돌아본다</strong> (한 마리만)</td></tr></tbody></table>
+<p><span class="star">★</span> 줄은 <strong>길을 막는 장애물이기도 하다.</strong> 피하면서 동시에 기다려야 한다.</p>
+<hr>
+<h2 id="4-석고-시선형-5챕터-과학-음악-미술실">4. 「석고」 — 시선형 · 5챕터 과학·음악·미술실</h2>
+<p><strong>컨셉:</strong> 인체모형과 석고상. 미술실 것은 <strong>얼굴이 없다.</strong> 1997년 학생들 중 가장 많이 무너진 것들 — 사람이었다는 것만 겨우 알아본다.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td><strong>시선.</strong> 화면 안에 있으면 정지</td></tr><tr><td><strong>능력</strong></td><td><strong>순간이동.</strong> 시야를 벗어난 동안 거리에 상관없이 이동한다</td></tr><tr><td><strong>금지 행동</strong></td><td><strong>등 돌리고 걷기</strong></td></tr><tr><td><strong>편입 조건</strong></td><td>접촉</td></tr><tr><td><strong>대응</strong></td><td>바라본 채 <strong>옆걸음·뒷걸음</strong>으로 이동한다</td></tr><tr><td><strong>경고</strong></td><td>화면에 다시 들어온 순간 <strong>아까와 자세가 다르다</strong></td></tr></tbody></table>
+<h3 id="방마다-정지-조건이-다르다"><span class="star">★</span> 방마다 정지 조건이 다르다</h3>
+<table><thead><tr><th>방</th><th>정지 조건</th><th>대응</th></tr></thead><tbody><tr><td><strong>과학실</strong></td><td>내가 보고 있으면</td><td>바라보며 후진</td></tr><tr><td><strong>음악실</strong></td><td><strong>소리가 나는 동안</strong></td><td>메트로놈을 켠다 — 태엽이 풀리면 끝. <strong>헐떡임도 소리다</strong> — 가쁜 숨이 이 방에서만은 정지 조건에 산입된다 <span class="ar">→</span> [[70-시스템]] §4</td></tr><tr><td><strong>미술실</strong></td><td><strong>조명이 켜져 있으면</strong></td><td>차단기를 올린 채 통과</td></tr></tbody></table>
+<p>음악실 메트로놈은 <strong>과학실까지 들린다.</strong> 두 방을 동시에 잠글 수 있다. <strong>같은 엔티티에 세 가지 대응을 해야 하는 것</strong>이 이 챕터의 난이도다.</p>
+<hr>
+<h2 id="5-거울-반사형-6챕터-화장실">5. 「거울」 — 반사형 · 6챕터 화장실</h2>
+<p><strong>컨셉:</strong> 1997년 최초 희생자. 거울 안쪽에 있다. <strong>주인공이 1챕터에서 느낀 「누가 쳐다보는 느낌」의 정체다.</strong></p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>감지</strong></td><td><strong>반사.</strong> 거울·창유리·젖은 바닥·스테인리스에 비치면 인식한다</td></tr><tr><td><strong>능력</strong></td><td><strong>거울에서 나온다.</strong> 비친 면이면 어디서든 나올 수 있다</td></tr><tr><td><strong>금지 행동</strong></td><td><strong>반사면 앞에 서기</strong></td></tr><tr><td><strong>편입 조건</strong></td><td>자기 모습이 비친 채 2초 이상</td></tr><tr><td><strong>대응</strong></td><td>반사면을 피해 이동. 세면대 조명을 깨거나, <strong>김을 서리게 한다</strong></td></tr><tr><td><strong>경고</strong></td><td>비친 모습이 <strong>조금 늦게 움직인다</strong></td></tr></tbody></table>
+<p><span class="star">★</span> <strong>1챕터 화장실에서 이미 한 번 보여준 경고다.</strong> 그때는 아무 일도 없었다.</p>
+<hr>
+<h2 id="6-조력자-엔티티가-아닌-척하는-엔티티">6. 조력자 — 엔티티가 아닌 척하는 엔티티</h2>
+<p><strong>「반원」</strong>은 위 다섯과 다르다. <span class="ar">→</span> [[68-조력자]]</p>
+<ul><li><strong>말을 한다.</strong> 규정을 알려주고, 그 규정이 실제로 맞다</li><li><strong>안전지대에 들어온다</strong> — 유일하게. 그가 만든 곳이니까</li><li>감지 방식이 없다. <strong>당신이 그를 믿는 동안은 사람이다</strong></li><li><span class="star">★</span> <strong>엔티티가 가까이 있을 때만 형태가 잠깐 흐트러진다.</strong> 하필 그를 볼 겨를이 없을 때다</li></ul>
+<blockquote><p>다섯 마리는 규칙을 지키면 피할 수 있다.</p><p><strong>그는 규칙을 알려주는 쪽이다.</strong></p></blockquote>
+<hr>
+<h2 id="배치-요약">배치 요약</h2>
+<table><thead><tr><th>#</th><th>챕터</th><th>엔티티</th><th>감지</th><th>능력</th><th>금지 행동</th><th>안전지대</th></tr></thead><tbody><tr><td>1</td><td>복도 &amp; 교실</td><td>—</td><td>—</td><td>—</td><td>—</td><td>홈베이스</td></tr><tr><td>2</td><td>도서실</td><td><strong>열람</strong></td><td>소리</td><td>서가 통과</td><td>소리 내기 · 서가 돌리기</td><td>대출대 안쪽</td></tr><tr><td>3</td><td>체육관</td><td><strong>조회</strong></td><td>조명</td><td>끌어당김</td><td>밝은 데서 멈추기</td><td>용구 창고</td></tr><tr><td>4</td><td>급식실</td><td><strong>줄</strong></td><td>시각</td><td>동시 반응</td><td>앞지르기</td><td>조리실</td></tr><tr><td>5</td><td>과학·음악·미술</td><td><strong>석고</strong></td><td>시선</td><td>순간이동</td><td>등 돌리고 걷기</td><td>과학 준비실 ✕</td></tr><tr><td>6</td><td>화장실</td><td><strong>거울</strong></td><td>반사</td><td>거울에서 나옴</td><td>반사면 앞에 서기</td><td><strong>없음</strong></td></tr></tbody></table>
+<p><strong>금지 행동이 전부 다르다.</strong> 그래서 챕터마다 손이 다르게 움직인다.</p>
+<div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
+</main></div><script>
+(function(){
+  var r=document.documentElement, k='mooksan-theme', s=localStorage.getItem(k);
+  if(s) r.setAttribute('data-theme',s);
+  var b=document.createElement('button'); b.className='tt'; b.textContent='명암';
+  b.onclick=function(){
+    var cur=r.getAttribute('data-theme')||
+      (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    var nx=cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx); localStorage.setItem(k,nx);
+  };
+  document.body.appendChild(b);
+  document.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tw';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+})();
+</script></body></html>

@@ -1,0 +1,22 @@
+{
+ "walkSpeed": 6.4,
+ "runSpeed": 11,
+ "diagFactor": 0.72,
+ "animWalk": 10,
+ "animRun": 17,
+ "typeSpeed": 44,
+ "breath": {
+  "drainRun": 0.2,
+  "recoverHold": 0.2,
+  "recoverIdle": 0.1,
+  "recoverWalk": 0.045,
+  "stage1": 0.34,
+  "stage2": 0.75,
+  "heavyStartMv": 1.4
+ },
+ "haven": {
+  "duration": 90,
+  "warnAt": 20,
+  "recoverMul": 2.2
+ }
+}

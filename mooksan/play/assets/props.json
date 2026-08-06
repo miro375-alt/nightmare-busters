@@ -1,0 +1,162 @@
+{
+ "map": {
+  "x": 0,
+  "y": 0,
+  "w": 2,
+  "h": 2,
+  "tag": "wall",
+  "pad": 4
+ },
+ "notice": {
+  "x": 2,
+  "y": 0,
+  "w": 2,
+  "h": 2,
+  "tag": "wall",
+  "pad": 3
+ },
+ "cork": {
+  "x": 4,
+  "y": 0,
+  "w": 2,
+  "h": 1,
+  "tag": "wall",
+  "pad": 3
+ },
+ "globe": {
+  "x": 6,
+  "y": 0,
+  "w": 1,
+  "h": 2,
+  "tag": "floor",
+  "pad": 10
+ },
+ "board_s": {
+  "x": 7,
+  "y": 0,
+  "w": 2,
+  "h": 2,
+  "tag": "wall",
+  "pad": 2
+ },
+ "whiteboard": {
+  "x": 9,
+  "y": 0,
+  "w": 2,
+  "h": 2,
+  "tag": "floor",
+  "pad": 7
+ },
+ "cabinet": {
+  "x": 11,
+  "y": 0,
+  "w": 1,
+  "h": 2,
+  "tag": "floor",
+  "pad": 0
+ },
+ "tdesk": {
+  "x": 12,
+  "y": 0,
+  "w": 2,
+  "h": 2,
+  "tag": "floor",
+  "pad": 0
+ },
+ "shelf": {
+  "x": 14,
+  "y": 0,
+  "w": 2,
+  "h": 3,
+  "tag": "floor",
+  "pad": 6
+ },
+ "shelf2": {
+  "x": 16,
+  "y": 0,
+  "w": 2,
+  "h": 3,
+  "tag": "floor",
+  "pad": 7
+ },
+ "rack": {
+  "x": 18,
+  "y": 0,
+  "w": 2,
+  "h": 3,
+  "tag": "floor",
+  "pad": 8
+ },
+ "rack2": {
+  "x": 20,
+  "y": 0,
+  "w": 2,
+  "h": 3,
+  "tag": "floor",
+  "pad": 8
+ },
+ "shelf3": {
+  "x": 22,
+  "y": 0,
+  "w": 2,
+  "h": 3,
+  "tag": "floor",
+  "pad": 6
+ },
+ "shelf4": {
+  "x": 24,
+  "y": 0,
+  "w": 2,
+  "h": 3,
+  "tag": "floor",
+  "pad": 6
+ },
+ "ladder": {
+  "x": 26,
+  "y": 0,
+  "w": 1,
+  "h": 2,
+  "tag": "floor",
+  "pad": 10
+ },
+ "tallboard": {
+  "x": 27,
+  "y": 0,
+  "w": 2,
+  "h": 3,
+  "tag": "floor",
+  "pad": 2
+ },
+ "plant": {
+  "x": 29,
+  "y": 0,
+  "w": 1,
+  "h": 2,
+  "tag": "floor",
+  "pad": 0
+ },
+ "curtain": {
+  "x": 30,
+  "y": 0,
+  "w": 2,
+  "h": 3,
+  "tag": "wall",
+  "pad": 0
+ },
+ "hyd": {
+  "x": 32,
+  "y": 0,
+  "w": 1,
+  "h": 2,
+  "tag": "floor",
+  "pad": 10
+ },
+ "cooler": {
+  "x": 33,
+  "y": 0,
+  "w": 1,
+  "h": 2,
+  "tag": "floor",
+  "pad": 0
+ }
+}

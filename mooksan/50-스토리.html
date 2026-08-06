@@ -1,0 +1,172 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>스토리 — 3막 — 묵산</title>
+<style>
+.navsec{margin:18px 14px 6px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:10px;letter-spacing:.2em;color:var(--dim)}
+nav .navsec:first-of-type{border-top:0;padding-top:0;margin-top:8px}
+main img{display:block;width:100%;max-width:760px;margin:20px 0 6px;
+  border:1px solid var(--line);background:#0b0c10;image-rendering:auto}
+
+:root{
+  --bg:#0e0f11; --fg:#d8d4cc; --dim:#8a857c; --line:#26282c;
+  --panel:#141618; --accent:#c9a227; --hot:#b4453a; --ok:#5d7f6a;
+  --mono:ui-monospace,SFMono-Regular,Menlo,'D2Coding',monospace;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+}
+:root[data-theme="light"]{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+:root[data-theme="dark"]{--bg:#0e0f11;--fg:#d8d4cc;--dim:#8a857c;--line:#26282c;--panel:#141618;--accent:#c9a227;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:15.5px/1.85 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+nav{width:250px;flex:0 0 250px;border-right:1px solid var(--line);padding:26px 0 60px;
+  position:sticky;top:0;max-height:100vh;overflow-y:auto;background:var(--panel)}
+nav .brand{padding:0 22px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+nav .brand b{display:block;font-size:21px;letter-spacing:.22em;font-weight:700}
+nav .brand span{display:block;font-size:11px;color:var(--dim);letter-spacing:.16em;margin-top:6px}
+nav a{display:block;padding:7px 22px;text-decoration:none;font-size:13.5px;color:var(--dim);
+  border-left:2px solid transparent}
+nav a:hover{color:var(--fg);background:rgba(127,127,127,.06)}
+nav a.on{color:var(--fg);border-left-color:var(--accent);background:rgba(127,127,127,.08)}
+nav .no{font-family:var(--mono);font-size:11px;opacity:.55;margin-right:8px}
+.othernav{margin:26px 14px 0;padding:13px 12px;border:1px solid var(--line);
+  border-left:2px solid var(--dim);background:rgba(127,127,127,.05)}
+.othernav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--dim);margin-bottom:7px}
+.othernav .ext{display:block;padding:0;border:0;font-size:12.5px;color:var(--fg);
+  text-decoration:underline;text-underline-offset:2px;line-height:1.5}
+.othernav .ext:hover{background:none;color:var(--accent)}
+.othernav .warn{display:block;margin-top:7px;font-size:10.5px;line-height:1.65;color:var(--dim)}
+.playnav{margin:14px 14px 0;padding:12px;border:1px solid var(--accent);
+  background:rgba(201,162,39,.06);text-decoration:none;display:block}
+.playnav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--accent);margin-bottom:6px}
+.playnav .nm{display:block;font-size:13px;color:var(--fg);font-weight:600}
+.playnav .sd{display:block;margin-top:5px;font-size:10.5px;color:var(--dim);line-height:1.6}
+.playnav:hover .nm{color:var(--accent)}
+.othernav .warn b{color:var(--fg);font-weight:650}
+main{flex:1;min-width:0;padding:44px 52px 120px;max-width:960px}
+h1{font-size:31px;letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+h2{font-size:20px;margin:52px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+h3{font-size:16.5px;margin:34px 0 10px;color:var(--fg);font-weight:700}
+h4{font-size:14.5px;margin:24px 0 8px;color:var(--dim);font-weight:700;letter-spacing:.03em}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:5px 0}
+strong{color:#fff;font-weight:650}
+:root[data-theme="light"] strong,@media(prefers-color-scheme:light){strong{color:#000}}
+em{color:var(--dim);font-style:italic}
+code{font-family:var(--mono);font-size:12.5px;background:rgba(127,127,127,.14);padding:1px 5px;border-radius:3px}
+pre.blk{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--dim);padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+blockquote{margin:0 0 18px;padding:14px 20px;background:var(--panel);
+  border-left:3px solid var(--accent)}
+blockquote p{margin:0 0 8px}
+blockquote p:last-child{margin:0}
+.tw{overflow-x:auto;margin:0 0 20px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:0 0 20px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:650;font-size:12.5px;letter-spacing:.02em}
+tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
+.ar{color:var(--dim)}
+.star{color:var(--accent)}
+.foot{margin-top:80px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);letter-spacing:.04em}
+.tt{position:fixed;top:14px;right:16px;z-index:20;background:var(--panel);color:var(--dim);
+  border:1px solid var(--line);border-radius:5px;padding:5px 11px;font-size:11.5px;cursor:pointer}
+@media(max-width:860px){
+  .wrap{display:block}
+  nav{width:auto;position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
+  nav a{display:inline-block;padding:6px 12px;border-left:0;border-bottom:2px solid transparent}
+  nav a.on{border-left:0;border-bottom-color:var(--accent)}
+  main{padding:26px 20px 80px}
+  h1{font-size:25px}
+}
+</style></head><body>
+<div class="wrap"><nav><div class="brand"><b>묵산</b><span>게임 기획 정본</span></div><div class="navsec">기획</div><a class="pg" href="00-개요.html"><span class="no">00</span>개요</a><a class="pg" href="05-참고작.html"><span class="no">05</span>참고작 분석</a><a class="pg" href="10-세계관.html"><span class="no">10</span>세계관 — 「발생」</a><a class="pg" href="15-전사.html"><span class="no">15</span>전사(前史) — 1998년 묵산</a><a class="pg" href="20-채움.html"><span class="no">20</span>채움의 역사</a><a class="pg" href="30-무대.html"><span class="no">30</span>무대 — 묵산시·묵산고</a><a class="pg" href="40-인물.html"><span class="no">40</span>주인공 4인</a><a class="pg on" href="50-스토리.html"><span class="no">50</span>스토리 — 3막</a><a class="pg" href="60-레벨.html"><span class="no">60</span>챕터 구성</a><a class="pg" href="62-공략.html"><span class="no">62</span>게임 방식과 공략</a><a class="pg" href="64-엔티티.html"><span class="no">64</span>엔티티</a><a class="pg" href="66-스토리보드.html"><span class="no">66</span>스토리보드</a><a class="pg" href="68-조력자.html"><span class="no">68</span>조력자 — 「반원」</a><a class="pg" href="70-시스템.html"><span class="no">70</span>게임 시스템 — 몸과 숨</a><a class="pg" href="80-진상.html"><span class="no">80</span>진상 4단</a><a class="pg" href="85-엔딩.html"><span class="no">85</span>엔딩 분기</a><a class="pg" href="90-톤.html"><span class="no">90</span>톤 규칙</a><a class="pg" href="95-하네스.html"><span class="no">95</span>하네스 &amp; 개선 루프</a><a class="pg" href="99-작업.html"><span class="no">99</span>다음 작업</a><div class="navsec">개발</div><a class="pg" href="D00-문서체계.html"><span class="no">D00</span>문서 체계</a><a class="pg" href="D05-규약.html"><span class="no">D05</span>규약</a><a class="pg" href="D90-결정기록.html"><span class="no">D90</span>결정 기록</a><a class="pg" href="D99-함정.html"><span class="no">D99</span>함정</a><a class="pg" href="P00-평가단.html"><span class="no">P00</span>평가단 — 기획·검토·개선 프로세스</a><a class="pg" href="P10-게임성.html"><span class="no">P10</span>헌장 P10 — 게임성 심사 (mechanics-critic)</a><a class="pg" href="P20-공포연출.html"><span class="no">P20</span>헌장 P20 — 공포연출 심사 (horror-critic)</a><a class="pg" href="P30-정합성.html"><span class="no">P30</span>헌장 P30 — 정합성 심사 (canon-keeper)</a><a class="pg" href="P40-구현성.html"><span class="no">P40</span>헌장 P40 — 구현성 심사 (feasibility)</a><a class="pg" href="P50-플레이어.html"><span class="no">P50</span>헌장 P50 — 플레이어 대변 (player-advocate)</a><a class="pg" href="P60-맵디자인.html"><span class="no">P60</span>헌장 P60 — 맵 디자인 심사 (map-critic)</a><a class="playnav" href="../play/"><span class="lbl">▶ 플레이 가능</span><span class="nm">챕터 1 — 복도</span><span class="sd">⚠ 구버전 규칙(단위 세기)으로 만든 수직 슬라이스입니다. 새 규격으로 재구현 예정.</span></a><div class="othernav"><span class="lbl">이어지는 정본</span><a class="ext" href="../kamc/">한국이상관리공단 문서보관소 <span class="ar">↗</span></a><span class="warn"><b>28년 전 기록.</b> 1998년 묵산시 전체가 발생했고, 국가는 그 문서로 재난대응반을 만들었다</span></div></nav><main><h1 id="스토리-3막">스토리 — 3막</h1>
+<blockquote><p>개정 2026-07-31. <strong>혼자 들어온다.</strong> 동행 없음.</p><p>챕터 구성은 <span class="ar">→</span> [[60-레벨]] · 조력자는 <span class="ar">→</span> [[68-조력자]] · 진상은 <span class="ar">→</span> [[80-진상]]</p></blockquote>
+<hr>
+<h2 id="1막-진입">1막 — 진입</h2>
+<h3 id="1-1-아주-사소한-이유로-들어간다">1-1. 아주 사소한 이유로 들어간다</h3>
+<p><strong>2026년 9월 17일 목요일. 야간자율학습 2교시.</strong></p>
+<p>야자는 <strong>1층 자율학습실</strong>에서 한다. 3학년은 거기 모여 앉는다. 문제집을 <strong>교실에 두고 왔다.</strong> 3층 자기 반이다.</p>
+<p>올라간다. <strong>교실 문이 잠겨 있다.</strong> 당직 선생님한테 열쇠를 받으러 다시 내려가긴 귀찮다. 그냥 내려가려는데—</p>
+<p><strong>3층 화장실에 불이 켜져 있다.</strong></p>
+<blockquote><p>마침 잘됐다 싶었다.</p><p>1층 화장실은 복도 끝이라 밤에 가기 싫다.</p><p><strong>누가 쓰고 불 안 껐나 보네.</strong></p></blockquote>
+<p>들어간다. <strong>이것이 진입이다.</strong></p>
+<h3 id="1-2-볼일을-보는-동안">1-2. 볼일을 보는 동안</h3>
+<p>칸에 들어가 있는 동안 밖에서 일이 일어난다. <strong>보이지 않는다. 들리기만 한다.</strong></p>
+<table><thead><tr><th>순서</th><th>일어나는 일</th><th>주인공의 해석</th></tr></thead><tbody><tr><td>1</td><td><strong>거울이 낡는다.</strong> 은도금이 검게 번진다</td><td>(안 보인다)</td></tr><tr><td>2</td><td><strong>휴지 돌아가는 소리.</strong> 옆 칸이다</td><td>「아, 누구 있구나」</td></tr><tr><td>3</td><td>소리가 <strong>멈추지 않는다.</strong> 계속 돌아간다</td><td>「…?」</td></tr><tr><td>4</td><td>형광등이 한 번 깜빡인다</td><td>「낡았네」</td></tr><tr><td>5</td><td><strong>누가 쳐다보는 느낌</strong></td><td>나간다</td></tr></tbody></table>
+<p><span class="star">★</span> <strong>점프 스케어 없음.</strong> 전부 「그럴 수도 있는 일」로 설명된다. 플레이어가 나중에 되짚었을 때 무서워야 한다.</p>
+<p>칸을 나오면 옆 칸 문은 <strong>열려 있고 아무도 없다.</strong> 휴지는 바닥에 다 풀려 있다. 거울 속 자기 얼굴이 <strong>조금 늦게 움직인다.</strong></p>
+<h3 id="1-3-복도로-나온다">1-3. 복도로 나온다</h3>
+<p>문을 열고 나오면 <strong>복도가 안 끝난다.</strong></p>
+<ul><li>복도등이 일정 간격으로 켜져 있다. 끝이 안 보인다</li><li>정수기가 있다. 냉수도 나온다. <strong>종이컵이 없다</strong></li><li>신발장이 있다. 실내화가 <strong>크기별로 정렬</strong>되어 있다</li><li>중간중간 <strong>홈베이스</strong> — 사물함이 모여 있는 공간. <strong>안전지대이자 거점</strong></li></ul>
+<p><strong>되돌아가면 화장실 문이 없다.</strong> 벽이다.</p>
+<h3 id="1-4-2026년이라서-생기는-첫-이상">1-4. 2026년이라서 생기는 첫 이상</h3>
+<ul><li>휴대전화가 켜진다. <strong>와이파이가 잡힌다.</strong> SSID는 학교 것이다. 연결도 된다. <strong>인터넷만 안 된다</strong></li><li>단톡방에 보내면 <strong>전송됨 표시가 뜬다.</strong> 답이 없다</li><li><strong>배터리가 줄지 않는다.</strong> 20:41에서 멈춰 있다</li><li>그런데 <strong>복도 벽시계는 간다</strong></li></ul>
+<h3 id="1-5-그리고-사람을-만난다">1-5. 그리고 사람을 만난다</h3>
+<p>복도 끝에서 <strong>대응반원 복장을 한 사람</strong>을 만난다. 그는 놀라지 않는다. 오히려 이렇게 말한다.</p>
+<blockquote><p>「교대 오셨어요?」</p></blockquote>
+<p>그리고 곧 말을 바꾼다.</p>
+<blockquote><p>「아… 학생이구나. 미안해요.</p><p>일단 나 따라와요. 여기 규정이 좀 있어요.」</p></blockquote>
+<p><strong>그가 알려주는 규정은 대부분 맞다.</strong> <span class="ar">→</span> [[68-조력자]]</p>
+<hr>
+<h2 id="2막-조사">2막 — 조사</h2>
+<p>이 공간이 <strong>1997년에 봉인된 그것</strong>이라는 걸 알아간다. 안에는 <strong>세 층의 기록</strong>이 있다.</p>
+<table><thead><tr><th>층</th><th>남긴 사람</th><th>매체</th><th>톤</th></tr></thead><tbody><tr><td><strong>1997</strong></td><td>학생 21 + 교사 1</td><td>교과서 여백, 책상 낙서, 화장실 벽, 분필</td><td>어리고, 구조를 기다리고, 나중에는 밖의 소리를 센다</td></tr><tr><td><strong>2008</strong></td><td>이송된 「구조자」 1█명</td><td>인쇄물 뒷면, 병원 팔찌, 처방전</td><td><strong>배신을 안다.</strong> 화가 나 있다. 지역이 제각각이라 말투가 다르다</td></tr><tr><td><strong>2017</strong></td><td>재난대응반원 4명</td><td>복명서 양식, 근무일지, 개인 수첩</td><td><strong>알고 들어왔다.</strong> 사무적이고, 체념해 있고, 서식을 지킨다</td></tr></tbody></table>
+<p><strong>세 층이 서로를 언급한다.</strong> 2008년 사람들은 1997년 낙서를 발견하고 놀란다. 2017년 반원들은 두 층을 다 읽고 정리해 뒀다 — <strong>그들이 남긴 것이 사실상 안내서</strong>다.</p>
+<p><strong>1997년의 마지막 기록</strong>은 이름 22개가 적힌 명단이다. <strong>필적이 하나다.</strong> 마지막까지 남은 한 명이 다 적었다.</p>
+<p>그리고 안에서 <strong>움직이는 것들</strong>을 본다. 처음엔 괴물로 보인다. <strong>전부 위 세 층의 사람들이다.</strong> 오래 있을수록 덜 사람이다. <span class="ar">→</span> [[80-진상]]</p>
+<blockquote><p><strong>2막의 진짜 목표는 탈출구를 찾는 게 아니라, 「왜 못 나가는지」를 아는 것.</strong></p></blockquote>
+<hr>
+<h2 id="3막-배신과-선택">3막 — 배신과 선택</h2>
+<h3 id="3-1-배신">3-1. 배신</h3>
+<p>사지로 몰아넣은 뒤, 그는 문 앞에서 돌아선다.</p>
+<blockquote><p><strong>「누군가는 여기 있어야 해.</strong></p><p><strong>네가 남고, 내가 나갈게.」</strong></p></blockquote>
+<p>그는 2017년에 들어온 넷 중 하나였고, <strong>가장 먼저 변한 사람</strong>이다. 반장이 괴물에게 죽은 뒤 엔티티화가 시작됐고, 남은 동료를 바로 죽였다. 그의 명찰은 <strong>그가 죽인 동료의 이름</strong>이다.</p>
+<p>그의 수첩 마지막 기재.</p>
+<blockquote><p>2026. 9. ██.</p><p>오늘 한 명 들어왔다. 고등학생이다.</p><p><strong>나는 나갈 수 있게 되었다.</strong></p></blockquote>
+<h3 id="3-2-네-번째-반원">3-2. 네 번째 반원</h3>
+<p><strong>9년간 숨어 있던 마지막 한 명</strong>이 나타나 그를 붙잡는다. 동료가 살해당하는 것을 보고 도망쳤던 사람 — 기록상의 「실종」이다.</p>
+<blockquote><p>「나는 그때 도망쳤어. 이번엔 안 도망쳐.</p><p>너는 나가.」</p></blockquote>
+<p>문이 열린다. 이번엔 진짜다.</p>
+<h3 id="3-3-그런데-나가지-않는다">3-3. <span class="star">★</span> 그런데 나가지 않는다</h3>
+<p>주인공은 혼자 들어왔다. 두고 갈 사람이 없다. <strong>그래서 남을 이유가 없어야 하는데, 있다.</strong></p>
+<p>그가 여기 온 이유를 기억한다.</p>
+<blockquote><p><strong>화장실에 불이 켜져 있었다.</strong></p></blockquote>
+<p>그 불은 <strong>꺼진 적이 없다.</strong> 그가 나가면 그대로 켜져 있을 것이다. 다음 목요일 야자에, 누군가 문제집을 가지러 3층에 올라와서, 1층 화장실은 무서우니까, <strong>불 켜진 3층 화장실로 들어올 것이다.</strong></p>
+<p><strong>그가 그랬듯이.</strong></p>
+<blockquote><p>「제가 나가면요.</p><p>저 불은 계속 켜져 있는 거잖아요.」</p></blockquote>
+<h3 id="3-4-닫는다">3-4. 닫는다</h3>
+<p>나가는 대신 <strong>닫기로 한다.</strong></p>
+<p>이전에 들어온 사람들이 남긴 것을 모으면 절차가 나온다 — 1997년 학생들이 사흘간 두드리며 센 경계, 2008년 사람들이 아는 입구, 2017년 반원들이 남긴 서식, 그리고 마지막 반원이 9년간 관찰한 성장 속도.</p>
+<p><span class="star">★</span> <strong>이것이 수집 문서의 진짜 용도다.</strong> 읽을거리가 아니라 <strong>부품</strong>이다.</p>
+<p>마지막 챕터가 <strong>화장실</strong>인 이유가 여기 있다. 들어온 자리로 돌아간다.</p>
+<blockquote><p>나가는 게 아니라 <strong>닫는다.</strong></p><p><strong>불을 끄러 간다.</strong></p></blockquote>
+<hr>
+<h2 id="폐기한-설정">폐기한 설정</h2>
+<table><thead><tr><th>폐기</th><th>이유</th></tr></thead><tbody><tr><td><strong>4인 동행 진입</strong></td><td>플레이가 1인이다. 동행은 시스템이 아니라 대사로만 남아 있었다</td></tr><tr><td><strong>「넷 중 하나가 남으면 셋은 나간다」 협상</strong></td><td>대화창에서 숫자 고르는 일이 된다</td></tr><tr><td><strong>친구 때문에 남는다</strong></td><td>혼자 들어왔다. <strong>남는 이유는 다음 사람 때문</strong>이어야 한다</td></tr><tr><td><strong>세라 삼촌 장치</strong></td><td>개인 사연으로 진상을 여는 방식이 톤과 안 맞는다 <span class="ar">→</span> [[90-톤]]</td></tr></tbody></table>
+<div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
+</main></div><script>
+(function(){
+  var r=document.documentElement, k='mooksan-theme', s=localStorage.getItem(k);
+  if(s) r.setAttribute('data-theme',s);
+  var b=document.createElement('button'); b.className='tt'; b.textContent='명암';
+  b.onclick=function(){
+    var cur=r.getAttribute('data-theme')||
+      (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    var nx=cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx); localStorage.setItem(k,nx);
+  };
+  document.body.appendChild(b);
+  document.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tw';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+})();
+</script></body></html>

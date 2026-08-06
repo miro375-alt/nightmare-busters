@@ -1,0 +1,160 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>챕터 구성 — 묵산</title>
+<style>
+.navsec{margin:18px 14px 6px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:10px;letter-spacing:.2em;color:var(--dim)}
+nav .navsec:first-of-type{border-top:0;padding-top:0;margin-top:8px}
+main img{display:block;width:100%;max-width:760px;margin:20px 0 6px;
+  border:1px solid var(--line);background:#0b0c10;image-rendering:auto}
+
+:root{
+  --bg:#0e0f11; --fg:#d8d4cc; --dim:#8a857c; --line:#26282c;
+  --panel:#141618; --accent:#c9a227; --hot:#b4453a; --ok:#5d7f6a;
+  --mono:ui-monospace,SFMono-Regular,Menlo,'D2Coding',monospace;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+}
+:root[data-theme="light"]{--bg:#f4f2ee;--fg:#1d1f22;--dim:#6b6760;--line:#dcd8d0;--panel:#fffdf9;--accent:#8a6d12;}
+:root[data-theme="dark"]{--bg:#0e0f11;--fg:#d8d4cc;--dim:#8a857c;--line:#26282c;--panel:#141618;--accent:#c9a227;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:15.5px/1.85 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+nav{width:250px;flex:0 0 250px;border-right:1px solid var(--line);padding:26px 0 60px;
+  position:sticky;top:0;max-height:100vh;overflow-y:auto;background:var(--panel)}
+nav .brand{padding:0 22px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+nav .brand b{display:block;font-size:21px;letter-spacing:.22em;font-weight:700}
+nav .brand span{display:block;font-size:11px;color:var(--dim);letter-spacing:.16em;margin-top:6px}
+nav a{display:block;padding:7px 22px;text-decoration:none;font-size:13.5px;color:var(--dim);
+  border-left:2px solid transparent}
+nav a:hover{color:var(--fg);background:rgba(127,127,127,.06)}
+nav a.on{color:var(--fg);border-left-color:var(--accent);background:rgba(127,127,127,.08)}
+nav .no{font-family:var(--mono);font-size:11px;opacity:.55;margin-right:8px}
+.othernav{margin:26px 14px 0;padding:13px 12px;border:1px solid var(--line);
+  border-left:2px solid var(--dim);background:rgba(127,127,127,.05)}
+.othernav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--dim);margin-bottom:7px}
+.othernav .ext{display:block;padding:0;border:0;font-size:12.5px;color:var(--fg);
+  text-decoration:underline;text-underline-offset:2px;line-height:1.5}
+.othernav .ext:hover{background:none;color:var(--accent)}
+.othernav .warn{display:block;margin-top:7px;font-size:10.5px;line-height:1.65;color:var(--dim)}
+.playnav{margin:14px 14px 0;padding:12px;border:1px solid var(--accent);
+  background:rgba(201,162,39,.06);text-decoration:none;display:block}
+.playnav .lbl{display:block;font-size:10.5px;letter-spacing:.15em;color:var(--accent);margin-bottom:6px}
+.playnav .nm{display:block;font-size:13px;color:var(--fg);font-weight:600}
+.playnav .sd{display:block;margin-top:5px;font-size:10.5px;color:var(--dim);line-height:1.6}
+.playnav:hover .nm{color:var(--accent)}
+.othernav .warn b{color:var(--fg);font-weight:650}
+main{flex:1;min-width:0;padding:44px 52px 120px;max-width:960px}
+h1{font-size:31px;letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+h2{font-size:20px;margin:52px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+h3{font-size:16.5px;margin:34px 0 10px;color:var(--fg);font-weight:700}
+h4{font-size:14.5px;margin:24px 0 8px;color:var(--dim);font-weight:700;letter-spacing:.03em}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:5px 0}
+strong{color:#fff;font-weight:650}
+:root[data-theme="light"] strong,@media(prefers-color-scheme:light){strong{color:#000}}
+em{color:var(--dim);font-style:italic}
+code{font-family:var(--mono);font-size:12.5px;background:rgba(127,127,127,.14);padding:1px 5px;border-radius:3px}
+pre.blk{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--dim);padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+blockquote{margin:0 0 18px;padding:14px 20px;background:var(--panel);
+  border-left:3px solid var(--accent)}
+blockquote p{margin:0 0 8px}
+blockquote p:last-child{margin:0}
+.tw{overflow-x:auto;margin:0 0 20px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:0 0 20px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:650;font-size:12.5px;letter-spacing:.02em}
+tbody tr:nth-child(even){background:rgba(127,127,127,.035)}
+.ar{color:var(--dim)}
+.star{color:var(--accent)}
+.foot{margin-top:80px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);letter-spacing:.04em}
+.tt{position:fixed;top:14px;right:16px;z-index:20;background:var(--panel);color:var(--dim);
+  border:1px solid var(--line);border-radius:5px;padding:5px 11px;font-size:11.5px;cursor:pointer}
+@media(max-width:860px){
+  .wrap{display:block}
+  nav{width:auto;position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
+  nav a{display:inline-block;padding:6px 12px;border-left:0;border-bottom:2px solid transparent}
+  nav a.on{border-left:0;border-bottom-color:var(--accent)}
+  main{padding:26px 20px 80px}
+  h1{font-size:25px}
+}
+</style></head><body>
+<div class="wrap"><nav><div class="brand"><b>묵산</b><span>게임 기획 정본</span></div><div class="navsec">기획</div><a class="pg" href="00-개요.html"><span class="no">00</span>개요</a><a class="pg" href="05-참고작.html"><span class="no">05</span>참고작 분석</a><a class="pg" href="10-세계관.html"><span class="no">10</span>세계관 — 「발생」</a><a class="pg" href="15-전사.html"><span class="no">15</span>전사(前史) — 1998년 묵산</a><a class="pg" href="20-채움.html"><span class="no">20</span>채움의 역사</a><a class="pg" href="30-무대.html"><span class="no">30</span>무대 — 묵산시·묵산고</a><a class="pg" href="40-인물.html"><span class="no">40</span>주인공 4인</a><a class="pg" href="50-스토리.html"><span class="no">50</span>스토리 — 3막</a><a class="pg on" href="60-레벨.html"><span class="no">60</span>챕터 구성</a><a class="pg" href="62-공략.html"><span class="no">62</span>게임 방식과 공략</a><a class="pg" href="64-엔티티.html"><span class="no">64</span>엔티티</a><a class="pg" href="66-스토리보드.html"><span class="no">66</span>스토리보드</a><a class="pg" href="68-조력자.html"><span class="no">68</span>조력자 — 「반원」</a><a class="pg" href="70-시스템.html"><span class="no">70</span>게임 시스템 — 몸과 숨</a><a class="pg" href="80-진상.html"><span class="no">80</span>진상 4단</a><a class="pg" href="85-엔딩.html"><span class="no">85</span>엔딩 분기</a><a class="pg" href="90-톤.html"><span class="no">90</span>톤 규칙</a><a class="pg" href="95-하네스.html"><span class="no">95</span>하네스 &amp; 개선 루프</a><a class="pg" href="99-작업.html"><span class="no">99</span>다음 작업</a><div class="navsec">개발</div><a class="pg" href="D00-문서체계.html"><span class="no">D00</span>문서 체계</a><a class="pg" href="D05-규약.html"><span class="no">D05</span>규약</a><a class="pg" href="D90-결정기록.html"><span class="no">D90</span>결정 기록</a><a class="pg" href="D99-함정.html"><span class="no">D99</span>함정</a><a class="pg" href="P00-평가단.html"><span class="no">P00</span>평가단 — 기획·검토·개선 프로세스</a><a class="pg" href="P10-게임성.html"><span class="no">P10</span>헌장 P10 — 게임성 심사 (mechanics-critic)</a><a class="pg" href="P20-공포연출.html"><span class="no">P20</span>헌장 P20 — 공포연출 심사 (horror-critic)</a><a class="pg" href="P30-정합성.html"><span class="no">P30</span>헌장 P30 — 정합성 심사 (canon-keeper)</a><a class="pg" href="P40-구현성.html"><span class="no">P40</span>헌장 P40 — 구현성 심사 (feasibility)</a><a class="pg" href="P50-플레이어.html"><span class="no">P50</span>헌장 P50 — 플레이어 대변 (player-advocate)</a><a class="pg" href="P60-맵디자인.html"><span class="no">P60</span>헌장 P60 — 맵 디자인 심사 (map-critic)</a><a class="playnav" href="../play/"><span class="lbl">▶ 플레이 가능</span><span class="nm">챕터 1 — 복도</span><span class="sd">⚠ 구버전 규칙(단위 세기)으로 만든 수직 슬라이스입니다. 새 규격으로 재구현 예정.</span></a><div class="othernav"><span class="lbl">이어지는 정본</span><a class="ext" href="../kamc/">한국이상관리공단 문서보관소 <span class="ar">↗</span></a><span class="warn"><b>28년 전 기록.</b> 1998년 묵산시 전체가 발생했고, 국가는 그 문서로 재난대응반을 만들었다</span></div></nav><main><h1 id="챕터-구성">챕터 구성</h1>
+<blockquote><p>개정 2026-07-31. 8레벨 <span class="ar">→</span> <strong>6챕터</strong>. <strong>화장실에서 시작해 화장실에서 끝난다.</strong></p><p>챕터마다 <strong>목표 · 탈출 아이템 · 맵 기믹 · 안전지대 · 엔티티</strong>를 갖는다.</p></blockquote>
+<hr>
+<h2 id="0-공통-규칙">0. 공통 규칙</h2>
+<h3 id="네-가지-압박-겹치지-않는다">네 가지 압박 — 겹치지 않는다</h3>
+<table><thead><tr><th>압박</th><th>범위</th><th>정체</th></tr></thead><tbody><tr><td><strong>봉인 시계</strong></td><td>전역</td><td>밖에서 72시간. 되돌아오지 않는다</td></tr><tr><td><strong>안전지대 만료</strong></td><td>국지</td><td>점검표를 안 채우면 거점을 잃는다</td></tr><tr><td><strong>엔티티</strong></td><td>순간</td><td>챕터마다 금지 행동이 다르다</td></tr><tr><td><strong>조력자</strong></td><td>판단</td><td>그의 말을 들을 것인가</td></tr></tbody></table>
+<p><span class="star">★</span> <strong>「무감각」 게이지는 폐기했다.</strong> 위 넷이 그 일을 나눠 가졌고, 정체가 불분명한 막대가 하나 더 있으면 <strong>넷 다 흐려진다.</strong> <span class="ar">→</span> [[D90-결정기록]] D-15</p>
+<h3 id="플레이-루프">플레이 루프</h3>
+<pre class='blk'>안전지대에서 나간다 → 맵 기믹을 풀며 탈출 아이템을 찾는다
+     ↑                                      │
+     └──────── 엔티티를 피해 복귀 ──────────┘</pre>
+<h3 id="안전지대-왜-안전한가">안전지대 — 왜 안전한가</h3>
+<p><strong>2017년 대응반이 9년간 유지한 거점이다.</strong> 봉인 테이프가 둘러쳐져 있고, 벽에 점검표가 붙어 있고, <strong>날짜가 매일 채워져 있다.</strong></p>
+<blockquote><p>사람의 손이 매일 닿은 자리에는 들어오지 못한다.</p><p>20만 명이 매일 반복한 사무가 도시를 붙잡았던 것과 같다. <span class="ar">→</span> [[15-전사]]</p></blockquote>
+<ul><li><strong>엔티티는 안전지대에 들어올 수 없다.</strong> 예외 없다</li><li>안전지대에서만 <strong>저장 · 정리 · 지도 확인</strong>이 가능하다</li><li>안전지대의 점검표에 <strong>날짜를 채우면</strong> 그 구역이 유지된다. 안 채우면 다음에 왔을 때 <strong>더 이상 안전지대가 아니다</strong></li><li><span class="star">★</span> <strong>이것이 돌아갈 이유다.</strong> 게이지가 아니라 <strong>장소와 노동</strong>이 플레이어를 불러들인다</li><li>그리고 그것은 <strong>대응반원이 9년간 하던 일 그대로</strong>다. 마지막에 「당신도 이미 근무 중이었다」가 여기서 성립한다</li><li><span class="star">★</span> <strong>조력자는 안전지대를 전부 안다.</strong> 5챕터에서 그가 하나를 무효화한다 <span class="ar">→</span> [[68-조력자]]</li></ul>
+<h3 id="몸과-숨-챕터별-상호작용">몸과 숨 — 챕터별 상호작용</h3>
+<p>숨 시스템의 정본은 <span class="ar">→</span> [[70-시스템]]. 챕터별로 이렇게 작동한다.</p>
+<table><thead><tr><th>#</th><th>엔티티</th><th>달리기는</th><th>숨소리는</th><th>배우는 것</th></tr></thead><tbody><tr><td>1</td><td>—</td><td><strong>자유.</strong> 반복 복도라 달릴 이유가 충분</td><td>무해</td><td>뛰면 숨이 가빠진다는 인과를 안전하게 학습</td></tr><tr><td>2</td><td>열람 (소리)</td><td>소리 자리 탈출엔 최선, 도착지에선 최악</td><td><span class="star">★</span> <strong>직접 감지</strong> + 경고음 매몰</td><td>숨 참기 · 「소리 낸 뒤 반드시 이동」</td></tr><tr><td>3</td><td>조회 (조명)</td><td>조명 경계 넘기에 유용</td><td>감지 안 됨. <strong>숨 고르기(정지)는 어둠에서만</strong></td><td>정지가 허락되는 곳이 챕터마다 다르다</td></tr><tr><td>4</td><td>줄 (위치)</td><td><strong>최대 유혹</strong> — 느린 줄을 앞지르고 싶다</td><td>감지 안 됨. 줄 기다리는 시간이 숨 고르기 타이밍</td><td>빠른 것이 항상 이득이 아니다</td></tr><tr><td>5</td><td>석고 (시선)</td><td><strong>달리기 = 등 돌리기 = 금지.</strong> 자동 봉인</td><td>헐떡임은 소리다 — <strong>음악실 정지 조건에 자연 산입</strong></td><td>뒷걸음·옆걸음만으로 이동 재구성</td></tr><tr><td>6</td><td>거울 (반사)</td><td>안전지대가 없어 숨 고를 곳이 없다</td><td><span class="star">★</span> <strong>김 서림의 재료</strong> — 숨이 도구가 되는 유일한 곳</td><td>약점이 도구가 된다</td></tr></tbody></table>
+<h3 id="탈출-아이템-봉인-절차의-부품">탈출 아이템 = 봉인 절차의 부품</h3>
+<p>챕터 아이템은 그 챕터를 나가는 열쇠인 <strong>동시에</strong> 마지막 봉인의 재료다. 6개를 다 모아야 닫을 수 있다. <span class="ar">→</span> [[50-스토리]]</p>
+<hr>
+<h2 id="1-복도-교실">1. 복도 &amp; 교실</h2>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>목표</strong></td><td>잠긴 도서실 문을 연다</td></tr><tr><td><strong>탈출 아이템</strong></td><td><strong>마스터 키</strong> — 2017년 반장 A의 유품. 이후 모든 안전지대 문을 연다</td></tr><tr><td><strong>맵 기믹</strong></td><td><strong>복도가 반복된다.</strong> 홈베이스마다 <strong>번호판</strong>이 붙어 있고, 그 번호로만 위치를 안다</td></tr><tr><td><strong>안전지대</strong></td><td><strong>홈베이스</strong> (사물함 구역) — 복도 중간중간에 있다</td></tr><tr><td><strong>엔티티</strong></td><td><strong>없음.</strong> 멀리서 뭔가 한 번 지나간다. 접촉 불가</td></tr></tbody></table>
+<ul><li>열리는 교실은 3개뿐. 나머지는 잠겨 있다</li><li>정수기(종이컵 없음) · 신발장(크기별 정렬) · 게시판 · 소화전</li><li>마스터 키는 <strong>A의 시신 옆</strong>에 있다. 첫 시신이다</li><li>끝에서 <strong>대응반원</strong>을 만난다. 「교대 오셨어요?」</li></ul>
+<blockquote><p>1챕터는 무섭지 않아도 된다. <strong>안심시켜야 나중이 아프다.</strong></p></blockquote>
+<h2 id="2-도서실">2. 도서실</h2>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>목표</strong></td><td>1997년 학급 명부를 찾아 나간다</td></tr><tr><td><strong>탈출 아이템</strong></td><td><strong>학급 명부</strong> — 22명, <strong>필적이 하나다</strong> ／ 봉인 부품 「<strong>이름</strong>」</td></tr><tr><td><strong>맵 기믹</strong></td><td><strong>모빌랙(이동 서가)</strong> — 통로를 열고 닫는다. <strong>돌리면 소리가 난다</strong></td></tr><tr><td><strong>안전지대</strong></td><td><strong>대출대 안쪽</strong> (사서 자리)</td></tr><tr><td><strong>엔티티</strong></td><td><strong>「열람」</strong> — 소리를 좇는다</td></tr></tbody></table>
+<ul><li>서가를 돌려야 길이 생기는데, <strong>돌리는 소리가 엔티티를 부른다</strong></li><li>즉 <strong>길을 만드는 행위가 곧 위험을 만드는 행위</strong>다</li><li>조력자: 「여기선 뛰지 마세요. 그것만 지키면 돼요」 — <strong>맞는 말이다</strong></li></ul>
+<h2 id="3-체육관">3. 체육관</h2>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>목표</strong></td><td>배전반에서 차단기 손잡이를 회수한다</td></tr><tr><td><strong>탈출 아이템</strong></td><td><strong>차단기 손잡이</strong> ／ 봉인 부품 「<strong>전원</strong>」 — <strong>마지막에 불을 끄는 물건</strong></td></tr><tr><td><strong>맵 기믹</strong></td><td><strong>천장 조명이 순서대로 꺼진다.</strong> 밝은 구역이 이동한다</td></tr><tr><td><strong>안전지대</strong></td><td><strong>용구 창고</strong></td></tr><tr><td><strong>엔티티</strong></td><td><strong>「조회」</strong> — 빛 속에 줄 맞춰 서 있다</td></tr></tbody></table>
+<ul><li>어두운 구역에 있으면 안 된다 <span class="ar">→</span> 밝은 데로 가야 한다</li><li>그런데 <strong>밝은 데서 멈추면 줄에 편입된다</strong></li><li>즉 <strong>밝은 데로 가되 멈추지 않는다.</strong> 조명 이동을 따라 계속 걷는다</li><li>창고에 2008년 이송자들의 운동화 — 크기가 제각각이다</li><li>조력자: 「불 켜진 데로만 다니세요」 — <strong>맞다. 절반만 맞다</strong></li></ul>
+<h2 id="4-급식실">4. 급식실</h2>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>목표</strong></td><td>실제 인원 수를 확인하고 배식구를 통과한다</td></tr><tr><td><strong>탈출 아이템</strong></td><td><strong>급식 계량표</strong> ／ 봉인 부품 「<strong>수</strong>」 — 몇 명이 채워졌는지</td></tr><tr><td><strong>맵 기믹</strong></td><td><strong>배식 줄이 동선을 막는다.</strong> 줄이 지나갈 때까지 기다리거나 우회한다</td></tr><tr><td><strong>안전지대</strong></td><td><strong>조리실</strong> (배식구 안쪽)</td></tr><tr><td><strong>엔티티</strong></td><td><strong>「줄」</strong> — 앞지르면 편입된다</td></tr></tbody></table>
+<ul><li>식판 수 · 의자 수 · 잔반통 — <strong>세 개가 다른 수를 말한다.</strong> 맞는 건 잔반통이다</li><li>조력자가 처음으로 <strong>당신을 앞세운다.</strong> 「먼저 가보세요」</li><li>여기서부터 그의 지시가 애매해진다</li></ul>
+<h2 id="5-과학실-음악실-미술실">5. 과학실 · 음악실 · 미술실</h2>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>목표</strong></td><td>2017년 반원들의 정리 노트를 회수한다</td></tr><tr><td><strong>탈출 아이템</strong></td><td><strong>반원 정리 노트</strong> ／ 봉인 부품 「<strong>절차</strong>」 — 어떻게 닫는지</td></tr><tr><td><strong>맵 기믹</strong></td><td><strong>세 방의 규칙이 다르고, 한 방의 조작이 다른 방에 영향을 준다</strong></td></tr><tr><td><strong>안전지대</strong></td><td><strong>과학 준비실</strong> <span class="star">★</span> 이 챕터에서 <strong>조력자가 무효화한다</strong></td></tr><tr><td><strong>엔티티</strong></td><td><strong>「석고」</strong> — 안 볼 때만 움직인다</td></tr></tbody></table>
+<table><thead><tr><th>방</th><th>있는 것</th><th>정지 조건</th></tr></thead><tbody><tr><td><strong>과학실</strong></td><td>인체모형</td><td>내가 <strong>보고 있으면</strong> 멈춘다</td></tr><tr><td><strong>음악실</strong></td><td>악기 · 메트로놈</td><td><strong>소리가 나는 동안</strong> 멈춘다</td></tr><tr><td><strong>미술실</strong></td><td>석고상 — <strong>얼굴이 없다</strong></td><td><strong>조명이 켜져 있으면</strong> 멈춘다</td></tr></tbody></table>
+<ul><li>음악실 메트로놈을 켜면 <strong>과학실까지 소리가 들린다</strong> <span class="ar">→</span> 두 방이 동시에 안전해진다</li><li>다만 메트로놈 소리는 태엽이 다 풀리면 멈춘다. <strong>시간 제한</strong></li><li><span class="star">★</span> 챕터 끝에서 <strong>배신</strong>이 일어난다</li></ul>
+<h2 id="6-화장실">6. 화장실</h2>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>목표</strong></td><td>봉인 절차를 실행한다</td></tr><tr><td><strong>탈출 아이템</strong></td><td><strong>거울 뒤 배관 공간의 것</strong> ／ 봉인 부품 「<strong>입구</strong>」 — 어디를 닫는지</td></tr><tr><td><strong>맵 기믹</strong></td><td><strong>거울에 비친 공간이 실제와 다르다.</strong> 거울로만 보이는 통로가 있다</td></tr><tr><td><strong>안전지대</strong></td><td><strong>없음</strong> <span class="star">★</span></td></tr><tr><td><strong>엔티티</strong></td><td><strong>「거울」</strong> — 비치면 나온다</td></tr></tbody></table>
+<ul><li>1챕터에서 들어온 그 화장실. <strong>불이 여전히 켜져 있다</strong></li><li><strong>돌아갈 곳이 없다.</strong> 마지막 챕터에는 안전지대를 두지 않는다</li><li>배신 <span class="ar">→</span> <strong>네 번째 반원</strong>의 개입 <span class="ar">→</span> 문이 열린다</li><li><strong>나가지 않는다.</strong> 부품 6개로 봉인한다</li><li>마지막 조작: <strong>차단기 손잡이로 불을 끈다</strong></li></ul>
+<hr>
+<h2 id="요약표">요약표</h2>
+<table><thead><tr><th>#</th><th>챕터</th><th>탈출 아이템 (봉인 부품)</th><th>맵 기믹</th><th>안전지대</th><th>엔티티</th></tr></thead><tbody><tr><td>1</td><td>복도 &amp; 교실</td><td>마스터 키</td><td>복도 반복 · 홈베이스 번호</td><td><strong>홈베이스</strong></td><td>—</td></tr><tr><td>2</td><td>도서실</td><td>학급 명부 (<strong>이름</strong>)</td><td>모빌랙 — 돌리면 소리</td><td><strong>대출대 안쪽</strong></td><td>열람</td></tr><tr><td>3</td><td>체육관</td><td>차단기 손잡이 (<strong>전원</strong>)</td><td>조명 순차 소등</td><td><strong>용구 창고</strong></td><td>조회</td></tr><tr><td>4</td><td>급식실</td><td>급식 계량표 (<strong>수</strong>)</td><td>배식 줄이 길을 막음</td><td><strong>조리실</strong></td><td>줄</td></tr><tr><td>5</td><td>과학·음악·미술</td><td>반원 정리 노트 (<strong>절차</strong>)</td><td>세 방의 규칙이 서로 간섭</td><td><strong>과학 준비실</strong> ✕</td><td>석고</td></tr><tr><td>6</td><td>화장실</td><td>거울 뒤의 것 (<strong>입구</strong>)</td><td>거울 속 공간이 다름</td><td><strong>없음</strong></td><td>거울</td></tr></tbody></table>
+<hr>
+<h2 id="난이도-곡선">난이도 곡선</h2>
+<pre class='blk'>1 안심 ── 2 규칙 하나 ── 3 규칙+시간 ── 4 규칙+위치 ── 5 규칙 반전 ×3 ── 6 결말
+     (조력자 신뢰 구축 ──────────────────────────────→ 배신)</pre>
+<ul><li><strong>1챕터를 반드시 비운다.</strong> 처음부터 조이면 배신이 안 아프다</li><li><strong>5챕터가 정점.</strong> 6은 난이도가 아니라 결말이다</li><li>조력자의 지시는 <strong>1~3에서 전부 맞고, 4에서 애매해지고, 5에서 당신을 죽이려 한다</strong></li><li><strong>안전지대가 4챕터까지 늘 있다가, 5에서 하나 사라지고, 6에서 아예 없다</strong></li></ul>
+<hr>
+<h2 id="폐기한-구성">폐기한 구성</h2>
+<table><thead><tr><th>폐기</th><th>이유</th></tr></thead><tbody><tr><td>구름다리 · 보일러실 · 운동장 · 통제선 바깥</td><td><strong>학교 안에서 끝난다.</strong> 밖으로 나가면 긴장이 풀린다</td></tr><tr><td>별관 자습실(1997 현장) 단독 챕터</td><td>각 챕터에 <strong>흔적으로 분산</strong></td></tr><tr><td>「단위를 세어 비상구에 기재」</td><td>산수였다. 회피 동사로 대체 <span class="ar">→</span> [[62-공략]]</td></tr></tbody></table>
+<div class="foot">묵산 — 게임 기획 정본 · 이 문서는 창작물입니다. 등장하는 지명·기관·인물·제도 운용 사례는 모두 가상입니다.</div>
+</main></div><script>
+(function(){
+  var r=document.documentElement, k='mooksan-theme', s=localStorage.getItem(k);
+  if(s) r.setAttribute('data-theme',s);
+  var b=document.createElement('button'); b.className='tt'; b.textContent='명암';
+  b.onclick=function(){
+    var cur=r.getAttribute('data-theme')||
+      (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    var nx=cur==='dark'?'light':'dark';
+    r.setAttribute('data-theme',nx); localStorage.setItem(k,nx);
+  };
+  document.body.appendChild(b);
+  document.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tw';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+})();
+</script></body></html>
