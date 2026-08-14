@@ -9,6 +9,7 @@
     <style>
       html,body{margin:0;height:100%;background:#0e0e12;}
       body{display:flex;align-items:center;justify-content:center;overflow:hidden;}
+      #unity-container.unity-mobile{display:flex;align-items:center;justify-content:center;}
       #unity-canvas{background:#000;border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,.6);}
       #unity-footer{display:none!important;}
     </style>
@@ -103,6 +104,8 @@
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
 
+        function fitMobile(){ var vw=window.innerWidth, vh=window.innerHeight; var w=vw, h=w*1.75; if(h>vh){ h=vh; w=h/1.75; } canvas.style.width=w+"px"; canvas.style.height=h+"px"; } fitMobile(); window.addEventListener("resize",fitMobile); window.addEventListener("orientationchange",function(){setTimeout(fitMobile,200);});
+
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
@@ -110,7 +113,7 @@
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        function fitPortrait(){ var h=Math.min(window.innerHeight-16,920); var w=h*9/16; if(w>window.innerWidth-16){w=window.innerWidth-16;h=w*16/9;} canvas.style.width=w+"px"; canvas.style.height=h+"px"; } fitPortrait(); window.addEventListener("resize",fitPortrait);
+        function fitPortrait(){ var h=Math.min(window.innerHeight-16,920); var w=h/1.75; if(w>window.innerWidth-16){w=window.innerWidth-16;h=w*1.75;} canvas.style.width=w+"px"; canvas.style.height=h+"px"; } fitPortrait(); window.addEventListener("resize",fitPortrait);
       }
 
       document.querySelector("#unity-loading-bar").style.display = "block";
