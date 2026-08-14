@@ -104,7 +104,7 @@
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
 
-        function fitMobile(){ var vw=window.innerWidth, vh=window.innerHeight; var w=vw, h=w*1.75; if(h>vh){ h=vh; w=h/1.75; } canvas.style.width=w+"px"; canvas.style.height=h+"px"; } fitMobile(); window.addEventListener("resize",fitMobile); window.addEventListener("orientationchange",function(){setTimeout(fitMobile,200);});
+        function fitMobile(){ var vw=window.innerWidth, vh=window.innerHeight, clipped=false; if(window.self!==window.top&&window.screen&&window.screen.height){ var lim=window.screen.height*0.62; if(vh>lim){ vh=lim; clipped=true; } } var w=vw, h=w*1.75; if(h>vh){ h=vh; w=h/1.75; } canvas.style.width=w+"px"; canvas.style.height=h+"px"; document.querySelector("#unity-container").style.alignItems=clipped?"flex-start":"center"; } fitMobile(); window.addEventListener("resize",fitMobile); window.addEventListener("orientationchange",function(){setTimeout(fitMobile,200);});
 
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
